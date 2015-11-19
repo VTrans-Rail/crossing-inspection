@@ -43,12 +43,12 @@ require([
 
     sources.push({
       featureLayer: new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspections2015/FeatureServer/0"),
-      searchFields: ["DOT_Num", "Feature_Crossed"],
+      searchFields: ["DOT_Num", "SignType"],
       suggestionTemplate: "${DOT_Num}, Sign Type: ${SignType}, Condition: ${SignCondition}, Installed: ${InstallDate}",
       exactMatch: false,
       name: "Crossing Signs",
       outFields: ["*"],
-      placeholder: "Search for crossing signs by Sign Type, DOT #, or Street Name",
+      placeholder: "Search for crossing signs by Sign Type or DOT #",
       maxResults: 10,
       maxSuggestions: 10,
 
