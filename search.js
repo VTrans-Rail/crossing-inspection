@@ -13,7 +13,6 @@ require([
     });
 
     var s = new Search({
-      enableButtonMode: true, //this enables the search widget to display as a single button
       enableLabel: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
