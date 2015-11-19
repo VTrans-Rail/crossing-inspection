@@ -22,21 +22,18 @@ require([
 
    var sources = s.get("sources");
 
-   //Push the sources used to search, by default the ArcGIS Online World geocoder is included. We need to figure out how to change the displayField to accept multiple attribute fields and text. Right-now it only accepts one field
-
-
-
-
+    //Push the sources used to search, by default the ArcGIS Online World geocoder is included.
     sources.push({
       featureLayer: new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1"),
-      searchFields: ["DOT_Num"],
-      displayField: "DOT_Num",
+      searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed"],
+      suggestionTemplate: "${DOT_Num}, Line: ${LineName}, Street: ${Feature_Crossed}, Warning Device: ${WDCode}, Condition: ${XingCond}",
       exactMatch: false,
       outFields: ["DOT_Num", "Feature_Crossed", "LineName", "WDCode", "XingCond"],
       name: "Railroad Crossings",
-      placeholder: "3708",
+      placeholder: "Search by DOT #, Line, Street, Town, or County",
       maxResults: 10,
       maxSuggestions: 10,
+
 
       //Create an InfoTemplate and include three fields
       infoTemplate: new InfoTemplate("Railroad Crossing", "DOT Crossing Number: ${DOT_Num}</br>Line Name: ${LineName}</br>Feature Crossed: ${Feature_Crossed}</br>Warning Device Level: ${WDCode}</br>Crossing Codition: ${XingCond}"),
@@ -46,18 +43,18 @@ require([
 
     sources.push({
       featureLayer: new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspections2015/FeatureServer/0"),
-      searchFields: ["DOT_Num"],
-      displayField: "SignType",
+      searchFields: ["DOT_Num", "Feature_Crossed"],
+      suggestionTemplate: "${DOT_Num}, Sign Type: ${SignType}, Condition: ${SignCondition}, Installed: ${InstallDate}",
       exactMatch: false,
       name: "Crossing Signs",
       outFields: ["*"],
-      placeholder: "Crossing Sign",
+      placeholder: "Search for crossing signs by Sign Type, DOT #, or Street Name",
       maxResults: 10,
       maxSuggestions: 10,
 
       //Create an InfoTemplate
 
-      infoTemplate: new InfoTemplate("Crossing Sign Info", "DOT # of Associated Crossing: ${DOT_Num}</br>Type of Sign: ${SignType}</br>Condition: ${SignCondition}"),
+      infoTemplate: new InfoTemplate("Crossing Sign Information", "DOT # of Associated Crossing: ${DOT_Num}</br>Type of Sign: ${SignType}</br>Condition: ${SignCondition}"),
 
       enableSuggestions: true,
       minCharacters: 0
