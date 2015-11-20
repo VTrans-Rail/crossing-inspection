@@ -12,7 +12,31 @@ require([
       zoom: 8
     });
 
-   var s = new Search({
+
+    //Add map layers
+    var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
+
+    var crossingTemplate = new InfoTemplate("Railroad Crossing", "DOT Crossing Number: ${DOT_Num}</br>Line Name: ${LineName}</br>Feature Crossed: ${Feature_Crossed}</br>Warning Device Level: ${WDCode}</br>Crossing Codition: ${XingCond}");
+
+    var crossingPoints = new FeatureLayer(crossingUrl, {
+      id: "crossing-points",
+      infoTemplate: crossingTemplate
+    });
+
+    var signUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspections2015/FeatureServer/0";
+
+    var signTemplate = new InfoTemplate("Crossing Sign", "Sign Type: ${SignType}");
+
+    var signPoints = new FeatureLayer(signUrl, {
+      id: "sign-points",
+      infoTemplate: signTemplate
+    });
+
+    map.addLayer(crossingPoints);
+    map.addLayer(signPoints);
+
+    //Build search
+    var s = new Search({
       enableLabel: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
@@ -64,7 +88,5 @@ require([
     s.set("sources", sources);
 
     s.startup();
-
-
 
 });
