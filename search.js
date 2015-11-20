@@ -12,14 +12,38 @@ require([
       zoom: 8
     });
 
-   var s = new Search({
+
+    //Add map layers
+    var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
+
+    var crossingTemplate = new InfoTemplate("Railroad Crossing", "DOT Crossing Number: ${DOT_Num}</br>Line Name: ${LineName}</br>Feature Crossed: ${Feature_Crossed}</br>Warning Device Level: ${WDCode}</br>Crossing Codition: ${XingCond}");
+
+    var crossingPoints = new FeatureLayer(crossingUrl, {
+      id: "crossing-points",
+      infoTemplate: crossingTemplate
+    });
+
+    var signUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspections2015/FeatureServer/0";
+
+    var signTemplate = new InfoTemplate("Crossing Sign", "Sign Type: ${SignType}");
+
+    var signPoints = new FeatureLayer(signUrl, {
+      id: "sign-points",
+      infoTemplate: signTemplate
+    });
+
+    map.addLayer(crossingPoints);
+    map.addLayer(signPoints);
+
+    //Build search
+    var s = new Search({
       enableLabel: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
       map: map
     }, "search");
 
-   var sources = s.get("sources");
+    var sources = s.get("sources");
 
     //Push the sources used to search, by default the ArcGIS Online World geocoder is included.
     sources.push({
@@ -42,6 +66,7 @@ require([
 
     sources.push({
       featureLayer: new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspections2015/FeatureServer/0"),
+      autoNavigate: false, //This prevents automatic navigation straight to sign feature when searched
       searchFields: ["DOT_Num", "SignType"],
       suggestionTemplate: "${DOT_Num}, Sign Type: ${SignType}, Condition: ${SignCondition}, Installed: ${InstallDate}",
       exactMatch: false,
