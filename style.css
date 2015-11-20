@@ -12,4 +12,45 @@ body,
    z-index: 2;
    top: 20px;
    left: 74px;
+   width: calc(100% - 74px);
+}
+
+/*search input style tweaks*/
+.arcgisSearch .searchGroup .searchInput {
+    width: 100%;
+    padding: 6px 0px 6px 12px;
+    height: 50px;
+    font-size: 1.5em;
+}
+/*set search input box width to full - width of side elements*/
+.arcgisSearch .searchInputGroup {
+    width: calc(100% - 55px);
+}
+
+.arcgisSearch .searchExpandContainer {
+    width: calc(100% - 74px);
+}
+
+/*multiple search dropdown arrow tweaks*/
+.arcgisSearch .hasMultipleSources .searchToggle {
+  height: 50px;
+}
+
+/*search mag glass button size*/
+.arcgisSearch .hasMultipleSources .searchSubmit {
+  height: 50px;
+}
+
+
+/*modify search icon symbol sizes and alignment*/
+.arcgisSearch .searchIcon {
+  font-size: 1.5em;
+  width: 20px;
+  height: 50px;
+  line-height: 50px;
+}
+
+/*"No Search Results" popup*/
+.arcgisSearch .noResultsMenu {
+  width: calc(100% - 70px);
 }

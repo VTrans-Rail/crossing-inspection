@@ -12,8 +12,7 @@ require([
       zoom: 8
     });
 
-    var s = new Search({
-      enableButtonMode: true, //this enables the search widget to display as a single button
+   var s = new Search({
       enableLabel: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
