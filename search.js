@@ -12,7 +12,7 @@ require([
       zoom: 8
     });
 
-    var s = new Search({
+   var s = new Search({
       enableLabel: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
