@@ -20,7 +20,7 @@ require([
       map: map
     }, "search");
 
-   var sources = s.get("sources");
+    var sources = s.get("sources");
 
     //Push the sources used to search, by default the ArcGIS Online World geocoder is included.
     sources.push({
@@ -43,6 +43,7 @@ require([
 
     sources.push({
       featureLayer: new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspections2015/FeatureServer/0"),
+      autoNavigate: false, //This prevents automatic navigation straight to sign feature when searched
       searchFields: ["DOT_Num", "SignType"],
       suggestionTemplate: "${DOT_Num}, Sign Type: ${SignType}, Condition: ${SignCondition}, Installed: ${InstallDate}",
       exactMatch: false,
@@ -64,5 +65,7 @@ require([
     s.set("sources", sources);
 
     s.startup();
+
+
 
 });
