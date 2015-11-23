@@ -26,12 +26,12 @@ require([
       id: "crossing-points",
       outFields: ["*"],
       infoTemplate: crossingTemplate,
-      minScale: 85000,
+      minScale: 200000,
     });
 
 
     //Create Sign Feature Layer
-    var signUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspections2015/FeatureServer/0";
+    var signUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/0";
 
     var signTemplate = new InfoTemplate("Crossing Sign", "DOT Crossing Number: ${DOT_Num}</br>Sign Type: ${SignType}</br>Sign Condition: ${SignCondition}</br>Installation Date: ${InstallDate}");
 
@@ -79,7 +79,8 @@ require([
     var s = new Search({
       enableLabel: false,
       enableInfoWindow: true,
-      showInfoWindowOnSelect: false,
+      showInfoWindowOnSelect: true,
+      enableHighlight: false,
       map: map,
       //Empty source array clears the default search source like the geocoder
       sources: []
@@ -87,17 +88,19 @@ require([
 
     var sources = s.get("sources");
 
+
+
     //Push the sources used to search, by default the ArcGIS Online World geocoder is included.
     sources.push({
-      featureLayer: new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1"),
+      featureLayer: new FeatureLayer(crossingUrl),
       searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed"],
       suggestionTemplate: "${DOT_Num}, Line: ${LineName}, Street: ${Feature_Crossed}, Warning Device: ${WDCode}, Condition: ${XingCond}",
       exactMatch: false,
       outFields: ["DOT_Num", "Feature_Crossed", "LineName", "WDCode", "XingCond"],
       name: "Railroad Crossings",
       placeholder: "Search by DOT #, Line, Street, Town, or County",
-      maxResults: 10,
-      maxSuggestions: 10,
+      maxResults: 15,
+      maxSuggestions: 15,
 
 
       //Create an InfoTemplate and include three fields
@@ -106,8 +109,9 @@ require([
       minCharacters: 0
     });
 
+
     sources.push({
-      featureLayer: new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspections2015/FeatureServer/0"),
+      featureLayer: new FeatureLayer(signUrl),
       autoNavigate: false, //This prevents automatic navigation straight to sign feature when searched
       searchFields: ["DOT_Num", "SignType"],
       suggestionTemplate: "${DOT_Num}, Sign Type: ${SignType}, Condition: ${SignCondition}, Installed: ${InstallDate}",
@@ -115,8 +119,8 @@ require([
       name: "Crossing Signs",
       outFields: ["*"],
       placeholder: "Search for crossing signs by Sign Type or DOT #",
-      maxResults: 10,
-      maxSuggestions: 10,
+      maxResults: 15,
+      maxSuggestions: 15,
 
       //Create an InfoTemplate
       infoTemplate: new InfoTemplate("Crossing Sign Information", "DOT # of Associated Crossing: ${DOT_Num}</br>Type of Sign: ${SignType}</br>Condition: ${SignCondition}"),
@@ -125,20 +129,9 @@ require([
       minCharacters: 0
     });
 
-    // sources.push({
-    //   locator: new Locator("//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"),
-    //   singleLineFieldName: "SingleLine",
-    //   outFields: ["Addr_type"],
-    //   name: i18n.widgets.Search.main.esriLocatorName,
-    //   localSearchOptions: {
-    //     minScale: 300000,
-    //     distance: 50000
-    //   },
-    //   placeholder:  i18n.widgets.Search.main.placeholder,
-    //   highlightSymbol: new PictureMarkerSymbol(this.basePath + "/images/search-pointer.png", 36, 36).setOffset(9,18)
-    // });
 
-    //Set the sources above to the search widget
+
+    // Set the sources above to the search widget
     s.set("sources", sources);
 
     s.startup();
