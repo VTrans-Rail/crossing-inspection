@@ -11,7 +11,7 @@ require([
     var map = new Map("map", {
       basemap: "dark-gray",
       center: [-72.68, 43.785], // lon, lat
-      zoom: 8
+      zoom:8
     });
 
 
@@ -25,7 +25,8 @@ require([
     var crossingPoints = new FeatureLayer(crossingUrl, {
       id: "crossing-points",
       outFields: ["*"],
-      infoTemplate: crossingTemplate
+      infoTemplate: crossingTemplate,
+      minScale: 85000,
     });
 
 
@@ -37,7 +38,8 @@ require([
     var signPoints = new FeatureLayer(signUrl, {
       id: "sign-points",
       outFields: ["*"],
-      infoTemplate: signTemplate
+      infoTemplate: signTemplate,
+      minScale: 25000,
     });
 
 
@@ -61,7 +63,8 @@ require([
     var aadtLine = new FeatureLayer(aadtUrl, {
       id: "aadt-line",
       outFields: ["*"],
-      infoTemplate: aadtTemplate
+      infoTemplate: aadtTemplate,
+      minScale: 50000,
     });
 
     //Add Layers to Map
