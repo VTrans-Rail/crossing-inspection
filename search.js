@@ -76,22 +76,19 @@ require([
 
 
 // ---------------------------- Build search --------------------------
-    var s = new Search({
+    var searchWidget = new Search({
       enableLabel: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: true,
       enableHighlight: false,
       map: map,
-      //Empty source array clears the default search source like the geocoder
-      sources: []
     }, "search");
 
-    var sources = s.get("sources");
+    //Create blank searchSources array
+    var searchSources = [];
 
-
-
-    //Push the sources used to search, by default the ArcGIS Online World geocoder is included.
-    sources.push({
+    //Push the first source used to search to searchSources array
+    searchSources.push({
       featureLayer: new FeatureLayer(crossingUrl),
       searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed"],
       suggestionTemplate: "${DOT_Num}, Line: ${LineName}, Street: ${Feature_Crossed}, Warning Device: ${WDCode}, Condition: ${XingCond}",
@@ -110,7 +107,8 @@ require([
     });
 
 
-    sources.push({
+    //Push the second source used to search to searchSources array
+    searchSources.push({
       featureLayer: new FeatureLayer(signUrl),
       autoNavigate: false, //This prevents automatic navigation straight to sign feature when searched
       searchFields: ["DOT_Num", "SignType"],
@@ -129,11 +127,18 @@ require([
       minCharacters: 0
     });
 
+    //Push the third source used to search to searchSources array(World Geocoding Service).
+    searchSources.push(searchWidget.sources[0]);
+
+    // Set the source for the searchWidget to the properly ordered searchSources array
+    searchWidget.set("sources", searchSources);
+
+    //Set the countryCode for World Geocoding Service
+    searchWidget.sources[2].countryCode = "US";
+    searchWidget.sources[2].maxSuggestions = 4;
 
 
-    // Set the sources above to the search widget
-    s.set("sources", sources);
-
-    s.startup();
+    //Finalize creation of the search widget
+    searchWidget.startup();
 
 });
