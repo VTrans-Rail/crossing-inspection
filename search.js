@@ -11,8 +11,9 @@ require([
     var map = new Map("map", {
       basemap: "dark-gray",
       center: [-72.68, 43.785], // lon, lat
-      zoom: 8
+      zoom:8
     });
+
 
 
 //  ---------------------- Add map layers ------------------------------
@@ -24,7 +25,8 @@ require([
     var crossingPoints = new FeatureLayer(crossingUrl, {
       id: "crossing-points",
       outFields: ["*"],
-      infoTemplate: crossingTemplate
+      infoTemplate: crossingTemplate,
+      minScale: 85000,
     });
 
 
@@ -36,7 +38,8 @@ require([
     var signPoints = new FeatureLayer(signUrl, {
       id: "sign-points",
       outFields: ["*"],
-      infoTemplate: signTemplate
+      infoTemplate: signTemplate,
+      minScale: 25000,
     });
 
 
@@ -60,7 +63,8 @@ require([
     var aadtLine = new FeatureLayer(aadtUrl, {
       id: "aadt-line",
       outFields: ["*"],
-      infoTemplate: aadtTemplate
+      infoTemplate: aadtTemplate,
+      minScale: 50000,
     });
 
     //Add Layers to Map
@@ -70,12 +74,15 @@ require([
     map.addLayer(signPoints);
 
 
+
 // ---------------------------- Build search --------------------------
     var s = new Search({
       enableLabel: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
-      map: map
+      map: map,
+      //Empty source array clears the default search source like the geocoder
+      sources: []
     }, "search");
 
     var sources = s.get("sources");
@@ -117,6 +124,19 @@ require([
       enableSuggestions: true,
       minCharacters: 0
     });
+
+    // sources.push({
+    //   locator: new Locator("//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"),
+    //   singleLineFieldName: "SingleLine",
+    //   outFields: ["Addr_type"],
+    //   name: i18n.widgets.Search.main.esriLocatorName,
+    //   localSearchOptions: {
+    //     minScale: 300000,
+    //     distance: 50000
+    //   },
+    //   placeholder:  i18n.widgets.Search.main.placeholder,
+    //   highlightSymbol: new PictureMarkerSymbol(this.basePath + "/images/search-pointer.png", 36, 36).setOffset(9,18)
+    // });
 
     //Set the sources above to the search widget
     s.set("sources", sources);
