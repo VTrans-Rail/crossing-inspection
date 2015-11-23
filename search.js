@@ -81,6 +81,7 @@ require([
       enableInfoWindow: true,
       showInfoWindowOnSelect: true,
       enableHighlight: false,
+      allPlaceholder: "Search for Railroad Crossings, Signs, Addresses or Places",
       map: map,
     }, "search");
 
