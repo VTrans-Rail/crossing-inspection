@@ -4,8 +4,10 @@ require([
   "esri/layers/FeatureLayer",
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
   "esri/symbols/SimpleFillSymbol", "esri/Color",
-  "dojo/dom-class", "dojo/dom-construct", "dojo/on",
+  "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
+  "dojo/dom-attr", "dojo/dom",
   // "dojox/charting/Chart", "dojox/charting/themes/Dollar",
+  "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
   "dojo/domReady!"
   ],
@@ -20,9 +22,13 @@ require([
     FeatureLayer,
     Popup, PopupTemplate,
     SimpleFillSymbol, Color,
-    domClass, domConstruct, on,
+    domClass, domConstruct, query, on,
+    // domAttr, dom,
+    Query, QueryTask,
     InfoTemplate
   ) {
+
+
 
 // --------------------Popup Shell Setup-----------------------------------
     var fill = new SimpleFillSymbol("solid", null, new Color("#A4CE67"));
@@ -36,7 +42,6 @@ require([
 
 
 
-
 //--------------------Create Map-----------------------------------------
     var map = new Map("map", {
       basemap: "dark-gray",
@@ -44,6 +49,7 @@ require([
       zoom:8,
       infoWindow: popup
     });
+
 
 
 // -----------------Define PopupTemplates------------------------------
@@ -104,7 +110,6 @@ require([
         { fieldName: "RouteNum", label: "Route Number", visible: true, format: { places: 0} },
       ],
     });
-
 
 
 
