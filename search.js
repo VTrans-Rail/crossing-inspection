@@ -52,12 +52,12 @@ require([
       title: "Summary Info for Crossing {DOT_Num}",
 
       fieldInfos: [
-        { fieldName: "DOT_Num", visible: true, format: { places: 0} },
-        { fieldName: "LineName", visible: true, format: { places: 0} },
-        { fieldName: "Feature_Crossed", visible: true, format: { places: 0} },
-        { fieldName: "WDCode", visible: true, format: { places: 0} },
-        { fieldName: "SurfaceType", visible: true, format: { places: 0} },
-        { fieldName: "XingCond", visible: true, format: { places: 0} },
+        { fieldName: "DOT_Num", label: "DOT Crossing Number", visible: true, format: { places: 0} },
+        { fieldName: "LineName", label: "Rail Line", visible: true, format: { places: 0} },
+        { fieldName: "Feature_Crossed", label: "Feature Crossed", visible: true, format: { places: 0} },
+        { fieldName: "WDCode", label: "Warning Device Level", visible: true, format: { places: 0} },
+        { fieldName: "SurfaceType", label: "Primary Crossing Surface Material", visible: true, format: { places: 0} },
+        { fieldName: "XingCond", label: "Overall Condition", visible: true, format: { places: 0} },
       ],
 
       showAttachments: true,
@@ -68,13 +68,13 @@ require([
       title: "Summary Info for Crossing Sign",
 
       fieldInfos: [
-        { fieldName: "DOT_Num", visible: true, format: { places: 0} },
-        { fieldName: "SignType", visible: true, format: { places: 0} },
-        { fieldName: "Post", visible: true, format: { places: 0} },
-        { fieldName: "Reflective", visible: true, format: { places: 0} },
-        { fieldName: "ReflSheetCond", visible: true, format: { places: 0} },
-        { fieldName: "InstallDate", visible: true, format: { places: 0} },
-        { fieldName: "SignCondition", visible: true, format: { places: 0} },
+        { fieldName: "DOT_Num", label: "DOT Crossing Number", visible: true, format: { places: 0} },
+        { fieldName: "SignType", label: "Type of Sign", visible: true, format: { places: 0} },
+        { fieldName: "Post", label: "Type of Sign Post", visible: true, format: { places: 0} },
+        { fieldName: "Reflective", label: "ASTM Reflective Sheeting", visible: true, format: { places: 0} },
+        { fieldName: "ReflSheetCond", label: "Reflective Sheeting Condition", visible: true, format: { places: 0} },
+        { fieldName: "InstallDate", label: "Installation Date", visible: true, format: { places: 0} },
+        { fieldName: "SignCondition", label: "Overall Condition", visible: true, format: { places: 0} },
       ],
 
       showAttachments: true,
@@ -85,7 +85,7 @@ require([
       title: "Summary Info for Rail Line",
 
       fieldInfos: [
-        { fieldName: "LineName", visible: true, format: { places: 0} },
+        { fieldName: "LineName", label: "Rail Line", visible: true, format: { places: 0} },
         { fieldName: "Division", visible: true, format: { places: 0} },
         { fieldName: "Subdivision", visible: true, format: { places: 0} },
         { fieldName: "Branch", visible: true, format: { places: 0} },
@@ -172,7 +172,6 @@ require([
       enableLabel: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: true,
-      infoWindow: popup,
       enableHighlight: false,
       allPlaceholder: "Search for Railroad Crossings, Signs, Addresses or Places",
       map: map,
