@@ -54,24 +54,21 @@ require([
 
 // -----------------Define PopupTemplates------------------------------
     //Crossing Template
-    var crossingTemplate = new PopupTemplate({
-      title: "Summary Info for Crossing {DOT_Num}",
+    var crossingPopupFeatures = "DOT Crossing Number: {DOT_Num}</br>Line Name: {LineName}</br>Feature Crossed: {Feature_Crossed}</br>Warning Device Level: {WDCode}</br>Primary Crossing Surface Material: {SurfaceType}</br>Crossing Codition: {XingCond}";
 
-      fieldInfos: [
-        { fieldName: "DOT_Num", label: "DOT Crossing Number", visible: true, format: { places: 0} },
-        { fieldName: "LineName", label: "Rail Line", visible: true, format: { places: 0} },
-        { fieldName: "Feature_Crossed", label: "Feature Crossed", visible: true, format: { places: 0} },
-        { fieldName: "WDCode", label: "Warning Device Level", visible: true, format: { places: 0} },
-        { fieldName: "SurfaceType", label: "Primary Crossing Surface Material", visible: true, format: { places: 0} },
-        { fieldName: "XingCond", label: "Overall Condition", visible: true, format: { places: 0} },
-      ],
+    var crossingTemplate = new PopupTemplate({
+      title: "Railroad Crossing {DOT_Num}",
+
+      description: crossingPopupFeatures + "</br></br><a href='ReportTest.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>",
 
       showAttachments: true,
     });
 
+
+
     //Sign Template
     var signTemplate = new PopupTemplate({
-      title: "Summary Info for Crossing Sign",
+      title: "Crossing Sign",
 
       fieldInfos: [
         { fieldName: "DOT_Num", label: "DOT Crossing Number", visible: true, format: { places: 0} },
