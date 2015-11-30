@@ -1,24 +1,73 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html dir="ltr">
+
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!--The viewport meta tag is used to improve the presentation and behavior of the samples
-      on iOS devices-->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+
     <title>Query State Info without Map</title>
 
     <script src="http://js.arcgis.com/3.14/"></script>
     <script src="js/report.js"></script>
+    <script src="http://localhost:35729/livereload.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/bootstrap-mod.css">
 
   </head>
 
   <body>
-    DOT Crossing Number :
-    <input type="text" id="searchInput" value="851-419J">
-    <input id="execute" type="button" value="Get Details">
-    <br />
-    <br />
-    <div id="info" style="padding:5px; margin:5px; background-color:#eee;">
+    <nav class="navbar navbar-inverse navbar-static-top report">
+      <div class="container">
+          <div class="row">
+            <div class="col-xs-3 col-sm-2 btn-head">
+              <div class="hidden-xs">
+                <a href="index.html"><button type="button" name="button" class="btn btn-primary btn-lg">Back</button></a>
+              </div>
+              <div class="visible-xs-2 hidden-sm hidden-md hidden-lg">
+                <a href="index.html"><button type="button" name="button" class="btn btn-primary"><img src="img\ic_keyboard_arrow_left_black_24px.svg" alt="" /></button></a>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-7">
+              <!-- <input type="text" id="searchInput" value="851-419J" class="form-control"> -->
+              <div class="form-group">
+                <div class="hidden-xs">
+                  <label class="control-label" for="searchInput">DOT Number, Town, or Road Name</label>
+                </div>
+                <div class="visible-xs-7 hidden-sm hidden-md hidden-lg">
+                  <label class="control-label" for="searchInput">Crossing Lookup</label>
+                </div>
+                <input class="form-control" id="searchInput" type="text" value="851-419J">
+              </div>
+            </div>
+            <div class="col-xs-1 col-sm-3 btn-head">
+              <div class="hidden-xs">
+                <button id="execute" type="button" class="btn btn-success btn-lg">Crossing Search</button>
+              </div>
+              <div class="visible-xs-3 hidden-sm hidden-md hidden-lg">
+                <button id="execute" type="button" class="btn btn-success">
+                  <img src="img\ic_search_black_24px.svg" alt="" />
+                </button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="container">
+      <div id="info" style="padding:5px; margin:5px; background-color:#eee;"></div>
     </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
   </body>
 </html>

@@ -7,3 +7,18 @@
   border-width: 12;
   border-style: solid;
 }
+
+.report {
+  background-color: #FFC107;
+  border-color: #FF6F00;
+  border-width: 12;
+  border-style: solid;
+}
+
+.navbar-header .navbar-brand {
+  color: #333333;
+}
+
+.btn-head {
+  padding-top: 15px;
+}
