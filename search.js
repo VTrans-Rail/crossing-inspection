@@ -2,72 +2,204 @@ require([
   "esri/map",
   "esri/dijit/Search",
   "esri/layers/FeatureLayer",
+  "esri/dijit/Popup", "esri/dijit/PopupTemplate",
+  "esri/symbols/SimpleFillSymbol", "esri/Color",
+  "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
+  "dojo/dom-attr", "dojo/dom",
+  // "dojox/charting/Chart", "dojox/charting/themes/Dollar",
+  "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
   "dojo/domReady!"
   ],
-  function (Map, Search, FeatureLayer, InfoTemplate) {
+
+
+//------------------------------------------------------------------
+// ----------------------Initialize Functions-----------------------
+//------------------------------------------------------------------
+  function (
+    Map,
+    Search,
+    FeatureLayer,
+    Popup, PopupTemplate,
+    SimpleFillSymbol, Color,
+    domClass, domConstruct, query, on,
+    // domAttr, dom,
+    Query, QueryTask,
+    InfoTemplate
+  ) {
+
+
+
+// --------------------Popup Shell Setup-----------------------------------
+    var fill = new SimpleFillSymbol("solid", null, new Color("#A4CE67"));
+    var popup = new Popup({
+      fillSymbol: fill,
+      titleInBody: false
+    }, domConstruct.create("div"));
+
+    //Add Popup theme
+    domClass.add(popup.domNode, "dark");
+
+
+
+//--------------------Create Map-----------------------------------------
     var map = new Map("map", {
-      basemap: "gray",
+      basemap: "dark-gray",
       center: [-72.68, 43.785], // lon, lat
-      zoom: 8
+      zoom:8,
+      infoWindow: popup
     });
 
 
-    //Add map layers
-    var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
 
-    var crossingTemplate = new InfoTemplate("Railroad Crossing", "DOT Crossing Number: ${DOT_Num}</br>Line Name: ${LineName}</br>Feature Crossed: ${Feature_Crossed}</br>Warning Device Level: ${WDCode}</br>Crossing Codition: ${XingCond}");
+// -----------------Define PopupTemplates------------------------------
+    //Crossing Template
+    var crossingTemplate = new PopupTemplate({
+      title: "Summary Info for Crossing {DOT_Num}",
+
+      fieldInfos: [
+        { fieldName: "DOT_Num", label: "DOT Crossing Number", visible: true, format: { places: 0} },
+        { fieldName: "LineName", label: "Rail Line", visible: true, format: { places: 0} },
+        { fieldName: "Feature_Crossed", label: "Feature Crossed", visible: true, format: { places: 0} },
+        { fieldName: "WDCode", label: "Warning Device Level", visible: true, format: { places: 0} },
+        { fieldName: "SurfaceType", label: "Primary Crossing Surface Material", visible: true, format: { places: 0} },
+        { fieldName: "XingCond", label: "Overall Condition", visible: true, format: { places: 0} },
+      ],
+
+      showAttachments: true,
+    });
+
+    //Sign Template
+    var signTemplate = new PopupTemplate({
+      title: "Summary Info for Crossing Sign",
+
+      fieldInfos: [
+        { fieldName: "DOT_Num", label: "DOT Crossing Number", visible: true, format: { places: 0} },
+        { fieldName: "SignType", label: "Type of Sign", visible: true, format: { places: 0} },
+        { fieldName: "Post", label: "Type of Sign Post", visible: true, format: { places: 0} },
+        { fieldName: "Reflective", label: "ASTM Reflective Sheeting", visible: true, format: { places: 0} },
+        { fieldName: "ReflSheetCond", label: "Reflective Sheeting Condition", visible: true, format: { places: 0} },
+        { fieldName: "InstallDate", label: "Installation Date", visible: true, format: { places: 0} },
+        { fieldName: "SignCondition", label: "Overall Condition", visible: true, format: { places: 0} },
+      ],
+
+      showAttachments: true,
+    });
+
+    //Rail Line Template
+    var lineTemplate = new PopupTemplate({
+      title: "Summary Info for Rail Line",
+
+      fieldInfos: [
+        { fieldName: "LineName", label: "Rail Line", visible: true, format: { places: 0} },
+        { fieldName: "Division", visible: true, format: { places: 0} },
+        { fieldName: "Subdivision", visible: true, format: { places: 0} },
+        { fieldName: "Branch", visible: true, format: { places: 0} },
+      ],
+    });
+
+    //AADT Template
+    var aadtTemplate = new PopupTemplate({
+      title: "Average Annual Daily Traffic at Station {ATRStation}",
+
+      fieldInfos: [
+        { fieldName: "aadt", label: "AADT", visible: true, format: { places: 0} },
+        { fieldName: "ATRStation", label: "Automated Traffic Recording Station", visible: true, format: { places: 0} },
+        { fieldName: "YEAR", label: "Last Year Counted", visible: true, format: { places: 0} },
+        { fieldName: "RouteName", label: "Route Name", visible: true, format: { places: 0} },
+        { fieldName: "RouteNum", label: "Route Number", visible: true, format: { places: 0} },
+      ],
+    });
+
+
+
+//  ---------------------- Add map layers ------------------------------
+    //Create Crossing Feature Layer
+    var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
       id: "crossing-points",
       outFields: ["*"],
-      infoTemplate: crossingTemplate
+      infoTemplate: crossingTemplate,
+      minScale: 200000,
     });
 
-    var signUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspections2015/FeatureServer/0";
 
-    var signTemplate = new InfoTemplate("Crossing Sign", "DOT Crossing Number: ${DOT_Num}</br>Sign Type: ${SignType}</br>Sign Condition: ${SignCondition}</br>Installation Date: ${InstallDate}");
+    //Create Sign Feature Layer
+    var signUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/0";
 
     var signPoints = new FeatureLayer(signUrl, {
       id: "sign-points",
       outFields: ["*"],
-      infoTemplate: signTemplate
+      infoTemplate: signTemplate,
+      minScale: 25000,
     });
 
+
+    //Create Rail Line Feature Layer
+    var lineUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer/0";
+
+    var railLine = new FeatureLayer(lineUrl, {
+      id: "rail-line",
+      outFields: ["*"],
+      infoTemplate: lineTemplate
+    });
+
+
+    //Create AADT Line Feature Layer
+    var aadtUrl = "https://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/AADT_2013_StateHighways/FeatureServer/0";
+
+    var aadtLine = new FeatureLayer(aadtUrl, {
+      id: "aadt-line",
+      outFields: ["*"],
+      infoTemplate: aadtTemplate,
+      minScale: 50000,
+    });
+
+    //Add Layers to Map
+    map.addLayer(aadtLine);
+    map.addLayer(railLine);
     map.addLayer(crossingPoints);
     map.addLayer(signPoints);
 
-    //Build search
-    var s = new Search({
+
+
+// ---------------------------- Build search --------------------------
+    var searchWidget = new Search({
       enableLabel: false,
       enableInfoWindow: true,
-      showInfoWindowOnSelect: false,
-      map: map
+      showInfoWindowOnSelect: true,
+      enableHighlight: false,
+      allPlaceholder: "Search for Railroad Crossings, Signs, Addresses or Places",
+      map: map,
     }, "search");
 
-    var sources = s.get("sources");
+    //Create blank searchSources array
+    var searchSources = [];
 
-    //Push the sources used to search, by default the ArcGIS Online World geocoder is included.
-    sources.push({
-      featureLayer: new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1"),
+    //Push the first source used to search to searchSources array
+    searchSources.push({
+      featureLayer: new FeatureLayer(crossingUrl),
       searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed"],
       suggestionTemplate: "${DOT_Num}, Line: ${LineName}, Street: ${Feature_Crossed}, Warning Device: ${WDCode}, Condition: ${XingCond}",
       exactMatch: false,
-      outFields: ["DOT_Num", "Feature_Crossed", "LineName", "WDCode", "XingCond"],
+      outFields: ["*"],
       name: "Railroad Crossings",
       placeholder: "Search by DOT #, Line, Street, Town, or County",
-      maxResults: 10,
-      maxSuggestions: 10,
+      maxResults: 15,
+      maxSuggestions: 15,
 
+      //Create an InfoTemplate
+      infoTemplate: crossingTemplate,
 
-      //Create an InfoTemplate and include three fields
-      infoTemplate: new InfoTemplate("Railroad Crossing", "DOT Crossing Number: ${DOT_Num}</br>Line Name: ${LineName}</br>Feature Crossed: ${Feature_Crossed}</br>Warning Device Level: ${WDCode}</br>Crossing Codition: ${XingCond}"),
       enableSuggestions: true,
       minCharacters: 0
     });
 
-    sources.push({
-      featureLayer: new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspections2015/FeatureServer/0"),
+
+    //Push the second source used to search to searchSources array
+    searchSources.push({
+      featureLayer: new FeatureLayer(signUrl),
       autoNavigate: false, //This prevents automatic navigation straight to sign feature when searched
       searchFields: ["DOT_Num", "SignType"],
       suggestionTemplate: "${DOT_Num}, Sign Type: ${SignType}, Condition: ${SignCondition}, Installed: ${InstallDate}",
@@ -75,20 +207,27 @@ require([
       name: "Crossing Signs",
       outFields: ["*"],
       placeholder: "Search for crossing signs by Sign Type or DOT #",
-      maxResults: 10,
-      maxSuggestions: 10,
+      maxResults: 15,
+      maxSuggestions: 15,
 
       //Create an InfoTemplate
-
-      infoTemplate: new InfoTemplate("Crossing Sign Information", "DOT # of Associated Crossing: ${DOT_Num}</br>Type of Sign: ${SignType}</br>Condition: ${SignCondition}"),
+      infoTemplate: signTemplate,
 
       enableSuggestions: true,
       minCharacters: 0
     });
 
-    //Set the sources above to the search widget
-    s.set("sources", sources);
+    //Push the third source used to search to searchSources array(World Geocoding Service).
+    searchSources.push(searchWidget.sources[0]);
 
-    s.startup();
+    // Set the source for the searchWidget to the properly ordered searchSources array
+    searchWidget.set("sources", searchSources);
+
+    //Set the countryCode for World Geocoding Service
+    searchWidget.sources[2].countryCode = "US";
+    searchWidget.sources[2].maxSuggestions = 4;
+
+    //Finalize creation of the search widget
+    searchWidget.startup();
 
 });
