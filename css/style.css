@@ -1,57 +1,51 @@
 #map {
   width: 100%;
   height: 100%;
-  /*margin: 0;*/
-  /*padding: 0;*/
-  padding-top: 100px;
+  padding-top: 85px;
   position: absolute;
-  /*top: 100px;*/
-  z-index: 0;
 }
 
-#search {
-   /*display: block;
-   position: absolute;
-   z-index: 2;
-   top: 20px;
-   left: 74px;*/
-   width: calc(100% - 74px);
-   padding: 20px;
-}
+#search { padding: 20px; }
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
 
 /*search input style tweaks*/
 .arcgisSearch .searchGroup .searchInput {
     width: 100%;
     padding: 6px 0px 6px 12px;
-    height: 50px;
-    font-size: 1.5em;
+    height: 30px;
+    font-size: 1em;
 }
 /*set search input box width to full - width of side elements*/
 .arcgisSearch .searchInputGroup {
-    width: calc(100% - 55px);
+    width: calc(100% - 52px);
 }
 
 .arcgisSearch .searchExpandContainer {
-    width: calc(100% - 74px);
+    width: calc(100% - 48px);
 }
 
 /*multiple search dropdown arrow tweaks*/
 .arcgisSearch .hasMultipleSources .searchToggle {
-  height: 50px;
+  height: 30px;
 }
 
 /*search mag glass button size*/
 .arcgisSearch .hasMultipleSources .searchSubmit {
-  height: 50px;
+  height: 30px;
 }
-
 
 /*modify search icon symbol sizes and alignment*/
 .arcgisSearch .searchIcon {
-  font-size: 1.5em;
+  font-size: 1em;
   width: 20px;
-  height: 50px;
-  line-height: 50px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.arcgisSearch .searchClear {
+  padding: 6px 12px;
 }
 
 /*"No Search Results" popup*/
@@ -60,10 +54,86 @@
 }
 
 .arcgisSearch .suggestionsMenu {
-  background-color: #ffb366;
-  font-weight: bold;
-  border: 2px solid #121310;
+  background-color: #81C784;
+  border: 2px solid #1B5E20;
+  width: calc(100% - 70px);
 }
+
+/*End extra small devices*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+  .arcgisSearch .searchGroup .searchInput {
+      height: 40px;
+      font-size: 1.25em;
+  }
+
+  /*multiple search dropdown arrow tweaks*/
+  .arcgisSearch .hasMultipleSources .searchToggle {
+    height: 40px;
+  }
+
+  /*search mag glass button size*/
+  .arcgisSearch .hasMultipleSources .searchSubmit {
+    height: 40px;
+  }
+
+  .arcgisSearch .searchClear {
+    padding: 8px 16px;
+  }
+
+  /*modify search icon symbol sizes and alignment*/
+  .arcgisSearch .searchIcon {
+    font-size: 1.25em;
+    width: 20px;
+    height: 40px;
+    line-height: 40px;
+  }
+
+  #map {
+    padding-top: 95px;
+  }
+} /* end small devices */
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+  .arcgisSearch .searchGroup .searchInput {
+      height: 50px;
+      font-size: 1.35em;
+  }
+
+  /*multiple search dropdown arrow tweaks*/
+  .arcgisSearch .hasMultipleSources .searchToggle {
+    height: 50px;
+  }
+
+  /*search mag glass button size*/
+  .arcgisSearch .hasMultipleSources .searchSubmit {
+    height: 50px;
+  }
+
+  .arcgisSearch .searchClear {
+    padding: 9px 18px;
+  }
+
+  /*modify search icon symbol sizes and alignment*/
+  .arcgisSearch .searchIcon {
+    font-size: 1.35em;
+    width: 20px;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  #map {
+    padding-top: 105px;
+  }
+} /* end medium devices */
+
+/* Large devices (large desktops, 1200px and up) ----not used currently
+@media (min-width: @screen-lg-min) { ... } */
+
 
 
 
