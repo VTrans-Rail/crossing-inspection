@@ -20,15 +20,17 @@ require([
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
       id: "crossing-points",
+      outFields: ["*"],
       infoTemplate: crossingTemplate
     });
 
     var signUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspections2015/FeatureServer/0";
 
-    var signTemplate = new InfoTemplate("Crossing Sign", "Sign Type: ${SignType}");
+    var signTemplate = new InfoTemplate("Crossing Sign", "DOT Crossing Number: ${DOT_Num}</br>Sign Type: ${SignType}</br>Sign Condition: ${SignCondition}</br>Installation Date: ${InstallDate}");
 
     var signPoints = new FeatureLayer(signUrl, {
       id: "sign-points",
+      outFields: ["*"],
       infoTemplate: signTemplate
     });
 
