@@ -10,10 +10,11 @@ require([
   query.returnGeometry = false;
   query.outFields = ["*"];
 
-  on(dom.byId("searchReport"), "click", searchReport);
+  on(dom.byId("execute"), "click", execute);
 
-  function searchReport () {
-    query.where = "DOT_Num = '" + dom.byId("DOT_Num").value + "'";
+  function execute () {
+    //Create possible filters
+    query.where = "DOT_Num like '%" + dom.byId("searchInput").value + "%' OR RRXingNum like '%" + dom.byId("searchInput").value + "%' OR XingCond like '%" + dom.byId("searchInput").value + "%'";
     queryTask.execute(query, showResults);
   }
 
