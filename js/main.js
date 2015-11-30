@@ -59,7 +59,7 @@ require([
     var crossingTemplate = new PopupTemplate({
       title: "Railroad Crossing {DOT_Num}",
 
-      description: crossingPopupFeatures + "</br></br><a href='ReportTest.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>",
+      description: crossingPopupFeatures + "</br></br><a href='report.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>",
 
       showAttachments: true,
     });
