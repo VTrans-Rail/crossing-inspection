@@ -7,7 +7,7 @@ require([
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
   // "dojox/charting/Chart", "dojox/charting/themes/Dollar",
-  "esri/tasks/query", "esri/tasks/QueryTask",
+  // "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
   "dojo/domReady!"
   ],
@@ -24,7 +24,7 @@ require([
     SimpleFillSymbol, Color,
     domClass, domConstruct, query, on,
     // domAttr, dom,
-    Query, QueryTask,
+    // Query, QueryTask,
     InfoTemplate
   ) {
 
@@ -197,35 +197,16 @@ require([
     });
 
 
-    //Push the second source used to search to searchSources array
-    searchSources.push({
-      featureLayer: new FeatureLayer(signUrl),
-      autoNavigate: false, //This prevents automatic navigation straight to sign feature when searched
-      searchFields: ["DOT_Num", "SignType"],
-      suggestionTemplate: "${DOT_Num}, Sign Type: ${SignType}, Condition: ${SignCondition}, Installed: ${InstallDate}",
-      exactMatch: false,
-      name: "Crossing Signs",
-      outFields: ["*"],
-      placeholder: "Search for crossing signs by Sign Type or DOT #",
-      maxResults: 15,
-      maxSuggestions: 15,
 
-      //Create an InfoTemplate
-      infoTemplate: signTemplate,
-
-      enableSuggestions: true,
-      minCharacters: 0
-    });
-
-    //Push the third source used to search to searchSources array(World Geocoding Service).
+    //Push the second source used to search to searchSources array(World Geocoding Service).
     searchSources.push(searchWidget.sources[0]);
 
     // Set the source for the searchWidget to the properly ordered searchSources array
     searchWidget.set("sources", searchSources);
 
     //Set the countryCode for World Geocoding Service
-    searchWidget.sources[2].countryCode = "US";
-    searchWidget.sources[2].maxSuggestions = 4;
+    searchWidget.sources[1].countryCode = "US";
+    searchWidget.sources[1].maxSuggestions = 4;
 
     //Finalize creation of the search widget
     searchWidget.startup();
