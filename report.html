@@ -24,18 +24,35 @@
     <nav class="navbar navbar-inverse navbar-static-top report">
       <div class="container">
           <div class="row">
-            <div class="col-xs-2 btn-head">
+            <div class="col-xs-3 col-sm-2 btn-head">
+              <div class="hidden-xs">
                 <a href="index.html"><button type="button" name="button" class="btn btn-primary btn-lg">Back</button></a>
+              </div>
+              <div class="visible-xs-2 hidden-sm hidden-md hidden-lg">
+                <a href="index.html"><button type="button" name="button" class="btn btn-primary"><img src="img\ic_keyboard_arrow_left_black_24px.svg" alt="" /></button></a>
+              </div>
             </div>
-            <div class="col-xs-7">
+            <div class="col-xs-6 col-sm-7">
               <!-- <input type="text" id="searchInput" value="851-419J" class="form-control"> -->
               <div class="form-group">
-                <label class="control-label" for="searchInput">DOT Crossing Number, Town, or Road Name</label>
+                <div class="hidden-xs">
+                  <label class="control-label" for="searchInput">DOT Number, Town, or Road Name</label>
+                </div>
+                <div class="visible-xs-7 hidden-sm hidden-md hidden-lg">
+                  <label class="control-label" for="searchInput">Crossing Lookup</label>
+                </div>
                 <input class="form-control" id="searchInput" type="text" value="851-419J">
               </div>
             </div>
-            <div class="col-xs-2 btn-head">
+            <div class="col-xs-1 col-sm-3 btn-head">
+              <div class="hidden-xs">
                 <button id="execute" type="button" class="btn btn-success btn-lg">Crossing Search</button>
+              </div>
+              <div class="visible-xs-3 hidden-sm hidden-md hidden-lg">
+                <button id="execute" type="button" class="btn btn-success">
+                  <img src="img\ic_search_black_24px.svg" alt="" />
+                </button>
+              </div>
             </div>
         </div>
       </div>
