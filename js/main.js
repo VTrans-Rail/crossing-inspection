@@ -3,11 +3,11 @@ require([
   "esri/dijit/Search",
   "esri/layers/FeatureLayer",
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
+  "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
   // "dojox/charting/Chart", "dojox/charting/themes/Dollar",
-  // "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
   "dojo/domReady!"
   ],
@@ -21,10 +21,10 @@ require([
     Search,
     FeatureLayer,
     Popup, PopupTemplate,
+    Query, QueryTask,
     SimpleFillSymbol, Color,
     domClass, domConstruct, query, on,
-    // domAttr, dom,
-    // Query, QueryTask,
+    domAttr, dom,
     InfoTemplate
   ) {
 
@@ -50,14 +50,26 @@ require([
       infoWindow: popup
     });
 
+    // map.infoWindow.resize(300, 700);
+
 
 
 // -----------------Define PopupTemplates------------------------------
     //Crossing Template
     var crossingPopupFeatures = "DOT Crossing Number: {DOT_Num}</br>Line Name: {LineName}</br>Feature Crossed: {Feature_Crossed}</br>Warning Device Level: {WDCode}</br>Primary Crossing Surface Material: {SurfaceType}</br>Crossing Codition: {XingCond}";
 
+    var link = domConstruct.create("a", {
+      "class": "action",
+      "id": "fullReport",
+      "innerHTML": "Full Report",
+      "href": "javascript:void(0);"
+    }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
+
     var crossingTemplate = new PopupTemplate({
       title: "Railroad Crossing {DOT_Num}",
+
+      // description: crossingPopupFeatures,
+
 
       description: crossingPopupFeatures + "</br></br><a href='report.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>",
 
@@ -158,6 +170,45 @@ require([
     map.addLayer(railLine);
     map.addLayer(crossingPoints);
     map.addLayer(signPoints);
+
+
+
+    // ------------------------------------------------------------------
+        var queryTask = new QueryTask(crossingUrl);
+
+        var query = new Query();
+
+        query.returnGeometry = true;
+        query.outFields = ["*"];
+
+        on(link, "click", selectionReportExecute);
+
+
+        function selectionReportExecute (event) {
+          //Create possible filters
+          // query.where = "DOT_Num IN '(" + crossingPoints + ")'";
+          query.geometry = event.mapPoint;
+          queryTask.execute(query, showResults);
+          window.location.href = 'report.html';
+
+        }
+
+        function showResults (results) {
+          var resultItems = [];
+          var resultCount = results.features.length;
+          for (var i = 0; i < resultCount; i++) {
+            var featureAttributes = results.features[i].attributes;
+            for (var attr in featureAttributes) {
+              resultItems.push("<b>" + attr + ":</b>  " + featureAttributes[attr] + "<br>");
+            }
+            resultItems.push("<br>");
+          }
+          dom.byId("info").innerHTML = resultItems.join("");
+        }
+
+
+
+    // -------------------------------------------------------------------
 
 
 
