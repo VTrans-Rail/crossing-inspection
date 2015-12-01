@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html dir="ltr">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+
+    <title>VTrans Rail: At-Grade Public Railroad Crossings</title>
+
+    <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.14/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/bootstrap-mod.css">
+
+    <script src="http://js.arcgis.com/3.14/"></script>
+    <script src="js/main.js"></script>
+    <script src="http://localhost:35729/livereload.js"></script>
+
+</head>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="page-header">
+        <h1>Crossing Report</h1>
+      </div>
+    </div>
+  </div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-primary">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Crossing Number</h3>
+			  </div>
+			  <div class="panel-body text-center">
+			    <h3>851-419J</h3>
+			  </div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Surface Condition</h3>
+        </div>
+        <div class="panel-body text-center">
+          <h3>Poor</h3>
+        </div>
+      </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+      <div class="page-header">
+        <h1><small>Location Information</small></h1>
+      </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Line Name</div>
+          <div class="panel-body">
+            <strong>VTR</strong>
+          </div>
+      </div>
+		</div>
+		<div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Division</div>
+          <div class="panel-body">
+            <strong>Vermont Railway</strong>
+          </div>
+      </div>
+		</div>
+		<div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Subdivision</div>
+          <div class="panel-body">
+            <strong>Northern</strong>
+          </div>
+      </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Branch</div>
+          <div class="panel-body">
+            <strong>None</strong>
+          </div>
+      </div>
+		</div>
+		<div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">MP</div>
+          <div class="panel-body">
+            <strong>120.42</strong>
+          </div>
+      </div>
+		</div>
+		<div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Road Name</div>
+          <div class="panel-body">
+            <strong>Flynn Ave</strong>
+          </div>
+      </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Town</div>
+          <div class="panel-body">
+            <strong>Burlington City</strong>
+          </div>
+      </div>
+		</div>
+		<div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">County</div>
+          <div class="panel-body">
+            <strong>Chittenden</strong>
+          </div>
+      </div>
+		</div>
+		<div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Land Use</div>
+          <div class="panel-body">
+            <strong>Industrial</strong>
+          </div>
+      </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+      <div class="page-header">
+        <h1><small>Safety Information</small></h1>
+      </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Warning Device</div>
+          <div class="panel-body">
+            <strong>FullQuad</strong>
+          </div>
+      </div>
+		</div>
+		<div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Signs or Signals?</div>
+          <div class="panel-body">
+            <strong>Yes</strong>
+          </div>
+      </div>
+		</div>
+		<div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Channelization</div>
+          <div class="panel-body">
+            <strong>All Approaches</strong>
+          </div>
+      </div>
+		</div>
+		<div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Stop Line</div>
+          <div class="panel-body">
+            <strong>Yes</strong>
+          </div>
+      </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Pavement Markings</div>
+          <div class="panel-body">
+            <strong>Yes</strong>
+          </div>
+      </div>
+		</div>
+		<div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Dynamic Envelope</div>
+          <div class="panel-body">
+            <strong>No</strong>
+          </div>
+      </div>
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+		<div class="col-sm-3">
+		</div>
+	</div>
+</div>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
