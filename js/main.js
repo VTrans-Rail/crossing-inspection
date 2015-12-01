@@ -61,9 +61,7 @@ require([
 
 // -----------------Define PopupTemplates------------------------------
     //Crossing Template
-    var crossingPopupFeatures = "DOT Crossing Number: <b>${DOT_Num}</b></br>Line Name: <b>${LineName}</b></br>Feature Crossed: <b>${Feature_Crossed}</b></br>Warning Device Level: <b>${WDCode}</b></br>Primary Crossing Surface Material: <b>${SurfaceType}</b></br>Crossing Codition: <b>${XingCond}</b>";
-
-    formatString += crossingPopupFeatures;
+    var crossingPopupFeatures = "<small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Crossing Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
 
     var link = domConstruct.create("a", {
       "class": "action",
@@ -74,31 +72,15 @@ require([
 
     var crossingTemplate = new PopupTemplate({
       title: "Railroad Crossing {DOT_Num}",
-
-      // description: crossingPopupFeatures,
-
-      // description: crossingPopupFeatures + "</br></br><a href='report.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>",
-
-      // showAttachments: true,
     });
 
 
 
     //Sign Template
+    var signPopupFeatures = "<small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>";
+
     var signTemplate = new PopupTemplate({
       title: "Crossing Sign",
-
-      fieldInfos: [
-        { fieldName: "DOT_Num", label: "DOT Crossing Number", visible: true, format: { places: 0} },
-        { fieldName: "SignType", label: "Type of Sign", visible: true, format: { places: 0} },
-        { fieldName: "Post", label: "Type of Sign Post", visible: true, format: { places: 0} },
-        { fieldName: "Reflective", label: "ASTM Reflective Sheeting", visible: true, format: { places: 0} },
-        { fieldName: "ReflSheetCond", label: "Reflective Sheeting Condition", visible: true, format: { places: 0} },
-        { fieldName: "InstallDate", label: "Installation Date", visible: true, format: { places: 0} },
-        { fieldName: "SignCondition", label: "Overall Condition", visible: true, format: { places: 0} },
-      ],
-
-      showAttachments: true,
     });
 
     //Rail Line Template
@@ -184,9 +166,10 @@ require([
 
     var selectQuery = new esri.tasks.Query();
 
+    //Crossings
     on(crossingPoints, "click", function(evt){
       map.infoWindow.hide();
-      // formatString = "";
+      formatString = crossingPopupFeatures;
       var  objectId = evt.graphic.attributes[crossingPoints.objectIdField];
       selectQuery.objectIds = [objectId];
       crossingPoints.selectFeatures(selectQuery);
@@ -196,11 +179,11 @@ require([
       console.log("error with crossingPoints; " + err.message);
     });
 
-    on(crossingPoints, 'selection-complete', setWindowContent);
+    on(crossingPoints, 'selection-complete', setCrossingWindowContent);
 
     map.addLayers([crossingPoints]);
 
-    function setWindowContent(results){
+    function setCrossingWindowContent(results){
       var imageString = "<table><tr>";
       var imageStyle = "alt='site image' width='100%'";
       var deferred = new dojo.Deferred;
@@ -215,11 +198,51 @@ require([
         else {
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
-            imageString += "<tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+            imageString += "<tr><td>Image " + (i+1) + "</td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
           formatString += imageString;
         }
         crossingTemplate.setContent(formatString);
+      });
+    }
+
+    // Signs
+    on(signPoints, "click", function(evt){
+      map.infoWindow.hide();
+      formatString = signPopupFeatures;
+      var  objectId = evt.graphic.attributes[signPoints.objectIdField];
+      selectQuery.objectIds = [objectId];
+      signPoints.selectFeatures(selectQuery);
+    });
+
+    on(signPoints, "error", function (err){
+      console.log("error with crossingPoints; " + err.message);
+    });
+
+    on(signPoints, 'selection-complete', setSignWindowContent);
+
+    map.addLayers([signPoints]);
+
+    function setSignWindowContent(results){
+      var imageString = "<table><tr>";
+      var imageStyle = "alt='site image' width='100%'";
+      var deferred = new dojo.Deferred;
+      var graphic = results.features[0];
+      var  objectId = graphic.attributes[signPoints.objectIdField];
+
+      signPoints.queryAttachmentInfos(objectId).then(function(response){
+        var imgSrc;
+        if (response.length === 0) {
+          deferred.resolve("no attachments");
+        }
+        else {
+          for ( i = 0; i < response.length; i++) {
+            imgSrc = response[i].url;
+            imageString += "<tr><td>Image " + (i+1) + "</td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+          }
+          formatString += imageString;
+        }
+        signTemplate.setContent(formatString);
       });
     }
 //---------------------------------------------------------------------------
