@@ -8,7 +8,9 @@ require([
   var query = new Query();
 
   query.returnGeometry = false;
-  query.outFields = ["*"];
+  query.outFields = [
+    "DOT_Num", "Feature_Crossed", "MP", "LineName", "Town", "FRA_LandUse", "WDCode", "SignSignal", "StopLine", "XingCond"
+  ];
 
   on(dom.byId("execute"), "click", execute);
 
@@ -24,7 +26,7 @@ require([
     for (var i = 0; i < resultCount; i++) {
       var featureAttributes = results.features[i].attributes;
       for (var attr in featureAttributes) {
-        resultItems.push("<b>" + attr + ":</b>  " + featureAttributes[attr] + "<br>");
+        resultItems.push("<div class='col-xs-12 col-sm-4 col-md-3'><strong>" + attr + ":</strong> " + featureAttributes[attr] + "</div>");
       }
       resultItems.push("<br>");
     }
