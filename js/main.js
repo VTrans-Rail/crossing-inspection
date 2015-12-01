@@ -3,11 +3,11 @@ require([
   "esri/dijit/Search",
   "esri/layers/FeatureLayer",
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
-  "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
   // "dojox/charting/Chart", "dojox/charting/themes/Dollar",
+  "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
   "dojo/domReady!"
   ],
@@ -21,10 +21,10 @@ require([
     Search,
     FeatureLayer,
     Popup, PopupTemplate,
-    Query, QueryTask,
     SimpleFillSymbol, Color,
     domClass, domConstruct, query, on,
-    domAttr, dom,
+    // domAttr, dom,
+    Query, QueryTask,
     InfoTemplate
   ) {
 
@@ -173,23 +173,24 @@ require([
 
 
 
-    // ------------------------------------------------------------------
-        var queryTask = new QueryTask(crossingUrl);
 
-        var query = new Query();
+     // ------------------------------------------------------------------
+      var queryTask = new esri.tasks.QueryTask(crossingUrl);
 
-        query.returnGeometry = true;
-        query.outFields = ["*"];
+      var query = new esri.tasks.Query();
 
-        on(link, "click", selectionReportExecute);
+      query.returnGeometry = true;
+      query.outFields = ["*"];
+
+      on(link, "click", selectionReportExecute);
 
 
-        function selectionReportExecute (event) {
-          //Create possible filters
-          // query.where = "DOT_Num IN '(" + crossingPoints + ")'";
-          query.geometry = event.mapPoint;
-          queryTask.execute(query, showResults);
-          window.location.href = 'report.html';
+      function selectionReportExecute (event) {
+        // Create possible filters
+        // query.where = "DOT_Num IN '(" + crossingPoints + ")'";
+        query.geometry = event.mapPoint;
+        queryTask.execute(query, showResults);
+        window.location.href = 'report.html';
 
         }
 
