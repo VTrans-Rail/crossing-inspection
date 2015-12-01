@@ -72,12 +72,6 @@ require([
 
     var crossingTemplate = new PopupTemplate({
       title: "Railroad Crossing {DOT_Num}",
-
-      // description: crossingPopupFeatures,
-
-      // description: crossingPopupFeatures + "</br></br><a href='report.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>",
-
-      // showAttachments: true,
     });
 
 
@@ -87,18 +81,6 @@ require([
 
     var signTemplate = new PopupTemplate({
       title: "Crossing Sign",
-
-      // fieldInfos: [
-      //   { fieldName: "DOT_Num", label: "DOT Crossing Number", visible: true, format: { places: 0} },
-      //   { fieldName: "SignType", label: "Type of Sign", visible: true, format: { places: 0} },
-      //   { fieldName: "Post", label: "Type of Sign Post", visible: true, format: { places: 0} },
-      //   { fieldName: "Reflective", label: "ASTM Reflective Sheeting", visible: true, format: { places: 0} },
-      //   { fieldName: "ReflSheetCond", label: "Reflective Sheeting Condition", visible: true, format: { places: 0} },
-      //   { fieldName: "InstallDate", label: "Installation Date", visible: true, format: { places: 0} },
-      //   { fieldName: "SignCondition", label: "Overall Condition", visible: true, format: { places: 0} },
-      // ],
-
-      // showAttachments: true,
     });
 
     //Rail Line Template
