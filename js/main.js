@@ -1,3 +1,5 @@
+var formatString = "";
+
 require([
   "esri/map",
   "esri/dijit/Search",
@@ -42,6 +44,9 @@ require([
 
 
 
+
+
+
 //--------------------Create Map-----------------------------------------
     var map = new Map("map", {
       basemap: "dark-gray",
@@ -56,7 +61,11 @@ require([
 
 // -----------------Define PopupTemplates------------------------------
     //Crossing Template
-    var crossingPopupFeatures = "DOT Crossing Number: {DOT_Num}</br>Line Name: {LineName}</br>Feature Crossed: {Feature_Crossed}</br>Warning Device Level: {WDCode}</br>Primary Crossing Surface Material: {SurfaceType}</br>Crossing Codition: {XingCond}";
+    var crossingPopupFeatures = "DOT Crossing Number: ${DOT_Num}</br>Line Name: ${LineName}</br>Feature Crossed: ${Feature_Crossed}</br>Warning Device Level: ${WDCode}</br>Primary Crossing Surface Material: ${SurfaceType}</br>Crossing Codition: ${XingCond}";
+
+    formatString += crossingPopupFeatures;
+
+    // formatString += crossingPopupFeatures + "</br></br><a href='report.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>";
 
     var link = domConstruct.create("a", {
       "class": "action",
@@ -71,9 +80,9 @@ require([
       // description: crossingPopupFeatures,
 
 
-      description: crossingPopupFeatures + "</br></br><a href='report.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>",
+      // description: crossingPopupFeatures + "</br></br><a href='report.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>",
 
-      showAttachments: true,
+      // showAttachments: true,
     });
 
 
@@ -127,7 +136,7 @@ require([
     var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
-      id: "crossing-points",
+      id: "crossingPoints",
       outFields: ["*"],
       infoTemplate: crossingTemplate,
       minScale: 200000,
@@ -172,9 +181,80 @@ require([
     map.addLayer(signPoints);
 
 
+    //---------------------------------------------------------------------------
+    //---------------------------------------------------------------------------
+        //Create popup formatString
+        // var formatString = "";
+
+        var selectQuery = new esri.tasks.Query();
+
+        on(crossingPoints, "click", function(evt){
+          map.infoWindow.hide();
+          // formatString = "";
+          var  objectId = evt.graphic.attributes[crossingPoints.objectIdField];
+          selectQuery.objectIds = [objectId];
+          crossingPoints.selectFeatures(selectQuery);
+        });
+
+        on(crossingPoints, "error", function (err){
+          console.log("error with crossingPoints; " + err.message);
+        });
+
+        on(crossingPoints, 'selection-complete', setWindowContent);
+
+        map.addLayers([crossingPoints]);
+
+      function setWindowContent(results){
+        var imageString = "<table><tr>";
+        var imageStyle = "alt='site image' width='100%'";
+        var deferred = new dojo.Deferred;
+          var graphic = results.features[0];
+          var  objectId = graphic.attributes[crossingPoints.objectIdField];
+
+          crossingPoints.queryAttachmentInfos(objectId).then(function(response){
+             var imgSrc;
+             if (response.length === 0) {
+                 deferred.resolve("no attachments");
+             }
+             else {
+               for ( i = 0; i < response.length; i++) {
+                 imgSrc = response[i].url;
+                 imageString += "<tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+               }
+               formatString += imageString;
+             }
+            //  formatString += "<td><b>" + graphic.attributes.DOT_Num + "</b><br/>" + graphic.attributes.LineName + "<br/>" +
+            // // formatString += "<td>" + graphic.attributes.Address + "<br/>" +
+            //  graphic.attributes.Feature_Crossed +
+            //  ", " +
+            //  graphic.attributes.XingCond +
+            //  "<td></tr></table>";
+
+          //   console.log(formatString);
+          //   var infoTemplate = new InfoTemplate();
+          //   infoTemplate.setContent(formatString);
+           //  infoTemplate.setTitle("Location");
+           //  infoTemplate.setTitle("<br>");
+           //  graphic.setInfoTemplate = infoTemplate;
+              crossingTemplate.setContent(formatString);
+            // map.infoWindow.setTitle("</br>");
+           //   map.infoWindow.setTitle(graphic.attributes.Facility);
+              // map.infoWindow.show(graphic.geometry);
+            /*   var t = query(".actionList");
+             domClass.remove(t[0], "hidden");
+             */
+           });
+         }
+    //---------------------------------------------------------------------------
+    //---------------------------------------------------------------------------
 
 
-     // ------------------------------------------------------------------
+
+
+      // ----------------------------------------------------------------
+      // ---------Navigate to Report Page with Current Selection----------
+      // ---------------------------------------------------------------------
+
       var queryTask = new esri.tasks.QueryTask(crossingUrl);
 
       var query = new esri.tasks.Query();
