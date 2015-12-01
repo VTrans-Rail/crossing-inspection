@@ -1,3 +1,5 @@
+var formatString = "";
+
 require([
   "esri/map",
   "esri/dijit/Search",
@@ -42,6 +44,9 @@ require([
 
 
 
+
+
+
 //--------------------Create Map-----------------------------------------
     var map = new Map("map", {
       basemap: "dark-gray",
@@ -56,7 +61,9 @@ require([
 
 // -----------------Define PopupTemplates------------------------------
     //Crossing Template
-    var crossingPopupFeatures = "DOT Crossing Number: {DOT_Num}</br>Line Name: {LineName}</br>Feature Crossed: {Feature_Crossed}</br>Warning Device Level: {WDCode}</br>Primary Crossing Surface Material: {SurfaceType}</br>Crossing Codition: {XingCond}";
+    var crossingPopupFeatures = "DOT Crossing Number: <b>${DOT_Num}</b></br>Line Name: <b>${LineName}</b></br>Feature Crossed: <b>${Feature_Crossed}</b></br>Warning Device Level: <b>${WDCode}</b></br>Primary Crossing Surface Material: <b>${SurfaceType}</b></br>Crossing Codition: <b>${XingCond}</b>";
+
+    formatString += crossingPopupFeatures;
 
     var link = domConstruct.create("a", {
       "class": "action",
@@ -70,10 +77,9 @@ require([
 
       // description: crossingPopupFeatures,
 
+      // description: crossingPopupFeatures + "</br></br><a href='report.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>",
 
-      description: crossingPopupFeatures + "</br></br><a href='report.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>",
-
-      showAttachments: true,
+      // showAttachments: true,
     });
 
 
@@ -127,7 +133,7 @@ require([
     var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
-      id: "crossing-points",
+      id: "crossingPoints",
       outFields: ["*"],
       infoTemplate: crossingTemplate,
       minScale: 200000,
@@ -172,44 +178,89 @@ require([
     map.addLayer(signPoints);
 
 
+//---------------------------------------------------------------------------
+//---------------------Display Photos in Popup--------------------------------
+//---------------------------------------------------------------------------
 
+    var selectQuery = new esri.tasks.Query();
 
-     // ------------------------------------------------------------------
-      var queryTask = new esri.tasks.QueryTask(crossingUrl);
+    on(crossingPoints, "click", function(evt){
+      map.infoWindow.hide();
+      // formatString = "";
+      var  objectId = evt.graphic.attributes[crossingPoints.objectIdField];
+      selectQuery.objectIds = [objectId];
+      crossingPoints.selectFeatures(selectQuery);
+    });
 
-      var query = new esri.tasks.Query();
+    on(crossingPoints, "error", function (err){
+      console.log("error with crossingPoints; " + err.message);
+    });
 
-      query.returnGeometry = true;
-      query.outFields = ["*"];
+    on(crossingPoints, 'selection-complete', setWindowContent);
 
-      on(link, "click", selectionReportExecute);
+    map.addLayers([crossingPoints]);
 
+    function setWindowContent(results){
+      var imageString = "<table><tr>";
+      var imageStyle = "alt='site image' width='100%'";
+      var deferred = new dojo.Deferred;
+      var graphic = results.features[0];
+      var  objectId = graphic.attributes[crossingPoints.objectIdField];
 
-      function selectionReportExecute (event) {
-        // Create possible filters
-        // query.where = "DOT_Num IN '(" + crossingPoints + ")'";
-        query.geometry = event.mapPoint;
-        queryTask.execute(query, showResults);
-        window.location.href = 'report.html';
-
+      crossingPoints.queryAttachmentInfos(objectId).then(function(response){
+        var imgSrc;
+        if (response.length === 0) {
+          deferred.resolve("no attachments");
         }
-
-        function showResults (results) {
-          var resultItems = [];
-          var resultCount = results.features.length;
-          for (var i = 0; i < resultCount; i++) {
-            var featureAttributes = results.features[i].attributes;
-            for (var attr in featureAttributes) {
-              resultItems.push("<b>" + attr + ":</b>  " + featureAttributes[attr] + "<br>");
-            }
-            resultItems.push("<br>");
+        else {
+          for ( i = 0; i < response.length; i++) {
+            imgSrc = response[i].url;
+            imageString += "<tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
-          dom.byId("info").innerHTML = resultItems.join("");
+          formatString += imageString;
         }
+        crossingTemplate.setContent(formatString);
+      });
+    }
+//---------------------------------------------------------------------------
 
 
 
-    // -------------------------------------------------------------------
+
+// ----------------------------------------------------------------
+// ---------Navigate to Report Page with Current Selection----------
+// ---------------------------------------------------------------------
+
+    var queryTask = new esri.tasks.QueryTask(crossingUrl);
+
+    var query = new esri.tasks.Query();
+
+    query.returnGeometry = true;
+    query.outFields = ["*"];
+
+    on(link, "click", selectionReportExecute);
+
+    function selectionReportExecute (event) {
+      // Create possible filters
+      // query.where = "DOT_Num IN '(" + crossingPoints + ")'";
+      query.geometry = event.mapPoint;
+      queryTask.execute(query, showResults);
+      window.location.href = 'report.html';
+    }
+
+    function showResults (results) {
+      var resultItems = [];
+      var resultCount = results.features.length;
+      for (var i = 0; i < resultCount; i++) {
+        var featureAttributes = results.features[i].attributes;
+        for (var attr in featureAttributes) {
+          resultItems.push("<b>" + attr + ":</b>  " + featureAttributes[attr] + "<br>");
+        }
+        resultItems.push("<br>");
+      }
+      dom.byId("info").innerHTML = resultItems.join("");
+    }
+// -------------------------------------------------------------------
 
 
 
