@@ -134,7 +134,12 @@
 /* Large devices (large desktops, 1200px and up) ----not used currently
 @media (min-width: @screen-lg-min) { ... } */
 
-
+/*Selection popup Header*/
+.esriPopup.dark .titlePane {
+  height: 25px;
+  color: #292a2b;
+  text-decoration: underline;
+}
 
 
 
@@ -146,12 +151,7 @@
   border: 2px solid #121310;*/
 /*}*/
 
-/*Selection popup Header*/
-/*.esriPopup .titlePane {
-  background-color: #003399;
-  border-bottom: 3px solid #121310;
-  font-weight: bold;
-}*/
+
 
 /*.esriPopup .contentPane,
 .esriPopup .actionsPane,
