@@ -61,11 +61,9 @@ require([
 
 // -----------------Define PopupTemplates------------------------------
     //Crossing Template
-    var crossingPopupFeatures = "DOT Crossing Number: ${DOT_Num}</br>Line Name: ${LineName}</br>Feature Crossed: ${Feature_Crossed}</br>Warning Device Level: ${WDCode}</br>Primary Crossing Surface Material: ${SurfaceType}</br>Crossing Codition: ${XingCond}";
+    var crossingPopupFeatures = "DOT Crossing Number: <b>${DOT_Num}</b></br>Line Name: <b>${LineName}</b></br>Feature Crossed: <b>${Feature_Crossed}</b></br>Warning Device Level: <b>${WDCode}</b></br>Primary Crossing Surface Material: <b>${SurfaceType}</b></br>Crossing Codition: <b>${XingCond}</b>";
 
     formatString += crossingPopupFeatures;
-
-    // formatString += crossingPopupFeatures + "</br></br><a href='report.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>";
 
     var link = domConstruct.create("a", {
       "class": "action",
@@ -78,7 +76,6 @@ require([
       title: "Railroad Crossing {DOT_Num}",
 
       // description: crossingPopupFeatures,
-
 
       // description: crossingPopupFeatures + "</br></br><a href='report.html'>Full Report</a>" + "</br></br><input id='selectionReport' type='button' value='Full Report'>",
 
@@ -181,115 +178,89 @@ require([
     map.addLayer(signPoints);
 
 
-    //---------------------------------------------------------------------------
-    //---------------------------------------------------------------------------
-        //Create popup formatString
-        // var formatString = "";
+//---------------------------------------------------------------------------
+//---------------------Display Photos in Popup--------------------------------
+//---------------------------------------------------------------------------
 
-        var selectQuery = new esri.tasks.Query();
+    var selectQuery = new esri.tasks.Query();
 
-        on(crossingPoints, "click", function(evt){
-          map.infoWindow.hide();
-          // formatString = "";
-          var  objectId = evt.graphic.attributes[crossingPoints.objectIdField];
-          selectQuery.objectIds = [objectId];
-          crossingPoints.selectFeatures(selectQuery);
-        });
+    on(crossingPoints, "click", function(evt){
+      map.infoWindow.hide();
+      // formatString = "";
+      var  objectId = evt.graphic.attributes[crossingPoints.objectIdField];
+      selectQuery.objectIds = [objectId];
+      crossingPoints.selectFeatures(selectQuery);
+    });
 
-        on(crossingPoints, "error", function (err){
-          console.log("error with crossingPoints; " + err.message);
-        });
+    on(crossingPoints, "error", function (err){
+      console.log("error with crossingPoints; " + err.message);
+    });
 
-        on(crossingPoints, 'selection-complete', setWindowContent);
+    on(crossingPoints, 'selection-complete', setWindowContent);
 
-        map.addLayers([crossingPoints]);
+    map.addLayers([crossingPoints]);
 
-      function setWindowContent(results){
-        var imageString = "<table><tr>";
-        var imageStyle = "alt='site image' width='100%'";
-        var deferred = new dojo.Deferred;
-          var graphic = results.features[0];
-          var  objectId = graphic.attributes[crossingPoints.objectIdField];
+    function setWindowContent(results){
+      var imageString = "<table><tr>";
+      var imageStyle = "alt='site image' width='100%'";
+      var deferred = new dojo.Deferred;
+      var graphic = results.features[0];
+      var  objectId = graphic.attributes[crossingPoints.objectIdField];
 
-          crossingPoints.queryAttachmentInfos(objectId).then(function(response){
-             var imgSrc;
-             if (response.length === 0) {
-                 deferred.resolve("no attachments");
-             }
-             else {
-               for ( i = 0; i < response.length; i++) {
-                 imgSrc = response[i].url;
-                 imageString += "<tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
-               }
-               formatString += imageString;
-             }
-            //  formatString += "<td><b>" + graphic.attributes.DOT_Num + "</b><br/>" + graphic.attributes.LineName + "<br/>" +
-            // // formatString += "<td>" + graphic.attributes.Address + "<br/>" +
-            //  graphic.attributes.Feature_Crossed +
-            //  ", " +
-            //  graphic.attributes.XingCond +
-            //  "<td></tr></table>";
-
-          //   console.log(formatString);
-          //   var infoTemplate = new InfoTemplate();
-          //   infoTemplate.setContent(formatString);
-           //  infoTemplate.setTitle("Location");
-           //  infoTemplate.setTitle("<br>");
-           //  graphic.setInfoTemplate = infoTemplate;
-              crossingTemplate.setContent(formatString);
-            // map.infoWindow.setTitle("</br>");
-           //   map.infoWindow.setTitle(graphic.attributes.Facility);
-              // map.infoWindow.show(graphic.geometry);
-            /*   var t = query(".actionList");
-             domClass.remove(t[0], "hidden");
-             */
-           });
-         }
-    //---------------------------------------------------------------------------
-    //---------------------------------------------------------------------------
-
-
-
-
-      // ----------------------------------------------------------------
-      // ---------Navigate to Report Page with Current Selection----------
-      // ---------------------------------------------------------------------
-
-      var queryTask = new esri.tasks.QueryTask(crossingUrl);
-
-      var query = new esri.tasks.Query();
-
-      query.returnGeometry = true;
-      query.outFields = ["*"];
-
-      on(link, "click", selectionReportExecute);
-
-
-      function selectionReportExecute (event) {
-        // Create possible filters
-        // query.where = "DOT_Num IN '(" + crossingPoints + ")'";
-        query.geometry = event.mapPoint;
-        queryTask.execute(query, showResults);
-        window.location.href = 'report.html';
-
+      crossingPoints.queryAttachmentInfos(objectId).then(function(response){
+        var imgSrc;
+        if (response.length === 0) {
+          deferred.resolve("no attachments");
         }
-
-        function showResults (results) {
-          var resultItems = [];
-          var resultCount = results.features.length;
-          for (var i = 0; i < resultCount; i++) {
-            var featureAttributes = results.features[i].attributes;
-            for (var attr in featureAttributes) {
-              resultItems.push("<b>" + attr + ":</b>  " + featureAttributes[attr] + "<br>");
-            }
-            resultItems.push("<br>");
+        else {
+          for ( i = 0; i < response.length; i++) {
+            imgSrc = response[i].url;
+            imageString += "<tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
-          dom.byId("info").innerHTML = resultItems.join("");
+          formatString += imageString;
         }
+        crossingTemplate.setContent(formatString);
+      });
+    }
+//---------------------------------------------------------------------------
 
 
 
-    // -------------------------------------------------------------------
+
+// ----------------------------------------------------------------
+// ---------Navigate to Report Page with Current Selection----------
+// ---------------------------------------------------------------------
+
+    var queryTask = new esri.tasks.QueryTask(crossingUrl);
+
+    var query = new esri.tasks.Query();
+
+    query.returnGeometry = true;
+    query.outFields = ["*"];
+
+    on(link, "click", selectionReportExecute);
+
+    function selectionReportExecute (event) {
+      // Create possible filters
+      // query.where = "DOT_Num IN '(" + crossingPoints + ")'";
+      query.geometry = event.mapPoint;
+      queryTask.execute(query, showResults);
+      window.location.href = 'report.html';
+    }
+
+    function showResults (results) {
+      var resultItems = [];
+      var resultCount = results.features.length;
+      for (var i = 0; i < resultCount; i++) {
+        var featureAttributes = results.features[i].attributes;
+        for (var attr in featureAttributes) {
+          resultItems.push("<b>" + attr + ":</b>  " + featureAttributes[attr] + "<br>");
+        }
+        resultItems.push("<br>");
+      }
+      dom.byId("info").innerHTML = resultItems.join("");
+    }
+// -------------------------------------------------------------------
 
 
 
