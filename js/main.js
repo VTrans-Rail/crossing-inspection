@@ -61,7 +61,7 @@ require([
 
 // -----------------Define PopupTemplates------------------------------
     //Crossing Template
-    var crossingPopupFeatures = "<small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Crossing Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
+    var crossingPopupFeatures = "<small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
 
     var link = domConstruct.create("a", {
       "class": "action",
@@ -71,7 +71,7 @@ require([
     }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
 
     var crossingTemplate = new PopupTemplate({
-      title: "Railroad Crossing {DOT_Num}",
+      title: "Crossing {DOT_Num}",
     });
 
 
@@ -85,7 +85,7 @@ require([
 
     //Rail Line Template
     var lineTemplate = new PopupTemplate({
-      title: "Summary Info for Rail Line",
+      title: "Railroad",
 
       fieldInfos: [
         { fieldName: "LineName", label: "Rail Line", visible: true, format: { places: 0} },
@@ -97,7 +97,7 @@ require([
 
     //AADT Template
     var aadtTemplate = new PopupTemplate({
-      title: "Average Annual Daily Traffic at Station {ATRStation}",
+      title: "Traffic Data",
 
       fieldInfos: [
         { fieldName: "aadt", label: "AADT", visible: true, format: { places: 0} },
