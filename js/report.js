@@ -9,7 +9,22 @@ require([
 
   query.returnGeometry = false;
   query.outFields = [
-    "DOT_Num", "Feature_Crossed", "MP", "LineName", "Town", "FRA_LandUse", "WDCode", "SignSignal", "StopLine", "XingCond"
+    'DOT_Num','Feature_Crossed','MP',
+    'LineName','Division','Subdivision',
+    'Branch','Town','County',
+    'FRA_LandUse','WDCode','SignSignal',
+    'Channelization','StopLine','RRXingPavMark',
+    'DynamicEnv','GateArmsRoad','GateArmsPed',
+    'GateConfig1','GateConfig2','Cant_Struc_Over',
+    'Cant_Struc_Side','Cant_FL_Type','FL_MastCount',
+    'Mast_FL_Type','BackSideFL','FlasherCount',
+    'FlasherSize','WaysideHorn','HTS_Control',
+    'HTS_for_Nearby_Intersection','BellCount','HTPS',
+    'HTPS_StorageDist','HTPS_StopLineDist','TrafficLnType',
+    'TrafficLnCount','Paved','XingIllum',
+    'SurfaceType','SurfaceType2','XingCond',
+    'FlangeMaterial','XingWidth','XingLength',
+    'Angle','SnoopCompliant','Comments'
   ];
 
   on(dom.byId("execute"), "click", execute);
@@ -26,8 +41,8 @@ require([
     for (var i = 0; i < resultCount; i++) {
       var featureAttributes = results.features[i].attributes;
       for (var attr in featureAttributes) {
-        resultItems.push("<div class='col-xs-12 col-sm-4 col-md-3'><strong>" + attr + ":</strong> " + featureAttributes[attr] + "</div>");
-      }
+          resultItems.push("<div class='col-xs-12 col-sm-4 col-md-3'><strong>" + attr + ":</strong> " + featureAttributes[attr] + "</div>");
+        }
       resultItems.push("<br>");
     }
     dom.byId("info").innerHTML = resultItems.join("");
