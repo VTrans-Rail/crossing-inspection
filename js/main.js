@@ -45,22 +45,18 @@ require([
 
 
 
-
-
 //--------------------Create Map-----------------------------------------
     var map = new Map("map", {
-      basemap: "dark-gray",
+      basemap: "topo",
       center: [-72.68, 43.785], // lon, lat
       zoom:8,
       infoWindow: popup
     });
 
-    // map.infoWindow.resize(300, 700);
-
 
 
 // -----------------Define PopupTemplates------------------------------
-    //Crossing Template
+    //Crossing Template--------------
     var crossingPopupFeatures = "<small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
 
     var link = domConstruct.create("a", {
@@ -75,27 +71,15 @@ require([
     });
 
 
-
-    //Sign Template
+    //Sign Template------------------
     var signPopupFeatures = "<small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>";
 
     var signTemplate = new PopupTemplate({
       title: "Crossing Sign",
     });
 
-    //Rail Line Template
-    var lineTemplate = new PopupTemplate({
-      title: "Railroad",
 
-      fieldInfos: [
-        { fieldName: "LineName", label: "Rail Line", visible: true, format: { places: 0} },
-        { fieldName: "Division", visible: true, format: { places: 0} },
-        { fieldName: "Subdivision", visible: true, format: { places: 0} },
-        { fieldName: "Branch", visible: true, format: { places: 0} },
-      ],
-    });
-
-    //AADT Template
+    //AADT Template--------------------
     var aadtTemplate = new PopupTemplate({
       title: "Traffic Data",
 
@@ -118,7 +102,7 @@ require([
       id: "crossingPoints",
       outFields: ["*"],
       infoTemplate: crossingTemplate,
-      minScale: 200000,
+      minScale: 550000,
     });
 
 
@@ -139,7 +123,6 @@ require([
     var railLine = new FeatureLayer(lineUrl, {
       id: "rail-line",
       outFields: ["*"],
-      infoTemplate: lineTemplate
     });
 
 
@@ -291,7 +274,7 @@ require([
     var searchWidget = new Search({
       enableLabel: false,
       enableInfoWindow: true,
-      showInfoWindowOnSelect: true,
+      showInfoWindowOnSelect: false,
       enableHighlight: false,
       allPlaceholder: "Search for Railroad Crossings, Signs, Addresses or Places",
       map: map,
@@ -302,7 +285,7 @@ require([
 
     //Push the first source used to search to searchSources array
     searchSources.push({
-      featureLayer: new FeatureLayer(crossingUrl),
+      featureLayer: crossingPoints,
       searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed"],
       suggestionTemplate: "${DOT_Num}, Line: ${LineName}, Street: ${Feature_Crossed}, Warning Device: ${WDCode}, Condition: ${XingCond}",
       exactMatch: false,
