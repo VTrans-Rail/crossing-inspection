@@ -136,7 +136,7 @@
 
 /*Selection popup Header*/
 .esriPopup.dark .titlePane {
-  height: 25px;
+  height: 30px;
   color: #292a2b;
   text-decoration: underline;
 }
