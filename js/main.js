@@ -181,7 +181,7 @@ require([
         else {
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
-            imageString += "<tr><td>Image " + (i+1) + "</td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+            imageString += "<tr><td></br></td></tr><tr><td>Image " + (i+1) + " URL: " + imgSrc + "</td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
           formatString += imageString;
         }
@@ -232,40 +232,21 @@ require([
 
 
 
-
-// ----------------------------------------------------------------
-// ---------Navigate to Report Page with Current Selection----------
+// ---------------------------------------------------------------------
+// -------Navigate to Report Page with  DOT_Num of Current Selection----------
 // ---------------------------------------------------------------------
 
-    var queryTask = new esri.tasks.QueryTask(crossingUrl);
+    on(crossingPoints, "click", function(evt) {
+      //Create Variable to Store DOT Number of selected crossing
+      var dotnum = evt.graphic.attributes.DOT_Num;
 
-    var query = new esri.tasks.Query();
+      on(link, "click", selectionReportExecute);
 
-    query.returnGeometry = true;
-    query.outFields = ["*"];
-
-    on(link, "click", selectionReportExecute);
-
-    function selectionReportExecute (event) {
-      // Create possible filters
-      // query.where = "DOT_Num IN '(" + crossingPoints + ")'";
-      query.geometry = event.mapPoint;
-      queryTask.execute(query, showResults);
-      window.location.href = 'report.html';
-    }
-
-    function showResults (results) {
-      var resultItems = [];
-      var resultCount = results.features.length;
-      for (var i = 0; i < resultCount; i++) {
-        var featureAttributes = results.features[i].attributes;
-        for (var attr in featureAttributes) {
-          resultItems.push("<b>" + attr + ":</b>  " + featureAttributes[attr] + "<br>");
-        }
-        resultItems.push("<br>");
+      function selectionReportExecute () {
+        window.location.href = 'report.html?dotnum=' + dotnum;
       }
-      dom.byId("info").innerHTML = resultItems.join("");
-    }
+    });
+
 // -------------------------------------------------------------------
 
 
