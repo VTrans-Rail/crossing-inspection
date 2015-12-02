@@ -152,13 +152,8 @@ require([
     //Crossings
     on(crossingPoints, "click", function(evt){
       map.infoWindow.hide();
-
+      formatString = crossingPopupFeatures;
       var  objectId = evt.graphic.attributes[crossingPoints.objectIdField];
-
-      var  dotNumTest = evt.graphic.attributes.DOT_Num;
-
-
-      formatString = crossingPopupFeatures + objectId + dotNumTest;
       selectQuery.objectIds = [objectId];
       crossingPoints.selectFeatures(selectQuery);
     });
@@ -246,7 +241,7 @@ require([
       var dotnum = evt.graphic.attributes.DOT_Num;
 
       on(link, "click", selectionReportExecute);
-      
+
       function selectionReportExecute () {
         window.location.href = 'report.html?dotnum=' + dotnum;
       }
