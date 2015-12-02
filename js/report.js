@@ -60,91 +60,708 @@ require([
       var featureAttributes = results.features[i].attributes;
 
       var html=`
-      <div class='row'>
-        <div class='col-xs-12'>
-          <div class='page-header'>
-            <h1>Crossing Report</h1>
-          </div>
-        </div>
-      </div>
-    	<div class='row'>
-    		<div class='col-sm-6'>
-    			<div class='panel panel-primary'>
-    			  <div class='panel-heading'>
-    			    <h3 class='panel-title'>Crossing Number</h3>
-    			  </div>
-    			  <div class='panel-body text-center'>
-    			    <h3>
+<div class='row'>
+  <div class='col-xs-12'>
+    <div class='page-header'>
+      <h1>Crossing Report</h1>
+    </div>
+  </div>
+</div>
+<div class='row'>
+	<div class='col-sm-6'>
+		<div class='panel panel-primary'>
+		  <div class='panel-heading'>
+		    <h3 class='panel-title'>Crossing Number</h3>
+		  </div>
+		  <div class='panel-body text-center'>
+		    <h3>
       `;
 
       html += featureAttributes.DOT_Num; + "</h3>"
 
       html += `
-          </div>
-        </div>
-      </div>
-      <div class='col-sm-6'>
-        <div class='panel panel-danger'>
-          <div class='panel-heading'>
-            <h3 class='panel-title'>Surface Condition</h3>
-          </div>
-          <div class='panel-body text-center'>
-            <h3>
+    </div>
+  </div>
+</div>
+<div class='col-sm-6'>
+  <div class='panel panel-danger'>
+    <div class='panel-heading'>
+      <h3 class='panel-title'>Surface Condition</h3>
+    </div>
+    <div class='panel-body text-center'>
+      <h3>
       `;
 
       html += featureAttributes.XingCond; + "</h3>"
 
-      html += "</h3> </div></div></div></div><div class='row img-row'> <div class='col-sm-6'> <img src='https://placeimg.com/640/480/tech' class='img-responsive'/> </div><div class='col-sm-6'> <img src='https://placeimg.com/640/480/arch' class='img-responsive'/> </div></div><div class='row img-row'> <div class='col-xs-12 col-sm-6'> <img src='https://placeimg.com/640/480/nature' class='img-responsive'/> </div><div class='col-xs-12 col-sm-6'> <img src='https://placeimg.com/640/480/arch/grayscale' class='img-responsive'/> </div></div></div><div class='row'><div class='col-sm-12'> <div class='page-header'> <h1><small>Location Information</small></h1> </div></div></div><div class='row'><div class='col-sm-4'> <div class='panel panel-default'> <div class='panel-heading'>Line Name</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+    </div>
+  </div>
+</div>
+<div class='row img-row'>
+  <div class='col-sm-6 col-md-4'>
+    <img src='https://placeimg.com/640/480/tech'  class='img-responsive'/>
+  </div>
+  <div class='col-sm-6 col-md-4'>
+    <img src='https://placeimg.com/640/480/arch'  class='img-responsive'/>
+  </div>
+</div>
+<div class='row img-row'>
+  <div class='col-sm-6 col-md-4'>
+    <img src='https://placeimg.com/640/480/nature'  class='img-responsive'/>
+  </div>
+  <div class='col-sm-6 col-md-4'>
+    <img src='https://placeimg.com/640/480/arch/grayscale'  class='img-responsive'/>
+  </div>
+</div>
+</div>
+<div class='row'>
+  <div class='col-sm-12'>
+    <div class='page-header'>
+      <h1><small>Location Information</small></h1>
+    </div>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-sm-4'>
+    <div class='panel panel-default'>
+      <div class='panel-heading'>Line Name</div>
+        <div class='panel-body'>
+          <strong>
+      `;
 
-      html += featureAttributes.LineName;
+      html += featureAttributes.LineName + "</strong>";
 
-      html += "</strong> </div></div></div><div class='col-sm-4'> <div class='panel panel-default'> <div class='panel-heading'>Division</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-4'>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>Division</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.Division;
+      html += featureAttributes.Division + "</strong>";
 
-      html += "</strong> </div></div></div><div class='col-sm-4'> <div class='panel panel-default'> <div class='panel-heading'>Subdivision</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-4'>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>Subdivision</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.Subdivision;
+      html += featureAttributes.Subdivision + "</strong>";
 
-      html += "</strong> </div></div></div></div><div class='row'><div class='col-sm-4'> <div class='panel panel-default'> <div class='panel-heading'>Branch</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-4'>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>Branch</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.Branch;
+      html += featureAttributes.Branch + "</strong>";
 
-      html += "</strong> </div></div></div><div class='col-sm-4'> <div class='panel panel-default'> <div class='panel-heading'>MP</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-4'>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>MP</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.MP;
+      html += featureAttributes.MP + "</strong>";
 
-      html += "</strong> </div></div></div><div class='col-sm-4'> <div class='panel panel-default'> <div class='panel-heading'>Road Name</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-4'>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>Road Name</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.Feature_Crossed;
+      html += featureAttributes.Feature_Crossed + "</strong>";
 
-      html += "</strong> </div></div></div></div><div class='row'><div class='col-sm-4'> <div class='panel panel-default'> <div class='panel-heading'>Town</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-4'>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>Town</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.Town;
+      html += featureAttributes.Town + "</strong>";
 
-      html += "</strong> </div></div></div><div class='col-sm-4'> <div class='panel panel-default'> <div class='panel-heading'>County</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-4'>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>County</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.County;
+      html += featureAttributes.County  + "</strong>";
 
-      html += "</strong> </div></div></div><div class='col-sm-4'> <div class='panel panel-default'> <div class='panel-heading'>Land Use</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-4'>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>Land Use</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.FRA_LandUse;
+      html += featureAttributes.FRA_LandUse  + "</strong>";
 
-      html += "</strong> </div></div></div></div><div class='row'> <div class='col-xs-12'> <div class='page-header'> <h1><small>Crossing Information</small></h1> </div></div></div><div class='row'> <div class='col-sm-3'> <div class='panel panel-info'> <div class='panel-heading'>Paved</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-12'>
+  <div class='page-header'>
+    <h1><small>Crossing Information</small></h1>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-3'>
+  <div class='panel panel-info'>
+    <div class='panel-heading'>Paved</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.Paved;
+      html += featureAttributes.Paved  + "</strong>";
 
-      html += "</strong> </div></div></div><div class='col-sm-3'> <div class='panel panel-info'> <div class='panel-heading'>Surface Type</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-info'>
+    <div class='panel-heading'>Surface Type</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.SurfaceType;
+      html += featureAttributes.SurfaceType  + "</strong>";
 
-      html += "</strong> </div></div></div><div class='col-sm-3'> <div class='panel panel-info'> <div class='panel-heading'>Surface Type 2</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-info'>
+    <div class='panel-heading'>Surface Type 2</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.SurfaceType2;
+      html += featureAttributes.SurfaceType2  + "</strong>";
 
-      html += "</strong> </div></div></div><div class='col-sm-3'> <div class='panel panel-info'> <div class='panel-heading'>Flange Material</div><div class='panel-body'> <strong>";
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-info'>
+    <div class='panel-heading'>Flange Material</div>
+      <div class='panel-body'>
+        <strong>
+      `;
 
-      html += featureAttributes.FlangeMaterial;
+      html += featureAttributes.FlangeMaterial + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-3'>
+  <div class='panel panel-info'>
+    <div class='panel-heading'>Crossing Width</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.XingWidth + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-info'>
+    <div class='panel-heading'>Crossing Length</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.XingLength + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-info'>
+    <div class='panel-heading'>Crossing Angle</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.Angle + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-info'>
+    <div class='panel-heading'>Snooper Compliant</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.SnoopCompliant + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-12'>
+  <div class='page-header'>
+    <h1><small>Safety Information</small></h1>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Warning Device</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.WDCode + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Signs or Signals?</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.SignSignal + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Channelization</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+
+      html += featureAttributes.Channelization + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Stop Line</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.StopLine + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Pavement Markings</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.RRXingPavMark + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Dynamic Envelope</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.DynamicEnv + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Gate Arms <small>(Vehicle)</small> </div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.GateArmsRoad + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Gate Arms <small>(Ped)</small> </div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.GateArmsPed + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Gate Configuration</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.GateConfig1 + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Special Gates</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.GateConfig2 + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Cantilevered (Road)</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.Cant_Struc_Over + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Cantilevered (Side)</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.Cant_Struc_Side + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Cantilevered Bulb</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.Cant_FL_Type + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Mast Flashers</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.FL_MastCount + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Mast Flasher Type</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.Mast_FL_Type
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Back Side Flashers</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.BackSideFL + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Flasher Total Count</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.FlasherCount + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Flasher Size</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.FlasherSize + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Wayside Horn</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.WaysideHorn + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Traffic Signal Control</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.HTS_Control + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Traffic Signal Nearby</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.HTS_for_Nearby_Intersection + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Bell Count</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.BellCount + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Traffic Pre-Signals</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.HTPS + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Storage Distance</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.HTPS_StorageDist + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Stop-line Distance</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.HTPS_StopLineDist + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Traffic Lane Type</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.TrafficLnType + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Traffic Lane Count</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.TrafficLnCount + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-3'>
+  <div class='panel panel-warning'>
+    <div class='panel-heading'>Crossing Illuminated</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.XingIllum + "</strong>";
+
+      html += `
+      </div>
+  </div>
+</div>
+<div class='col-sm-9'>
+  <div class='panel panel-success'>
+    <div class='panel-heading'>Comments</div>
+      <div class='panel-body'>
+        <strong>
+      `;
+
+      html += featureAttributes.Comments + "</strong>";
+      html += `
+      </div>
+  </div>
+</div>
+</div>
+      `;
 
     }
     dom.byId("info").innerHTML = html;
