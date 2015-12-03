@@ -232,15 +232,11 @@ require([
 
 
 // ---------------------------------------------------------------------
-// -------------------Resize Popup if Mobile Phone----------------------
+// -------------------Maximize Popup for Small Devices----------------------
 // ---------------------------------------------------------------------
     on(map, "click", function(evt) {
       if ( map.width < 415 ) {
-        map.infoWindow.resize( map.width * .85 , map.height * .85 );
-
-        // https://geonet.esri.com/thread/58100
-
-        // https://geonet.esri.com/thread/32141
+        map.infoWindow.maximize();
       }
     });
 //-----------------------------------------------------------------------
