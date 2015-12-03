@@ -19,17 +19,24 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/bootstrap-mod.css">
+    <link href="css/instructions.css" rel="stylesheet">
+
 
     <script src="http://js.arcgis.com/3.14/"></script>
     <script src="js/main.js"></script>
     <script src="http://localhost:35729/livereload.js"></script>
+    <script type="text/javascript" src="js/instructions-popup.js">
 
+    </script>
 </head>
 
 <body>
   <div class="navbar navbar-inverse navbar-fixed-top">
+    <a href='#' onclick='return clicker();' id="clicker">Open Window</a>
     <div id="search"></div>
   </div>
+
+  <div id="instructions" style="display: none;"></div>
 
   <div id="map"></div>
 
