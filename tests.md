@@ -37,4 +37,4 @@ Sizes
 - [ ] 1200px
 
 Accessibility
-- [ ] ???
+- [ ] Colorblind-accessible
