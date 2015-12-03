@@ -236,7 +236,26 @@ require([
 // ---------------------------------------------------------------------
     on(map, "click", function(evt) {
       if ( map.width < 415 ) {
-        map.infoWindow.resize( map.width * .85 , map.height * .85 );
+        // map.infoWindow.resize( map.width * .85 , map.height * .85 );
+
+        map.infoWindow.maximize();
+
+        // on(map.infoWindow, "load", function(evt) {
+        //   var xPoint = evt.mapPoint.x;
+        //   var xDiff = ((map.extent.xmax - map.extent.xmin) / 2);
+        //   var xCenter = xPoint + xDiff;
+        //
+        //   var yPoint = evt.mapPoint.y;
+        //   var yDiff = ((map.extent.ymax - map.extent.ymin) / 2);
+        //   var yCenter = yPoint + yDiff;
+        //
+        //   var newCenterPoint = new esri.geometry.Point(xCenter, yCenter);
+        //
+        //   centerPoint = map.toMap(newCenterPoint);
+        //   map.centerAt(centerPoint);
+        // });
+
+        // var crossPoint = new esri.geometry.Point(evt.mapPoint);
 
         // https://geonet.esri.com/thread/58100
 
