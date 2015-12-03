@@ -19,42 +19,41 @@ require([
   var query = new Query();
 
 
-  // ------------Get Picture URls and Build Image Tags------------------
-  var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
-
-  var crossingPoints = new FeatureLayer(crossingUrl, {
-    id: "crossingPoints",
-    outFields: ["*"],
-  });
-
-  var imageString = "";
-  var imgClass = "class='img-responsive'";
-  var imageStyle = "alt='site image' width='100%'";
-  var deferred = new dojo.Deferred;
-  var objectId = 715; //Need to change this to some query
-
-  crossingPoints.queryAttachmentInfos(objectId).then(function(response){
-    var imgSrc;
-    if (response.length === 0) {
-      deferred.resolve("no attachments");
-    }
-    else {
-      for ( i = 0; i < response.length; i++) {
-        imgSrc = response[i].url;
-        imageString += "<div class='col-sm-6 col-md-4'><img src='" + imgSrc + "' " + imgClass + " " + imageStyle + "></div>";
-      }
-      var images = imageString;
-    }
-    
-    //consolelog messages used to help debug image loading issues
-    console.log("This text should be followed by the html string for the images if page loaded correctly (This is within the queryAttachment): " + imageString);
-  });
-  //---------------------------------------------------------------------
+  // // ------------Get Picture URls and Build Image Tags------------------
+  // var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
+  //
+  // var crossingPoints = new FeatureLayer(crossingUrl, {
+  //   id: "crossingPoints",
+  // });
+  //
+  // var imageString = "";
+  // var imgClass = "class='img-responsive'";
+  // var imageStyle = "alt='site image' width='100%'";
+  // var deferred = new dojo.Deferred;
+  // var objectId = 715; //Need to change this to some query
+  //
+  // crossingPoints.queryAttachmentInfos(objectId).then(function(response){
+  //   var imgSrc;
+  //   if (response.length === 0) {
+  //     deferred.resolve("no attachments");
+  //   }
+  //   else {
+  //     for ( i = 0; i < response.length; i++) {
+  //       imgSrc = response[i].url;
+  //       imageString += "<div class='col-sm-6 col-md-4'><img src='" + imgSrc + "' " + imgClass + " " + imageStyle + "></div>";
+  //     }
+  //     var images = imageString;
+  //   }
+  //
+  //   //consolelog messages used to help debug image loading issues
+  //   console.log("This text should be followed by the html string for the images if page loaded correctly (This is within the queryAttachment): " + imageString);
+  // });
+  // //---------------------------------------------------------------------
 
 
   query.returnGeometry = false;
   query.outFields = [
-    'DOT_Num','Feature_Crossed','MP',
+    'OBJECTID','DOT_Num','Feature_Crossed','MP',
     'LineName','Division','Subdivision',
     'Branch','Town','County',
     'FRA_LandUse','WDCode','SignSignal',
@@ -73,6 +72,69 @@ require([
   ];
 
   var dotnumqs = getParameterByName("dotnum");
+
+
+//-----------------------------------------------------
+//------------Working Section------------------------------
+//-----------------------------------------------------
+
+  var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
+
+  var crossingPoints = new FeatureLayer(crossingUrl, {
+    id: "crossingPoints",
+  });
+
+
+  if (dotnumqs)
+    {
+      query.where = "DOT_Num like '%" + dotnumqs + "%'";
+      queryTask.execute(query,getPhotos);
+    }
+
+    var imageString = "";
+
+
+  function getPhotos (results) {
+    var resultCount = results.features.length;
+    for (var i = 0; i < resultCount; i++) {
+      var featureAttributes = results.features[i].attributes;
+      var objectId = featureAttributes.OBJECTID;
+      // ------------Get Picture URls and Build Image Tags------------------
+      // var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
+      //
+      // var crossingPoints = new FeatureLayer(crossingUrl, {
+      //   id: "crossingPoints",
+      // });
+
+      var imgClass = "class='img-responsive'";
+      var imageStyle = "alt='site image' width='100%'";
+      var deferred = new dojo.Deferred;
+      // var objectId = 715; //Need to change this to some query
+
+      crossingPoints.queryAttachmentInfos(objectId).then(function(response){
+        var imgSrc;
+        if (response.length === 0) {
+          deferred.resolve("no attachments");
+        }
+        else {
+          for ( i = 0; i < response.length; i++) {
+            imgSrc = response[i].url;
+            imageString += "<div class='col-sm-6 col-md-4'><img src='" + imgSrc + "' " + imgClass + " " + imageStyle + "></div>";
+          }
+        }
+
+        //consolelog messages used to help debug image loading issues
+        console.log("This text should be followed by the html string for the images if page loaded correctly (This is within the queryAttachment): " + imageString);
+      });
+      //---------------------------------------------------------------------
+    }
+  }
+
+
+//-----------------------------------------------------
+//-----------------------------------------------------
+
+
 
   //Ensures that photos load by preventing the rest of the report from being generated until the attachment query from being complete
   on(crossingPoints, "query-attachment-infos-complete", beginReport);
@@ -99,7 +161,7 @@ require([
 
     //consolelog messages used to help debug image loading issues
     console.log("This text should be followed by the html string for the images if page loaded correctly (This is within the showResults function): " + imageString);
-    console.log(objectId);
+    // console.log(objectId);
 
     for (var i = 0; i < resultCount; i++) {
       var featureAttributes = results.features[i].attributes;
