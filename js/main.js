@@ -180,7 +180,7 @@ require([
         else {
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
-            imageString += "<tr><td></br></td></tr><tr><td>Image " + (i+1) + "</td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+            imageString += "<tr><td></br></td></tr><tr><td><a href='" + imgSrc + "' target='_blank'>Image " + (i+1) + ": Click to View Full Image</a></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
           formatString += imageString;
         }
@@ -220,7 +220,7 @@ require([
         else {
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
-            imageString += "<tr><td>Image " + (i+1) + "</td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+            imageString += "<tr><td></br></td></tr><tr><td><a href='" + imgSrc + "' target='_blank'>Image " + (i+1) + ": Click to View Full Image</a></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
           formatString += imageString;
         }
