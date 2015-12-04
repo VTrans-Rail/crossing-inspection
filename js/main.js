@@ -62,7 +62,8 @@ require([
       "class": "action",
       "id": "fullReport",
       "innerHTML": "Full Report",
-      "href": "javascript:void(0);"
+      "href": "javascript:void(0);",
+      "target": "_blank"
     }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
 
     var crossingTemplate = new PopupTemplate({
@@ -249,12 +250,17 @@ require([
 
     on(crossingPoints, "click", function(evt) {
       //Create Variable to Store DOT Number of selected crossing
-      var dotnum = evt.graphic.attributes.DOT_Num;
 
       on(link, "click", selectionReportExecute);
 
       function selectionReportExecute () {
-        window.location.href = 'report.html?dotnum=' + dotnum;
+        var dotnum = "";
+
+        dotnum = evt.graphic.attributes.DOT_Num;
+
+        // window.location.href = 'report.html?dotnum=' + dotnum;
+        // location.href = 'report.html?dotnum=' + dotnum;
+        window.open('report.html?dotnum=' + dotnum, '_blank');
       }
     });
 
