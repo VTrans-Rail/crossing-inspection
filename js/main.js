@@ -193,17 +193,6 @@ require([
         }
         crossingTemplate.setContent(formatString);
       });
-
-      // var dotnum = "";
-      // dotnum = graphic.attributes.DOT_Num;
-      //
-      // on(link, "click", selectionReportExecute);
-      //
-      // function selectionReportExecute () {
-      //   // window.location.href = 'report.html?dotnum=' + dotnum;
-      //   // location.href = 'report.html?dotnum=' + dotnum;
-      //   window.open('report.html?dotnum=' + dotnum, '_blank');
-      // }
     }
 
     // Signs
@@ -258,55 +247,6 @@ require([
       }
     });
 //-----------------------------------------------------------------------
-
-
-
-// ---------------------------------------------------------------------
-// -------Navigate to Report Page with  DOT_Num of Current Selection----------
-// ---------------------------------------------------------------------
-
-
-    // link.addEventListener("click", function(event) {
-    //   event.preventDefault();
-    //
-    //   var dotnum = "";
-    //   dotnum = event.graphic.attributes.DOT_Num;
-    //   // window.caches.clear();
-    //
-    //   link.addEventListener("click", selectionReportExecute);
-    //
-    //   function selectionReportExecute () {
-    //     // window.location.href = 'report.html?dotnum=' + dotnum;
-    //     var reportUrl = "";
-    //     reportUrl = window.open('report.html?dotnum=' + dotnum, '_blank');
-    //     var reportLength = reportUrl;
-    //   }
-    //
-    // });
-
-    // on(crossingPoints, "click", function(evt) {
-    //   //Create Variable to Store DOT Number of selected crossing
-    //   var dotnum = "";
-    //   dotnum = evt.graphic.attributes.DOT_Num;
-    //   // window.caches.clear();
-    //
-    //   on(link, "click", selectionReportExecute);
-    //
-    //   function selectionReportExecute () {
-    //     // window.location.href = 'report.html?dotnum=' + dotnum;
-    //     var reportUrl = "";
-    //     reportUrl = window.location.href = 'report.html?dotnum=' + dotnum;
-    //     // reportUrl = window.open('report.html?dotnum=' + dotnum, '_blank');
-    //     var reportLength = reportUrl;
-    //     // reportUrl.close();
-    //     // var dd = crossingPoints.getSelectedFeatures();
-    //     // reportUrl;
-    //   }
-    // });
-
-
-
-// -------------------------------------------------------------------
 
 
 
