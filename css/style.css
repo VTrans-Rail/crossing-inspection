@@ -5,7 +5,24 @@
   position: absolute;
 }
 
-#search { padding: 20px; }
+#search {
+  padding: 10px;
+  padding-right: 0px;
+}
+
+#clicker {
+  padding: 10px;
+}
+
+#helpBtn {
+  background-color: white;
+  border: 1px solid #57585A;
+  border-radius: 4px;
+}
+
+#helpIcon img {
+  width: 30px;
+}
 
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
@@ -16,10 +33,12 @@
     padding: 6px 0px 6px 12px;
     height: 30px;
     font-size: 1em;
+    border-left: 1px solid #57585A;
+    border-radius: 4px 0 0 4px;
 }
 /*set search input box width to full - width of side elements*/
 .arcgisSearch .searchInputGroup {
-    width: calc(100% - 52px);
+    width: calc(100% - 11px); /*modified to 11 when sources select was removed*/
 }
 
 .arcgisSearch .searchExpandContainer {
@@ -149,6 +168,6 @@
   left:0px;
   width:100%;
   height:100%;
-  text-align:center; 
+  text-align:center;
   vertical-align:middle;
 }
