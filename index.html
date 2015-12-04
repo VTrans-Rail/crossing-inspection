@@ -32,8 +32,21 @@
 
 <body>
   <div class="navbar navbar-inverse navbar-fixed-top">
-    <a href='#' onclick='return clicker();' id="clicker">Open Window</a>
-    <div id="search"></div>
+
+    <div class="row">
+      <div class="col-xs-8">
+        <div id="search"></div>
+      </div>
+      <div class="col-xs-2">
+        <a href='#' onclick='return clicker();' id="clicker">
+          <button type="button" name="button" id="helpBtn">
+            <span id="helpIcon">
+              <img src="img\ic_help_outline_black_24px.svg" alt="" />
+            </span>
+          </button>
+        </a>
+      </div>
+  </div>
   </div>
 
   <div id="instructions" style="display: none;"></div>
