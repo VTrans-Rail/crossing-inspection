@@ -284,8 +284,8 @@ require([
       outFields: ["*"],
       name: "Railroad Crossings",
       placeholder: "Search by DOT #, Line, Street, Town, or County",
-      maxResults: 15,
-      maxSuggestions: 15,
+      maxResults: 30,
+      maxSuggestions: 45,
 
       //Create an InfoTemplate
       infoTemplate: crossingTemplate,
