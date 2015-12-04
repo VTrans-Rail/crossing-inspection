@@ -62,7 +62,8 @@ require([
       "class": "action",
       "id": "fullReport",
       "innerHTML": "Full Report",
-      "href": "javascript:void(0);"
+      "href": "www.google.com",
+      "target": "_blank"
     }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
 
     var crossingTemplate = new PopupTemplate({
@@ -101,7 +102,7 @@ require([
       id: "crossingPoints",
       outFields: ["*"],
       infoTemplate: crossingTemplate,
-      minScale: 550000,
+      minScale: 650000,
     });
 
 
@@ -112,7 +113,7 @@ require([
       id: "sign-points",
       outFields: ["*"],
       infoTemplate: signTemplate,
-      minScale: 25000,
+      minScale: 3000,
     });
 
 
@@ -145,6 +146,8 @@ require([
 //---------------------------------------------------------------------------
 //---------------------Display Photos in Popup--------------------------------
 //---------------------------------------------------------------------------
+//---------------------Build Link to Report Page--------------------------------
+//---------------------------------------------------------------------------
 
     var selectQuery = new esri.tasks.Query();
 
@@ -152,9 +155,13 @@ require([
     on(crossingPoints, "click", function(evt){
       map.infoWindow.hide();
       formatString = crossingPopupFeatures;
-      var  objectId = evt.graphic.attributes[crossingPoints.objectIdField];
+      var objectId = evt.graphic.attributes[crossingPoints.objectIdField];
       selectQuery.objectIds = [objectId];
       crossingPoints.selectFeatures(selectQuery);
+
+      //Updates link to report page
+      var dotnum = evt.graphic.attributes.DOT_Num;
+      link.href = "report.html?dotnum=" + dotnum;
     });
 
     on(crossingPoints, "error", function (err){
@@ -163,14 +170,14 @@ require([
 
     on(crossingPoints, 'selection-complete', setCrossingWindowContent);
 
-    map.addLayers([crossingPoints]);
+    // map.addLayers([crossingPoints]);
 
     function setCrossingWindowContent(results){
       var imageString = "<table><tr>";
       var imageStyle = "alt='site image' width='100%'";
       var deferred = new dojo.Deferred;
       var graphic = results.features[0];
-      var  objectId = graphic.attributes[crossingPoints.objectIdField];
+      var objectId = graphic.attributes[crossingPoints.objectIdField];
 
       crossingPoints.queryAttachmentInfos(objectId).then(function(response){
         var imgSrc;
@@ -180,7 +187,7 @@ require([
         else {
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
-            imageString += "<tr><td></br></td></tr><tr><td>Image " + (i+1) + "</td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+            imageString += "<tr><td></br></td></tr><tr><td><a href='" + imgSrc + "' target='_blank'>Image " + (i+1) + ": Click to View Full Image</a></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
           formatString += imageString;
         }
@@ -198,12 +205,12 @@ require([
     });
 
     on(signPoints, "error", function (err){
-      console.log("error with crossingPoints; " + err.message);
+      console.log("error with signPoints; " + err.message);
     });
 
     on(signPoints, 'selection-complete', setSignWindowContent);
 
-    map.addLayers([signPoints]);
+    // map.addLayers([signPoints]);
 
     function setSignWindowContent(results){
       var imageString = "<table><tr>";
@@ -220,7 +227,7 @@ require([
         else {
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
-            imageString += "<tr><td>Image " + (i+1) + "</td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+            imageString += "<tr><td></br></td></tr><tr><td><a href='" + imgSrc + "' target='_blank'>Image " + (i+1) + ": Click to View Full Image</a></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
           formatString += imageString;
         }
@@ -240,25 +247,6 @@ require([
       }
     });
 //-----------------------------------------------------------------------
-
-
-
-// ---------------------------------------------------------------------
-// -------Navigate to Report Page with  DOT_Num of Current Selection----------
-// ---------------------------------------------------------------------
-
-    on(crossingPoints, "click", function(evt) {
-      //Create Variable to Store DOT Number of selected crossing
-      var dotnum = evt.graphic.attributes.DOT_Num;
-
-      on(link, "click", selectionReportExecute);
-
-      function selectionReportExecute () {
-        window.location.href = 'report.html?dotnum=' + dotnum;
-      }
-    });
-
-// -------------------------------------------------------------------
 
 
 
@@ -284,8 +272,8 @@ require([
       outFields: ["*"],
       name: "Railroad Crossings",
       placeholder: "Search by DOT #, Line, Street, Town, or County",
-      maxResults: 15,
-      maxSuggestions: 15,
+      maxResults: 30,
+      maxSuggestions: 45,
 
       //Create an InfoTemplate
       infoTemplate: crossingTemplate,
