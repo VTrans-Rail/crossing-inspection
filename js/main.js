@@ -62,7 +62,7 @@ require([
       "class": "action",
       "id": "fullReport",
       "innerHTML": "Full Report",
-      "href": "javascript:void(0);",
+      "href": "www.google.com",
       "target": "_blank"
     }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
 
@@ -146,6 +146,8 @@ require([
 //---------------------------------------------------------------------------
 //---------------------Display Photos in Popup--------------------------------
 //---------------------------------------------------------------------------
+//---------------------Build Link to Report Page--------------------------------
+//---------------------------------------------------------------------------
 
     var selectQuery = new esri.tasks.Query();
 
@@ -153,9 +155,13 @@ require([
     on(crossingPoints, "click", function(evt){
       map.infoWindow.hide();
       formatString = crossingPopupFeatures;
-      var  objectId = evt.graphic.attributes[crossingPoints.objectIdField];
+      var objectId = evt.graphic.attributes[crossingPoints.objectIdField];
       selectQuery.objectIds = [objectId];
       crossingPoints.selectFeatures(selectQuery);
+
+      //Updates link to report page
+      var dotnum = evt.graphic.attributes.DOT_Num;
+      link.href = "report.html?dotnum=" + dotnum;
     });
 
     on(crossingPoints, "error", function (err){
@@ -164,14 +170,14 @@ require([
 
     on(crossingPoints, 'selection-complete', setCrossingWindowContent);
 
-    map.addLayers([crossingPoints]);
+    // map.addLayers([crossingPoints]);
 
     function setCrossingWindowContent(results){
       var imageString = "<table><tr>";
       var imageStyle = "alt='site image' width='100%'";
       var deferred = new dojo.Deferred;
       var graphic = results.features[0];
-      var  objectId = graphic.attributes[crossingPoints.objectIdField];
+      var objectId = graphic.attributes[crossingPoints.objectIdField];
 
       crossingPoints.queryAttachmentInfos(objectId).then(function(response){
         var imgSrc;
@@ -187,6 +193,17 @@ require([
         }
         crossingTemplate.setContent(formatString);
       });
+
+      // var dotnum = "";
+      // dotnum = graphic.attributes.DOT_Num;
+      //
+      // on(link, "click", selectionReportExecute);
+      //
+      // function selectionReportExecute () {
+      //   // window.location.href = 'report.html?dotnum=' + dotnum;
+      //   // location.href = 'report.html?dotnum=' + dotnum;
+      //   window.open('report.html?dotnum=' + dotnum, '_blank');
+      // }
     }
 
     // Signs
@@ -199,12 +216,12 @@ require([
     });
 
     on(signPoints, "error", function (err){
-      console.log("error with crossingPoints; " + err.message);
+      console.log("error with signPoints; " + err.message);
     });
 
     on(signPoints, 'selection-complete', setSignWindowContent);
 
-    map.addLayers([signPoints]);
+    // map.addLayers([signPoints]);
 
     function setSignWindowContent(results){
       var imageString = "<table><tr>";
@@ -248,21 +265,46 @@ require([
 // -------Navigate to Report Page with  DOT_Num of Current Selection----------
 // ---------------------------------------------------------------------
 
-    on(crossingPoints, "click", function(evt) {
-      //Create Variable to Store DOT Number of selected crossing
 
-      on(link, "click", selectionReportExecute);
+    // link.addEventListener("click", function(event) {
+    //   event.preventDefault();
+    //
+    //   var dotnum = "";
+    //   dotnum = event.graphic.attributes.DOT_Num;
+    //   // window.caches.clear();
+    //
+    //   link.addEventListener("click", selectionReportExecute);
+    //
+    //   function selectionReportExecute () {
+    //     // window.location.href = 'report.html?dotnum=' + dotnum;
+    //     var reportUrl = "";
+    //     reportUrl = window.open('report.html?dotnum=' + dotnum, '_blank');
+    //     var reportLength = reportUrl;
+    //   }
+    //
+    // });
 
-      function selectionReportExecute () {
-        var dotnum = "";
+    // on(crossingPoints, "click", function(evt) {
+    //   //Create Variable to Store DOT Number of selected crossing
+    //   var dotnum = "";
+    //   dotnum = evt.graphic.attributes.DOT_Num;
+    //   // window.caches.clear();
+    //
+    //   on(link, "click", selectionReportExecute);
+    //
+    //   function selectionReportExecute () {
+    //     // window.location.href = 'report.html?dotnum=' + dotnum;
+    //     var reportUrl = "";
+    //     reportUrl = window.location.href = 'report.html?dotnum=' + dotnum;
+    //     // reportUrl = window.open('report.html?dotnum=' + dotnum, '_blank');
+    //     var reportLength = reportUrl;
+    //     // reportUrl.close();
+    //     // var dd = crossingPoints.getSelectedFeatures();
+    //     // reportUrl;
+    //   }
+    // });
 
-        dotnum = evt.graphic.attributes.DOT_Num;
 
-        // window.location.href = 'report.html?dotnum=' + dotnum;
-        // location.href = 'report.html?dotnum=' + dotnum;
-        window.open('report.html?dotnum=' + dotnum, '_blank');
-      }
-    });
 
 // -------------------------------------------------------------------
 
