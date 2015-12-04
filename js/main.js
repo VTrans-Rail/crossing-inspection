@@ -101,7 +101,7 @@ require([
       id: "crossingPoints",
       outFields: ["*"],
       infoTemplate: crossingTemplate,
-      minScale: 550000,
+      minScale: 650000,
     });
 
 
@@ -112,7 +112,7 @@ require([
       id: "sign-points",
       outFields: ["*"],
       infoTemplate: signTemplate,
-      minScale: 25000,
+      minScale: 3000,
     });
 
 
