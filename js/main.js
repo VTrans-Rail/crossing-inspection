@@ -56,7 +56,7 @@ require([
 
 // -----------------Define PopupTemplates------------------------------
     //Crossing Template--------------
-    var crossingPopupFeatures = "<small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
+    var crossingPopupFeatures = "<div style='overflow-y:auto'><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
 
     var link = domConstruct.create("a", {
       "class": "action",
@@ -72,7 +72,7 @@ require([
 
 
     //Sign Template------------------
-    var signPopupFeatures = "<small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>";
+    var signPopupFeatures = "<div style='overflow-y:auto'><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>";
 
     var signTemplate = new PopupTemplate({
       title: "Crossing Sign",
@@ -189,7 +189,8 @@ require([
             imgSrc = response[i].url;
             imageString += "<tr><td></br></td></tr><tr><td><a href='" + imgSrc + "' target='_blank'>Image " + (i+1) + ": Click to View Full Image</a></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
-          formatString += imageString;
+          //Add closing div tag to to match the opening div tag in crossingPopupFeatures that
+          formatString += imageString + "</div>";
         }
         crossingTemplate.setContent(formatString);
       });
@@ -229,7 +230,7 @@ require([
             imgSrc = response[i].url;
             imageString += "<tr><td></br></td></tr><tr><td><a href='" + imgSrc + "' target='_blank'>Image " + (i+1) + ": Click to View Full Image</a></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
-          formatString += imageString;
+          formatString += imageString + "</div>";
         }
         signTemplate.setContent(formatString);
       });
