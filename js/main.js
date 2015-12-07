@@ -49,7 +49,8 @@ require([
       basemap: "topo",
       center: [-72.68, 43.785], // lon, lat
       zoom:8,
-      infoWindow: popup
+      infoWindow: popup,
+      showLabels: true
     });
 
 
@@ -136,11 +137,45 @@ require([
       minScale: 50000,
     });
 
+
+    //Create Mile Posts Feature Layers
+    var mpTenUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3";
+
+    var mpFiveUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/2";
+
+    var mpOneUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/1";
+
+    var milePostsTen = new FeatureLayer (mpTenUrl, {
+      id: "mile-post-ten",
+      outFields: ["MP"],
+      labelingInfo: ["MP"],
+    });
+
+    var milePostsFive = new FeatureLayer (mpFiveUrl, {
+      id: "mile-post-five",
+      outFields: ["MP"],
+      labelingInfo: ["MP"],
+    });
+
+    var milePostsOne = new FeatureLayer (mpOneUrl, {
+      id: "mile-post-one",
+      outFields: ["MP"],
+      labelingInfo: ["MP"],
+      minScale: 50000,
+    });
+
+
+
     //Add Layers to Map
     map.addLayer(aadtLine);
     map.addLayer(railLine);
+    map.addLayer(milePostsTen);
+    map.addLayer(milePostsFive);
+    map.addLayer(milePostsOne);
     map.addLayer(crossingPoints);
     map.addLayer(signPoints);
+
+
 
 
 //---------------------------------------------------------------------------
