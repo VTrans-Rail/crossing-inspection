@@ -1,11 +1,30 @@
 #map {
   width: 100%;
   height: 100%;
-  padding-top: 85px;
+  padding-top: 65px;
   position: absolute;
 }
 
-#search { padding: 20px; }
+#search {
+  padding: 10px;
+}
+
+#clicker {
+  /*padding: 10px;*/
+  /*padding-left: 0;*/
+  /*display: block;*/
+}
+
+#helpDiv {
+  padding-top: 10px;
+  padding-left: 0px;
+}
+
+#helpIcon img {
+  width: 18px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
 
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
@@ -16,10 +35,12 @@
     padding: 6px 0px 6px 12px;
     height: 30px;
     font-size: 1em;
+    border-left: 1px solid #57585A;
+    border-radius: 4px 0 0 4px;
 }
 /*set search input box width to full - width of side elements*/
 .arcgisSearch .searchInputGroup {
-    width: calc(100% - 52px);
+    width: calc(100% - 11px); /*modified to 11 when sources select was removed*/
 }
 
 .arcgisSearch .searchExpandContainer {
@@ -92,7 +113,13 @@
   }
 
   #map {
-    padding-top: 95px;
+    padding-top: 75px;
+  }
+
+  #helpIcon img {
+    width: 22px;
+    padding-top: 9px;
+    padding-bottom: 9px;
   }
 } /* end small devices */
 
@@ -127,7 +154,13 @@
   }
 
   #map {
-    padding-top: 105px;
+    padding-top: 85px;
+  }
+
+  #helpIcon img {
+    width: 24px;
+    padding-top: 13px;
+    padding-bottom: 13px;
   }
 } /* end medium devices */
 
@@ -149,6 +182,6 @@
   left:0px;
   width:100%;
   height:100%;
-  text-align:center; 
+  text-align:center;
   vertical-align:middle;
 }

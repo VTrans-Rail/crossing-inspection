@@ -8,3 +8,6 @@ https://getbootstrap.com/examples/cover/
 
 Base template:
 https://developers.arcgis.com/javascript/jssamples/search_multiplesources.html
+
+Icons:
+https://www.google.com/design/icons/
