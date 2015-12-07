@@ -23,8 +23,8 @@
 
 #helpIcon img {
   width: 18px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 /* Extra small devices (phones, less than 768px) */
@@ -116,6 +116,12 @@
   #map {
     padding-top: 75px;
   }
+
+  #helpIcon img {
+    width: 22px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
 } /* end small devices */
 
 /* Medium devices (desktops, 992px and up) */
@@ -150,6 +156,12 @@
 
   #map {
     padding-top: 85px;
+  }
+
+  #helpIcon img {
+    width: 24px;
+    padding-top: 13px;
+    padding-bottom: 13px;
   }
 } /* end medium devices */
 
