@@ -1,3 +1,6 @@
 - Basemap Toggle Button: https://developers.arcgis.com/javascript/jsapi/basemaptoggle-amd.html
 - Basemap Change on Zoom Level: https://developers.arcgis.com/javascript/jssamples/map_switch_layer_on_zoom.html
 - Styling Popup: https://developers.arcgis.com/javascript/jsapi/css/esri/dijit/css/Popup.css
+
+
+- Awesome Symbology and Visualization for AADT Lines: https://developers.arcgis.com/javascript/jssamples/renderer_legend.html
