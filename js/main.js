@@ -49,76 +49,50 @@ require([
 
 
 //--------------------Create Map-----------------------------------------
-  var customLods = [];
-  var loadCount = 0;
 
-  // satellite imagery from ArcGIS Online, use levels 0 - 11
-  var topoBasemap = new   ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer", {
-    displayLevels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-  });
-  // satellite.on("load", addLods);
+    // satellite imagery from ArcGIS Online, use levels 0 - 11
+    var topoBasemap = new   ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer", {
+      displayLevels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    });
 
-  // street Map service from ArcGIS Online, use levels 11 - 15
-  var streetBasemap = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer", {
-    displayLevels: [11, 12, 13, 14, 15, 16, 17, 18, 19],
-    opacity : 0.65
-  });
-  // streets.on("load", addLods);
+    // street Map service from ArcGIS Online, use levels 11 - 15
+    var streetBasemap = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer", {
+      displayLevels: [12, 13, 14, 15, 16, 17, 18, 19],
+      opacity : 0.65
+    });
 
-  // // popuplate an array with zoom levels
-  // function addLods(evt) {
-  // customLods = customLods.concat(evt.layer.tileInfo.lods);
-  // loadCount++;
-  // if (loadCount === 2) {
-  //   initMap();
-  // }
-  // }
-
-  // create the map and use the custom zoom levels
-  // function initMap() {
+    // create the map and use the custom zoom levels
     var map = new Map("map", {
+      // basemap: "topo",
       center: [-72.68, 43.785],
       zoom: 8,
       maxZoom:19,
       infoWindow: popup,
       showLabels: true,
-      // lods : customLods
     });
-  // map.on("extent-change", changeScale);
+
+    // map.on("extent-change", changeScale);
     map.addLayer(topoBasemap);
     map.addLayer(streetBasemap);
-  // }
-
-  // //Report which layer is being shown
-  // function changeScale(evt) {
-  //   dom.byId("scale").innerHTML = "Level: <i>" + evt.lod.level;
-  //   if (evt.lod.level < 11) {
-  //     dom.byId("visibleLayer").innerHTML = "Layer: <i>Imagery</i>";
-  //   } else if (evt.lod.level == 11) {
-  //     // both layers are loaded
-  //     dom.byId("visibleLayer").innerHTML = "<i>Both layers currently visible</i>";
-  //   } else {
-  //     dom.byId("visibleLayer").innerHTML = "Layer: <i>Streets</i>";
-  //   }
-  // }
-
-
-
-
-
-    // var map = new Map("map", {
-    //   basemap: "topo",
-    //   center: [-72.68, 43.785], // lon, lat
-    //   zoom:8,
-    //   infoWindow: popup,
-    //   showLabels: true
-    // });
 
     var toggle = new BasemapToggle({
       map: map,
       basemap: "satellite",
+      visible: false,
     }, "BasemapToggle");
     toggle.startup();
+
+
+    //Turn on imagery toggle when zoomed in to specific level
+    map.on("extent-change", checkBasemapToggle);
+    function checkBasemapToggle () {
+      var zoom = map.getZoom();
+      if ( zoom > 11 ) {
+        toggle.show();
+      } else {
+        toggle.hide();
+      }
+    }
 
 
 
