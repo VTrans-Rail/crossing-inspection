@@ -5,10 +5,27 @@
   position: absolute;
 }
 
+#BasemapToggle {
+  position: absolute;
+  top: 105px;
+  right: 20px;
+  z-index: 50;
+}
+
+/*change BasemapToggle title width*/
+.BasemapToggle .basemapTitle {
+  width: 100%;
+}
+
 #search { padding: 20px; }
 
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
+
+.BasemapToggle .basemapImage {
+  width: 65px;
+  height: 50px;
+}
 
 /*search input style tweaks*/
 .arcgisSearch .searchGroup .searchInput {
@@ -64,6 +81,12 @@
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
+  /*BasemapToggle Button Size*/
+  .BasemapToggle .basemapImage {
+    width: 75px;
+    height: 75px;
+  }
+
   .arcgisSearch .searchGroup .searchInput {
       height: 40px;
       font-size: 1.25em;
@@ -93,6 +116,10 @@
 
   #map {
     padding-top: 95px;
+  }
+
+  #BasemapToggle {
+    top: 115px;
   }
 } /* end small devices */
 
@@ -129,33 +156,57 @@
   #map {
     padding-top: 105px;
   }
+
+  #BasemapToggle {
+    top: 125px;
+  }
+
 } /* end medium devices */
 
 /* Large devices (large desktops, 1200px and up) ----not used currently
 @media (min-width: @screen-lg-min) { ... } */
 
-/*Selection popup Header*/
-.esriPopup.dark .titlePane {
-  height: 30px;
-  color: #292a2b;
+
+/*Popup Styling for Light Theme*/
+.esriPopup.light .titlePane {
+  height: 35px;
+  color: #FFFFED;
+  background-color: #555354;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+@media (min-width: 350px) {
+  .esriPopup.light .titlePane {
+    font-size: 14.5px;
+  }
+}
+
+.esriPopup.light .contentPane {
+  color: #555354;
+  background-color: #FFFFED;
+}
+
+.esriPopup.light .actionsPane {
+  height: 35px;
+  line-height: 35px;
+  background-color: #555354;
+}
+
+.esriPopup.light .actionsPane .action {
+  color: #FFFFED;
+  font-size: 16px;
   text-decoration: underline;
 }
 
+.esriPopup.light .actionsPane .action.zoomTo {
+  text-decoration: none;
+}
 
+.esriPopup.light .titleButton {
+  color: #FFFFED;
+}
 
-/*Playing Around with Styling*/
-/*------------------------------------------------------------------*/
-/*.arcgisSearch .resultsList {
-  background-color: pink;
-  font-weight: bold;
-  border: 2px solid #121310;*/
-/*}*/
-
-
-
-/*.esriPopup .contentPane,
-.esriPopup .actionsPane,
-.esriPopup .pointer,
-.esriPopup .outerPointer {
-   background-color: #B3B3B3;
-}*/
+.esriPopup.light .titleButton.close::before {
+  color: #FFFFED;
+}
