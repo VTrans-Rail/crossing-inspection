@@ -61,6 +61,17 @@ require([
     }, "BasemapToggle");
     toggle.startup();
 
+    map.on("extent-change", changeBasemap);
+
+    function changeBasemap () {
+      var newZoom = map.getZoom();
+      if ( newZoom > 13 ) {
+        map.setBasemap("osm");
+      } else {
+        map.setBasemap("topo");
+      }
+    }
+
 
 
 // -----------------Define PopupTemplates------------------------------
