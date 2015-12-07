@@ -4,7 +4,9 @@ require([
   "esri/map",
   "esri/dijit/Search",
   "esri/layers/FeatureLayer",
+  "esri/layers/ArcGISTiledMapServiceLayer",
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
+  "esri/dijit/BasemapToggle",
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
@@ -22,10 +24,12 @@ require([
     Map,
     Search,
     FeatureLayer,
+    ArcGISTiledMapServiceLayer,
     Popup, PopupTemplate,
+    BasemapToggle,
     SimpleFillSymbol, Color,
     domClass, domConstruct, query, on,
-    // domAttr, dom,
+    dom,
     Query, QueryTask,
     InfoTemplate
   ) {
@@ -45,12 +49,50 @@ require([
 
 
 //--------------------Create Map-----------------------------------------
-    var map = new Map("map", {
-      basemap: "topo",
-      center: [-72.68, 43.785], // lon, lat
-      zoom:8,
-      infoWindow: popup
+
+    // satellite imagery from ArcGIS Online, use levels 0 - 11
+    var topoBasemap = new   ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer", {
+      displayLevels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     });
+
+    // street Map service from ArcGIS Online, use levels 11 - 15
+    var streetBasemap = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer", {
+      displayLevels: [12, 13, 14, 15, 16, 17, 18, 19],
+      opacity : 0.65
+    });
+
+    // create the map and use the custom zoom levels
+    var map = new Map("map", {
+      // basemap: "topo",
+      center: [-72.68, 43.785],
+      zoom: 8,
+      maxZoom:19,
+      infoWindow: popup,
+      showLabels: true,
+    });
+
+    // map.on("extent-change", changeScale);
+    map.addLayer(topoBasemap);
+    map.addLayer(streetBasemap);
+
+    var toggle = new BasemapToggle({
+      map: map,
+      basemap: "satellite",
+      visible: false,
+    }, "BasemapToggle");
+    toggle.startup();
+
+
+    //Turn on imagery toggle when zoomed in to specific level
+    map.on("extent-change", checkBasemapToggle);
+    function checkBasemapToggle () {
+      var zoom = map.getZoom();
+      if ( zoom > 11 ) {
+        toggle.show();
+      } else {
+        toggle.hide();
+      }
+    }
 
 
 
@@ -136,11 +178,45 @@ require([
       minScale: 50000,
     });
 
+
+    //Create Mile Posts Feature Layers
+    var mpTenUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3";
+
+    var mpFiveUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/2";
+
+    var mpOneUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/1";
+
+    var milePostsTen = new FeatureLayer (mpTenUrl, {
+      id: "mile-post-ten",
+      outFields: ["MP"],
+      labelingInfo: ["MP"],
+    });
+
+    var milePostsFive = new FeatureLayer (mpFiveUrl, {
+      id: "mile-post-five",
+      outFields: ["MP"],
+      labelingInfo: ["MP"],
+    });
+
+    var milePostsOne = new FeatureLayer (mpOneUrl, {
+      id: "mile-post-one",
+      outFields: ["MP"],
+      labelingInfo: ["MP"],
+      minScale: 50000,
+    });
+
+
+
     //Add Layers to Map
     map.addLayer(aadtLine);
     map.addLayer(railLine);
+    map.addLayer(milePostsTen);
+    map.addLayer(milePostsFive);
+    map.addLayer(milePostsOne);
     map.addLayer(crossingPoints);
     map.addLayer(signPoints);
+
+
 
 
 //---------------------------------------------------------------------------

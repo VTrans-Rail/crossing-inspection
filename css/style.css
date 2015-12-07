@@ -5,10 +5,27 @@
   position: absolute;
 }
 
+#BasemapToggle {
+  position: absolute;
+  top: 105px;
+  right: 20px;
+  z-index: 50;
+}
+
+/*change BasemapToggle title width*/
+.BasemapToggle .basemapTitle {
+  width: 100%;
+}
+
 #search { padding: 20px; }
 
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
+
+.BasemapToggle .basemapImage {
+  width: 65px;
+  height: 50px;
+}
 
 /*search input style tweaks*/
 .arcgisSearch .searchGroup .searchInput {
@@ -64,6 +81,12 @@
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
+  /*BasemapToggle Button Size*/
+  .BasemapToggle .basemapImage {
+    width: 75px;
+    height: 75px;
+  }
+
   .arcgisSearch .searchGroup .searchInput {
       height: 40px;
       font-size: 1.25em;
@@ -93,6 +116,10 @@
 
   #map {
     padding-top: 95px;
+  }
+
+  #BasemapToggle {
+    top: 115px;
   }
 } /* end small devices */
 
@@ -129,6 +156,11 @@
   #map {
     padding-top: 105px;
   }
+
+  #BasemapToggle {
+    top: 125px;
+  }
+
 } /* end medium devices */
 
 /* Large devices (large desktops, 1200px and up) ----not used currently
