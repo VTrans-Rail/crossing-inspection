@@ -5,6 +5,7 @@ require([
   "esri/dijit/Search",
   "esri/layers/FeatureLayer",
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
+  "esri/dijit/BasemapToggle",
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
@@ -23,6 +24,7 @@ require([
     Search,
     FeatureLayer,
     Popup, PopupTemplate,
+    BasemapToggle,
     SimpleFillSymbol, Color,
     domClass, domConstruct, query, on,
     // domAttr, dom,
@@ -52,6 +54,12 @@ require([
       infoWindow: popup,
       showLabels: true
     });
+
+    var toggle = new BasemapToggle({
+      map: map,
+      basemap: "hybrid",
+    }, "BasemapToggle");
+    toggle.startup();
 
 
 
