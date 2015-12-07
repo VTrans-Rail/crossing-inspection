@@ -70,3 +70,11 @@
 #search_menu_button {
   display: none;
 }
+
+/*Question mark button on main page*/
+
+.btnHelp {
+  background-color: white;
+  border: 1px solid #57585A;
+  border-radius: 4px;
+}

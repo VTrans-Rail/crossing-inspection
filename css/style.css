@@ -11,17 +11,20 @@
 }
 
 #clicker {
-  padding: 10px;
+  /*padding: 10px;*/
+  /*padding-left: 0;*/
+  /*display: block;*/
 }
 
-#helpBtn {
-  background-color: white;
-  border: 1px solid #57585A;
-  border-radius: 4px;
+#helpDiv {
+  padding-top: 10px;
+  padding-left: 0px;
 }
 
 #helpIcon img {
-  width: 30px;
+  width: 18px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 /* Extra small devices (phones, less than 768px) */
