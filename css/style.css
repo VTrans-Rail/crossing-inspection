@@ -9,7 +9,7 @@
   position: absolute;
   top: 105px;
   right: 20px;
-  z-index: 50;
+  z-index: 1;
 }
 
 /*change BasemapToggle title width*/
