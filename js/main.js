@@ -44,7 +44,7 @@ require([
     }, domConstruct.create("div"));
 
     //Add Popup theme
-    domClass.add(popup.domNode, "dark");
+    domClass.add(popup.domNode, "light");
 
 
 
@@ -75,6 +75,9 @@ require([
     map.addLayer(topoBasemap);
     map.addLayer(streetBasemap);
 
+    //Resize Popup To Fit titlePane
+    map.infoWindow.resize(300, 370)
+
     var toggle = new BasemapToggle({
       map: map,
       basemap: "satellite",
@@ -103,7 +106,7 @@ require([
     var link = domConstruct.create("a", {
       "class": "action",
       "id": "fullReport",
-      "innerHTML": "Full Report",
+      "innerHTML": "Full Report Link",
       "href": "www.google.com",
       "target": "_blank"
     }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
