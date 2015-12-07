@@ -1,0 +1,2 @@
+- Basemap Toggle Button: https://developers.arcgis.com/javascript/jsapi/basemaptoggle-amd.html
+- Basemap Change on Zoom Level: https://developers.arcgis.com/javascript/jssamples/map_switch_layer_on_zoom.html
