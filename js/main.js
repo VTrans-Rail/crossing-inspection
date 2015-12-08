@@ -2,14 +2,21 @@ var formatString = "";
 
 require([
   "esri/map",
+  "esri/arcgis/utils",
   "esri/dijit/Search",
   "esri/layers/FeatureLayer",
   "esri/layers/ArcGISTiledMapServiceLayer",
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
   "esri/dijit/BasemapToggle",
+  "esri/dijit/LayerList",
+  "esri/renderers/UniqueValueRenderer",
+  // "esri/symbols/SimpleLineSymbol",
+  "esri/symbols/CartographicLineSymbol",
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
+  "dijit/layout/BorderContainer",
+  "dijit/layout/ContentPane",
   // "dojox/charting/Chart", "dojox/charting/themes/Dollar",
   "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
@@ -22,11 +29,16 @@ require([
 //------------------------------------------------------------------
   function (
     Map,
+    arcgisUtils,
     Search,
     FeatureLayer,
     ArcGISTiledMapServiceLayer,
     Popup, PopupTemplate,
     BasemapToggle,
+    LayerList,
+    UniqueValueRenderer,
+    // SimpleLineSymbol,
+    CartographicLineSymbol,
     SimpleFillSymbol, Color,
     domClass, domConstruct, query, on,
     dom,
@@ -86,7 +98,7 @@ require([
     toggle.startup();
 
 
-    //Turn on imagery toggle when zoomed in to specific level
+    //Turn on BasemapToggle when zoomed in to specific level
     map.on("extent-change", checkBasemapToggle);
     function checkBasemapToggle () {
       var zoom = map.getZoom();
@@ -156,13 +168,14 @@ require([
 
     var signPoints = new FeatureLayer(signUrl, {
       id: "sign-points",
+      displayField: "DOT_Num",
       outFields: ["*"],
       infoTemplate: signTemplate,
       minScale: 3000,
     });
 
 
-    //Create Rail Line Feature Layer
+    //Create Rail Line Feature Layer----------------------------
     var lineUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer/0";
 
     var railLine = new FeatureLayer(lineUrl, {
@@ -170,16 +183,47 @@ require([
       outFields: ["*"],
     });
 
-
-    //Create AADT Line Feature Layer
+    // --------------------------------------------------
+    //Create AADT Line Feature Layer--------------------------------
+    // --------------------------------------------------
     var aadtUrl = "https://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/AADT_2013_StateHighways/FeatureServer/0";
 
     var aadtLine = new FeatureLayer(aadtUrl, {
-      id: "aadt-line",
+      mode: FeatureLayer.MODE_AUTO,
       outFields: ["*"],
       infoTemplate: aadtTemplate,
-      minScale: 50000,
+      minScale: 288000,
     });
+
+    var aadtSymbol = new CartographicLineSymbol(    );
+    aadtSymbol.style = CartographicLineSymbol.STYLE_DASH;
+    aadtSymbol.setCap("ROUND");
+    aadtSymbol.setJoin("ROUND");
+    aadtSymbol.setColor([230, 0, 169, 1]);
+
+    //Create a unique value renderer and its unique value info
+    var renderer = new UniqueValueRenderer(aadtSymbol);
+
+    /**********************************************
+    * Define a size visual variable to vary the width
+    * of each highway based on its annual average daily
+    * traffic count.
+    *********************************************/
+    renderer.setVisualVariables([{
+        type: "sizeInfo",
+        field: "aadt",
+        valueUnit: "unknown",
+        minSize: 2.5,
+        maxSize: 10,
+        minDataValue: 10,
+        maxDataValue: 56000
+    }]);
+
+    //Set the renderer on the layer and add the layer to the map
+    aadtLine.setRenderer(renderer);
+    // --------------------------------------------------
+    // --------------------------------------------------
+
 
 
     //Create Mile Posts Feature Layers
@@ -212,13 +256,38 @@ require([
 
     //Add Layers to Map
     map.addLayer(aadtLine);
+    // map.addLayer(aadtLineBase);
     map.addLayer(railLine);
     map.addLayer(milePostsTen);
     map.addLayer(milePostsFive);
     map.addLayer(milePostsOne);
     map.addLayer(crossingPoints);
     map.addLayer(signPoints);
+//-------------------------------------------------------------------------
 
+
+
+//-------------------------------------------------------------------------
+//-----------------------LayerToggle--------------------------------
+//-------------------------------------------------------------------------
+    var toggleLayers = [
+      {
+        layer: signPoints,
+        content: "<b>Signs</b> <img src='img/favicon.png' alt='site image' height=17px style='border-radius:4px; float:right; right:5px'>",
+      },
+      {
+        layer: aadtLine,
+        content: "<b>AADT</b> <img src='img/aadtSymbol.png' alt='site image' width=60px style='border-radius:4px; float:right; right:5px'>",
+      },
+    ];
+
+    var myLayerList = new LayerList({
+      map: map,
+      layers: toggleLayers,
+      theme: "vtransTheme",
+    }, "layerList");
+    myLayerList.startup();
+//-------------------------------------------------------------------------
 
 
 
@@ -347,6 +416,7 @@ require([
     searchSources.push({
       featureLayer: crossingPoints,
       searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed"],
+      displayField: "DOT_Num",
       suggestionTemplate: "${DOT_Num}: The ${LineName} crosses ${Feature_Crossed} in ${Town}. (${XingCond})",
       exactMatch: false,
       outFields: ["*"],
