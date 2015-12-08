@@ -24,9 +24,8 @@
 
 /* Padding for spacing */
 .inner {
-  padding: 30px;
+  padding: 20px;
 }
-
 
 .cover {
   padding: 0 20px;
@@ -77,4 +76,33 @@
   background-color: white;
   border: 1px solid #57585A;
   border-radius: 4px;
+}
+
+/*user added styles*/
+.subtitle small {
+  color: #ddd;
+  font-style: italic;
+}
+
+.step {
+  font-size: 1.25em;
+}
+
+.horiz-line {
+  height: 1px;
+  background-color: #ddd;
+  text-align: center;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.divider-text {
+  background-color: #333;
+  position: relative;
+  top: -0.75em;
+  padding: 5px;
+}
+
+.gotit {
+  padding-top: 50px;
 }

@@ -9,12 +9,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
 
     <title>Cover Template for Bootstrap</title>
 
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="css/bootstrap-mod.css">
+    <link rel="stylesheet" href="css/style.css">
     <!-- Custom styles for this template -->
     <link href="css/instructions.css" rel="stylesheet">
 
@@ -22,33 +25,50 @@
   </head>
 
   <body>
-
+    <div id="instructions">
     <div class="site-wrapper">
-
       <div class="site-wrapper-inner">
-
         <div class="cover-container">
-
           <div class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand">Crossing Inspection</h3>
-              <h3><small>Data Investigation App</small></h3>
+              <h2 class="masthead-brand">Crossing Inspection</h2>
+              <h3 class="subtitle"><em>Data Investigation App</em></h3>
+              <h2 class="subtitle"><small>Here's how it works:</small></h2>
             </div>
           </div>
 
           <div class="inner cover">
-            <h1 class="cover-heading">Here's how it works</h1>
-            <p class="lead">
-              First, do the thing.
+            <p class="step">
+              <span class="searchIcon esri-icon-search" id="searchico"> </span>
+              <strong>
+                Search for
+              </strong>
             </p>
             <p>
-              Then the next step is this.
+              <ul class="list-inline">
+                <li>DOT Number</li>
+                <li>Town Name</li>
+                <li>Road Name</li>
+              </ul>
+            </p>
+            <div class="horiz-line">
+              <span class="divider-text">
+                <em>or</em>
+              </span>
+            </div>
+            <p class="step">
+              <span class="searchIcon esri-icon-zoom-out-fixed"> </span>
+              <strong>
+                Use the map
+              </strong>
             </p>
             <p>
-              Finally, click.
+              <em>
+                Navigate the map to your desired area.
+              </em>
             </p>
           </div>
-          <div class="inner cover">
+          <div class="inner cover gotit">
             <p class="lead">
               <a href="#" onclick="return clicker();"class="btn btn-lg btn-success">Got it!</a>
             </p>
@@ -59,6 +79,7 @@
 
       </div>
 
+    </div>
     </div>
 
     <!-- Bootstrap core JavaScript
