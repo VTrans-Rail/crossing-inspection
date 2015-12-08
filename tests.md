@@ -1,5 +1,5 @@
 
-Mobile
+Mobile: Test on actual devices in addition to chrome's developer tools (Developer tools showed ghost text and images when scrolling with any touchscreen device. By forking repo to personal account and testing on actual mobile devices this issue did not appear).
 - [ ] iPhone 5s
 - [ ] iPhone 6s+
 - [ ] Nexus 6P
@@ -37,4 +37,4 @@ Sizes
 - [ ] 1200px
 
 Accessibility
-- [ ] ???
+- [ ] Colorblind-accessible
