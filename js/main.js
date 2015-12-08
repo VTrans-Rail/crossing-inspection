@@ -98,7 +98,7 @@ require([
     toggle.startup();
 
 
-    //Turn on imagery toggle when zoomed in to specific level
+    //Turn on BasemapToggle when zoomed in to specific level
     map.on("extent-change", checkBasemapToggle);
     function checkBasemapToggle () {
       var zoom = map.getZoom();
@@ -275,14 +275,11 @@ require([
     var toggleLayers = [
       {
         layer: signPoints,
-        // button: "<img src='img/favicon.png' alt='site image'> Signs",
-        content: "<img src='img/favicon.png' alt='site image'> Signs",
-        // visibility: false,
+        content: "<div style='position:absolute'><b>Signs</b> <img src='img/favicon.png' alt='site image' height=20px width=20px style='border-radius:4px'></div>" + "<div style='float:right; right:5px'><img src='img/favicon.png' alt='site image' height=20px width=20px style='border-radius:4px'></div>",
       },
       {
         layer: aadtLine,
-        content: "<img src='img/aadtSymbol.png' alt='site image' width=80%> AADT Traffic Data",
-        // showLegend: true,
+        content: "<b>AADT</b> <img src='img/aadtSymbol.png' alt='site image' width=60px style='border-radius:4px; float:right; right:5px'>",
       },
     ];
 
@@ -290,9 +287,21 @@ require([
       map: map,
       layers: toggleLayers,
       theme: "vtransTheme",
-      // theme: "tab",
+      // visible: false,
     }, "layerList");
     myLayerList.startup();
+
+    // //Turn on LayerList when zoomed in to specific level
+    // map.on("extent-change", checkLayerList);
+    // function checkLayerList () {
+    //   var zoom = map.getZoom();
+    //   if ( zoom > 11 ) {
+    //     myLayerList.visible = true;
+    //   } else {
+    //     myLayerList.visible = false;
+    //   }
+    // }
+    // console.log(myLayerList.visible);
 //-------------------------------------------------------------------------
 
 
