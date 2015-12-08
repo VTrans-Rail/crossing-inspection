@@ -2,11 +2,13 @@ var formatString = "";
 
 require([
   "esri/map",
+  "esri/arcgis/utils",
   "esri/dijit/Search",
   "esri/layers/FeatureLayer",
   "esri/layers/ArcGISTiledMapServiceLayer",
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
   "esri/dijit/BasemapToggle",
+  "esri/dijit/LayerList",
   "esri/renderers/UniqueValueRenderer",
   "esri/symbols/SimpleLineSymbol",
   "esri/symbols/CartographicLineSymbol",
@@ -25,11 +27,13 @@ require([
 //------------------------------------------------------------------
   function (
     Map,
+    arcgisUtils,
     Search,
     FeatureLayer,
     ArcGISTiledMapServiceLayer,
     Popup, PopupTemplate,
     BasemapToggle,
+    LayerList,
     UniqueValueRenderer,
     SimpleLineSymbol,
     CartographicLineSymbol,
@@ -164,6 +168,7 @@ require([
       id: "sign-points",
       outFields: ["*"],
       infoTemplate: signTemplate,
+      // minScale: 850000,
       minScale: 3000,
     });
 
@@ -181,37 +186,37 @@ require([
     //Create AADT Line Feature Layer
     var aadtUrl = "https://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/AADT_2013_StateHighways/FeatureServer/0";
 
-    var aadtLineBase = new FeatureLayer(aadtUrl, {
-      mode: FeatureLayer.MODE_AUTO,
-      minScale: 50000,
-    });
+    // var aadtLineBase = new FeatureLayer(aadtUrl, {
+    //   mode: FeatureLayer.MODE_AUTO,
+    //   minScale: 50000,
+    // });
 
     var aadtLine = new FeatureLayer(aadtUrl, {
       mode: FeatureLayer.MODE_AUTO,
       outFields: ["*"],
       infoTemplate: aadtTemplate,
-      minScale: 50000,
+      minScale: 500000,
     });
 
-    var aadtSymbolBase = new CartographicLineSymbol();
-    aadtSymbolBase.style = CartographicLineSymbol.STYLE_SOLID;
-    aadtSymbolBase.setCap("ROUND");
-    aadtSymbolBase.setJoin("ROUND");
-    aadtSymbolBase.setWidth(.5);
-    aadtSymbolBase.setColor("#000000");
+    // var aadtSymbolBase = new CartographicLineSymbol();
+    // aadtSymbolBase.style = CartographicLineSymbol.STYLE_SOLID;
+    // aadtSymbolBase.setCap("ROUND");
+    // aadtSymbolBase.setJoin("ROUND");
+    // aadtSymbolBase.setWidth(.5);
+    // aadtSymbolBase.setColor("#000000");
+    //
+    // //Create a unique value renderer and its unique value info
+    // var rendererBase = new UniqueValueRenderer(aadtSymbolBase);
+    //
+    // //Set the renderer on the layer and add the layer to the map
+    // aadtLineBase.setRenderer(rendererBase);
 
-    //Create a unique value renderer and its unique value info
-    var rendererBase = new UniqueValueRenderer(aadtSymbolBase);
 
-    //Set the renderer on the layer and add the layer to the map
-    aadtLineBase.setRenderer(rendererBase);
-
-
-    var aadtSymbol = new CartographicLineSymbol();
-    aadtSymbol.style = SimpleLineSymbol.STYLE_SOLID;
+    var aadtSymbol = new CartographicLineSymbol(    );
+    aadtSymbol.style = SimpleLineSymbol.STYLE_DASH;
     aadtSymbol.setCap("ROUND");
     aadtSymbol.setJoin("ROUND");
-    aadtSymbol.setColor("#48EA00");
+    aadtSymbol.setColor([230, 0, 169, 1]);
 
     //Create a unique value renderer and its unique value info
     var renderer = new UniqueValueRenderer(aadtSymbol);
@@ -268,14 +273,42 @@ require([
 
     //Add Layers to Map
     map.addLayer(aadtLine);
-    map.addLayer(aadtLineBase);
+    // map.addLayer(aadtLineBase);
     map.addLayer(railLine);
     map.addLayer(milePostsTen);
     map.addLayer(milePostsFive);
     map.addLayer(milePostsOne);
     map.addLayer(crossingPoints);
     map.addLayer(signPoints);
+//-------------------------------------------------------------------------
 
+
+
+//-------------------------------------------------------------------------
+//-----------------------LayerToggle--------------------------------
+//-------------------------------------------------------------------------
+
+    var toggleLayers = [
+      {
+        layer: signPoints,
+        content: "<img src='img/favicon.png'>",
+        // visibility: false,
+      },
+      {
+        layer: aadtLine,
+      },
+      // {
+      //   layer: aadtLineBase,
+      // }
+    ];
+
+    var myLayerList = new LayerList({
+      map: map,
+      layers: toggleLayers
+      // layers: arcgisUtils.getLayerList(map)
+    }, "layerList");
+    myLayerList.startup();
+//-------------------------------------------------------------------------
 
 
 

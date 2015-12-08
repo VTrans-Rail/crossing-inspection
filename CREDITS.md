@@ -7,3 +7,8 @@
 - CartographicLineSymbol: https://developers.arcgis.com/javascript/jsapi/cartographiclinesymbol-amd.html
 - SimpleLineSymbol: https://developers.arcgis.com/javascript/jsapi/simplelinesymbol-amd.html
 - UniqueValueRenderer: https://developers.arcgis.com/javascript/jssamples/renderer_unique_value.html
+
+-Possible Way to Add Outline to SimpleLineSymbol: https://developers.arcgis.com/javascript/jsapi/symbolstyler-amd.html
+
+
+-Locate Button: https://developers.arcgis.com/javascript/jsapi/locatebutton-amd.html
