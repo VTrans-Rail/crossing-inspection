@@ -171,7 +171,6 @@ require([
       displayField: "DOT_Num",
       outFields: ["*"],
       infoTemplate: signTemplate,
-      // minScale: 850000,
       minScale: 3000,
     });
 
@@ -193,7 +192,7 @@ require([
       mode: FeatureLayer.MODE_AUTO,
       outFields: ["*"],
       infoTemplate: aadtTemplate,
-      minScale: 500000,
+      minScale: 288000,
     });
 
     var aadtSymbol = new CartographicLineSymbol(    );
@@ -271,11 +270,10 @@ require([
 //-------------------------------------------------------------------------
 //-----------------------LayerToggle--------------------------------
 //-------------------------------------------------------------------------
-
     var toggleLayers = [
       {
         layer: signPoints,
-        content: "<div style='position:absolute'><b>Signs</b> <img src='img/favicon.png' alt='site image' height=20px width=20px style='border-radius:4px'></div>" + "<div style='float:right; right:5px'><img src='img/favicon.png' alt='site image' height=20px width=20px style='border-radius:4px'></div>",
+        content: "<b>Signs</b> <img src='img/favicon.png' alt='site image' height=17px style='border-radius:4px; float:right; right:5px'>",
       },
       {
         layer: aadtLine,
@@ -287,21 +285,8 @@ require([
       map: map,
       layers: toggleLayers,
       theme: "vtransTheme",
-      // visible: false,
     }, "layerList");
     myLayerList.startup();
-
-    // //Turn on LayerList when zoomed in to specific level
-    // map.on("extent-change", checkLayerList);
-    // function checkLayerList () {
-    //   var zoom = map.getZoom();
-    //   if ( zoom > 11 ) {
-    //     myLayerList.visible = true;
-    //   } else {
-    //     myLayerList.visible = false;
-    //   }
-    // }
-    // console.log(myLayerList.visible);
 //-------------------------------------------------------------------------
 
 
