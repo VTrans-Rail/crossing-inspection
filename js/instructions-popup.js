@@ -15,12 +15,12 @@ function clicker(){
           </div>
 
           <div class="inner cover">
-            <p class="step">
+            <div class="step">
               <span class="searchIcon esri-icon-search" id="searchico"> </span>
               <strong>
-                Search for
+                Search for:
               </strong>
-            </p>
+            </div>
             <p>
               <ul class="list-inline">
                 <li>DOT Number</li>
@@ -33,12 +33,12 @@ function clicker(){
                 <em>or</em>
               </span>
             </div>
-            <p class="step">
+            <div class="step">
               <span class="searchIcon esri-icon-zoom-out-fixed"> </span>
               <strong>
                 Use the map
               </strong>
-            </p>
+            </div>
             <p>
               <em>
                 Navigate the map to your desired area.
@@ -51,7 +51,7 @@ function clicker(){
             </div>
 
             <p>
-            <img src="img\\\x63rossing-good.png" alt="" id="xingImg"/>
+            <img src="img\crossing-good.png" alt="" id="xingImg"/>
             <em>
               Click on a crossing to see details
             </em>
@@ -62,15 +62,15 @@ function clicker(){
             </p>
           </div>
           <div class="inner cover gotit">
-            <p class="lead">
               <a href="#" onclick="return clicker();"class="btn btn-lg btn-success">Got it!</a>
-            </p>
           </div>
 
 
         </div>
 
       </div>
+
+    </div>
 		`;
 	}else{
 		thediv.style.display = "none";
