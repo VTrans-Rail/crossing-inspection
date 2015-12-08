@@ -8,7 +8,7 @@ require([
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
   "esri/dijit/BasemapToggle",
   "esri/renderers/UniqueValueRenderer",
-  // "esri/symbols/SimpleLineSymbol",
+  "esri/symbols/SimpleLineSymbol",
   "esri/symbols/CartographicLineSymbol",
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
@@ -31,7 +31,7 @@ require([
     Popup, PopupTemplate,
     BasemapToggle,
     UniqueValueRenderer,
-    // SimpleLineSymbol,
+    SimpleLineSymbol,
     CartographicLineSymbol,
     SimpleFillSymbol, Color,
     domClass, domConstruct, query, on,
@@ -200,41 +200,50 @@ require([
       minScale: 650000,
     });
 
+
+
+    var aadtSymbolBase = new CartographicLineSymbol();
+    aadtSymbolBase.style = CartographicLineSymbol.STYLE_SOLID;
+    aadtSymbolBase.setCap("ROUND");
+    aadtSymbolBase.setJoin("ROUND");
+    aadtSymbolBase.setWidth(.75);
+    aadtSymbolBase.setColor("#000000");
+
     //Create a unique value renderer and its unique value info
-    var rendererBase = new UniqueValueRenderer(null, "AOTCLASS");
+    var rendererBase = new UniqueValueRenderer(aadtSymbolBase);
 
     //This function will be used to create symbols for each unique value
-    function createSymbolBase () {
-      return new CartographicLineSymbol(CartographicLineSymbol.STYLE_SOLID, new Color([26, 26, 26, 1]), .75, CartographicLineSymbol.CAP_ROUND, CartographicLineSymbol.JOIN_ROUND);
-    }
-
-    rendererBase.addValue({
-      value: "1",
-      symbol: createSymbolBase(),
-      label: "Class 1 Town Highway",
-      description: "Class 1 Town Highway"
-    });
-    rendererBase.addValue({
-      value: "30",
-      // value: ["30", "31", "33"],
-      symbol: createSymbolBase(),
-      label: "State Highway",
-      description: "State Highway"
-    });
-    rendererBase.addValue({
-      value: "40",
-      // value: ["40", "41", "43"],
-      symbol: createSymbolBase(),
-      label: "US Highway",
-      description: "US Highway"
-    });
-    rendererBase.addValue({
-      value: "51",
-      // value: ["51", "53"],
-      symbol: createSymbolBase(),
-      label: "Interstate Highway",
-      description: "Interstate Highway"
-    });
+    // function createSymbolBase () {
+    //   return new CartographicLineSymbol(CartographicLineSymbol.STYLE_SOLID, new Color([26, 26, 26, 1]), .75, CartographicLineSymbol.CAP_ROUND, CartographicLineSymbol.JOIN_ROUND);
+    // }
+    //
+    // rendererBase.addValue({
+    //   value: "1",
+    //   symbol: createSymbolBase(),
+    //   label: "Class 1 Town Highway",
+    //   description: "Class 1 Town Highway"
+    // });
+    // rendererBase.addValue({
+    //   value: "30",
+    //   // value: ["30", "31", "33"],
+    //   symbol: createSymbolBase(),
+    //   label: "State Highway",
+    //   description: "State Highway"
+    // });
+    // rendererBase.addValue({
+    //   value: "40",
+    //   // value: ["40", "41", "43"],
+    //   symbol: createSymbolBase(),
+    //   label: "US Highway",
+    //   description: "US Highway"
+    // });
+    // rendererBase.addValue({
+    //   value: "51",
+    //   // value: ["51", "53"],
+    //   symbol: createSymbolBase(),
+    //   label: "Interstate Highway",
+    //   description: "Interstate Highway"
+    // });
 
     /**********************************************
     * Define a size visual variable to vary the width
@@ -256,41 +265,47 @@ require([
 
 
 
+    var symbol = new SimpleLineSymbol();
+    symbol.style = SimpleLineSymbol.STYLE_SOLID;
+    symbol.setColor("#48EA00");
+
     //Create a unique value renderer and its unique value info
-    var renderer = new UniqueValueRenderer(null, "AOTCLASS");
+    // var renderer = new UniqueValueRenderer(null, "AOTCLASS");
+    var renderer = new UniqueValueRenderer(symbol);
+
 
     //This function will be used to create symbols for each unique value
-    function createSymbol (color) {
-      return new CartographicLineSymbol(CartographicLineSymbol.STYLE_DASH, new Color(color), 2, CartographicLineSymbol.CAP_ROUND, CartographicLineSymbol.JOIN_ROUND);
-    }
+    // function createSymbol (color) {
+    //   return new CartographicLineSymbol(CartographicLineSymbol.STYLE_DASH, new Color(color), 2, CartographicLineSymbol.CAP_ROUND, CartographicLineSymbol.JOIN_ROUND);
+    // }
 
-    renderer.addValue({
-      value: "1",
-      symbol: createSymbol("#48EA00"),
-      label: "Class 1 Town Highway",
-      description: "Class 1 Town Highway"
-    });
-    renderer.addValue({
-      value: "30",
-      // value: ["30", "31", "33"],
-      symbol: createSymbol("#48EA00"),
-      label: "State Highway",
-      description: "State Highway"
-    });
-    renderer.addValue({
-      value: "40",
-      // value: ["40", "41", "43"],
-      symbol: createSymbol("#48EA00"),
-      label: "US Highway",
-      description: "US Highway"
-    });
-    renderer.addValue({
-      value: "51",
-      // value: ["51", "53"],
-      symbol: createSymbol("#48EA00"),
-      label: "Interstate Highway",
-      description: "Interstate Highway"
-    });
+    // renderer.addValue({
+    //   value: "1",
+    //   symbol: createSymbol("#48EA00"),
+    //   label: "Class 1 Town Highway",
+    //   description: "Class 1 Town Highway"
+    // });
+    // renderer.addValue({
+    //   value: "30",
+    //   // value: ["30", "31", "33"],
+    //   symbol: createSymbol("#48EA00"),
+    //   label: "State Highway",
+    //   description: "State Highway"
+    // });
+    // renderer.addValue({
+    //   value: "40",
+    //   // value: ["40", "41", "43"],
+    //   symbol: createSymbol("#48EA00"),
+    //   label: "US Highway",
+    //   description: "US Highway"
+    // });
+    // renderer.addValue({
+    //   value: "51",
+    //   // value: ["51", "53"],
+    //   symbol: createSymbol("#48EA00"),
+    //   label: "Interstate Highway",
+    //   description: "Interstate Highway"
+    // });
 
     /**********************************************
     * Define a size visual variable to vary the width
