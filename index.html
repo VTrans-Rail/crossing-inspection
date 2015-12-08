@@ -19,17 +19,36 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/bootstrap-mod.css">
+    <link href="css/instructions.css" rel="stylesheet">
+
 
     <script src="http://js.arcgis.com/3.14/"></script>
     <script src="js/main.js"></script>
     <script src="http://localhost:35729/livereload.js"></script>
+    <script type="text/javascript" src="js/instructions-popup.js">
 
+    </script>
 </head>
 
 <body>
   <div class="navbar navbar-inverse navbar-fixed-top">
-    <div id="search"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-10 col-sm-11">
+          <div id="search"></div>
+        </div>
+        <div class="col-xs-1" id="helpDiv">
+          <a href="#" onclick="return clicker()" id="clicker" role="button" class="btn btnHelp">
+            <span id="helpIcon">
+              <img src="img\ic_help_outline_black_24px.svg" alt="" />
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <div id="instructions" style="display: none;"></div>
 
   <div id="map">
     <div id="BasemapToggle"></div>
