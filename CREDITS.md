@@ -4,3 +4,6 @@
 
 
 - Awesome Symbology and Visualization for AADT Lines: https://developers.arcgis.com/javascript/jssamples/renderer_legend.html
+- CartographicLineSymbol: https://developers.arcgis.com/javascript/jsapi/cartographiclinesymbol-amd.html
+- SimpleLineSymbol: https://developers.arcgis.com/javascript/jsapi/simplelinesymbol-amd.html
+- UniqueValueRenderer: https://developers.arcgis.com/javascript/jssamples/renderer_unique_value.html

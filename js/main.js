@@ -167,8 +167,9 @@ require([
       minScale: 3000,
     });
 
-
-    //Create Rail Line Feature Layer
+    // --------------------------------------------------
+    //Create Rail Line Feature Layer----------------------------
+    // --------------------------------------------------
     var lineUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer/0";
 
     var railLine = new FeatureLayer(lineUrl, {
@@ -181,131 +182,39 @@ require([
     var aadtUrl = "https://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/AADT_2013_StateHighways/FeatureServer/0";
 
     var aadtLineBase = new FeatureLayer(aadtUrl, {
-      // id: "aadt-line",
       mode: FeatureLayer.MODE_AUTO,
-      // outFields: ["*"],
-      // infoTemplate: aadtTemplate,
-      // minScale: 50000,
-      minScale: 650000,
+      minScale: 50000,
     });
 
-
-
     var aadtLine = new FeatureLayer(aadtUrl, {
-      // id: "aadt-line",
       mode: FeatureLayer.MODE_AUTO,
       outFields: ["*"],
       infoTemplate: aadtTemplate,
-      // minScale: 50000,
-      minScale: 650000,
+      minScale: 50000,
     });
-
-
 
     var aadtSymbolBase = new CartographicLineSymbol();
     aadtSymbolBase.style = CartographicLineSymbol.STYLE_SOLID;
     aadtSymbolBase.setCap("ROUND");
     aadtSymbolBase.setJoin("ROUND");
-    aadtSymbolBase.setWidth(.75);
+    aadtSymbolBase.setWidth(.5);
     aadtSymbolBase.setColor("#000000");
 
     //Create a unique value renderer and its unique value info
     var rendererBase = new UniqueValueRenderer(aadtSymbolBase);
 
-    //This function will be used to create symbols for each unique value
-    // function createSymbolBase () {
-    //   return new CartographicLineSymbol(CartographicLineSymbol.STYLE_SOLID, new Color([26, 26, 26, 1]), .75, CartographicLineSymbol.CAP_ROUND, CartographicLineSymbol.JOIN_ROUND);
-    // }
-    //
-    // rendererBase.addValue({
-    //   value: "1",
-    //   symbol: createSymbolBase(),
-    //   label: "Class 1 Town Highway",
-    //   description: "Class 1 Town Highway"
-    // });
-    // rendererBase.addValue({
-    //   value: "30",
-    //   // value: ["30", "31", "33"],
-    //   symbol: createSymbolBase(),
-    //   label: "State Highway",
-    //   description: "State Highway"
-    // });
-    // rendererBase.addValue({
-    //   value: "40",
-    //   // value: ["40", "41", "43"],
-    //   symbol: createSymbolBase(),
-    //   label: "US Highway",
-    //   description: "US Highway"
-    // });
-    // rendererBase.addValue({
-    //   value: "51",
-    //   // value: ["51", "53"],
-    //   symbol: createSymbolBase(),
-    //   label: "Interstate Highway",
-    //   description: "Interstate Highway"
-    // });
-
-    /**********************************************
-    * Define a size visual variable to vary the width
-    * of each highway based on its annual average daily
-    * traffic count.
-    *********************************************/
-    // rendererBase.setVisualVariables([{
-    //     type: "sizeInfo",
-    //     field: "aadt",
-    //     valueUnit: "unknown",
-    //     minSize: 2,
-    //     maxSize: 8.25,
-    //     minDataValue: 10,
-    //     maxDataValue: 56000
-    // }]);
-
     //Set the renderer on the layer and add the layer to the map
     aadtLineBase.setRenderer(rendererBase);
 
 
-
-    var symbol = new SimpleLineSymbol();
-    symbol.style = SimpleLineSymbol.STYLE_SOLID;
-    symbol.setColor("#48EA00");
+    var aadtSymbol = new CartographicLineSymbol();
+    aadtSymbol.style = SimpleLineSymbol.STYLE_SOLID;
+    aadtSymbol.setCap("ROUND");
+    aadtSymbol.setJoin("ROUND");
+    aadtSymbol.setColor("#48EA00");
 
     //Create a unique value renderer and its unique value info
-    // var renderer = new UniqueValueRenderer(null, "AOTCLASS");
-    var renderer = new UniqueValueRenderer(symbol);
-
-
-    //This function will be used to create symbols for each unique value
-    // function createSymbol (color) {
-    //   return new CartographicLineSymbol(CartographicLineSymbol.STYLE_DASH, new Color(color), 2, CartographicLineSymbol.CAP_ROUND, CartographicLineSymbol.JOIN_ROUND);
-    // }
-
-    // renderer.addValue({
-    //   value: "1",
-    //   symbol: createSymbol("#48EA00"),
-    //   label: "Class 1 Town Highway",
-    //   description: "Class 1 Town Highway"
-    // });
-    // renderer.addValue({
-    //   value: "30",
-    //   // value: ["30", "31", "33"],
-    //   symbol: createSymbol("#48EA00"),
-    //   label: "State Highway",
-    //   description: "State Highway"
-    // });
-    // renderer.addValue({
-    //   value: "40",
-    //   // value: ["40", "41", "43"],
-    //   symbol: createSymbol("#48EA00"),
-    //   label: "US Highway",
-    //   description: "US Highway"
-    // });
-    // renderer.addValue({
-    //   value: "51",
-    //   // value: ["51", "53"],
-    //   symbol: createSymbol("#48EA00"),
-    //   label: "Interstate Highway",
-    //   description: "Interstate Highway"
-    // });
+    var renderer = new UniqueValueRenderer(aadtSymbol);
 
     /**********************************************
     * Define a size visual variable to vary the width
@@ -316,14 +225,16 @@ require([
         type: "sizeInfo",
         field: "aadt",
         valueUnit: "unknown",
-        minSize: 2,
-        maxSize: 8.25,
+        minSize: 2.5,
+        maxSize: 10,
         minDataValue: 10,
         maxDataValue: 56000
     }]);
 
     //Set the renderer on the layer and add the layer to the map
     aadtLine.setRenderer(renderer);
+    // --------------------------------------------------
+    // --------------------------------------------------
 
 
 
