@@ -92,8 +92,8 @@
   height: 1px;
   background-color: #ddd;
   text-align: center;
-  margin-bottom: 25px;
-  margin-top: 25px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .divider-text {
@@ -103,6 +103,10 @@
   padding: 5px;
 }
 
-.gotit {
-  padding-top: 50px;
+#xingImg {
+  max-height: 50px;
 }
+
+/*.gotit {
+  padding-top: 50px;
+}*/
