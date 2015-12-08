@@ -10,11 +10,13 @@ require([
   "esri/dijit/BasemapToggle",
   "esri/dijit/LayerList",
   "esri/renderers/UniqueValueRenderer",
-  "esri/symbols/SimpleLineSymbol",
+  // "esri/symbols/SimpleLineSymbol",
   "esri/symbols/CartographicLineSymbol",
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
+  "dijit/layout/BorderContainer",
+  "dijit/layout/ContentPane",
   // "dojox/charting/Chart", "dojox/charting/themes/Dollar",
   "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
@@ -35,7 +37,7 @@ require([
     BasemapToggle,
     LayerList,
     UniqueValueRenderer,
-    SimpleLineSymbol,
+    // SimpleLineSymbol,
     CartographicLineSymbol,
     SimpleFillSymbol, Color,
     domClass, domConstruct, query, on,
@@ -166,15 +168,15 @@ require([
 
     var signPoints = new FeatureLayer(signUrl, {
       id: "sign-points",
+      displayField: "DOT_Num",
       outFields: ["*"],
       infoTemplate: signTemplate,
       // minScale: 850000,
       minScale: 3000,
     });
 
-    // --------------------------------------------------
+
     //Create Rail Line Feature Layer----------------------------
-    // --------------------------------------------------
     var lineUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer/0";
 
     var railLine = new FeatureLayer(lineUrl, {
@@ -182,14 +184,10 @@ require([
       outFields: ["*"],
     });
 
-
-    //Create AADT Line Feature Layer
+    // --------------------------------------------------
+    //Create AADT Line Feature Layer--------------------------------
+    // --------------------------------------------------
     var aadtUrl = "https://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/AADT_2013_StateHighways/FeatureServer/0";
-
-    // var aadtLineBase = new FeatureLayer(aadtUrl, {
-    //   mode: FeatureLayer.MODE_AUTO,
-    //   minScale: 50000,
-    // });
 
     var aadtLine = new FeatureLayer(aadtUrl, {
       mode: FeatureLayer.MODE_AUTO,
@@ -198,22 +196,8 @@ require([
       minScale: 500000,
     });
 
-    // var aadtSymbolBase = new CartographicLineSymbol();
-    // aadtSymbolBase.style = CartographicLineSymbol.STYLE_SOLID;
-    // aadtSymbolBase.setCap("ROUND");
-    // aadtSymbolBase.setJoin("ROUND");
-    // aadtSymbolBase.setWidth(.5);
-    // aadtSymbolBase.setColor("#000000");
-    //
-    // //Create a unique value renderer and its unique value info
-    // var rendererBase = new UniqueValueRenderer(aadtSymbolBase);
-    //
-    // //Set the renderer on the layer and add the layer to the map
-    // aadtLineBase.setRenderer(rendererBase);
-
-
     var aadtSymbol = new CartographicLineSymbol(    );
-    aadtSymbol.style = SimpleLineSymbol.STYLE_DASH;
+    aadtSymbol.style = CartographicLineSymbol.STYLE_DASH;
     aadtSymbol.setCap("ROUND");
     aadtSymbol.setJoin("ROUND");
     aadtSymbol.setColor([230, 0, 169, 1]);
@@ -291,21 +275,22 @@ require([
     var toggleLayers = [
       {
         layer: signPoints,
-        content: "<img src='img/favicon.png'>",
+        // button: "<img src='img/favicon.png' alt='site image'> Signs",
+        content: "<img src='img/favicon.png' alt='site image'> Signs",
         // visibility: false,
       },
       {
         layer: aadtLine,
+        content: "<img src='img/aadtSymbol.png' alt='site image' width=80%> AADT Traffic Data",
+        // showLegend: true,
       },
-      // {
-      //   layer: aadtLineBase,
-      // }
     ];
 
     var myLayerList = new LayerList({
       map: map,
-      layers: toggleLayers
-      // layers: arcgisUtils.getLayerList(map)
+      layers: toggleLayers,
+      theme: "vtransTheme",
+      // theme: "tab",
     }, "layerList");
     myLayerList.startup();
 //-------------------------------------------------------------------------
@@ -437,6 +422,7 @@ require([
     searchSources.push({
       featureLayer: crossingPoints,
       searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed"],
+      displayField: "DOT_Num",
       suggestionTemplate: "${DOT_Num}: The ${LineName} crosses ${Feature_Crossed} in ${Town}. (${XingCond})",
       exactMatch: false,
       outFields: ["*"],
