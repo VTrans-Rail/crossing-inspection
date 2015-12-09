@@ -51,11 +51,8 @@ require([
 
 
 // --------------------Popup Shell Setup-----------------------------------
-    // var fill = new SimpleFillSymbol("solid", null, new Color("#A4CE67"));
     var popup = new Popup({
-      // fillSymbol: fill,
       titleInBody: false,
-      // visibleWhenEmpty: false,
     }, domConstruct.create("div"));
     popup.setContent("");
 
@@ -138,14 +135,6 @@ require([
 // -----------------Define PopupTemplates------------------------------
     //Crossing Template--------------
     var crossingPopupFeatures = "<div style='overflow-y:auto'><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
-
-    var link = domConstruct.create("a", {
-      "class": "action",
-      "id": "fullReport",
-      "innerHTML": "Full Report Link",
-      "href": "www.google.com",
-      "target": "_blank"
-    }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
 
     var crossingTemplate = new PopupTemplate({
       title: "Crossing {DOT_Num}",
@@ -318,6 +307,20 @@ require([
 
 
 
+//------------------------------------------------------------------------
+//----------Create Full Report link with a filler href---------------------
+//------------------------------------------------------------------------
+  var link = domConstruct.create("a", {
+    "class": "action",
+    "id": "fullReport",
+    "innerHTML": "Full Report",
+    "href": "www.google.com",
+    "target": "_blank"
+  }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
+//------------------------------------------------------------------------
+
+
+
 //---------------------------------------------------------------------------
 //---------------------Display Photos in Popup--------------------------------
 //---------------------------------------------------------------------------
@@ -378,6 +381,10 @@ require([
       var  objectId = evt.graphic.attributes[signPoints.objectIdField];
       selectQuery.objectIds = [objectId];
       signPoints.selectFeatures(selectQuery);
+
+      //Updates link to report page
+      var dotnum = evt.graphic.attributes.DOT_Num;
+      link.href = "report.html?dotnum=" + dotnum;
     });
 
     on(signPoints, "error", function (err){
