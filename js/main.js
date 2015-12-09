@@ -51,11 +51,10 @@ require([
 
 
 // --------------------Popup Shell Setup-----------------------------------
-    var fill = new SimpleFillSymbol("solid", null, new Color("#A4CE67"));
     var popup = new Popup({
-      fillSymbol: fill,
-      titleInBody: false
+      titleInBody: false,
     }, domConstruct.create("div"));
+    popup.setContent("");
 
     //Add Popup theme
     domClass.add(popup.domNode, "light");
@@ -137,17 +136,11 @@ require([
     //Crossing Template--------------
     var crossingPopupFeatures = "<div style='overflow-y:auto'><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
 
-    var link = domConstruct.create("a", {
-      "class": "action",
-      "id": "fullReport",
-      "innerHTML": "Full Report Link",
-      "href": "www.google.com",
-      "target": "_blank"
-    }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
-
     var crossingTemplate = new PopupTemplate({
       title: "Crossing {DOT_Num}",
     });
+    //Provides warning if popup doesn't load properly and clears out editSummary
+    crossingTemplate.setContent("<b>Oops!</b></br>The summary information and pictures for this crossing did not load properly. Please refresh popup window by closing it and clicking on the crossing again.");
 
 
     //Sign Template------------------
@@ -156,6 +149,8 @@ require([
     var signTemplate = new PopupTemplate({
       title: "Crossing Sign",
     });
+    //Provides warning if popup doesn't load properly and clears out editSummary
+    signTemplate.setContent("<b>Oops!</b></br>The summary information and pictures for this sign did not load properly. Please refresh popup window by closing it and clicking on the sign again.");
 
 
     //AADT Template--------------------
@@ -178,7 +173,7 @@ require([
     var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
-      id: "crossingPoints",
+      id: "crossing-points",
       outFields: ["*"],
       infoTemplate: crossingTemplate,
       minScale: 650000,
@@ -278,7 +273,6 @@ require([
 
     //Add Layers to Map
     map.addLayer(aadtLine);
-    // map.addLayer(aadtLineBase);
     map.addLayer(railLine);
     map.addLayer(milePostsTen);
     map.addLayer(milePostsFive);
@@ -310,6 +304,23 @@ require([
     }, "layerList");
     myLayerList.startup();
 //-------------------------------------------------------------------------
+
+
+
+//------------------------------------------------------------------------
+//----------Create Full Report link with a filler href---------------------
+//------------------------------------------------------------------------
+  var link = domConstruct.create("a", {
+    "class": "btn btn-sm btn-default btn-report",
+    // "class": "action",
+    // "id": "clicker",
+    "role": "button",
+    "id": "fullReport",
+    "innerHTML": "Full Report",
+    "href": "www.google.com",
+    "target": "_blank"
+  }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
+//------------------------------------------------------------------------
 
 
 
@@ -357,7 +368,7 @@ require([
         else {
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
-            imageString += "<tr><td></br></td></tr><tr><td><a href='" + imgSrc + "' target='_blank'>Image " + (i+1) + ": Click to View Full Image</a></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+            imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
           //Add closing div tag to to match the opening div tag in crossingPopupFeatures that
           formatString += imageString + "</div>";
@@ -373,6 +384,10 @@ require([
       var  objectId = evt.graphic.attributes[signPoints.objectIdField];
       selectQuery.objectIds = [objectId];
       signPoints.selectFeatures(selectQuery);
+
+      //Updates link to report page
+      var dotnum = evt.graphic.attributes.DOT_Num;
+      link.href = "report.html?dotnum=" + dotnum;
     });
 
     on(signPoints, "error", function (err){
@@ -398,7 +413,7 @@ require([
         else {
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
-            imageString += "<tr><td></br></td></tr><tr><td><a href='" + imgSrc + "' target='_blank'>Image " + (i+1) + ": Click to View Full Image</a></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+            imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
           formatString += imageString + "</div>";
         }

@@ -41,6 +41,26 @@
   z-index: 1;
 }
 
+/*Popup Links*/
+.esriPopup a {
+  text-decoration: none;
+}
+
+.img-link {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 2px;
+  text-align: center;
+}
+
+.btn-report {
+  width: 50%;
+  position: absolute;
+  top: 2px;
+  left: 25%;
+}
+
+
 /*.esriLayerList {
   background-color: #FFFFED;
 }*/
