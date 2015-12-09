@@ -1,67 +1,42 @@
 //get querystring value
+"use strict";
+
 function getParameterByName(name) {
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
   var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-    results = regex.exec(location.search);
+      results = regex.exec(location.search);
   return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-
-require([
-  "dojo/dom", "dojo/on",
-  "esri/tasks/query", "esri/tasks/QueryTask",
-  "esri/layers/FeatureLayer",
-  "dojo/domReady!"
-], function (dom, on, Query, QueryTask, FeatureLayer) {
+require(["dojo/dom", "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "esri/layers/FeatureLayer", "dojo/domReady!"], function (dom, on, Query, QueryTask, FeatureLayer) {
 
   var queryTask = new QueryTask("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1");
 
   var query = new Query();
 
   query.returnGeometry = false;
-  query.outFields = [
-    'OBJECTID','DOT_Num','Feature_Crossed','MP',
-    'LineName','Division','Subdivision',
-    'Branch','Town','County',
-    'FRA_LandUse','WDCode','SignSignal',
-    'Channelization','StopLine','RRXingPavMark',
-    'DynamicEnv','GateArmsRoad','GateArmsPed',
-    'GateConfig1','GateConfig2','Cant_Struc_Over',
-    'Cant_Struc_Side','Cant_FL_Type','FL_MastCount',
-    'Mast_FL_Type','BackSideFL','FlasherCount',
-    'FlasherSize','WaysideHorn','HTS_Control',
-    'HTS_for_Nearby_Intersection','BellCount','HTPS',
-    'HTPS_StorageDist','HTPS_StopLineDist','TrafficLnType',
-    'TrafficLnCount','Paved','XingIllum',
-    'SurfaceType','SurfaceType2','XingCond',
-    'FlangeMaterial','XingWidth','XingLength',
-    'Angle','SnoopCompliant','Comments'
-  ];
+  query.outFields = ['OBJECTID', 'DOT_Num', 'Feature_Crossed', 'MP', 'LineName', 'Division', 'Subdivision', 'Branch', 'Town', 'County', 'FRA_LandUse', 'WDCode', 'SignSignal', 'Channelization', 'StopLine', 'RRXingPavMark', 'DynamicEnv', 'GateArmsRoad', 'GateArmsPed', 'GateConfig1', 'GateConfig2', 'Cant_Struc_Over', 'Cant_Struc_Side', 'Cant_FL_Type', 'FL_MastCount', 'Mast_FL_Type', 'BackSideFL', 'FlasherCount', 'FlasherSize', 'WaysideHorn', 'HTS_Control', 'HTS_for_Nearby_Intersection', 'BellCount', 'HTPS', 'HTPS_StorageDist', 'HTPS_StopLineDist', 'TrafficLnType', 'TrafficLnCount', 'Paved', 'XingIllum', 'SurfaceType', 'SurfaceType2', 'XingCond', 'FlangeMaterial', 'XingWidth', 'XingLength', 'Angle', 'SnoopCompliant', 'Comments'];
 
   var dotnumqs = getParameterByName("dotnum");
 
-
-//-----------------------------------------------------
-//------------Working Section------------------------------
-//-----------------------------------------------------
+  //-----------------------------------------------------
+  //------------Working Section------------------------------
+  //-----------------------------------------------------
 
   var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
 
   var crossingPoints = new FeatureLayer(crossingUrl, {
-    id: "crossingPoints",
+    id: "crossingPoints"
   });
 
+  if (dotnumqs) {
+    query.where = "DOT_Num like '%" + dotnumqs + "%'";
+    queryTask.execute(query, getPhotos);
+  }
 
-  if (dotnumqs)
-    {
-      query.where = "DOT_Num like '%" + dotnumqs + "%'";
-      queryTask.execute(query,getPhotos);
-    }
+  var imageString = "";
 
-    var imageString = "";
-
-
-  function getPhotos (results) {
+  function getPhotos(results) {
     var resultCount = results.features.length;
     for (var i = 0; i < resultCount; i++) {
       var featureAttributes = results.features[i].attributes;
@@ -70,15 +45,14 @@ require([
 
       var imgClass = "class='img-responsive'";
       var imageStyle = "alt='site image' width='100%'";
-      var deferred = new dojo.Deferred;
+      var deferred = new dojo.Deferred();
 
-      crossingPoints.queryAttachmentInfos(objectId).then(function(response){
+      crossingPoints.queryAttachmentInfos(objectId).then(function (response) {
         var imgSrc;
         if (response.length === 0) {
           deferred.resolve("no attachments");
-        }
-        else {
-          for ( i = 0; i < response.length; i++) {
+        } else {
+          for (i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
             imageString += "<div class='col-sm-6 col-md-4'><img src='" + imgSrc + "' " + imgClass + " " + imageStyle + "></div>";
           }
@@ -91,22 +65,17 @@ require([
     }
   }
 
-
-//-----------------------------------------------------
-//-----------------------------------------------------
-
-
+  //-----------------------------------------------------
+  //-----------------------------------------------------
 
   //Ensures that photos load by preventing the rest of the report from being generated until the attachment query from being complete
   on(crossingPoints, "query-attachment-infos-complete", beginReport);
-  function beginReport () {
-    if (dotnumqs)
-      {
-        query.where = "DOT_Num like '%" + dotnumqs + "%'";
-        queryTask.execute(query,showResults);
-      }
+  function beginReport() {
+    if (dotnumqs) {
+      query.where = "DOT_Num like '%" + dotnumqs + "%'";
+      queryTask.execute(query, showResults);
+    }
   }
-
 
   // on(dom.byId("execute"), "click", execute);
   //
@@ -116,7 +85,7 @@ require([
   //   queryTask.execute(query, showResults);
   // }
 
-  function showResults (results) {
+  function showResults(results) {
     var resultItems = [];
     var resultCount = results.features.length;
 
@@ -127,700 +96,202 @@ require([
     for (var i = 0; i < resultCount; i++) {
       var featureAttributes = results.features[i].attributes;
 
-      var html=`
-<div class='row'>
-  <div class='col-xs-12'>
-    <div class='page-header'>
-      <h1>Crossing Report</h1>
-    </div>
-  </div>
-</div>
-<div class='row'>
-	<div class='col-sm-6'>
-		<div class='panel panel-primary'>
-		  <div class='panel-heading'>
-		    <h3 class='panel-title'>Crossing Number</h3>
-		  </div>
-		  <div class='panel-body text-center'>
-		    <h3>
-      `;
+      var html = "\n<div class='row'>\n  <div class='col-xs-12'>\n    <div class='page-header'>\n      <h1>Crossing Report</h1>\n    </div>\n  </div>\n</div>\n<div class='row'>\n\t<div class='col-sm-6'>\n\t\t<div class='panel panel-primary'>\n\t\t  <div class='panel-heading'>\n\t\t    <h3 class='panel-title'>Crossing Number</h3>\n\t\t  </div>\n\t\t  <div class='panel-body text-center'>\n\t\t    <h3>\n      ";
 
-      html += featureAttributes.DOT_Num; + "</h3>"
+      html += featureAttributes.DOT_Num;+"</h3>";
 
-      html += `
-    </div>
-  </div>
-</div>
-<div class='col-sm-6'>
-  <div class='panel panel-danger'>
-    <div class='panel-heading'>
-      <h3 class='panel-title'>Surface Condition</h3>
-    </div>
-    <div class='panel-body text-center'>
-      <h3>
-      `;
+      html += "\n    </div>\n  </div>\n</div>\n<div class='col-sm-6'>\n  <div class='panel panel-danger'>\n    <div class='panel-heading'>\n      <h3 class='panel-title'>Surface Condition</h3>\n    </div>\n    <div class='panel-body text-center'>\n      <h3>\n      ";
 
-      html += featureAttributes.XingCond; + "</h3>"
+      html += featureAttributes.XingCond;+"</h3>";
 
-      html += `
-      </div>
-    </div>
-  </div>
-</div>
-<div class='row img-row'>
-  `;
+      html += "\n      </div>\n    </div>\n  </div>\n</div>\n<div class='row img-row'>\n  ";
 
-  html += imageString;
+      html += imageString;
 
-  html += `
-</div>
-<div class='row'>
-  <div class='col-sm-12'>
-    <div class='page-header'>
-      <h1><small>Location Information</small></h1>
-    </div>
-  </div>
-</div>
-<div class='row'>
-  <div class='col-sm-4'>
-    <div class='panel panel-default'>
-      <div class='panel-heading'>Line Name</div>
-        <div class='panel-body'>
-          <strong>
-      `;
+      html += "\n</div>\n<div class='row'>\n  <div class='col-sm-12'>\n    <div class='page-header'>\n      <h1><small>Location Information</small></h1>\n    </div>\n  </div>\n</div>\n<div class='row'>\n  <div class='col-sm-4'>\n    <div class='panel panel-default'>\n      <div class='panel-heading'>Line Name</div>\n        <div class='panel-body'>\n          <strong>\n      ";
 
       html += featureAttributes.LineName + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-4'>
-  <div class='panel panel-default'>
-    <div class='panel-heading'>Division</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-4'>\n  <div class='panel panel-default'>\n    <div class='panel-heading'>Division</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.Division + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-4'>
-  <div class='panel panel-default'>
-    <div class='panel-heading'>Subdivision</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-4'>\n  <div class='panel panel-default'>\n    <div class='panel-heading'>Subdivision</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.Subdivision + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-4'>
-  <div class='panel panel-default'>
-    <div class='panel-heading'>Branch</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-4'>\n  <div class='panel panel-default'>\n    <div class='panel-heading'>Branch</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.Branch + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-4'>
-  <div class='panel panel-default'>
-    <div class='panel-heading'>MP</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-4'>\n  <div class='panel panel-default'>\n    <div class='panel-heading'>MP</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.MP + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-4'>
-  <div class='panel panel-default'>
-    <div class='panel-heading'>Road Name</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-4'>\n  <div class='panel panel-default'>\n    <div class='panel-heading'>Road Name</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.Feature_Crossed + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-4'>
-  <div class='panel panel-default'>
-    <div class='panel-heading'>Town</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-4'>\n  <div class='panel panel-default'>\n    <div class='panel-heading'>Town</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.Town + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-4'>
-  <div class='panel panel-default'>
-    <div class='panel-heading'>County</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-4'>\n  <div class='panel panel-default'>\n    <div class='panel-heading'>County</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
-      html += featureAttributes.County  + "</strong>";
+      html += featureAttributes.County + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-4'>
-  <div class='panel panel-default'>
-    <div class='panel-heading'>Land Use</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-4'>\n  <div class='panel panel-default'>\n    <div class='panel-heading'>Land Use</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
-      html += featureAttributes.FRA_LandUse  + "</strong>";
+      html += featureAttributes.FRA_LandUse + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-xs-12'>
-  <div class='page-header'>
-    <h1><small>Crossing Information</small></h1>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-3'>
-  <div class='panel panel-info'>
-    <div class='panel-heading'>Paved</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-xs-12'>\n  <div class='page-header'>\n    <h1><small>Crossing Information</small></h1>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-3'>\n  <div class='panel panel-info'>\n    <div class='panel-heading'>Paved</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
-      html += featureAttributes.Paved  + "</strong>";
+      html += featureAttributes.Paved + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-info'>
-    <div class='panel-heading'>Surface Type</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-info'>\n    <div class='panel-heading'>Surface Type</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
-      html += featureAttributes.SurfaceType  + "</strong>";
+      html += featureAttributes.SurfaceType + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-info'>
-    <div class='panel-heading'>Surface Type 2</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-info'>\n    <div class='panel-heading'>Surface Type 2</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
-      html += featureAttributes.SurfaceType2  + "</strong>";
+      html += featureAttributes.SurfaceType2 + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-info'>
-    <div class='panel-heading'>Flange Material</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-info'>\n    <div class='panel-heading'>Flange Material</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.FlangeMaterial + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-3'>
-  <div class='panel panel-info'>
-    <div class='panel-heading'>Crossing Width</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-3'>\n  <div class='panel panel-info'>\n    <div class='panel-heading'>Crossing Width</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.XingWidth + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-info'>
-    <div class='panel-heading'>Crossing Length</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-info'>\n    <div class='panel-heading'>Crossing Length</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.XingLength + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-info'>
-    <div class='panel-heading'>Crossing Angle</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-info'>\n    <div class='panel-heading'>Crossing Angle</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.Angle + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-info'>
-    <div class='panel-heading'>Snooper Compliant</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-info'>\n    <div class='panel-heading'>Snooper Compliant</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.SnoopCompliant + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-12'>
-  <div class='page-header'>
-    <h1><small>Safety Information</small></h1>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Warning Device</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-12'>\n  <div class='page-header'>\n    <h1><small>Safety Information</small></h1>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Warning Device</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.WDCode + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Signs or Signals?</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Signs or Signals?</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.SignSignal + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Channelization</div>
-      <div class='panel-body'>
-        <strong>
-      `;
-
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Channelization</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.Channelization + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Stop Line</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Stop Line</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.StopLine + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Pavement Markings</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Pavement Markings</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.RRXingPavMark + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Dynamic Envelope</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Dynamic Envelope</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.DynamicEnv + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Gate Arms <small>(Vehicle)</small> </div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Gate Arms <small>(Vehicle)</small> </div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.GateArmsRoad + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Gate Arms <small>(Ped)</small> </div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Gate Arms <small>(Ped)</small> </div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.GateArmsPed + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Gate Configuration</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Gate Configuration</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.GateConfig1 + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Special Gates</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Special Gates</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.GateConfig2 + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Cantilevered (Road)</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Cantilevered (Road)</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.Cant_Struc_Over + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Cantilevered (Side)</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Cantilevered (Side)</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.Cant_Struc_Side + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Cantilevered Bulb</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Cantilevered Bulb</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.Cant_FL_Type + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Mast Flashers</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Mast Flashers</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.FL_MastCount + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Mast Flasher Type</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Mast Flasher Type</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
-      html += featureAttributes.Mast_FL_Type
+      html += featureAttributes.Mast_FL_Type;
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Back Side Flashers</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Back Side Flashers</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.BackSideFL + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Flasher Total Count</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Flasher Total Count</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.FlasherCount + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Flasher Size</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Flasher Size</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.FlasherSize + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Wayside Horn</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Wayside Horn</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.WaysideHorn + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Traffic Signal Control</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Traffic Signal Control</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.HTS_Control + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Traffic Signal Nearby</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Traffic Signal Nearby</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.HTS_for_Nearby_Intersection + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Bell Count</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Bell Count</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.BellCount + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Traffic Pre-Signals</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Traffic Pre-Signals</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.HTPS + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Storage Distance</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Storage Distance</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.HTPS_StorageDist + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Stop-line Distance</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Stop-line Distance</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.HTPS_StopLineDist + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Traffic Lane Type</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Traffic Lane Type</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.TrafficLnType + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Traffic Lane Count</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Traffic Lane Count</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.TrafficLnCount + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-<div class='row'>
-<div class='col-sm-3'>
-  <div class='panel panel-warning'>
-    <div class='panel-heading'>Crossing Illuminated</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n<div class='row'>\n<div class='col-sm-3'>\n  <div class='panel panel-warning'>\n    <div class='panel-heading'>Crossing Illuminated</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.XingIllum + "</strong>";
 
-      html += `
-      </div>
-  </div>
-</div>
-<div class='col-sm-9'>
-  <div class='panel panel-success'>
-    <div class='panel-heading'>Comments</div>
-      <div class='panel-body'>
-        <strong>
-      `;
+      html += "\n      </div>\n  </div>\n</div>\n<div class='col-sm-9'>\n  <div class='panel panel-success'>\n    <div class='panel-heading'>Comments</div>\n      <div class='panel-body'>\n        <strong>\n      ";
 
       html += featureAttributes.Comments + "</strong>";
-      html += `
-      </div>
-  </div>
-</div>
-</div>
-      `;
-
+      html += "\n      </div>\n  </div>\n</div>\n</div>\n      ";
     }
     dom.byId("info").innerHTML = html;
   }
