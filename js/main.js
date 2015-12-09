@@ -173,7 +173,7 @@ require([
     var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
-      id: "crossingPoints",
+      id: "crossing-points",
       outFields: ["*"],
       infoTemplate: crossingTemplate,
       minScale: 650000,
@@ -311,7 +311,10 @@ require([
 //----------Create Full Report link with a filler href---------------------
 //------------------------------------------------------------------------
   var link = domConstruct.create("a", {
-    "class": "action",
+    "class": "btn btn-sm btn-default btn-report",
+    // "class": "action",
+    // "id": "clicker",
+    "role": "button",
     "id": "fullReport",
     "innerHTML": "Full Report",
     "href": "www.google.com",
@@ -365,7 +368,7 @@ require([
         else {
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
-            imageString += "<tr><td></br></td></tr><tr><td><a href='" + imgSrc + "' target='_blank'>Image " + (i+1) + ": Click to View Full Image</a></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+            imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
           //Add closing div tag to to match the opening div tag in crossingPopupFeatures that
           formatString += imageString + "</div>";
@@ -410,7 +413,7 @@ require([
         else {
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
-            imageString += "<tr><td></br></td></tr><tr><td><a href='" + imgSrc + "' target='_blank'>Image " + (i+1) + ": Click to View Full Image</a></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
+            imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
           }
           formatString += imageString + "</div>";
         }
