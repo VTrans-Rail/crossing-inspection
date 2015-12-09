@@ -51,11 +51,13 @@ require([
 
 
 // --------------------Popup Shell Setup-----------------------------------
-    var fill = new SimpleFillSymbol("solid", null, new Color("#A4CE67"));
+    // var fill = new SimpleFillSymbol("solid", null, new Color("#A4CE67"));
     var popup = new Popup({
-      fillSymbol: fill,
-      titleInBody: false
+      // fillSymbol: fill,
+      titleInBody: false,
+      // visibleWhenEmpty: false,
     }, domConstruct.create("div"));
+    popup.setContent("");
 
     //Add Popup theme
     domClass.add(popup.domNode, "light");
@@ -148,6 +150,8 @@ require([
     var crossingTemplate = new PopupTemplate({
       title: "Crossing {DOT_Num}",
     });
+    //Provides warning if popup doesn't load properly and clears out editSummary
+    crossingTemplate.setContent("<b>Oops!</b></br>The summary information and pictures for this crossing did not load properly. Please refresh popup window by closing it and clicking on the crossing again.");
 
 
     //Sign Template------------------
@@ -156,6 +160,8 @@ require([
     var signTemplate = new PopupTemplate({
       title: "Crossing Sign",
     });
+    //Provides warning if popup doesn't load properly and clears out editSummary
+    signTemplate.setContent("<b>Oops!</b></br>The summary information and pictures for this sign did not load properly. Please refresh popup window by closing it and clicking on the sign again.");
 
 
     //AADT Template--------------------
@@ -278,7 +284,6 @@ require([
 
     //Add Layers to Map
     map.addLayer(aadtLine);
-    // map.addLayer(aadtLineBase);
     map.addLayer(railLine);
     map.addLayer(milePostsTen);
     map.addLayer(milePostsFive);
