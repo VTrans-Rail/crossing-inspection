@@ -294,7 +294,7 @@ require([
       },
       {
         layer: aadtLine,
-        content: "<b>AADT</b> <img src='img/aadtSymbol.png' alt='site image' width=60px style='border-radius:4px; float:right; right:5px'>",
+        content: "<b>AADT</b> <img src='img/aadt.png' alt='site image' width=60px style='border-radius:4px; float:right; right:5px'>",
       },
     ];
 
