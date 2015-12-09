@@ -1,14 +1,141 @@
 #map {
   width: 100%;
   height: 100%;
-  padding-top: 85px;
+  padding-top: 65px;
   position: absolute;
 }
 
-#search { padding: 20px; }
+
+#BasemapToggle {
+  position: absolute;
+  top: 105px;
+  right: 20px;
+  z-index: 1;
+}
+
+/*change BasemapToggle title width*/
+.BasemapToggle .basemapTitle {
+  width: 100%;
+}
+
+#locateButton {
+  position: absolute;
+  float: right;
+  right: 20px;
+  bottom: 105px;
+  z-index: 1;
+}
+
+#layerList {
+  position: absolute;
+  /*background-color: transparent;*/
+  background-color: #4CAF50;
+  border: 1px solid #57585A;
+  border-radius: 5px;
+  /*opacity: 0.6;*/
+  display: block;
+  width: 125px;
+  bottom: 50px;
+  right: 20px;
+  float: right;
+  z-index: 1;
+}
+
+/*Popup Links*/
+.esriPopup a {
+  text-decoration: none;
+}
+
+.img-link {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 2px;
+  text-align: center;
+}
+
+.btn-report {
+  width: 50%;
+  position: absolute;
+  top: 2px;
+  left: 25%;
+}
+
+
+/*.esriLayerList {
+  background-color: #FFFFED;
+}*/
+
+/*.esriLayerList .esriContainer {
+  background-color: #FFFFED;
+}*/
+
+.vtransTheme .esriList {
+  /*background-color: #FFFFED;*/
+  padding-left: 0px;
+  margin-bottom: 0px;
+  list-style: none;
+}
+
+.vtransTheme .esriTitleContainer {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 1px;
+  width: 15%;
+}
+
+.vtransTheme .esriContent {
+  /*position: absolute;*/
+  padding-left: 15px;
+  padding-top: 4px;
+  padding-right: 2px;
+  padding-bottom: 4px;
+  font-size: 11px;
+}
+
+
+
+.vtransTheme .esriLabel {
+  display: none;
+}
+
+/*.esriLayerList .esriLayer {
+  background-color: #FFFFED;
+}*/
+
+/*.esriLayerList .esriTitleContainer {
+  background-color: #555354;
+}*/
+
+
+#search {
+  padding: 10px;
+}
+
+#clicker {
+  /*padding: 10px;*/
+  /*padding-left: 0;*/
+  /*display: block;*/
+}
+
+#helpDiv {
+  padding-top: 10px;
+  padding-left: 0px;
+}
+
+#helpIcon img {
+  max-width: 18px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
 
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
+
+.BasemapToggle .basemapImage {
+  width: 65px;
+  height: 50px;
+}
 
 /*search input style tweaks*/
 .arcgisSearch .searchGroup .searchInput {
@@ -16,10 +143,12 @@
     padding: 6px 0px 6px 12px;
     height: 30px;
     font-size: 1em;
+    border-left: 1px solid #57585A;
+    border-radius: 4px 0 0 4px;
 }
 /*set search input box width to full - width of side elements*/
 .arcgisSearch .searchInputGroup {
-    width: calc(100% - 52px);
+    width: calc(100% - 11px); /*modified to 11 when sources select was removed*/
 }
 
 .arcgisSearch .searchExpandContainer {
@@ -64,6 +193,12 @@
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
+  /*BasemapToggle Button Size*/
+  .BasemapToggle .basemapImage {
+    width: 75px;
+    height: 75px;
+  }
+
   .arcgisSearch .searchGroup .searchInput {
       height: 40px;
       font-size: 1.25em;
@@ -92,7 +227,17 @@
   }
 
   #map {
-    padding-top: 95px;
+    padding-top: 75px;
+  }
+
+  #helpIcon img {
+    max-width: 22px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+
+  #BasemapToggle {
+    top: 115px;
   }
 } /* end small devices */
 
@@ -127,35 +272,77 @@
   }
 
   #map {
-    padding-top: 105px;
+    padding-top: 85px;
   }
+
+  #helpIcon img {
+    max-width: 24px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+
+  #BasemapToggle {
+    top: 125px;
+  }
+
 } /* end medium devices */
 
 /* Large devices (large desktops, 1200px and up) ----not used currently
 @media (min-width: @screen-lg-min) { ... } */
 
-/*Selection popup Header*/
-.esriPopup.dark .titlePane {
-  height: 30px;
-  color: #292a2b;
+
+/*Popup Styling for Light Theme*/
+.esriPopup.light .titlePane {
+  height: 35px;
+  color: #FFFFED;
+  background-color: #555354;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+@media (min-width: 350px) {
+  .esriPopup.light .titlePane {
+    font-size: 14.5px;
+  }
+}
+
+.esriPopup.light .contentPane {
+  color: #555354;
+  background-color: #FFFFED;
+}
+
+.esriPopup.light .actionsPane {
+  height: 35px;
+  line-height: 35px;
+  background-color: #555354;
+}
+
+.esriPopup.light .actionsPane .action {
+  color: #FFFFED;
+  font-size: 16px;
   text-decoration: underline;
 }
 
+.esriPopup.light .actionsPane .action.zoomTo {
+  text-decoration: none;
+}
 
+.esriPopup.light .titleButton {
+  color: #FFFFED;
+}
 
-/*Playing Around with Styling*/
-/*------------------------------------------------------------------*/
-/*.arcgisSearch .resultsList {
-  background-color: pink;
-  font-weight: bold;
-  border: 2px solid #121310;*/
-/*}*/
+.esriPopup.light .titleButton.close::before {
+  color: #FFFFED;
+}
 
+#instructions {
+  z-index: 10000;
+	position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  text-align:center;
+  vertical-align:middle;
 
-
-/*.esriPopup .contentPane,
-.esriPopup .actionsPane,
-.esriPopup .pointer,
-.esriPopup .outerPointer {
-   background-color: #B3B3B3;
-}*/
+}
