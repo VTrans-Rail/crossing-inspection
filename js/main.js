@@ -9,6 +9,7 @@ require([
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
   "esri/dijit/BasemapToggle",
   "esri/dijit/LayerList",
+  "esri/dijit/LocateButton",
   "esri/renderers/UniqueValueRenderer",
   // "esri/symbols/SimpleLineSymbol",
   "esri/symbols/CartographicLineSymbol",
@@ -36,6 +37,7 @@ require([
     Popup, PopupTemplate,
     BasemapToggle,
     LayerList,
+    LocateButton,
     UniqueValueRenderer,
     // SimpleLineSymbol,
     CartographicLineSymbol,
@@ -57,11 +59,13 @@ require([
 
     //Add Popup theme
     domClass.add(popup.domNode, "light");
+//----------------------------------------------------------------------
 
 
 
+//-------------------------------------------------------------
 //--------------------Create Map-----------------------------------------
-
+//-------------------------------------------------------------
     // satellite imagery from ArcGIS Online, use levels 0 - 11
     var topoBasemap = new   ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer", {
       displayLevels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
@@ -89,7 +93,13 @@ require([
 
     //Resize Popup To Fit titlePane
     map.infoWindow.resize(300, 370)
+//-------------------------------------------------------------
 
+
+
+//-------------------------------------------------------------
+//---------------------Create BasemapToggle--------------------
+//-------------------------------------------------------------
     var toggle = new BasemapToggle({
       map: map,
       basemap: "satellite",
@@ -108,6 +118,18 @@ require([
         toggle.hide();
       }
     }
+//-------------------------------------------------------------
+
+
+
+//----------------------------------------------------------------
+//---------------------Create LocateButton-----------------------
+//---------------------------------------------------------------
+    var geoLocate = new LocateButton({
+      map: map
+    }, "locateButton");
+    geoLocate.startup();
+//------------------------------------------------------------------
 
 
 

@@ -18,6 +18,14 @@
   width: 100%;
 }
 
+#locateButton {
+  position: absolute;
+  float: right;
+  right: 20px;
+  bottom: 105px;
+  z-index: 1;
+}
+
 #layerList {
   position: absolute;
   /*background-color: transparent;*/
