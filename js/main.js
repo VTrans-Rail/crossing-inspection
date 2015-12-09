@@ -125,7 +125,8 @@ require([
 //---------------------Create LocateButton-----------------------
 //---------------------------------------------------------------
     var geoLocate = new LocateButton({
-      map: map
+      map: map,
+      scale: 5000,
     }, "locateButton");
     geoLocate.startup();
 //------------------------------------------------------------------
@@ -313,7 +314,6 @@ require([
   var link = domConstruct.create("a", {
     "class": "btn btn-sm btn-default btn-report",
     // "class": "action",
-    // "id": "clicker",
     "role": "button",
     "id": "fullReport",
     "innerHTML": "Full Report",
