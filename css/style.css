@@ -313,6 +313,7 @@
 
 .esriPopup.light .titleButton.close::before {
   color: #FFFFED;
+}
 
 #instructions {
   z-index: 10000;

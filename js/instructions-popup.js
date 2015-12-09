@@ -51,7 +51,7 @@ function clicker(){
             </div>
 
             <p>
-            <img src="img\crossing-good.png" alt="" id="xingImg"/>
+            <img src="img\\\x63rossing-good.png" alt="" id="xingImg"/>
             <em>
               Click on a crossing to see details
             </em>
