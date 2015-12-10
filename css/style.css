@@ -299,6 +299,19 @@
   font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   font-size: 12px;
 }
+@media (max-width: 415px) {
+  .esriPopup.light .titleButton.restore {
+    display: none;
+  }
+
+  .esriPopup.light .titleButton.next {
+    right: 35px;
+  }
+
+  .esriPopup.light .titleButton.prev {
+    right: 60px;
+  }
+}
 
 @media (min-width: 350px) {
   .esriPopup.light .titlePane {
@@ -334,6 +347,7 @@
 .esriPopup.light .titleButton.close::before {
   color: #FFFFED;
 }
+
 
 #instructions {
   z-index: 10000;
