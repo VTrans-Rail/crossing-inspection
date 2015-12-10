@@ -444,6 +444,7 @@ require([
       enableHighlight: false,
       allPlaceholder: "Search for Railroad Crossings, Signs, Addresses or Places",
       map: map,
+      suggestionDelay: 0,
     }, "search");
 
     //Create blank searchSources array
