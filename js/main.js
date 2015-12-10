@@ -225,50 +225,22 @@ require([
 
     crossingPoints.setLabelingInfo([ crossingLabelClass ]);
 
-  // mpTen labels
-    var mpTenLabel = new esri.symbol.TextSymbol();
-    mpTenLabel.font.setSize("10pt");
-    mpTenLabel.font.setFamily("Verdana");
-    mpTenLabel.setColor(new Color([235,235,235, 1]));
+  // mp labels
+    var mpLabel = new esri.symbol.TextSymbol();
+    mpLabel.font.setSize("10pt");
+    mpLabel.font.setFamily("Verdana");
+    mpLabel.setColor(new Color([235,235,235, 1]));
 
-    var jsonLblmpTen = {
+    var jsonLblmp = {
       "labelExpressionInfo": {"value": "{MP}"},
     };
 
-    var mpTenLabelClass = new esri.layers.LabelClass(jsonLblmpTen);
-    mpTenLabelClass.symbol = mpTenLabel;
+    var mpLabelClass = new esri.layers.LabelClass(jsonLblmp);
+    mpLabelClass.symbol = mpLabel;
 
-    milePostsTen.setLabelingInfo([ mpTenLabelClass ]);
-
-  // mpFive labels
-    var mpFiveLabel = new esri.symbol.TextSymbol();
-    mpFiveLabel.font.setSize("10pt");
-    mpFiveLabel.font.setFamily("Verdana");
-    mpFiveLabel.setColor(new Color([235,235,235, 1]));
-
-    var jsonLblmpFive = {
-      "labelExpressionInfo": {"value": "{MP}"},
-    };
-
-    var mpFiveLabelClass = new esri.layers.LabelClass(jsonLblmpFive);
-    mpFiveLabelClass.symbol = mpFiveLabel;
-
-    milePostsFive.setLabelingInfo([ mpFiveLabelClass ]);
-
-  // mpOne labels
-    var mpOneLabel = new esri.symbol.TextSymbol();
-    mpOneLabel.font.setSize("10pt");
-    mpOneLabel.font.setFamily("Verdana");
-    mpOneLabel.setColor(new Color([235,235,235, 1]));
-
-    var jsonLblmpOne = {
-      "labelExpressionInfo": {"value": "{MP}"},
-    };
-
-    var mpOneLabelClass = new esri.layers.LabelClass(jsonLblmpOne);
-    mpOneLabelClass.symbol = mpOneLabel;
-
-    milePostsOne.setLabelingInfo([ mpOneLabelClass ]);
+    milePostsTen.setLabelingInfo([ mpLabelClass ]);
+    milePostsFive.setLabelingInfo([ mpLabelClass ]);
+    milePostsOne.setLabelingInfo([ mpLabelClass ]);
 // -------------------------------------------------------------------
 
 
