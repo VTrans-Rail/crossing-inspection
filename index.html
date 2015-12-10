@@ -44,12 +44,32 @@
     </div>
   </div>
 
-
   <div id="map">
     <div id="BasemapToggle"></div>
     <div id="layerList"></div>
     <div id="locateButton"></div>
   </div>
+
+  <svg height="0" xmlns="http://www.w3.org/2000/svg">
+    <filter id="drop-shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="0" result="offsetblur"/>
+      <feFlood flood-color="rgba(0,0,0,0.5)"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </svg>
+
+
+  <style>
+    text {
+      text-shadow: 0px 0px 4px rgba(0,0,0,1);
+      filter: url(#drop-shadow);
+    }
+  </style>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
