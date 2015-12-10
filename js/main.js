@@ -168,7 +168,6 @@ require([
     });
 
 
-
     //Create Mile Posts Feature Layers
     var mpTenUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3";
 
@@ -195,6 +194,11 @@ require([
       minScale: 50000,
     });
 
+    // Remove rail trails and TSRR from feature layers
+    railLine.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+    milePostsTen.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+    milePostsFive.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+    milePostsOne.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
 
 
     //Add Layers to Map
