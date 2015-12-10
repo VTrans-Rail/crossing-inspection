@@ -7,18 +7,15 @@ require([
   "esri/layers/FeatureLayer",
   "esri/layers/ArcGISTiledMapServiceLayer",
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
-  "esri/dijit/BasemapToggle",
-  "esri/dijit/LayerList",
   "esri/dijit/LocateButton",
   "esri/renderers/UniqueValueRenderer",
-  // "esri/symbols/SimpleLineSymbol",
+  "esri/symbols/Font",
   "esri/symbols/CartographicLineSymbol",
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
   "dijit/layout/BorderContainer",
   "dijit/layout/ContentPane",
-  // "dojox/charting/Chart", "dojox/charting/themes/Dollar",
   "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
   "dojo/domReady!"
@@ -35,11 +32,9 @@ require([
     FeatureLayer,
     ArcGISTiledMapServiceLayer,
     Popup, PopupTemplate,
-    BasemapToggle,
-    LayerList,
     LocateButton,
     UniqueValueRenderer,
-    // SimpleLineSymbol,
+    font,
     CartographicLineSymbol,
     SimpleFillSymbol, Color,
     domClass, domConstruct, query, on,
@@ -65,16 +60,21 @@ require([
 //-------------------------------------------------------------
 //--------------------Create Map-----------------------------------------
 //-------------------------------------------------------------
-    // satellite imagery from ArcGIS Online, use levels 0 - 11
+    // satellite imagery from ArcGIS Online, use levels 0 - 14
     var topoBasemap = new   ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer", {
-      displayLevels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      displayLevels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
     });
 
-    // street Map service from ArcGIS Online, use levels 11 - 15
-    var streetBasemap = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer", {
-      displayLevels: [12, 13, 14, 15, 16, 17, 18, 19],
-      opacity : 0.65
+    // satellite Map service from ArcGIS Online, use levels 15 - 19
+    var imageryBasemap = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer", {
+      displayLevels: [15, 16, 17, 18, 19],
     });
+
+    // transportation reference layer map service from ArcGIS Online, use levels 15 - 19
+    var streetReferenceLayer = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer", {
+      displayLevels: [15, 16, 17, 18, 19],
+    });
+
 
     // create the map and use the custom zoom levels
     var map = new Map("map", {
@@ -86,37 +86,12 @@ require([
       showLabels: true,
     });
 
-    // map.on("extent-change", changeScale);
     map.addLayer(topoBasemap);
-    map.addLayer(streetBasemap);
+    map.addLayer(imageryBasemap);
+    map.addLayer(streetReferenceLayer);
 
     //Resize Popup To Fit titlePane
     map.infoWindow.resize(300, 370)
-//-------------------------------------------------------------
-
-
-
-//-------------------------------------------------------------
-//---------------------Create BasemapToggle--------------------
-//-------------------------------------------------------------
-    var toggle = new BasemapToggle({
-      map: map,
-      basemap: "satellite",
-      visible: false,
-    }, "BasemapToggle");
-    toggle.startup();
-
-
-    //Turn on BasemapToggle when zoomed in to specific level
-    map.on("extent-change", checkBasemapToggle);
-    function checkBasemapToggle () {
-      var zoom = map.getZoom();
-      if ( zoom > 11 ) {
-        toggle.show();
-      } else {
-        toggle.hide();
-      }
-    }
 //-------------------------------------------------------------
 
 
@@ -133,7 +108,9 @@ require([
 
 
 
+//------------------------------------------------------------------
 // -----------------Define PopupTemplates------------------------------
+//------------------------------------------------------------------
     //Crossing Template--------------
     var crossingPopupFeatures = "<div style='overflow-y:auto'><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
 
@@ -141,7 +118,7 @@ require([
       title: "Crossing {DOT_Num}",
     });
     //Provides warning if popup doesn't load properly and clears out editSummary
-    crossingTemplate.setContent("<b>Oops!</b></br>The summary information and pictures for this crossing did not load properly. Please refresh popup window by closing it and clicking on the crossing again.");
+    crossingTemplate.setContent("<h1>Oops!</h1></br><b>Please close popup and try again.</b></br>The summary information and pictures for this crossing did not load properly.");
 
 
     //Sign Template------------------
@@ -151,26 +128,15 @@ require([
       title: "Crossing Sign",
     });
     //Provides warning if popup doesn't load properly and clears out editSummary
-    signTemplate.setContent("<b>Oops!</b></br>The summary information and pictures for this sign did not load properly. Please refresh popup window by closing it and clicking on the sign again.");
-
-
-    //AADT Template--------------------
-    var aadtTemplate = new PopupTemplate({
-      title: "Traffic Data",
-
-      fieldInfos: [
-        { fieldName: "aadt", label: "AADT", visible: true, format: { places: 0} },
-        { fieldName: "ATRStation", label: "Automated Traffic Recording Station", visible: true, format: { places: 0} },
-        { fieldName: "YEAR", label: "Last Year Counted", visible: true, format: { places: 0} },
-        { fieldName: "RouteName", label: "Route Name", visible: true, format: { places: 0} },
-        { fieldName: "RouteNum", label: "Route Number", visible: true, format: { places: 0} },
-      ],
-    });
+    signTemplate.setContent("<h1>Oops!</h1></br><b>Please close popup and try again.</b></br>The summary information and pictures for this sign did not load properly.");
+//-----------------------------------------------------------------------
 
 
 
-//  ---------------------- Add map layers ------------------------------
-    //Create Crossing Feature Layer
+//------------------------------------------------------------------
+//  ---------------------- Create Feature Layers ------------------------------
+//------------------------------------------------------------------
+    //Create Crossing Feature Layer-------------------
     var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
@@ -181,7 +147,7 @@ require([
     });
 
 
-    //Create Sign Feature Layer
+    //Create Sign Feature Layer---------------------------------
     var signUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/0";
 
     var signPoints = new FeatureLayer(signUrl, {
@@ -201,50 +167,8 @@ require([
       outFields: ["*"],
     });
 
-    // --------------------------------------------------
-    //Create AADT Line Feature Layer--------------------------------
-    // --------------------------------------------------
-    var aadtUrl = "https://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/AADT_2013_StateHighways/FeatureServer/0";
 
-    var aadtLine = new FeatureLayer(aadtUrl, {
-      mode: FeatureLayer.MODE_AUTO,
-      outFields: ["*"],
-      infoTemplate: aadtTemplate,
-      minScale: 288000,
-    });
-
-    var aadtSymbol = new CartographicLineSymbol(    );
-    aadtSymbol.style = CartographicLineSymbol.STYLE_DASH;
-    aadtSymbol.setCap("ROUND");
-    aadtSymbol.setJoin("ROUND");
-    aadtSymbol.setColor([230, 0, 169, 1]);
-
-    //Create a unique value renderer and its unique value info
-    var renderer = new UniqueValueRenderer(aadtSymbol);
-
-    /**********************************************
-    * Define a size visual variable to vary the width
-    * of each highway based on its annual average daily
-    * traffic count.
-    *********************************************/
-    renderer.setVisualVariables([{
-        type: "sizeInfo",
-        field: "aadt",
-        valueUnit: "unknown",
-        minSize: 2.5,
-        maxSize: 10,
-        minDataValue: 10,
-        maxDataValue: 56000
-    }]);
-
-    //Set the renderer on the layer and add the layer to the map
-    aadtLine.setRenderer(renderer);
-    // --------------------------------------------------
-    // --------------------------------------------------
-
-
-
-    //Create Mile Posts Feature Layers
+    //Create Mile Posts Feature Layers-------------------------------
     var mpTenUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3";
 
     var mpFiveUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/2";
@@ -270,41 +194,67 @@ require([
       minScale: 50000,
     });
 
+    // Remove rail trails and TSRR from feature layers---------------
+    railLine.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+    milePostsTen.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+    milePostsFive.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+    milePostsOne.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+//-------------------------------------------------------------------------
 
 
-    //Add Layers to Map
-    map.addLayer(aadtLine);
+
+// -------------------------------------------------------------------
+// -------------- Add Labels: Crossings with DOT_Num---------------------
+// -------------------------------------------------------------------
+  // crossingPoints labels
+    var dotNumLabel = new esri.symbol.TextSymbol();
+    dotNumLabel.font.setSize("13pt");
+    dotNumLabel.font.setFamily("Verdana");
+    dotNumLabel.font.setWeight(font.WEIGHT_BOLD);
+    dotNumLabel.setColor(new Color([190, 232, 255, 1, 1]));
+    // dotNumLabel.setHaloColor(new Color([26, 26, 26, 1])); //Option added at v3.15
+    // dotNumLabel.setHaloSize("25px"); //Option added at v3.15
+
+    var jsonLblCrossing = {
+      "labelExpressionInfo": {"value": "{DOT_Num}"},
+      "minScale": 20000,
+    };
+
+    var crossingLabelClass = new esri.layers.LabelClass(jsonLblCrossing);
+    crossingLabelClass.symbol = dotNumLabel;
+
+    crossingPoints.setLabelingInfo([ crossingLabelClass ]);
+
+  // mp labels
+    var mpLabel = new esri.symbol.TextSymbol();
+    mpLabel.font.setSize("10pt");
+    mpLabel.font.setFamily("Verdana");
+    mpLabel.setColor(new Color([235,235,235, 1]));
+
+    var jsonLblmp = {
+      "labelExpressionInfo": {"value": "{MP}"},
+    };
+
+    var mpLabelClass = new esri.layers.LabelClass(jsonLblmp);
+    mpLabelClass.symbol = mpLabel;
+
+    milePostsTen.setLabelingInfo([ mpLabelClass ]);
+    milePostsFive.setLabelingInfo([ mpLabelClass ]);
+    milePostsOne.setLabelingInfo([ mpLabelClass ]);
+// -------------------------------------------------------------------
+
+
+
+//------------------------------------------------------------------
+//----------------------Add Layers to Map--------------------------
+//------------------------------------------------------------------
     map.addLayer(railLine);
     map.addLayer(milePostsTen);
     map.addLayer(milePostsFive);
     map.addLayer(milePostsOne);
     map.addLayer(crossingPoints);
     map.addLayer(signPoints);
-//-------------------------------------------------------------------------
-
-
-
-//-------------------------------------------------------------------------
-//-----------------------LayerToggle--------------------------------
-//-------------------------------------------------------------------------
-    var toggleLayers = [
-      {
-        layer: signPoints,
-        content: "<b>Signs</b> <img src='img/favicon.png' alt='site image' height=17px style='border-radius:4px; float:right; right:5px'>",
-      },
-      {
-        layer: aadtLine,
-        content: "<b>AADT</b> <img src='img/aadt.png' alt='site image' width=60px style='border-radius:4px; float:right; right:5px'>",
-      },
-    ];
-
-    var myLayerList = new LayerList({
-      map: map,
-      layers: toggleLayers,
-      theme: "vtransTheme",
-    }, "layerList");
-    myLayerList.startup();
-//-------------------------------------------------------------------------
+//------------------------------------------------------------------
 
 
 
@@ -351,7 +301,6 @@ require([
 
     on(crossingPoints, 'selection-complete', setCrossingWindowContent);
 
-    // map.addLayers([crossingPoints]);
 
     function setCrossingWindowContent(results){
       var imageString = "<table><tr>";
@@ -396,7 +345,6 @@ require([
 
     on(signPoints, 'selection-complete', setSignWindowContent);
 
-    // map.addLayers([signPoints]);
 
     function setSignWindowContent(results){
       var imageString = "<table><tr>";
@@ -444,6 +392,7 @@ require([
       enableHighlight: false,
       allPlaceholder: "Search for Railroad Crossings, Signs, Addresses or Places",
       map: map,
+      suggestionDelay: 0,
     }, "search");
 
     //Create blank searchSources array

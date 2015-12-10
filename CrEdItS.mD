@@ -26,3 +26,5 @@ https://www.google.com/design/icons/
 
 
 -Locate Button: https://developers.arcgis.com/javascript/jsapi/locatebutton-amd.html
+
+- Create Label Shadow without v3.15 Halo TextSymbol Properties: https://gist.github.com/patrickarlt/7139538 
