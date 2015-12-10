@@ -118,7 +118,7 @@ require([
       title: "Crossing {DOT_Num}",
     });
     //Provides warning if popup doesn't load properly and clears out editSummary
-    crossingTemplate.setContent("<b>Oops!</b></br>The summary information and pictures for this crossing did not load properly. Please refresh popup window by closing it and clicking on the crossing again.");
+    crossingTemplate.setContent("<h1>Oops!</h1></br><b>Please close popup and try again.</b></br>The summary information and pictures for this crossing did not load properly.");
 
 
     //Sign Template------------------
@@ -128,7 +128,7 @@ require([
       title: "Crossing Sign",
     });
     //Provides warning if popup doesn't load properly and clears out editSummary
-    signTemplate.setContent("<b>Oops!</b></br>The summary information and pictures for this sign did not load properly. Please refresh popup window by closing it and clicking on the sign again.");
+    signTemplate.setContent("<h1>Oops!</h1></br><b>Please close popup and try again.</b></br>The summary information and pictures for this sign did not load properly.");
 //-----------------------------------------------------------------------
 
 
