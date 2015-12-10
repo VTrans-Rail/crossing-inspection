@@ -7,18 +7,15 @@ require([
   "esri/layers/FeatureLayer",
   "esri/layers/ArcGISTiledMapServiceLayer",
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
-  "esri/dijit/BasemapToggle",
-  "esri/dijit/LayerList",
   "esri/dijit/LocateButton",
   "esri/renderers/UniqueValueRenderer",
-  // "esri/symbols/SimpleLineSymbol",
+  "esri/symbols/Font",
   "esri/symbols/CartographicLineSymbol",
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
   "dijit/layout/BorderContainer",
   "dijit/layout/ContentPane",
-  // "dojox/charting/Chart", "dojox/charting/themes/Dollar",
   "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
   "dojo/domReady!"
@@ -35,10 +32,9 @@ require([
     FeatureLayer,
     ArcGISTiledMapServiceLayer,
     Popup, PopupTemplate,
-    BasemapToggle,
-    LayerList,
     LocateButton,
     UniqueValueRenderer,
+    font,
     CartographicLineSymbol,
     SimpleFillSymbol, Color,
     domClass, domConstruct, query, on,
@@ -77,7 +73,6 @@ require([
     // transportation reference layer map service from ArcGIS Online, use levels 15 - 19
     var streetReferenceLayer = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer", {
       displayLevels: [15, 16, 17, 18, 19],
-      // opacity : 0.65
     });
 
 
@@ -113,7 +108,9 @@ require([
 
 
 
+//------------------------------------------------------------------
 // -----------------Define PopupTemplates------------------------------
+//------------------------------------------------------------------
     //Crossing Template--------------
     var crossingPopupFeatures = "<div style='overflow-y:auto'><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
 
@@ -132,11 +129,14 @@ require([
     });
     //Provides warning if popup doesn't load properly and clears out editSummary
     signTemplate.setContent("<b>Oops!</b></br>The summary information and pictures for this sign did not load properly. Please refresh popup window by closing it and clicking on the sign again.");
+//-----------------------------------------------------------------------
 
 
 
-//  ---------------------- Add map layers ------------------------------
-    //Create Crossing Feature Layer
+//------------------------------------------------------------------
+//  ---------------------- Create Feature Layers ------------------------------
+//------------------------------------------------------------------
+    //Create Crossing Feature Layer-------------------
     var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
@@ -147,7 +147,7 @@ require([
     });
 
 
-    //Create Sign Feature Layer
+    //Create Sign Feature Layer---------------------------------
     var signUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/0";
 
     var signPoints = new FeatureLayer(signUrl, {
@@ -168,7 +168,7 @@ require([
     });
 
 
-    //Create Mile Posts Feature Layers
+    //Create Mile Posts Feature Layers-------------------------------
     var mpTenUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3";
 
     var mpFiveUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/2";
@@ -194,21 +194,95 @@ require([
       minScale: 50000,
     });
 
-    // Remove rail trails and TSRR from feature layers
+    // Remove rail trails and TSRR from feature layers---------------
     railLine.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsTen.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsFive.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsOne.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+//-------------------------------------------------------------------------
 
 
-    //Add Layers to Map
+
+// -------------------------------------------------------------------
+// -------------- Add Labels: Crossings with DOT_Num---------------------
+// -------------------------------------------------------------------
+  // crossingPoints labels
+    var dotNumLabel = new esri.symbol.TextSymbol();
+    dotNumLabel.font.setSize("13pt");
+    dotNumLabel.font.setFamily("Verdana");
+    dotNumLabel.font.setWeight(font.WEIGHT_BOLD);
+    dotNumLabel.setColor(new Color([190, 232, 255, 1, 1]));
+    // dotNumLabel.setHaloColor(new Color([26, 26, 26, 1])); //Option added at v3.15
+    // dotNumLabel.setHaloSize("25px"); //Option added at v3.15
+
+    var jsonLblCrossing = {
+      "labelExpressionInfo": {"value": "{DOT_Num}"},
+      "minScale": 20000,
+    };
+
+    var crossingLabelClass = new esri.layers.LabelClass(jsonLblCrossing);
+    crossingLabelClass.symbol = dotNumLabel;
+
+    crossingPoints.setLabelingInfo([ crossingLabelClass ]);
+
+  // mpTen labels
+    var mpTenLabel = new esri.symbol.TextSymbol();
+    mpTenLabel.font.setSize("10pt");
+    mpTenLabel.font.setFamily("Verdana");
+    mpTenLabel.setColor(new Color([235,235,235, 1]));
+
+    var jsonLblmpTen = {
+      "labelExpressionInfo": {"value": "{MP}"},
+    };
+
+    var mpTenLabelClass = new esri.layers.LabelClass(jsonLblmpTen);
+    mpTenLabelClass.symbol = mpTenLabel;
+
+    milePostsTen.setLabelingInfo([ mpTenLabelClass ]);
+
+  // mpFive labels
+    var mpFiveLabel = new esri.symbol.TextSymbol();
+    mpFiveLabel.font.setSize("10pt");
+    mpFiveLabel.font.setFamily("Verdana");
+    mpFiveLabel.setColor(new Color([235,235,235, 1]));
+
+    var jsonLblmpFive = {
+      "labelExpressionInfo": {"value": "{MP}"},
+    };
+
+    var mpFiveLabelClass = new esri.layers.LabelClass(jsonLblmpFive);
+    mpFiveLabelClass.symbol = mpFiveLabel;
+
+    milePostsFive.setLabelingInfo([ mpFiveLabelClass ]);
+
+  // mpOne labels
+    var mpOneLabel = new esri.symbol.TextSymbol();
+    mpOneLabel.font.setSize("10pt");
+    mpOneLabel.font.setFamily("Verdana");
+    mpOneLabel.setColor(new Color([235,235,235, 1]));
+
+    var jsonLblmpOne = {
+      "labelExpressionInfo": {"value": "{MP}"},
+    };
+
+    var mpOneLabelClass = new esri.layers.LabelClass(jsonLblmpOne);
+    mpOneLabelClass.symbol = mpOneLabel;
+
+    milePostsOne.setLabelingInfo([ mpOneLabelClass ]);
+// -------------------------------------------------------------------
+
+
+
+//------------------------------------------------------------------
+//----------------------Add Layers to Map--------------------------
+//------------------------------------------------------------------
     map.addLayer(railLine);
     map.addLayer(milePostsTen);
     map.addLayer(milePostsFive);
     map.addLayer(milePostsOne);
     map.addLayer(crossingPoints);
     map.addLayer(signPoints);
-//-------------------------------------------------------------------------
+//------------------------------------------------------------------
 
 
 
