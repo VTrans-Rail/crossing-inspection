@@ -65,7 +65,7 @@
   padding-left: 0px;
 }
 
-#clicker {
+#HelpButton {
   padding-top: 6px;
   padding-bottom: 6px;
 }
@@ -181,7 +181,7 @@
     padding-top: 75px;
   }
 
-  #clicker {
+  #HelpButton {
     padding-top: 11px;
     padding-bottom: 11px;
   }

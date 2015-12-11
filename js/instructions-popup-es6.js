@@ -1,4 +1,4 @@
-function clicker(){
+function HelpButton(){
 	var thediv=document.getElementById('instructions');
 	if(thediv.style.display == "none"){
 		thediv.style.display = "";
@@ -66,7 +66,7 @@ function clicker(){
 					<div class="mastfoot">
 
 					<div class="inner cover gotit">
-							<a href="#" onclick="return clicker();"class="btn btn-lg btn-success">Got it!</a>
+							<a href="#" onclick="return HelpButton();"class="btn btn-lg btn-success">Got it!</a>
 					</div>
 				</div>
 
