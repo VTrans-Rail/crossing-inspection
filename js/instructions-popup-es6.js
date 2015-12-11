@@ -1,4 +1,5 @@
 function HelpButton(){
+	ga('send', 'event', { eventCategory: 'Help', eventAction: 'Click', eventLabel: 'Help button click'});
 	var thediv=document.getElementById('instructions');
 	if(thediv.style.display == "none"){
 		thediv.style.display = "";
