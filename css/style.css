@@ -60,19 +60,12 @@
   padding: 10px;
 }
 
-#clicker {
-  /*padding: 10px;*/
-  /*padding-left: 0;*/
-  /*display: block;*/
-}
-
 #helpDiv {
   padding-top: 10px;
   padding-left: 0px;
 }
 
-#helpIcon img {
-  max-width: 18px;
+#HelpButton {
   padding-top: 6px;
   padding-bottom: 6px;
 }
@@ -188,10 +181,9 @@
     padding-top: 75px;
   }
 
-  #helpIcon img {
-    max-width: 22px;
-    padding-top: 9px;
-    padding-bottom: 9px;
+  #HelpButton {
+    padding-top: 11px;
+    padding-bottom: 11px;
   }
 } /* end small devices */
 
