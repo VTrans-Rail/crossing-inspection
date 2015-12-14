@@ -65,3 +65,16 @@
     /*width: calc(190px + ((100% - 992px)/4));*/
   }
 }
+
+@media (max-width: 415px) {
+  #mobileLegendButton {
+    display: block;
+    position: fixed;
+    color: #fff;
+    background-color: rgba(102, 102, 102, 0.8);
+    bottom: 0%;
+    height: 10%;
+    width: 100%;
+    z-index: 1;
+  }
+}
