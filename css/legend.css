@@ -1,0 +1,49 @@
+#legend {
+  position:absolute;
+  background-color: rgba(76, 175, 80, 0.8);
+  padding: 20px 10px 10px 10px;
+  /*border-radius: 5px;*/
+  float: right;
+  right: 0px;
+  z-index: 1;
+  width: 200px;
+  height: 100%;
+}
+
+/*#legendDiv {
+  top: 80px;
+}*/
+
+/*#legendDiv {
+  position:absolute;
+  background-color: rgba(76, 175, 80, 0.8);
+  padding: 20px 10px 10px 10px;*/
+  /*border-radius: 5px;*/
+  /*float: right;
+  right: 0px;
+  top: 80px;
+  z-index: 1;
+  width: 200px;
+  height: 100%;
+}*/
+
+
+/*Hides Rail Trails and TSRR (I couldn't figure out how to display only some of the symbology classes)*/
+#legendDiv_rail-line tr:nth-child( 1n+9 ) {
+  display: none;
+}
+
+#legendDiv_sign-points tr:nth-child( n+4 ) {
+  display: none;
+}
+
+
+@media (min-width: 992px) {
+  #legend {
+    /*width: calc(190px + ((100% - 992px)/4));*/
+  }
+  #legendDiv {
+    top: 80px;
+    /*width: calc(190px + ((100% - 992px)/4));*/
+  }
+}

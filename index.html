@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
 
     <link rel="stylesheet" href="css/instructions.css">
+    <!-- <link rel="stylesheet" href="css/legend.css"> -->
     <link rel="stylesheet" href="css/style.css">
 
     <!-- Latest compiled and minified Bootstrap CSS -->
@@ -19,6 +20,7 @@
 
     <link rel="stylesheet" href="css/bootstrap-mod.css">
     <link href="css/instructions.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/legend.css">
 
 
     <script src="http://js.arcgis.com/3.14/"></script>
@@ -49,20 +51,8 @@
     <div id="layerList"></div>
     <div id="locateButton"></div>
   </div>
-  <div id="rightPane"
-       data-dojo-type="dijit/layout/ContentPane"
-       data-dojo-props="region:'right'">
-
-    <div data-dojo-type="dijit/layout/AccordionContainer">
-      <div data-dojo-type="dijit/layout/ContentPane" id="legendPane"
-           data-dojo-props="title:'Legend', selected:true">
-        <div id="legendDiv"></div>
-      </div>
-      <div data-dojo-type="dijit/layout/ContentPane"
-           data-dojo-props="title:'Pane 2'">
-        This pane could contain tools or additional content
-      </div>
-    </div>
+  <div id="legend">
+    <div id="legendDiv"></div>
   </div>
 
 

@@ -169,6 +169,7 @@ require([
     var railLine = new FeatureLayer(lineUrl, {
       id: "rail-line",
       outFields: ["*"],
+      definitionExpression: "RailTrail = 'N' AND VRLID <> 'VRL15'"
     });
 
 
@@ -199,7 +200,7 @@ require([
     });
 
     // Remove rail trails and TSRR from feature layers---------------
-    railLine.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+    // railLine.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsTen.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsFive.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsOne.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
@@ -265,31 +266,34 @@ require([
 //------------------------------------------------------------------
 //----------------------Build Legend----------------------------
 //------------------------------------------------------------------
-  // topoBasemap.on("load", function() {
-    var layerInfo = [
-      {
-        layer: crossingPoints, title: "Railroad Crossings"
-      },
-      {
-        layer: signPoints, title: "Traffic Signs Related to Railroad Crossings"
-      },
-      {
-        layer: milePostsTen, title: "Mile Posts"
-      },
-      {
-        layer: railLine, title: "Railroad Lines"
-      }];
+  map.on("load", function() {
+    if ( map.width > 415 ) {
+      var layerInfo = [
+        {
+          layer: signPoints, title: "Traffic Signs Related to Railroad Crossings"
+        },
+        {
+          layer: crossingPoints, title: "Railroad Crossings"
+        },
+        {
+          layer: milePostsTen, title: "Mile Posts"
+        },
+        {
+          layer: railLine, title: "Railroad Lines", defaultSymbol: false
+        }];
 
-    var legendDijit = new Legend({
-      map: map,
+      var legendDijit = new Legend({
+        map: map,
 
-      layerInfos: layerInfo,
+        layerInfos: layerInfo,
 
-      respectCurrentMapScale: true,
-    }, "legendDiv");
-    legendDijit.startup();
-    console.log(layerInfo);
-  // });
+        respectCurrentMapScale: true,
+      }, "legendDiv");
+      legendDijit.startup();
+      console.log(layerInfo);
+      console.log(layerInfo[3]);
+    }
+  });
 
 //------------------------------------------------------------------
 
