@@ -270,7 +270,7 @@ require([
     if ( map.width > 415 ) {
       var layerInfo = [
         {
-          layer: signPoints, title: "Traffic Signs Related to Railroad Crossings"
+          layer: signPoints, title: "Common Crossing Signs"
         },
         {
           layer: crossingPoints, title: "Railroad Crossings"
@@ -279,7 +279,7 @@ require([
           layer: milePostsTen, title: "Mile Posts"
         },
         {
-          layer: railLine, title: "Railroad Lines", defaultSymbol: false
+          layer: railLine, title: "Railroad Lines", hideLayers: [0], defaultSymbol: false
         }];
 
       var legendDijit = new Legend({
@@ -292,6 +292,7 @@ require([
       legendDijit.startup();
       console.log(layerInfo);
       console.log(layerInfo[3]);
+      console.log(layerInfo[3].layer._div.children);
     }
   });
 

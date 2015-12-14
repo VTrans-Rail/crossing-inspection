@@ -1,31 +1,6 @@
 #legend {
-  position:absolute;
-  background-color: rgba(76, 175, 80, 0.8);
-  padding: 20px 10px 10px 10px;
-  /*border-radius: 5px;*/
-  float: right;
-  right: 0px;
-  z-index: 1;
-  width: 200px;
-  height: 100%;
+  display: none;
 }
-
-/*#legendDiv {
-  top: 80px;
-}*/
-
-/*#legendDiv {
-  position:absolute;
-  background-color: rgba(76, 175, 80, 0.8);
-  padding: 20px 10px 10px 10px;*/
-  /*border-radius: 5px;*/
-  /*float: right;
-  right: 0px;
-  top: 80px;
-  z-index: 1;
-  width: 200px;
-  height: 100%;
-}*/
 
 
 /*Hides Rail Trails and TSRR (I couldn't figure out how to display only some of the symbology classes)*/
@@ -33,17 +8,58 @@
   display: none;
 }
 
-#legendDiv_sign-points tr:nth-child( n+4 ) {
+#legendDiv_crossing-points_1 .esriLegendLayer:last-child {
   display: none;
 }
 
 
+#legendDiv_sign-points_0 tr {
+  display: none;
+}
+
+#legendDiv_sign-points_0 tr:nth-child( 1 ) {
+  display: table-row;
+}
+#legendDiv_sign-points_0 tr:nth-child( 5 ) {
+  display: table-row;
+}
+/*#legendDiv_sign-points_0 tr:nth-child( 6 ) {
+  display: table-row;
+}*/
+#legendDiv_sign-points_0 tr:nth-child( 7 ) {
+  display: table-row;
+}
+#legendDiv_sign-points_0 tr:nth-child( 16 ) {
+  display: table-row;
+}
+#legendDiv_sign-points_0 tr:nth-child( 30 ) {
+  display: table-row;
+}
+
+
+#legendDiv_sign-points_0 .esriLegendLayer:last-child {
+  display:none;
+}
+
+
+
 @media (min-width: 992px) {
   #legend {
-    /*width: calc(190px + ((100% - 992px)/4));*/
+    display: block;
+    overflow-y: auto;
+    position:absolute;
+    background-color: rgba(76, 175, 80, 0.8);
+    padding: 20px 10px 10px 10px;
+    float: right;
+    right: 0px;
+    z-index: 1;
+    width: 200px;
+    height: 100%;
   }
+
   #legendDiv {
     top: 80px;
+    padding-bottom: 25px;
     /*width: calc(190px + ((100% - 992px)/4));*/
   }
 }
