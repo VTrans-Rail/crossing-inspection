@@ -48,7 +48,8 @@
     display: block;
     overflow-y: auto;
     position:absolute;
-    background-color: rgba(76, 175, 80, 0.8);
+    background-color: rgba(102, 102, 102, 0.8);
+    /*background-color: rgba(76, 175, 80, 0.8);*/
     padding: 20px 10px 10px 10px;
     float: right;
     right: 0px;
@@ -59,6 +60,7 @@
 
   #legendDiv {
     top: 80px;
+    color: #fff;
     padding-bottom: 25px;
     /*width: calc(190px + ((100% - 992px)/4));*/
   }
