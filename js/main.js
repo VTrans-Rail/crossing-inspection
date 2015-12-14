@@ -6,8 +6,10 @@ require([
   "esri/dijit/Search",
   "esri/layers/FeatureLayer",
   "esri/layers/ArcGISTiledMapServiceLayer",
+  "esri/layers/LayerInfo",
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
   "esri/dijit/LocateButton",
+  "esri/dijit/Legend",
   "esri/renderers/UniqueValueRenderer",
   "esri/symbols/Font",
   "esri/symbols/CartographicLineSymbol",
@@ -31,8 +33,10 @@ require([
     Search,
     FeatureLayer,
     ArcGISTiledMapServiceLayer,
+    LayerInfo,
     Popup, PopupTemplate,
     LocateButton,
+    Legend,
     UniqueValueRenderer,
     font,
     CartographicLineSymbol,
@@ -254,6 +258,39 @@ require([
     map.addLayer(milePostsOne);
     map.addLayer(crossingPoints);
     map.addLayer(signPoints);
+//------------------------------------------------------------------
+
+
+
+//------------------------------------------------------------------
+//----------------------Build Legend----------------------------
+//------------------------------------------------------------------
+  // topoBasemap.on("load", function() {
+    var layerInfo = [
+      {
+        layer: crossingPoints, title: "Railroad Crossings"
+      },
+      {
+        layer: signPoints, title: "Traffic Signs Related to Railroad Crossings"
+      },
+      {
+        layer: milePostsTen, title: "Mile Posts"
+      },
+      {
+        layer: railLine, title: "Railroad Lines"
+      }];
+
+    var legendDijit = new Legend({
+      map: map,
+
+      layerInfos: layerInfo,
+
+      respectCurrentMapScale: true,
+    }, "legendDiv");
+    legendDijit.startup();
+    console.log(layerInfo);
+  // });
+
 //------------------------------------------------------------------
 
 

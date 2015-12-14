@@ -5,6 +5,14 @@
   position: absolute;
 }
 
+#legendDiv {
+  position:absolute;
+  float: right;
+  right: 5px;
+  top: 150px;
+  z-index: 1;
+  width: 20%;
+}
 
 /*Popup Links*/
 .esriPopup a {
