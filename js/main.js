@@ -62,6 +62,30 @@ require([
 
 
 //-------------------------------------------------------------
+//--------------------Setup Mobile Legend Controls-----------------------
+//-------------------------------------------------------------
+    var legendOpen = document.getElementById('mobileLegendButtonClosed');
+    if (legendOpen) {
+      legendOpen.addEventListener('click', function () {
+        document.getElementById('legend').style.display = "block";
+        document.getElementById('mobileLegendButtonClosed').style.display = "none";
+        document.getElementById('mobileLegendButtonOpen').style.display = "block";
+      });
+    }
+
+    var legendClose = document.getElementById('mobileLegendButtonOpen');
+    if (legendClose) {
+      legendClose.addEventListener('click', function () {
+        document.getElementById('legend').style.display = "none";
+        document.getElementById('mobileLegendButtonClosed').style.display = "block";
+        document.getElementById('mobileLegendButtonOpen').style.display = "none";
+      });
+    }
+//-------------------------------------------------------------
+
+
+
+//-------------------------------------------------------------
 //--------------------Create Map-----------------------------------------
 //-------------------------------------------------------------
     // satellite imagery from ArcGIS Online, use levels 0 - 14
@@ -267,33 +291,31 @@ require([
 //----------------------Build Legend----------------------------
 //------------------------------------------------------------------
   map.on("load", function() {
-    if ( map.width > 415 ) {
-      var layerInfo = [
-        {
-          layer: signPoints, title: "Common Crossing Signs"
-        },
-        {
-          layer: crossingPoints, title: "Railroad Crossings"
-        },
-        {
-          layer: milePostsTen, title: "Mile Posts"
-        },
-        {
-          layer: railLine, title: "Railroad Lines", hideLayers: [0], defaultSymbol: false
-        }];
+    var layerInfo = [
+      {
+        layer: signPoints, title: "Common Crossing Signs"
+      },
+      {
+        layer: crossingPoints, title: "Railroad Crossings"
+      },
+      {
+        layer: milePostsTen, title: "Mile Posts"
+      },
+      {
+        layer: railLine, title: "Railroad Lines", hideLayers: [0], defaultSymbol: false
+      }];
 
-      var legendDijit = new Legend({
-        map: map,
+    var legendDijit = new Legend({
+      map: map,
 
-        layerInfos: layerInfo,
+      layerInfos: layerInfo,
 
-        respectCurrentMapScale: true,
-      }, "legendDiv");
-      legendDijit.startup();
-      console.log(layerInfo);
-      console.log(layerInfo[3]);
-      console.log(layerInfo[3].layer._div.children);
-    }
+      respectCurrentMapScale: true,
+    }, "legendDiv");
+    legendDijit.startup();
+    console.log(layerInfo);
+    console.log(layerInfo[3]);
+    console.log(layerInfo[3].layer._div.children);
   });
 
 //------------------------------------------------------------------
