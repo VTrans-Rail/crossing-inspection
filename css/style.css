@@ -5,6 +5,9 @@
   position: absolute;
 }
 
+.esriControlsBR {
+  display:none;
+}
 
 /*Popup Links*/
 .esriPopup a {
@@ -76,8 +79,10 @@
 
 #locateButton {
   position: absolute;
-  float: right;
-  right: 20px;
+  float: left;
+  border: 1px solid #57585A;
+  border-radius: 5px;
+  left: 60px;
   top: 85px;
   /*width: 40px;*/
   /*height: 40px;*/
@@ -142,7 +147,8 @@
 @media (min-width: 768px) {
 
   #locateButton {
-    top: 100px;
+    top: 95px;
+    left: 60px;
   }
 
   .LocateButton .zoomLocateButton {
@@ -191,7 +197,8 @@
 @media (min-width: 992px) {
 
   #locateButton {
-    top: 110px;
+    top: 105px;
+    left: 72px;
   }
 
   .LocateButton .zoomLocateButton {

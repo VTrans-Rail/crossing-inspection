@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
 
     <link rel="stylesheet" href="css/instructions.css">
+    <!-- <link rel="stylesheet" href="css/legend.css"> -->
     <link rel="stylesheet" href="css/style.css">
 
     <!-- Latest compiled and minified Bootstrap CSS -->
@@ -19,14 +20,13 @@
 
     <link rel="stylesheet" href="css/bootstrap-mod.css">
     <link href="css/instructions.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/legend.css">
 
 
     <script src="http://js.arcgis.com/3.14/"></script>
     <script src="js/main.js"></script>
     <script src="http://localhost:35729/livereload.js"></script>
-    <script type="text/javascript" src="js/instructions-popup.js">
-
-    </script>
+    <script type="text/javascript" src="js/instructions-popup.js"></script>
 </head>
 
 <body>
@@ -49,6 +49,17 @@
     <div id="layerList"></div>
     <div id="locateButton"></div>
   </div>
+  <div id="legend">
+    <!-- <button type="button" id="mobileLegendButton" class="btn btn-default text-center btnHelp">Legend</button> -->
+    <div id="legendDiv"></div>
+  </div>
+  <div id="mobileLegendDiv">
+    <button type="button" id="closeMobileLegend" class="btn btn-default text-center btnHelp">&#x25BC Legend &#x25BC</button>
+
+    <button type="button" id="openMobileLegend" class="btn btn-default text-center btnHelp">&#x25B2 Legend &#x25B2</button>
+  </div>
+
+
 
   <svg height="0" xmlns="http://www.w3.org/2000/svg">
     <filter id="drop-shadow">

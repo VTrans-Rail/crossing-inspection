@@ -6,8 +6,10 @@ require([
   "esri/dijit/Search",
   "esri/layers/FeatureLayer",
   "esri/layers/ArcGISTiledMapServiceLayer",
+  "esri/layers/LayerInfo",
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
   "esri/dijit/LocateButton",
+  "esri/dijit/Legend",
   "esri/renderers/UniqueValueRenderer",
   "esri/symbols/Font",
   "esri/symbols/CartographicLineSymbol",
@@ -31,8 +33,10 @@ require([
     Search,
     FeatureLayer,
     ArcGISTiledMapServiceLayer,
+    LayerInfo,
     Popup, PopupTemplate,
     LocateButton,
+    Legend,
     UniqueValueRenderer,
     font,
     CartographicLineSymbol,
@@ -165,6 +169,7 @@ require([
     var railLine = new FeatureLayer(lineUrl, {
       id: "rail-line",
       outFields: ["*"],
+      definitionExpression: "RailTrail = 'N' AND VRLID <> 'VRL15'"
     });
 
 
@@ -195,7 +200,7 @@ require([
     });
 
     // Remove rail trails and TSRR from feature layers---------------
-    railLine.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+    // railLine.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsTen.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsFive.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsOne.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
@@ -254,6 +259,65 @@ require([
     map.addLayer(milePostsOne);
     map.addLayer(crossingPoints);
     map.addLayer(signPoints);
+//------------------------------------------------------------------
+
+
+
+//-------------------------------------------------------------
+//--------------------Setup Mobile Legend Controls-----------------------
+//-------------------------------------------------------------
+    var legendOpen = document.getElementById('openMobileLegend');
+    if (legendOpen) {
+      legendOpen.addEventListener('click', function () {
+        document.getElementById('legend').style.display = "block";
+        document.getElementById('openMobileLegend').style.display = "none";
+        document.getElementById('closeMobileLegend').style.display = "block";
+      });
+    }
+
+    var legendClose = document.getElementById('closeMobileLegend');
+    if (legendClose) {
+      legendClose.addEventListener('click', function () {
+        document.getElementById('legend').style.display = "none";
+        document.getElementById('openMobileLegend').style.display = "block";
+        document.getElementById('closeMobileLegend').style.display = "none";
+      });
+    }
+//-------------------------------------------------------------
+
+
+
+//------------------------------------------------------------------
+//----------------------Build Legend----------------------------
+//------------------------------------------------------------------
+  map.on("load", function() {
+    var layerInfo = [
+      {
+        layer: signPoints, title: "Common Crossing Signs"
+      },
+      {
+        layer: crossingPoints, title: "Railroad Crossings"
+      },
+      {
+        layer: milePostsTen, title: "Mile Posts"
+      },
+      {
+        layer: railLine, title: "Railroad Lines", hideLayers: [0], defaultSymbol: false
+      }];
+
+    var legendDijit = new Legend({
+      map: map,
+
+      layerInfos: layerInfo,
+
+      respectCurrentMapScale: true,
+    }, "legendDiv");
+    legendDijit.startup();
+    console.log(layerInfo);
+    console.log(layerInfo[3]);
+    console.log(layerInfo[3].layer._div.children);
+  });
+
 //------------------------------------------------------------------
 
 
