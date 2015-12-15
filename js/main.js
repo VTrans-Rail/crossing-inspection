@@ -313,9 +313,6 @@ require([
       respectCurrentMapScale: true,
     }, "legendDiv");
     legendDijit.startup();
-    console.log(layerInfo);
-    console.log(layerInfo[3]);
-    console.log(layerInfo[3].layer._div.children);
   });
 
 //------------------------------------------------------------------
