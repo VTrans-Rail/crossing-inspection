@@ -3,7 +3,7 @@
   overflow-y: auto;
   position:absolute;
   background-color: rgba(102, 102, 102, 0.8);
-  padding: 115px 10px 60px 60px;
+  padding: 70px 10px 60px 60px;
   float: right;
   right: 0px;
   z-index: 31;
@@ -11,9 +11,35 @@
   height: 100%;
 }
 
-/*#legendDiv {
+#legendDiv {
+  top: 10px;
+  color: #fff;
+  padding-bottom: 5px;
+}
+
+#openMobileLegend {
   display: block;
-}*/
+  position: fixed;
+  color: #fff;
+  background-color: rgba(102, 102, 102, 0.8);
+  font-size: 18px;
+  bottom: 0%;
+  height: 7%;
+  width: 100%;
+  z-index: 1;
+}
+#closeMobileLegend {
+  display: none;
+  position: fixed;
+  color: #fff;
+  background-color: rgba(102, 102, 102, 1);
+  font-size: 18px;
+  top: 0;
+  height: 64px;
+  width: 100%;
+  z-index: 1032;
+}
+
 
 
 /*Hides Rail Trails and TSRR (I couldn't figure out how to display only some of the symbology classes)*/
@@ -55,6 +81,11 @@
 }
 
 
+@media (min-width: 415px) {
+  #openMobileLegend {
+    display: none;
+  }
+}
 
 @media (min-width: 992px) {
   #legend {
@@ -62,8 +93,7 @@
     overflow-y: auto;
     position:absolute;
     background-color: rgba(102, 102, 102, 0.8);
-    /*background-color: rgba(76, 175, 80, 0.8);*/
-    padding: 20px 10px 10px 10px;
+    padding: 115px 10px 60px 60px;
     float: right;
     right: 0px;
     z-index: 1;
@@ -75,39 +105,30 @@
     top: 80px;
     color: #fff;
     padding-bottom: 25px;
-    /*width: calc(190px + ((100% - 992px)/4));*/
   }
 }
 
-@media (max-width: 415px) {
-  #mobileLegendButtonClosed {
+/*@media (max-width: 415px) {
+  #openMobileLegend {
     display: block;
     position: fixed;
     color: #fff;
     background-color: rgba(102, 102, 102, 0.8);
     font-size: 18px;
     bottom: 0%;
-    height: 55px;
+    height: 7%;
     width: 100%;
     z-index: 1;
   }
-  #mobileLegendButtonOpen {
+  #closeMobileLegend {
     display: none;
     position: fixed;
     color: #fff;
-    background-color: rgba(102, 102, 102, 0.8);
+    background-color: rgba(102, 102, 102, 1);
     font-size: 18px;
-    top: 64px;
-    height: 55px;
+    top: 0;
+    height: 64px;
     width: 100%;
-    z-index: 32;
+    z-index: 1032;
   }
-
-  #legendDiv {
-    top: 10px;
-    color: #fff;
-    padding-bottom: 25px;
-    /*width: calc(190px + ((100% - 992px)/4));*/
-  }
-
-}
+}*/

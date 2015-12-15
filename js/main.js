@@ -64,21 +64,21 @@ require([
 //-------------------------------------------------------------
 //--------------------Setup Mobile Legend Controls-----------------------
 //-------------------------------------------------------------
-    var legendOpen = document.getElementById('mobileLegendButtonClosed');
+    var legendOpen = document.getElementById('openMobileLegend');
     if (legendOpen) {
       legendOpen.addEventListener('click', function () {
         document.getElementById('legend').style.display = "block";
-        document.getElementById('mobileLegendButtonClosed').style.display = "none";
-        document.getElementById('mobileLegendButtonOpen').style.display = "block";
+        document.getElementById('openMobileLegend').style.display = "none";
+        document.getElementById('closeMobileLegend').style.display = "block";
       });
     }
 
-    var legendClose = document.getElementById('mobileLegendButtonOpen');
+    var legendClose = document.getElementById('closeMobileLegend');
     if (legendClose) {
       legendClose.addEventListener('click', function () {
         document.getElementById('legend').style.display = "none";
-        document.getElementById('mobileLegendButtonClosed').style.display = "block";
-        document.getElementById('mobileLegendButtonOpen').style.display = "none";
+        document.getElementById('openMobileLegend').style.display = "block";
+        document.getElementById('closeMobileLegend').style.display = "none";
       });
     }
 //-------------------------------------------------------------
