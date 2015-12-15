@@ -3,7 +3,7 @@
   overflow-y: auto;
   position:absolute;
   background-color: rgba(102, 102, 102, 0.8);
-  padding: 70px 10px 60px 60px;
+  /*padding: 70px 10px 60px 60px;*/
   float: right;
   right: 0px;
   z-index: 31;
@@ -14,7 +14,11 @@
 #legendDiv {
   top: 10px;
   color: #fff;
-  padding-bottom: 5px;
+  top: 70px;
+  width: 70%;
+  left: 15%;
+  /*padding: 70px 10px 60px 60px;*/
+
 }
 
 #openMobileLegend {
@@ -83,26 +87,49 @@
 
 @media (min-width: 415px) {
   #openMobileLegend {
-    display: none;
+    height: 6%;
+  }
+}
+
+@media (min-width: 768px) {
+  #closeMobileLegend {
+    height: 74px;
+  }
+
+  #legend {
+    /*padding: 70px 10px 60px 10px;*/
+  }
+
+  #legendDiv {
+    font-size: 18px;
+    width: 40%;
+    top: 90px;
+    left: 30%;
   }
 }
 
 @media (min-width: 992px) {
+  #openMobileLegend {
+    display: none;
+  }
   #legend {
     display: block;
     overflow-y: auto;
     position:absolute;
     background-color: rgba(102, 102, 102, 0.8);
-    padding: 115px 10px 60px 60px;
-    float: right;
-    right: 0px;
+    /*padding: 20px 10px 20px 10px;*/
+    /*float: right;*/
+    /*right: 0px;*/
     z-index: 1;
     width: 200px;
     height: 100%;
   }
 
   #legendDiv {
-    top: 80px;
+    font-size: 14px;
+    top: 100px;
+    left: 5%;
+    width: 90%;
     color: #fff;
     padding-bottom: 25px;
   }

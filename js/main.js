@@ -62,30 +62,6 @@ require([
 
 
 //-------------------------------------------------------------
-//--------------------Setup Mobile Legend Controls-----------------------
-//-------------------------------------------------------------
-    var legendOpen = document.getElementById('openMobileLegend');
-    if (legendOpen) {
-      legendOpen.addEventListener('click', function () {
-        document.getElementById('legend').style.display = "block";
-        document.getElementById('openMobileLegend').style.display = "none";
-        document.getElementById('closeMobileLegend').style.display = "block";
-      });
-    }
-
-    var legendClose = document.getElementById('closeMobileLegend');
-    if (legendClose) {
-      legendClose.addEventListener('click', function () {
-        document.getElementById('legend').style.display = "none";
-        document.getElementById('openMobileLegend').style.display = "block";
-        document.getElementById('closeMobileLegend').style.display = "none";
-      });
-    }
-//-------------------------------------------------------------
-
-
-
-//-------------------------------------------------------------
 //--------------------Create Map-----------------------------------------
 //-------------------------------------------------------------
     // satellite imagery from ArcGIS Online, use levels 0 - 14
@@ -284,6 +260,30 @@ require([
     map.addLayer(crossingPoints);
     map.addLayer(signPoints);
 //------------------------------------------------------------------
+
+
+
+//-------------------------------------------------------------
+//--------------------Setup Mobile Legend Controls-----------------------
+//-------------------------------------------------------------
+    var legendOpen = document.getElementById('openMobileLegend');
+    if (legendOpen) {
+      legendOpen.addEventListener('click', function () {
+        document.getElementById('legend').style.display = "block";
+        document.getElementById('openMobileLegend').style.display = "none";
+        document.getElementById('closeMobileLegend').style.display = "block";
+      });
+    }
+
+    var legendClose = document.getElementById('closeMobileLegend');
+    if (legendClose) {
+      legendClose.addEventListener('click', function () {
+        document.getElementById('legend').style.display = "none";
+        document.getElementById('openMobileLegend').style.display = "block";
+        document.getElementById('closeMobileLegend').style.display = "none";
+      });
+    }
+//-------------------------------------------------------------
 
 
 
