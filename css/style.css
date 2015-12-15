@@ -69,8 +69,8 @@
 }
 
 #HelpButton {
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 
@@ -188,8 +188,8 @@
   }
 
   #HelpButton {
-    padding-top: 11px;
-    padding-bottom: 11px;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 } /* end small devices */
 
@@ -241,6 +241,11 @@
     max-width: 24px;
     padding-top: 13px;
     padding-bottom: 13px;
+  }
+
+  #HelpButton {
+    padding-top: 11px;
+    padding-bottom: 11px;
   }
 } /* end medium devices */
 
