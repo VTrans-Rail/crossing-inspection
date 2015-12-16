@@ -171,7 +171,6 @@ require([
     var railLine = new FeatureLayer(lineUrl, {
       id: "rail-line",
       outFields: ["*"],
-      definitionExpression: "RailTrail = 'N' AND VRLID <> 'VRL15'"
     });
 
 
@@ -202,7 +201,7 @@ require([
     });
 
     // Remove rail trails and TSRR from feature layers---------------
-    // railLine.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+    railLine.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsTen.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsFive.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsOne.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
@@ -326,7 +325,6 @@ require([
 //------------------------------------------------------------------------
   var link = domConstruct.create("a", {
     "class": "btn btn-sm btn-default btn-report",
-    // "class": "action",
     "role": "button",
     "id": "fullReport",
     "innerHTML": "Full Report",
@@ -346,19 +344,14 @@ require([
 
   var interval = 3000;
   function when (interval) {
-    // console.log(popup);
-    // console.log(popup.count);
-    // map.infoWindow.hide();
-
     var deferred = new dojo.Deferred();
-    var featureCount = popup.count;
-    if ( featureCount > 0 ) {
-      console.log(featureCount);
 
+    var featureCount = popup.count;
+
+    if ( featureCount > 0 ) {
       //Updates link to report page
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
       link.href = "report.html?dotnum=" + dotnum;
-
 
       var pictureOpen = document.getElementById('popupPictures');
       if (pictureOpen) {
@@ -366,8 +359,6 @@ require([
           pictureOpen.style.display = "none";
 
           var objectId = popup.getSelectedFeature().attributes.OBJECTID;
-          // console.log(popup.getSelectedFeature());
-          // console.log(objectId);
 
           formatString = "";
 
@@ -378,19 +369,14 @@ require([
 
           var selectedLayerId = popup.getSelectedFeature()._layer.id;
 
-          console.log(selectedLayerId);
-
           if ( selectedLayerId.length > 12 ) {
             selectedLayer = crossingPoints;
           } else {
             selectedLayer = signPoints;
           }
 
-          console.log(selectedLayer);
-
           selectedLayer.queryAttachmentInfos(objectId).then(function(response){
             var imgSrc;
-            console.log(objectId);
             if (response.length === 0) {
               deferred.resolve("no attachments");
             }
@@ -400,10 +386,8 @@ require([
                 imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
               }
               formatString += imageString;
-              console.log(imageString);
             }
           }).then(function(response) {
-              console.log(formatString);
               var summaryInfo = document.getElementById("popupContent").innerHTML;
               document.getElementById("popupContent").innerHTML = summaryInfo + formatString;
             });
