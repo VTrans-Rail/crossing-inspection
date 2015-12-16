@@ -116,7 +116,7 @@ require([
 // -----------------Define PopupTemplates------------------------------
 //------------------------------------------------------------------
     //Crossing Template--------------
-    var crossingPopupFeatures = "<div style='overflow-y:auto'><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
+    var crossingPopupFeatures = "<div style='overflow-y:auto'>${OBJECTID}</br><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>";
 
     var crossingTemplate = new PopupTemplate({
       title: "Crossing {DOT_Num}",
@@ -389,7 +389,13 @@ require([
 
     // Signs
     on(signPoints, "click", function(evt){
-      map.infoWindow.hide();
+      // console.log(evt.graphic.attributes.DOT_Num);
+      // console.log(evt.graphic);
+      // console.log(evt);
+      // console.log(signPoints.graphics);
+      // console.log(signPoints.graphics.attributes.DOT_Num);
+      // console.log(signPoints.getSelectedFeatures());
+      // map.infoWindow.hide();
       formatString = signPopupFeatures;
       var  objectId = evt.graphic.attributes[signPoints.objectIdField];
       selectQuery.objectIds = [objectId];
@@ -404,15 +410,28 @@ require([
       console.log("error with signPoints; " + err.message);
     });
 
-    on(signPoints, 'selection-complete', setSignWindowContent);
+    // on(signPoints, 'selection-complete', setSignWindowContent);
+    on(map.infoWindow, 'selection-change', setSignWindowContent);
+    // on(map.infoWindow, 'selection-change', function () {
+    //   on(popup, 'set-features', setSignWindowContent);
+    // });
+
 
 
     function setSignWindowContent(results){
+    // on(popup, 'set-features', function () {
+      formatString = signPopupFeatures;
       var imageString = "<table><tr>";
       var imageStyle = "alt='site image' width='100%'";
       var deferred = new dojo.Deferred;
-      var graphic = results.features[0];
-      var  objectId = graphic.attributes[signPoints.objectIdField];
+      console.log(popup.getSelectedFeature().attributes.OBJECTID);
+      var objectId = popup.getSelectedFeature().attributes.OBJECTID;
+      // console.log(objectId);
+      // var graphic = results.features[0];
+      // var  objectId = graphic.attributes[signPoints.objectIdField];
+      console.log(objectId);
+      // console.log(popup.getSelectedFeature());
+
 
       signPoints.queryAttachmentInfos(objectId).then(function(response){
         var imgSrc;
@@ -428,6 +447,7 @@ require([
         }
         signTemplate.setContent(formatString);
       });
+    // });
     }
 //---------------------------------------------------------------------------
 

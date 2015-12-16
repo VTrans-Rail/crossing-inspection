@@ -254,6 +254,10 @@
 
 
 /*Popup Styling for Light Theme*/
+.esriPopup {
+  z-index:25;
+}
+
 .esriPopup.light .titlePane {
   height: 35px;
   color: #FFFFED;
