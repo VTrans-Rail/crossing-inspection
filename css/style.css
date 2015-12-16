@@ -12,6 +12,9 @@
   text-align: center;
 }
 
+.actual-image {
+  margin-bottom: 20px;
+}
 
 .esriControlsBR {
   display:none;
