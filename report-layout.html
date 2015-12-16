@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/bootstrap-mod.css">
 
     <!-- Gridforms CSS -->
-    <link rel="stylesheet" type="text/css" href="gridforms.css">
+    <link rel="stylesheet" type="text/css" href="gridforms/gridforms.css">
 
   </head>
 
@@ -63,507 +63,409 @@
       </div>
     </nav>
 
-
     <div class="container-fluid" id="info">
-<div class="row">
-  <div class="col-xs-12">
-    <div class="page-header">
-      <h1>Crossing Report</h1>
+
+    <form class="grid-form">
+        <fieldset>
+            <legend>Crossing Details</legend>
+            <div data-row-span="4">
+                <div data-field-span="1">
+                  <label>Crossing Number</label>
+                  <input type="text" disabled="true" value="247-510N">
+                </div>
+                <div data-field-span="1">
+                  <label>Surface Condition</label>
+                  <input type="text" disabled="true" value="Good">
+                </div>
+                <div data-field-span="1">
+                  <label>Road Name</label>
+                  <input type="text" disabled="true" value="Sidewalk">
+                </div>
+                <div data-field-span="1">
+                  <label>Town</label>
+                  <input type="text" disabled="true" value="Northfield Village">
+                </div>
+            </div>
+            <div data-row-span="4">
+                <div data-field-span="2">
+                  <label>Rail Division</label>
+                  <input type="text" disabled="true" value="New England Central Railroad">
+                </div>
+                <div data-field-span="1">
+                  <label>Subdivision</label>
+                  <input type="text" disabled="true" value="Roxbury">
+                </div>
+                <div data-field-span="1">
+                  <label>MP</label>
+                  <input type="text" disabled="true" value="67.73">
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+          <legend>Crossing Photos</legend>
+          <div data-row-span="2">
+            <div data-field-span="1">
+              <input type="image" src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6798">
+            </div>
+            <div data-field-span="1">
+              <input type="image" src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6799">
+            </div>
+          </div>
+          <div data-row-span="2">
+            <div data-field-span="1">
+              <input type="image" src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6800">
+            </div>
+            <div data-field-span="1">
+              <input type="image" src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6801">
+            </div>
+          </div>
+          <div data-row-span="2">
+            <div data-field-span="1">
+              <input type="image" src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6802">
+            </div>
+            <div data-field-span="1">
+              <input type="image" src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6803">
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Crossing Details</legend>
+          <div data-row-span="6">
+            <div data-field-span="1">
+              <label>Paved</label>
+              <input type="checkbox" disabled="true" checked>
+            </div>
+            <div data-field-span="1">
+              <label>Illuminated</label>
+              <input type="checkbox" disabled="true" checked>
+            </div>
+            <div data-field-span="1">
+              <label>Road within 500'</label>
+              <input type="checkbox" disabled="true" checked>
+            </div>
+          </div>
+          <div data-row-span="4">
+            <div data-field-span="1">
+              <label>AOT Class</label>
+              <input type="text" disabled="true" value="3">
+            </div>
+            <div data-field-span="1">
+              <label>Functional Class</label>
+              <input type="text" disabled="true" value="3">
+            </div>
+            <div data-field-span="1">
+              <label>Pavement Marking Condition</label>
+              <input type="text" disabled="true" value="Good">
+            </div>
+            <div data-field-span="1">
+              <label>Number of Tracks</label>
+              <input type="text" disabled="true" value="3">
+            </div>
+          </div>
+        </fieldset>
+    </form>
+
+        <div class="panel-heading">Surface Type</div>
+          <div class="panel-body">
+            <strong>
+          Unconsolidated</strong>
+          </div>
+      </div>
     </div>
-  </div>
-</div>
-<div class="row">
-	<div class="col-sm-6">
-		<div class="panel panel-primary">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Crossing Number</h3>
-		  </div>
-		  <div class="panel-body text-center">
-		    <h3>
-      247-510N
-    </h3></div>
-  </div>
-</div>
-<div class="col-sm-6">
-  <div class="panel panel-danger">
-    <div class="panel-heading">
-      <h3 class="panel-title">Surface Condition</h3>
+    <div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Surface Type 2</div>
+          <div class="panel-body">
+            <strong>
+          null</strong>
+          </div>
+      </div>
     </div>
-    <div class="panel-body text-center">
-      <h3>
-      Good
-      </h3></div>
+    <div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Flange Material</div>
+          <div class="panel-body">
+            <strong>
+          None</strong>
+          </div>
+      </div>
     </div>
-  </div>
-</div>
-<div class="row img-row">
-  <div class="col-sm-6 col-md-4"><img src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6798" class="img-responsive" alt="site image" width="100%"></div><div class="col-sm-6 col-md-4"><img src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6799" class="img-responsive" alt="site image" width="100%"></div><div class="col-sm-6 col-md-4"><img src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6800" class="img-responsive" alt="site image" width="100%"></div><div class="col-sm-6 col-md-4"><img src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6801" class="img-responsive" alt="site image" width="100%"></div><div class="col-sm-6 col-md-4"><img src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6802" class="img-responsive" alt="site image" width="100%"></div><div class="col-sm-6 col-md-4"><img src="http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1/401/attachments/6803" class="img-responsive" alt="site image" width="100%"></div>
-</div>
-<div class="row">
-  <div class="col-sm-12">
-    <div class="page-header">
-      <h1><small>Location Information</small></h1>
     </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">Line Name</div>
-        <div class="panel-body">
-          <strong>
-      NECR</strong>
+    <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Crossing Width</div>
+          <div class="panel-body">
+            <strong>
+          25</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">Division</div>
-      <div class="panel-body">
-        <strong>
-      New England Central Railroad</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Crossing Length</div>
+          <div class="panel-body">
+            <strong>
+          13</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">Subdivision</div>
-      <div class="panel-body">
-        <strong>
-      Roxbury</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Crossing Angle</div>
+          <div class="panel-body">
+            <strong>
+          60-90</strong>
+          </div>
       </div>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">Branch</div>
-      <div class="panel-body">
-        <strong>
-      None</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-info">
+        <div class="panel-heading">Snooper Compliant</div>
+          <div class="panel-body">
+            <strong>
+          Yes</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">MP</div>
-      <div class="panel-body">
-        <strong>
-      67.73</strong>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h1><small>Safety Information</small></h1>
       </div>
-  </div>
-</div>
-<div class="col-sm-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">Road Name</div>
-      <div class="panel-body">
-        <strong>
-      Sidewalk</strong>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Warning Device</div>
+          <div class="panel-body">
+            <strong>
+          None</strong>
+          </div>
       </div>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">Town</div>
-      <div class="panel-body">
-        <strong>
-      Northfield Village</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">County</div>
-      <div class="panel-body">
-        <strong>
-      Washington</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Channelization</div>
+          <div class="panel-body">
+            <strong>
+          None</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">Land Use</div>
-      <div class="panel-body">
-        <strong>
-      Industrial</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Stop Line</div>
+          <div class="panel-body">
+            <strong>
+          No</strong>
+          </div>
       </div>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-xs-12">
-  <div class="page-header">
-    <h1><small>Crossing Information</small></h1>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-3">
-  <div class="panel panel-info">
-    <div class="panel-heading">Paved</div>
-      <div class="panel-body">
-        <strong>
-      Yes</strong>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Pavement Markings</div>
+          <div class="panel-body">
+            <strong>
+          No</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-info">
-    <div class="panel-heading">Surface Type</div>
-      <div class="panel-body">
-        <strong>
-      Unconsolidated</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-info">
-    <div class="panel-heading">Surface Type 2</div>
-      <div class="panel-body">
-        <strong>
-      null</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Gate Arms <small>(Vehicle)</small> </div>
+          <div class="panel-body">
+            <strong>
+          0</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-info">
-    <div class="panel-heading">Flange Material</div>
-      <div class="panel-body">
-        <strong>
-      None</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Gate Arms <small>(Ped)</small> </div>
+          <div class="panel-body">
+            <strong>
+          0</strong>
+          </div>
       </div>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-3">
-  <div class="panel panel-info">
-    <div class="panel-heading">Crossing Width</div>
-      <div class="panel-body">
-        <strong>
-      25</strong>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Gate Configuration</div>
+          <div class="panel-body">
+            <strong>
+          None</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-info">
-    <div class="panel-heading">Crossing Length</div>
-      <div class="panel-body">
-        <strong>
-      13</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-info">
-    <div class="panel-heading">Crossing Angle</div>
-      <div class="panel-body">
-        <strong>
-      60-90</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Cantilevered (Road)</div>
+          <div class="panel-body">
+            <strong>
+          0</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-info">
-    <div class="panel-heading">Snooper Compliant</div>
-      <div class="panel-body">
-        <strong>
-      Yes</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Cantilevered (Side)</div>
+          <div class="panel-body">
+            <strong>
+          0</strong>
+          </div>
       </div>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-12">
-  <div class="page-header">
-    <h1><small>Safety Information</small></h1>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Warning Device</div>
-      <div class="panel-body">
-        <strong>
-      None</strong>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Cantilevered Bulb</div>
+          <div class="panel-body">
+            <strong>
+          No Flashers</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Signs or Signals?</div>
-      <div class="panel-body">
-        <strong>
-      No</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Mast Flashers</div>
+          <div class="panel-body">
+            <strong>
+          0</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Channelization</div>
-      <div class="panel-body">
-        <strong>
-      None</strong>
-      </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Stop Line</div>
-      <div class="panel-body">
-        <strong>
-      No</strong>
-      </div>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Pavement Markings</div>
-      <div class="panel-body">
-        <strong>
-      No</strong>
-      </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Dynamic Envelope</div>
-      <div class="panel-body">
-        <strong>
-      No</strong>
-      </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Gate Arms <small>(Vehicle)</small> </div>
-      <div class="panel-body">
-        <strong>
-      0</strong>
-      </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Gate Arms <small>(Ped)</small> </div>
-      <div class="panel-body">
-        <strong>
-      0</strong>
-      </div>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Gate Configuration</div>
-      <div class="panel-body">
-        <strong>
-      None</strong>
-      </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Special Gates</div>
-      <div class="panel-body">
-        <strong>
-      None</strong>
-      </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Cantilevered (Road)</div>
-      <div class="panel-body">
-        <strong>
-      0</strong>
-      </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Cantilevered (Side)</div>
-      <div class="panel-body">
-        <strong>
-      0</strong>
-      </div>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Cantilevered Bulb</div>
-      <div class="panel-body">
-        <strong>
-      No Flashers</strong>
-      </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Mast Flashers</div>
-      <div class="panel-body">
-        <strong>
-      0</strong>
-      </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Mast Flasher Type</div>
-      <div class="panel-body">
-        <strong>
-      No Flashers
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Mast Flasher Type</div>
+          <div class="panel-body">
+            <strong>
+          No Flashers
+          </strong></div><strong>
       </strong></div><strong>
-  </strong></div><strong>
-</strong></div><strong>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Back Side Flashers</div>
-      <div class="panel-body">
-        <strong>
-      None</strong>
+    </strong></div><strong>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Back Side Flashers</div>
+          <div class="panel-body">
+            <strong>
+          None</strong>
+          </div>
       </div>
-  </div>
-</div>
-</strong></div><strong>
-<div class="row">
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Flasher Total Count</div>
-      <div class="panel-body">
-        <strong>
-      0</strong>
+    </div>
+    </strong></div><strong>
+    <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Flasher Total Count</div>
+          <div class="panel-body">
+            <strong>
+          0</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Flasher Size</div>
-      <div class="panel-body">
-        <strong>
-      None</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Flasher Size</div>
+          <div class="panel-body">
+            <strong>
+          None</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Wayside Horn</div>
-      <div class="panel-body">
-        <strong>
-      No</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Traffic Signal Control</div>
-      <div class="panel-body">
-        <strong>
-      No</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
       </div>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Traffic Signal Nearby</div>
-      <div class="panel-body">
-        <strong>
-      No</strong>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Traffic Signal Nearby</div>
+          <div class="panel-body">
+            <strong>
+          No</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Bell Count</div>
-      <div class="panel-body">
-        <strong>
-      0</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Bell Count</div>
+          <div class="panel-body">
+            <strong>
+          0</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Traffic Pre-Signals</div>
-      <div class="panel-body">
-        <strong>
-      No</strong>
+    </div>
+        <div class="panel-heading">Traffic Lane Type</div>
+          <div class="panel-body">
+            <strong>
+          N/A</strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Storage Distance</div>
-      <div class="panel-body">
-        <strong>
-      0</strong>
+    </div>
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Traffic Lane Count</div>
+          <div class="panel-body">
+            <strong>
+          0</strong>
+          </div>
       </div>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Stop-line Distance</div>
-      <div class="panel-body">
-        <strong>
-      0</strong>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-warning">
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Traffic Lane Type</div>
-      <div class="panel-body">
-        <strong>
-      N/A</strong>
+    </div>
+    <div class="col-sm-9">
+      <div class="panel panel-success">
+        <div class="panel-heading">Comments</div>
+          <div class="panel-body">
+            <strong>
+          Ped Xing Sidewalk. May be private crossing. Look at signs </strong>
+          </div>
       </div>
-  </div>
-</div>
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Traffic Lane Count</div>
-      <div class="panel-body">
-        <strong>
-      0</strong>
-      </div>
-  </div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-3">
-  <div class="panel panel-warning">
-    <div class="panel-heading">Crossing Illuminated</div>
-      <div class="panel-body">
-        <strong>
-      Yes</strong>
-      </div>
-  </div>
-</div>
-<div class="col-sm-9">
-  <div class="panel panel-success">
-    <div class="panel-heading">Comments</div>
-      <div class="panel-body">
-        <strong>
-      Ped Xing Sidewalk. May be private crossing. Look at signs </strong>
-      </div>
-  </div>
-</div>
-</div>
-      </strong></div>
+    </div>
+    </div>
+    </div>
+<!-- end container -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+  </body>
+  </html>
