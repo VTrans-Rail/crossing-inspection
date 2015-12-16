@@ -116,7 +116,7 @@ require([
 // -----------------Define PopupTemplates------------------------------
 //------------------------------------------------------------------
     //Crossing Template--------------
-    var crossingPopupFeatures = "<div  id='popupContent' style='overflow-y:auto'>${OBJECTID}</br><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popupPictures' class='btn btn-default text-center btnHelp'>&#x25BC Pictures &#x25BC</button></div>";
+    var crossingPopupFeatures = "<div id='popupContent' style='overflow-y:auto'>${OBJECTID}</br><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popupPictures' class='btn btn-default text-center btnHelp'>&#x25BC Pictures &#x25BC</button></div>";
 
     var crossingTemplate = new PopupTemplate({
       title: "Crossing {DOT_Num}",
@@ -126,7 +126,7 @@ require([
 
 
     //Sign Template------------------
-    var signPopupFeatures = "<div style='overflow-y:auto'><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>";
+    var signPopupFeatures = "<div id='popupContent' style='overflow-y:auto'>${OBJECTID}</br><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popupPictures' class='btn btn-default text-center btnHelp'>&#x25BC Pictures &#x25BC</button></div>";
 
     var signTemplate = new PopupTemplate({
       title: "Crossing Sign",
@@ -334,55 +334,6 @@ require([
     "target": "_blank"
   }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
 //------------------------------------------------------------------------
-console.log(map.infoWindow.isShowing);
-
-
-// //-------------------------------------------------------------
-// //--------------------Setup Mobile Legend Controls-----------------------
-// //-------------------------------------------------------------
-//     var pictureOpen = document.getElementById('popupPictures');
-//     if (pictureOpen) {
-//       pictureOpen.addEventListener('click', function () {
-//         console.log(featureCount);
-//         var objectId = popup.getSelectedFeature().attributes.OBJECTID;
-//         console.log(objectId);
-//         formatString = crossingPopupFeatures;
-//         var imageString = "<table><tr>";
-//         var imageStyle = "alt='site image' width='100%'";
-//
-//         crossingPoints.queryAttachmentInfos(objectId).then(function(response){
-//             var imgSrc;
-//             if (response.length === 0) {
-//               deferred.resolve("no attachments");
-//             }
-//             else {
-//               for ( i = 0; i < response.length; i++) {
-//                 imgSrc = response[i].url;
-//                 imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
-//               }
-//               //Add closing div tag to to match the opening div tag in crossingPopupFeatures that
-//               formatString += imageString + "</div>";
-//             }
-//             crossingTemplate.setContent(formatString);
-//           });
-//
-//
-//
-//         // document.getElementById('legend').style.display = "block";
-//         // document.getElementById('openMobileLegend').style.display = "none";
-//         // document.getElementById('closeMobileLegend').style.display = "block";
-//       });
-//     }
-//
-//     // var legendClose = document.getElementById('closeMobileLegend');
-//     // if (legendClose) {
-//     //   legendClose.addEventListener('click', function () {
-//     //     document.getElementById('legend').style.display = "none";
-//     //     document.getElementById('openMobileLegend').style.display = "block";
-//     //     document.getElementById('closeMobileLegend').style.display = "none";
-//     //   });
-//     // }
-// //-------------------------------------------------------------
 
 
 
@@ -391,18 +342,7 @@ console.log(map.infoWindow.isShowing);
 //---------------------------------------------------------------------------
 //---------------------Build Link to Report Page--------------------------------
 //---------------------------------------------------------------------------
-  // var selectQuery = new esri.tasks.Query();
-
-  // on(crossingPoints, "click", setPopupFeatures);
-  // on(map.infoWindow, "selection-change", setCrossingWindowContent);
   on(map.infoWindow, "selection-change", when);
-
-
-  // var hmmm = function setCrossingWindowContent() {
-  //   var objectId = popup.getSelectedFeature().attributes.OBJECTID;
-  //   console.log(objectId);
-  // }
-
 
   var interval = 3000;
   function when (interval) {
@@ -414,229 +354,65 @@ console.log(map.infoWindow.isShowing);
     var featureCount = popup.count;
     if ( featureCount > 0 ) {
       console.log(featureCount);
-      var objectId = popup.getSelectedFeature().attributes.OBJECTID;
-      console.log(objectId);
+
+      //Updates link to report page
+      var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
+      link.href = "report.html?dotnum=" + dotnum;
+
 
       var pictureOpen = document.getElementById('popupPictures');
       if (pictureOpen) {
         pictureOpen.addEventListener('click', function () {
           pictureOpen.style.display = "none";
-          // map.infoWindow.hide();
 
           var objectId = popup.getSelectedFeature().attributes.OBJECTID;
+          // console.log(popup.getSelectedFeature());
           // console.log(objectId);
 
-          // formatString = crossingPopupFeatures;
           formatString = "";
 
           var imageString = "<table><tr>";
           var imageStyle = "alt='site image' width='100%'";
 
+          var selectedLayer = "";
 
-          crossingPoints.queryAttachmentInfos(objectId).then(function(response){
-              var imgSrc;
-              // console.log(objectId);
-              if (response.length === 0) {
-                deferred.resolve("no attachments");
+          var selectedLayerId = popup.getSelectedFeature()._layer.id;
+
+          console.log(selectedLayerId);
+
+          if ( selectedLayerId.length > 12 ) {
+            selectedLayer = crossingPoints;
+          } else {
+            selectedLayer = signPoints;
+          }
+
+          console.log(selectedLayer);
+
+          selectedLayer.queryAttachmentInfos(objectId).then(function(response){
+            var imgSrc;
+            console.log(objectId);
+            if (response.length === 0) {
+              deferred.resolve("no attachments");
+            }
+            else {
+              for ( i = 0; i < response.length; i++) {
+                imgSrc = response[i].url;
+                imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
               }
-              else {
-                for ( i = 0; i < response.length; i++) {
-                  imgSrc = response[i].url;
-                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
-                }
-                //Add closing div tag to to match the opening div tag in crossingPopupFeatures that
-                formatString += imageString + "</div>";
-              }
-              // console.log("This text should be followed by the html string for the images if page loaded correctly (This is within the showResults function): " + imageString);
-              // crossingTemplate.setContent(formatString);
-            }).then(function(response) {
-              // console.log("This text should be followed by the html string for the images if page loaded correctly (This is within the showResults function): " + formatString);
+              formatString += imageString;
+              console.log(imageString);
+            }
+          }).then(function(response) {
+              console.log(formatString);
               var summaryInfo = document.getElementById("popupContent").innerHTML;
               document.getElementById("popupContent").innerHTML = summaryInfo + formatString;
-              // crossingTemplate.setContent(formatString);
-              // map.infoWindow.show();
             });
-
-            // on(crossingPoints, "query-attachment-infos-complete", appendPopup);
-            // function appendPopup () {
-            //   // console.log("This text should be followed by the html string for the images if page loaded correctly (This is within the showResults function): " + imageString);
-            //   crossingTemplate.setContent(formatString);
-            // }
-
-
-          // query.where =
         });
-
-      // formatString = crossingPopupFeatures;
-      // var imageString = "<table><tr>";
-      // var imageStyle = "alt='site image' width='100%'";
-      //
-      // crossingPoints.queryAttachmentInfos(objectId).then(function(response){
-      //     var imgSrc;
-      //     if (response.length === 0) {
-      //       deferred.resolve("no attachments");
-      //     }
-      //     else {
-      //       for ( i = 0; i < response.length; i++) {
-      //         imgSrc = response[i].url;
-      //         imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
-      //       }
-      //       //Add closing div tag to to match the opening div tag in crossingPopupFeatures that
-      //       formatString += imageString + "</div>";
-      //     }
-      //     crossingTemplate.setContent(formatString);
-      //   });
       } else {
         setTimeout(function(){ when(interval);}, interval);
       }
     }
   }
-
-  function setPopupFeatures () {
-    var deferred = new dojo.Deferred();
-
-    // var objectId = graphic.attributes[crossingPoints.objectIdField];
-    // selectQuery.objectIds = [objectId];
-    // crossingPoints.selectFeatures(selectQuery).then(setCrossingWindowContent);
-    setCrossingWindowContent;
-    // popup.getSelectedFeature().then(setCrossingWindowContent);
-  }
-
-  // function setCrossingWindowContent () {
-  //   var objectId = popup.getSelectedFeature().attributes.OBJECTID;
-  //   console.log(objectId);
-
-    //   signPoints.queryAttachmentInfos(objectId).then(function(response){
-    //     var imgSrc;
-    //     if (response.length === 0) {
-    //       deferred.resolve("no attachments");
-    //     }
-    //     else {
-    //       for ( i = 0; i < response.length; i++) {
-    //         imgSrc = response[i].url;
-    //         imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
-    //       }
-    //       formatString += imageString + "</div>";
-    //     }
-    //     signTemplate.setContent(formatString);
-    //   });
-
-  // }
-
-
-
-
-
-
-
-    // var selectQuery = new esri.tasks.Query();
-    //
-    // //Crossings
-    // on(crossingPoints, "click", function(evt){
-    //   map.infoWindow.hide();
-    //   formatString = crossingPopupFeatures;
-    //   var objectId = evt.graphic.attributes[crossingPoints.objectIdField];
-    //   selectQuery.objectIds = [objectId];
-    //   crossingPoints.selectFeatures(selectQuery);
-    //
-    //   //Updates link to report page
-    //   var dotnum = evt.graphic.attributes.DOT_Num;
-    //   link.href = "report.html?dotnum=" + dotnum;
-    // });
-    //
-    // on(crossingPoints, "error", function (err){
-    //   console.log("error with crossingPoints; " + err.message);
-    // });
-    //
-    // on(crossingPoints, 'selection-complete', setCrossingWindowContent);
-    //
-    //
-    // function setCrossingWindowContent(results){
-    //   var imageString = "<table><tr>";
-    //   var imageStyle = "alt='site image' width='100%'";
-    //   var deferred = new dojo.Deferred;
-    //   var graphic = results.features[0];
-    //   var objectId = graphic.attributes[crossingPoints.objectIdField];
-    //
-    //   crossingPoints.queryAttachmentInfos(objectId).then(function(response){
-    //     var imgSrc;
-    //     if (response.length === 0) {
-    //       deferred.resolve("no attachments");
-    //     }
-    //     else {
-    //       for ( i = 0; i < response.length; i++) {
-    //         imgSrc = response[i].url;
-    //         imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
-    //       }
-    //       //Add closing div tag to to match the opening div tag in crossingPopupFeatures that
-    //       formatString += imageString + "</div>";
-    //     }
-    //     crossingTemplate.setContent(formatString);
-    //   });
-    // }
-    //
-    // // Signs
-    // on(signPoints, "click", function(evt){
-    //   // console.log(evt.graphic.attributes.DOT_Num);
-    //   // console.log(evt.graphic);
-    //   // console.log(evt);
-    //   // console.log(signPoints.graphics);
-    //   // console.log(signPoints.graphics.attributes.DOT_Num);
-    //   // console.log(signPoints.getSelectedFeatures());
-    //   // map.infoWindow.hide();
-    //   formatString = signPopupFeatures;
-    //   var  objectId = evt.graphic.attributes[signPoints.objectIdField];
-    //   selectQuery.objectIds = [objectId];
-    //   signPoints.selectFeatures(selectQuery);
-    //
-    //   //Updates link to report page
-    //   var dotnum = evt.graphic.attributes.DOT_Num;
-    //   link.href = "report.html?dotnum=" + dotnum;
-    // });
-    //
-    // on(signPoints, "error", function (err){
-    //   console.log("error with signPoints; " + err.message);
-    // });
-    //
-    // // on(signPoints, 'selection-complete', setSignWindowContent);
-    // on(map.infoWindow, 'selection-change', setSignWindowContent);
-    // // on(map.infoWindow, 'selection-change', function () {
-    // //   on(popup, 'set-features', setSignWindowContent);
-    // // });
-    //
-    //
-    //
-    // function setSignWindowContent(results){
-    // // on(popup, 'set-features', function () {
-    //   formatString = signPopupFeatures;
-    //   var imageString = "<table><tr>";
-    //   var imageStyle = "alt='site image' width='100%'";
-    //   var deferred = new dojo.Deferred;
-    //   console.log(popup.getSelectedFeature().attributes.OBJECTID);
-    //   var objectId = popup.getSelectedFeature().attributes.OBJECTID;
-    //   // console.log(objectId);
-    //   // var graphic = results.features[0];
-    //   // var  objectId = graphic.attributes[signPoints.objectIdField];
-    //   console.log(objectId);
-    //   // console.log(popup.getSelectedFeature());
-    //
-    //
-    //   signPoints.queryAttachmentInfos(objectId).then(function(response){
-    //     var imgSrc;
-    //     if (response.length === 0) {
-    //       deferred.resolve("no attachments");
-    //     }
-    //     else {
-    //       for ( i = 0; i < response.length; i++) {
-    //         imgSrc = response[i].url;
-    //         imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><img src='" + imgSrc + "' " + imageStyle + "></td></tr>";
-    //       }
-    //       formatString += imageString + "</div>";
-    //     }
-    //     signTemplate.setContent(formatString);
-    //   });
-    // // });
-    // }
 //---------------------------------------------------------------------------
 
 
