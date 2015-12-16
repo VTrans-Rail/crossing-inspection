@@ -116,7 +116,7 @@ require([
 // -----------------Define PopupTemplates------------------------------
 //------------------------------------------------------------------
     //Crossing Template--------------
-    var crossingPopupFeatures = "<div  id='popupContent' style='overflow-y:auto'>${OBJECTID}</br><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popupPictures' class='btn btn-default text-center btnHelp'>&#x25B2 Pictures &#x25B2</button>";
+    var crossingPopupFeatures = "<div  id='popupContent' style='overflow-y:auto'>${OBJECTID}</br><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popupPictures' class='btn btn-default text-center btnHelp'>&#x25BC Pictures &#x25BC</button></div>";
 
     var crossingTemplate = new PopupTemplate({
       title: "Crossing {DOT_Num}",
@@ -420,6 +420,7 @@ console.log(map.infoWindow.isShowing);
       var pictureOpen = document.getElementById('popupPictures');
       if (pictureOpen) {
         pictureOpen.addEventListener('click', function () {
+          pictureOpen.style.display = "none";
           // map.infoWindow.hide();
 
           var objectId = popup.getSelectedFeature().attributes.OBJECTID;

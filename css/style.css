@@ -5,6 +5,14 @@
   position: absolute;
 }
 
+#popupPictures {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 2px;
+  text-align: center;
+}
+
+
 .esriControlsBR {
   display:none;
 }
