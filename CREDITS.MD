@@ -30,3 +30,5 @@ https://www.google.com/design/icons/
 - Create Label Shadow without v3.15 Halo TextSymbol Properties: https://gist.github.com/patrickarlt/7139538
 
 - Huge Help With InfoWindow Selection Changes: http://gis.stackexchange.com/questions/75608/infowindow-selection-change
+
+- Huge help figuring out "when" function in javascript for popup photos: http://walterhiggins.net/blog/JavascriptWhen
