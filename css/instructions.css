@@ -27,18 +27,28 @@
 
 /* Padding for spacing */
 .inner {
-  padding: 20px;
+  padding: 10px;
+  padding-top: 0;
 }
 
 .cover {
   padding: 0 20px;
 }
 
-.cover .btn-lg {
+.cover.btn-lg {
   padding: 10px 20px;
   font-weight: bold;
 }
 
+
+/*
+ * Footer
+ */
+
+.mastfoot {
+  color: #999; /* IE8 proofing */
+  color: rgba(255,255,255,.5);
+}
 
 /*
  * Affix and center
@@ -55,24 +65,38 @@
   background-color: white;
   border: 1px solid #57585A;
   border-radius: 4px;
+  padding: 1px 9px;
 }
 
 /*user added styles*/
+
+.subtitle {
+  margin: 0;
+  margin-top: 5px;
+}
+
+#helpRptBtn {
+  position: inherit;
+  max-width: 150px;
+  pointer-events: none;
+  cursor: default;
+}
+
 .subtitle small {
   color: #ddd;
   font-style: italic;
 }
 
 .step {
-  font-size: 1.25em;
+  font-size: 1.125em;
 }
 
 .horiz-line {
   height: 1px;
   background-color: #ddd;
   text-align: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .divider-text {
@@ -100,6 +124,11 @@
     font-size: 40px;
   }
 
+  .mastfoot {
+  position: fixed;
+  bottom: 10%;
+}
+
   .subtitle {
     font-size: 28px;
   }
@@ -121,6 +150,7 @@
   }
   /* Handle the widths */
   .masthead,
+  .mastfoot,
   .cover-container {
     width: 70%; /* Must be percentage or pixels for horizontal alignment */
   }
@@ -134,6 +164,7 @@
 
 @media (min-width: 992px) {
   .masthead,
+  .mastfoot,
   .cover-container {
     width: 700px;
   }
