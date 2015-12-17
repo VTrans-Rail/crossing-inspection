@@ -351,12 +351,6 @@ require([
     var deferred = new dojo.Deferred();
 
     var featureCount = popup.count;
-    // for (var i = 0; i < crossingPoints.fields.length; i++) {
-    //   console.debug(crossingPoints.fields[i].domain);
-    // }
-    // console.log(crossingPoints.getDomain("WDCode"));
-    // console.log(popup.getSelectedFeature());
-
 
     if ( featureCount > 0 ) {
 
