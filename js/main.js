@@ -365,25 +365,26 @@ require([
       link.href = "report.html?dotnum=" + dotnum;
 
       // Updates Domain Codes to Coded Value, aka description or alias
-      console.log(document.getElementById('warnCode').innerHTML);
-      var warn = document.getElementById('warnCode').innerHTML;
+      if (document.getElementById('warnCode')) {
+        var warn = document.getElementById('warnCode').innerHTML;
 
-      if (warn === "StopYield") {
-        document.getElementById('warnCode').innerHTML = "Stop or Yield";
-      } else if (warn === "XB") {
-        document.getElementById('warnCode').innerHTML = "Crossbucks";
-      } else if (warn === "Flashers") {
-        document.getElementById('warnCode').innerHTML = "Flashing Lights";
-      } else if (warn === "Gates") {
-        document.getElementById('warnCode').innerHTML = "1 to 3 Gates";
-      } else if (warn === "FullQuad") {
-        document.getElementById('warnCode').innerHTML = "Four Quad (full barrier) Gates";
-      } else if (warn === "Other") {
-        document.getElementById('warnCode').innerHTML = "Other signs or signals";
-      } else if (warn === "Other AWD") {
-        document.getElementById('warnCode').innerHTML = "Other Active Device (flagging)";
-      } else if (warn === "None") {
-        document.getElementById('warnCode').innerHTML = "No signs or signals";
+        if (warn === "StopYield") {
+          document.getElementById('warnCode').innerHTML = "Stop or Yield";
+        } else if (warn === "XB") {
+          document.getElementById('warnCode').innerHTML = "Crossbucks";
+        } else if (warn === "Flashers") {
+          document.getElementById('warnCode').innerHTML = "Flashing Lights";
+        } else if (warn === "Gates") {
+          document.getElementById('warnCode').innerHTML = "1 to 3 Gates";
+        } else if (warn === "FullQuad") {
+          document.getElementById('warnCode').innerHTML = "Four Quad (full barrier) Gates";
+        } else if (warn === "Other") {
+          document.getElementById('warnCode').innerHTML = "Other signs or signals";
+        } else if (warn === "Other AWD") {
+          document.getElementById('warnCode').innerHTML = "Other Active Device (flagging)";
+        } else if (warn === "None") {
+          document.getElementById('warnCode').innerHTML = "No signs or signals";
+        }
       }
 
 
