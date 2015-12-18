@@ -398,7 +398,11 @@ require([
             selectedLayer = crossingPoints;
           } else {
             selectedLayer = signPoints;
-            imageStyle += "style='transform:rotate(90deg); margin-top:35px; margin-bottom:15px'";
+            var transform = "transform:rotate(90deg); "
+            if ( /webOS|iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+              transform = "";
+            }
+            imageStyle += "style='" + transform + "margin-top:35px; margin-bottom:15px'";
           }
 
           selectedLayer.queryAttachmentInfos(objectId).then(function(response){
