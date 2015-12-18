@@ -65,9 +65,20 @@
 
 
     <div class="container-fluid" id="info"></div>
+    <div id="metadata-info"><h3>Metadata</h3><p>This is the crossing ID number assigned by the Department of Transportation (DOT_Num), with the dash after the third character. Usually the DOT number is reported with the dash and this field allows for simple queries and joins in most situations. For crossings believed to be public that do not yet have a valid DOT number, this field has the unique ID given to the crossing by the crossing inspector in 2015. The format for these crossing ID’s is “NOT-####,” with the numbers increasing with each addition, starting with NOT-0001.</p></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+    function displayMD() {
+      document.getElementById("metadata-info").style.display = "block";
+      // document.getElementById("xing-num").style.display = "none";
+    }
+    function hideMD() {
+      document.getElementById("metadata-info").style.display = "none";
+    }
+    </script>
+
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
