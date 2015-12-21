@@ -133,7 +133,7 @@ require([
           <fieldset>
               <legend>Crossing Details</legend>
               <div data-row-span="4">
-                  <div data-field-span="1" id='xing-num' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
+                  <div data-field-span="1" id='xing-num' onmouseover='displayMD(this)' onmouseout='hideMD(this)' ontouchstart='displayMD(this)' ontouchend='hideMD(this)'>
                     <label>Crossing Number</label>
                     <input type="text" disabled="true" value="` + featureAttributes.DOT_Num + `">
                   </div>
