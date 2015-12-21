@@ -96,7 +96,7 @@ require(["dojo/dom", "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "esr
     for (var i = 0; i < resultCount; i++) {
       var featureAttributes = results.features[i].attributes;
 
-      var html = "\n<div class='row'>\n  <div class='col-xs-12'>\n    <div class='page-header'>\n      <h1>Crossing Report</h1>\n    </div>\n  </div>\n</div>\n<div class='row'>\n\t<div class='col-sm-6'>\n\t\t<div class='panel panel-primary'>\n\t\t  <div class='panel-heading'>\n\t\t    <h3 class='panel-title'>Crossing Number</h3>\n\t\t  </div>\n\t\t  <div class='panel-body text-center'>\n\t\t    <h3>\n      ";
+      var html = "\n<div class='row'>\n  <div class='col-xs-12'>\n    <div class='page-header'>\n      <h1>Crossing Report</h1>\n    </div>\n  </div>\n</div>\n<div class='row'>\n\t<div class='col-sm-6'>\n\t\t<div class='panel panel-primary'>\n\t\t  <div id='xing-num' class='panel-heading' onmouseover='displayMD()' onmouseout='hideMD()'>\n\t\t    <h3 class='panel-title'>Crossing Number</h3>\n\t\t  </div>\n\t\t  <div class='panel-body text-center'>\n\t\t    <h3>\n      ";
 
       html += featureAttributes.DOT_Num;+"</h3>";
 

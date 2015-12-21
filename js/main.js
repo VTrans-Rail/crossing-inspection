@@ -116,7 +116,7 @@ require([
 // -----------------Define PopupTemplates------------------------------
 //------------------------------------------------------------------
     //Crossing Template--------------
-    var crossingPopupFeatures = "<div id='popupContent' style='overflow-y:auto'><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b>${WDCode}</b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popupPictures' class='btn btn-default text-center btnHelp'>&#x25BC Pictures &#x25BC</button></div>";
+    var crossingPopupFeatures = "<div id='popupContent' style='overflow-y:auto'><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b><span id='warnCode'>${WDCode}</span></b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popupPictures' class='btn btn-lg btn-default text-center btnHelp'>&#x25BC Pictures &#x25BC</button></div>";
 
     var crossingTemplate = new PopupTemplate({
       title: "Crossing {DOT_Num}",
@@ -126,7 +126,7 @@ require([
 
 
     //Sign Template------------------
-    var signPopupFeatures = "<div id='popupContent' ><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popupPictures' class='btn btn-default text-center btnHelp'>&#x25BC Pictures &#x25BC</button></div>";
+    var signPopupFeatures = "<div id='popupContent' ><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popupPictures' class='btn btn-lg btn-default text-center btnHelp'>&#x25BC Pictures &#x25BC</button></div>";
 
     var signTemplate = new PopupTemplate({
       title: "Crossing Sign",
@@ -349,9 +349,34 @@ require([
     var featureCount = popup.count;
 
     if ( featureCount > 0 ) {
+
       //Updates link to report page
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
       link.href = "report.html?dotnum=" + dotnum;
+
+      // Updates Domain Codes to Coded Value, aka description or alias
+      if (document.getElementById('warnCode')) {
+        var warn = document.getElementById('warnCode').innerHTML;
+
+        if (warn === "StopYield") {
+          document.getElementById('warnCode').innerHTML = "Stop or Yield";
+        } else if (warn === "XB") {
+          document.getElementById('warnCode').innerHTML = "Crossbucks";
+        } else if (warn === "Flashers") {
+          document.getElementById('warnCode').innerHTML = "Flashing Lights";
+        } else if (warn === "Gates") {
+          document.getElementById('warnCode').innerHTML = "1 to 3 Gates";
+        } else if (warn === "FullQuad") {
+          document.getElementById('warnCode').innerHTML = "Four Quad (full barrier) Gates";
+        } else if (warn === "Other") {
+          document.getElementById('warnCode').innerHTML = "Other signs or signals";
+        } else if (warn === "Other AWD") {
+          document.getElementById('warnCode').innerHTML = "Other Active Device (flagging)";
+        } else if (warn === "None") {
+          document.getElementById('warnCode').innerHTML = "No signs or signals";
+        }
+      }
+
 
       var pictureOpen = document.getElementById('popupPictures');
       if (pictureOpen) {
@@ -373,7 +398,11 @@ require([
             selectedLayer = crossingPoints;
           } else {
             selectedLayer = signPoints;
-            imageStyle += "style='transform:rotate(90deg); margin-top:35px; margin-bottom:15px'";
+            var transform = "style='transform:rotate(90deg); margin-top:42px; margin-bottom:15px'"
+            if ( /webOS|iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+              transform = "";
+            }
+            imageStyle += transform;
           }
 
           selectedLayer.queryAttachmentInfos(objectId).then(function(response){

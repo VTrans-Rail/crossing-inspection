@@ -1,6 +1,6 @@
-Beta 1 - Initial Release 12/02/15
+# Beta 1 - Initial Release 12/02/15
 
-Beta 2 - 12/09/15
+## Beta 2 - 12/09/15
   - Popup maximizes automatically in mobile device under 415 pixels wide. (#95 & #97)
 
   - Instructions Overlay added. (#110)
@@ -33,3 +33,16 @@ Beta 2 - 12/09/15
   - Added warning text that explains when information and images don't load correctly in a popup. (#133)
   - Styled popup links to Full Report page and view full images. (#133)
   - Enabled Full Report link on signs popup to navigate to the crossing report related to the sign. (#133)
+
+
+## Beta 3 - Released 12/17/2015
+- Removed AADT Layer (#150, #126, #135)
+- Removed Restore Button on popup when screen is less than 415 pixels wide. Also styled prev, next, close, and popup title for aesthetics and ease of use on a touchscreen (#149)
+- Added the text "Help" under the symbol for the Help Button to make it more clear to users. Also made styling more responsive for Help Button (#148, #169, #157, #168)
+- Added responsive Legend for desktop and mobile (#147, #146)
+- Fixed bug for instructions page so that it loads correctly on iphone 4/5 (#145)
+- Improved "Oops" text for popup so that it is more clear and concise (#161)
+- Removed LayerToggle and BasemapToggle. Changed high-zoom basemap from streets to satellite imagery with world transportation reference layer for labels. (#131, #121, #162)
+- Removed Rail Trails and Twin State RR from Railroad Lines layer as they are not associated with any public crossings. (#156)
+- Changed JS code for loading popup info and images so that each popup loads the correct photos. Stopped photos from automatically loading in popup and added button to popup to load photos on request. Rotated sign photos 90 degrees so that the majority of the sign photos display with the correct orientation in popups. Previously photos were loading for the wrong crossing when network was slow. (#160, #98, #174)
+- Added DOT Number label to crossings and fixed font issue for labels in different browsers (#140, #158)
