@@ -130,7 +130,7 @@ require([
                   </div>
                   <div data-field-span="1" id='surf-cond' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                     <label>Surface Condition</label>
-                    <input type="text" disabled="true" value="` + featureAttributes.XingCond + `">
+                    <input type="text" disabled="true" id='condition' value="` + featureAttributes.XingCond + `">
                   </div>
                   <div data-field-span="1" id='feature-crossed' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                     <label>Road Name</label>
@@ -286,7 +286,7 @@ require([
               </div>
               <div data-field-span="2" id='pave-mark-cond' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Pavement Markings Condition</label>
-                <input type="text" disabled="true" value="` + featureAttributes.PavMarkCond + `">
+                <input type="text" disabled="true" id='pmark-cond' value="` + featureAttributes.PavMarkCond + `">
               </div>
             </div>
             <div data-row-span="3">
@@ -394,5 +394,46 @@ require([
       </form>`;
     }
     dom.byId("info").innerHTML = html;
+
+    //--------Update background color of condition cells----------
+      // overall condition
+      var cond = document.getElementById("condition");
+      var condcell = document.getElementById("surf-cond");
+      if (cond.value === "Excellent") {
+        // cond.style.color = "green";
+        condcell.style.backgroundColor = "#99d899";
+      }
+      else if (cond.value === "Good") {
+        // cond.style.color = "light-green";
+        condcell.style.backgroundColor = "#e5f5e5";
+      }
+      else if (cond.value === "Fair") {
+        // cond.style.color = "Yellow";
+        condcell.style.backgroundColor = "#fcffd1";
+      }
+      else if (cond.value === "Poor") {
+        // cond.style.color = "Red";
+        condcell.style.backgroundColor = "#e24c4c";
+      }
+
+      // pavement condition
+      var pcond = document.getElementById("pmark-cond");
+      var pcondcell = document.getElementById("pave-mark-cond");
+      if (pcond.value === "Excellent") {
+        // cond.style.color = "green";
+        pcondcell.style.backgroundColor = "#99d899";
+      }
+      else if (pcond.value === "Good") {
+        // cond.style.color = "light-green";
+        pcondcell.style.backgroundColor = "#e5f5e5";
+      }
+      else if (pcond.value === "Fair") {
+        // cond.style.color = "Yellow";
+        pcondcell.style.backgroundColor = "#fcffd1";
+      }
+      else if (pcond.value === "Poor") {
+        // cond.style.color = "Red";
+        pcondcell.style.backgroundColor = "#e24c4c";
+      }
   }
 });

@@ -20,6 +20,10 @@
   padding-top: 95px;
 }
 
+#left-panel {
+  display: none;
+}
+
 #metadata-info {
   /*display: none;*/
   display:block;
