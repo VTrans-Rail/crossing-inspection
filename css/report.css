@@ -49,8 +49,8 @@
   padding-bottom: 5px;
   /*padding-left: 10px;*/
   padding-left: calc((100% - 670px)/2);
-  background-color: rgba(102, 102, 102, 0.9);
-  color: #fff;
+  background-color: rgba(200, 200, 200, 0.95);
+  color: #000;
   font-size: 12px;
   z-index: 2;
   height: 150px;
@@ -68,26 +68,76 @@
 
 @media (max-width: 415px) {
   #metadata-info {
-    padding-top: 120px;
+    padding-top: 80px;
+    /*padding-right: 20px;*/
+    /*padding-left: 20px;*/
     bottom: 0px;
     height: 100%;
   }
 
+  #metadata-body {
+    /*position: absolute;*/
+    /*top: 250px;*/
+    /*padding-top: 100px;*/
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-bottom: 65px;
+  }
+
+  #metadata-title {
+    /*position: fixed;*/
+  }
+
+  /* Flaired edges, by Tomas Theunissen */
+
+  hr.style-seven {
+      height: 30px;
+      margin-top: 10px;
+      margin-bottom: -20px;
+      border-style: solid;
+      border-color: black;
+      border-width: 1px 0 0 0;
+      border-radius: 20px;
+  }
+  hr.style-seven:before { /* Not really supposed to work, but does */
+      display: block;
+      content: "";
+      height: 30px;
+      margin-top: -31px;
+      border-style: solid;
+      border-color: black;
+      border-width: 0 0 1px 0;
+      border-radius: 20px;
+  }
+
+  #metadata-heading {
+    /*position: fixed;*/
+    /*background-color: rgba(102, 102, 102, 1);*/
+    width: 100%;
+    padding-top: 2px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+  }
+
+
   #close-metadata {
     display: none;
-    position: fixed;
-    color: #fff;
-    right: 10px;
-    top: 150px;
   }
 
 }
 
 .gotit {
   position: fixed;
-  bottom: 15px;
+  bottom: 0px;
+  background-color: rgba(102, 102, 102, 1);
+  padding-top: 5px;
+  padding-right: calc(((100% - 82px)/2));
+  padding-bottom: 5px;
+  padding-left: calc(((100% - 82px)/2));
+
   /*width: 45px;*/
-  left: calc((100% - 82px)/2)
+  /*left: calc((100% - 82px)/2);*/
 }
 
 
