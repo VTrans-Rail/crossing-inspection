@@ -218,30 +218,26 @@ require([
                 <input type="text" disabled="true" value="3">
               </div>
             </div> -->
-            <div data-row-span="6">
-              <div data-field-span="2" id='surf-type' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
+            <div data-row-span="3">
+              <div data-field-span="1" id='surf-type' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Main Surface Material</label>
                 <input type="text" disabled="true" value="` + featureAttributes.SurfaceType + `">
               </div>
-              <div data-field-span="2" id='surf-type-two' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
+              <div data-field-span="1" id='surf-type-two' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Secondary Surface Material</label>
                 <input type="text" disabled="true" value="` + featureAttributes.SurfaceType2 + `">
-              </div>
-              <div data-field-span="1" id='snooper' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
-                <label>Snooper Compliant</label>
-                <input type="text" disabled="true" value="` + featureAttributes.SnoopCompliant + `">
               </div>
               <div data-field-span="1" id='flange-material' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Flange Material</label>
                 <input type="text" disabled="true" value="` + featureAttributes.FlangeMaterial + `">
               </div>
             </div>
-            <div data-row-span="6">
-              <div data-field-span="2" id='number-tracks' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
+            <div data-row-span="9">
+              <div data-field-span="3" id='number-tracks' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Number of Tracks</label>
                 <input type="text" disabled="true" value="` + featureAttributes.NumTracks + `">
               </div>
-              <div data-field-span="2" id='crossing-angle' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
+              <div data-field-span="1" id='crossing-angle' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Angle</label>
                 <input type="text" disabled="true" value="` + featureAttributes.Angle + `">
               </div>
@@ -252,6 +248,10 @@ require([
               <div data-field-span="1" id='crossing-length' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Length</label>
                 <input type="text" disabled="true" value="` + featureAttributes.XingLength + `">
+              </div>
+              <div data-field-span="3" id='snooper' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
+                <label>Snooper Compliant</label>
+                <input type="text" disabled="true" value="` + featureAttributes.SnoopCompliant + `">
               </div>
             </div>
           </fieldset>
@@ -271,7 +271,7 @@ require([
                 <input type="text" disabled="true" value="` + featureAttributes.XingIllum + `">
               </div>
             </div>
-            <div data-row-span="4">
+            <div data-row-span="6">
               <div data-field-span="1" id='paved' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Paved</label>
                 <input type="text" disabled="true" value="` + featureAttributes.Paved + `">
@@ -280,11 +280,11 @@ require([
                 <label>Stop Line</label>
                 <input type="text" disabled="true" value="` + featureAttributes.StopLine + `">
               </div>
-              <div data-field-span="1" id='rr-pave-mark' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
+              <div data-field-span="2" id='rr-pave-mark' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>RR Pavement Markings</label>
                 <input type="text" disabled="true" value="` + featureAttributes.RRXingPavMark + `">
               </div>
-              <div data-field-span="1" id='pave-mark-cond' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
+              <div data-field-span="2" id='pave-mark-cond' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Pavement Markings Condition</label>
                 <input type="text" disabled="true" value="` + featureAttributes.PavMarkCond + `">
               </div>
@@ -387,7 +387,7 @@ require([
             <legend>General Comments</legend>
             <div data-row-span="1">
               <div data-field-span="1" id='comments' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
-                <input type="text" disabled="true" value="` + featureAttributes.Comments + `">
+                <textarea disabled='true'>` + featureAttributes.Comments + `</textarea>
               </div>
             </div>
           </fieldset>
