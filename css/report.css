@@ -57,6 +57,17 @@
   width: 100%;
 }
 
+.gotit {
+  position: fixed;
+  bottom: 0px;
+  background-color: rgba(200, 200, 200, 0.9);
+  padding-top: 5px;
+  padding-right: calc(((100% - 82px)/2));
+  padding-bottom: 5px;
+  padding-left: calc(((100% - 82px)/2));
+}
+
+
 #close-metadata {
   position: fixed;
   float: right;
@@ -126,18 +137,6 @@
 
 }
 
-.gotit {
-  position: fixed;
-  bottom: 0px;
-  background-color: rgba(102, 102, 102, 1);
-  padding-top: 5px;
-  padding-right: calc(((100% - 82px)/2));
-  padding-bottom: 5px;
-  padding-left: calc(((100% - 82px)/2));
-
-  /*width: 45px;*/
-  /*left: calc((100% - 82px)/2);*/
-}
 
 
 @media (min-width: 416px) {
