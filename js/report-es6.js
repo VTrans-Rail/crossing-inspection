@@ -124,7 +124,7 @@ require([
           <fieldset>
               <legend>Crossing Details</legend>
               <div data-row-span="4">
-                  <div data-field-span="1" id='xing-num' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
+                  <div data-field-span="1" id='xing-num' onmouseover='displayMD(this)' onmouseout='hideMD(this)' onclick='displayMD(this)'>
                     <label>Crossing Number</label>
                     <input type="text" disabled="true" value="` + featureAttributes.DOT_Num + `">
                   </div>
@@ -400,20 +400,21 @@ require([
       var cond = document.getElementById("condition");
       var condcell = document.getElementById("surf-cond");
       if (cond.value === "Excellent") {
-        // cond.style.color = "green";
-        condcell.style.backgroundColor = "#99d899";
+        cond.style.color = "green";
+        // condcell.style.backgroundColor = "#99d899";
+        // cond.style.textShadow
       }
       else if (cond.value === "Good") {
-        // cond.style.color = "light-green";
-        condcell.style.backgroundColor = "#e5f5e5";
+        // cond.style.color = "#e5f5e5";
+        // condcell.style.backgroundColor = "#e5f5e5";
       }
       else if (cond.value === "Fair") {
-        // cond.style.color = "Yellow";
-        condcell.style.backgroundColor = "#fcffd1";
+        cond.style.color = "Orange";
+        // condcell.style.backgroundColor = "#fcffd1";
       }
       else if (cond.value === "Poor") {
-        // cond.style.color = "Red";
-        condcell.style.backgroundColor = "#e24c4c";
+        cond.style.color = "Red";
+        // condcell.style.backgroundColor = "#e24c4c";
       }
 
       // pavement condition

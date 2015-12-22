@@ -53,6 +53,9 @@
     <div id="metadata-info">
       <h4>Metadata</h4>
       <p id='metadata-body'>Place your mouse over (or tap) a grid cell to display the data attribute explanation.</p>
+      <div class="inner cover gotit">
+          <a href="#" onclick='closeMD()' class="btn btn-lg btn-success">Got it!</a>
+      </div>
       <img src='img/close.png' alt='site-image' height='16px' width='16px' onclick='closeMD()' id='close-metadata'>
     </div>
     <div id="left-panel">
@@ -240,7 +243,11 @@
     }
     function hideMD() {
       // document.getElementById("metadata-info").style.display = "none";
-      document.getElementById("metadata-body").innerHTML = "Place your mouse over (or tap) a grid cell to display the data attribute explanation.";
+      var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+      if (width > 415) {
+        document.getElementById("metadata-body").innerHTML = "Place your mouse over (or tap) a grid cell to display the data attribute explanation.";
+
+      }
     }
     function closeMD() {
       document.getElementById("metadata-info").style.display = "none";
