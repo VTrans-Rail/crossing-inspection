@@ -83,6 +83,21 @@
 
 }
 
+.gotit {
+  position: fixed;
+  bottom: 15px;
+  /*width: 45px;*/
+  left: calc((100% - 82px)/2)
+}
+
+
+@media (min-width: 416px) {
+  .gotit {
+    display: none;
+  }
+}
+
+
 @media (min-width: 768px) {
   #report-title {
     font-size: 32px;
