@@ -20,7 +20,10 @@
 }
 
 .btn-head {
+  position:absolute;
+  float: right;
   padding-top: 15px;
+  right: 0px;
 }
 
 .img-responsive {
@@ -53,6 +56,13 @@
       .container-fluid {
         max-width: 700px;
       }
+
+      .btn-head {
+        position:absolute;
+        float: right;
+        padding-top: 10px;
+        right: 50px;
+      }
     }
 
     /* Medium Devices, Desktops */
@@ -64,5 +74,10 @@
 
     /* Large Devices, Wide Screens */
     @media only screen and (min-width : 1200px) {
-
+      .btn-head {
+        position:absolute;
+        float: right;
+        padding-top: 15px;
+        right: 50px;
+      }
     }

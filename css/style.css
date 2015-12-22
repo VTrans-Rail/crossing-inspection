@@ -5,58 +5,6 @@
   position: absolute;
 }
 
-#metadata-info {
-  /*display: none;*/
-  display:block;
-  position: fixed;
-  text-align: center;
-  overflow-y: auto;
-  bottom: 20px;
-  right: 0;
-  padding-top: 5px;
-  padding-right: 10px;
-  padding-bottom: 5px;
-  padding-left: 10px;
-  background-color: rgba(102, 102, 102, 0.9);
-  color: #fff;
-  font-size: 12px;
-  z-index: 2;
-  height: 150px;
-  width: 100%;
-}
-
-@media (min-width: 1200px) {
-  #metadata-info {
-    /*color: #404040;
-    background-color: #fff;*/
-    bottom: 0;
-    width: calc((100% - 830px)/2);
-    height: 100%;
-    padding-top: 80px;
-  }
-  #left-panel {
-    display:block;
-    position: fixed;
-    text-align: center;
-    background-color: rgba(102, 102, 102, 0.9);
-    color: #fff;
-    bottom:0;
-    width: calc((100% - 830px)/2);
-    height: 100%;
-    padding-top: 80px;
-  }
-  #close-button {
-    display: none;
-  }
-}
-
-#close-button {
-  position: absolute;
-  color: #fff;
-  right: 10px;
-  top: 10px;
-}
-
 #popupPictures {
   width: 100%;
   margin: 0 auto;

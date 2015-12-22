@@ -16,6 +16,7 @@
     <script src="http://localhost:35729/livereload.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/report.css">
 
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -29,19 +30,19 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-inverse navbar-static-top report">
+    <nav class="navbar navbar-inverse navbar-static-top report" id="navigation-bar">
       <div class="container">
           <div class="row">
             <div class="col-xs-3 col-sm-2 btn-head">
               <div class="hidden-xs">
-                <a href="index.html"><button type="button" name="button" class="btn btn-primary btn-lg">Back</button></a>
+                <a href="index.html"><button type="button" name="button" class="btn btn-primary btn-lg" onclick="self.close()">Close Report</button></a>
               </div>
               <div class="visible-xs-2 hidden-sm hidden-md hidden-lg">
-                <a href="index.html"><button type="button" name="button" class="btn btn-primary"><img src="img\ic_keyboard_arrow_left_black_24px.svg" alt="" /></button></a>
+                <a href="index.html"><button type="button" name="button" class="btn btn-primary" onclick="self.close()"><img src="img\close.png" height="16" width="16px" alt="" /></button></a>
               </div>
             </div>
-            <div class="col-xs-6 col-sm-7">
-              <h1 class="text-center">Crossing Report</h1>
+            <div class="col-xs-6 col-sm-7" id="report-div">
+              <h1 class="text-center" id="report-title">Crossing Report</h1>
             </div>
         </div>
       </div>
@@ -52,7 +53,7 @@
     <div id="metadata-info">
       <h4>Metadata</h4>
       <p id='metadata-body'>Place your mouse over (or tap) a grid cell to display the data attribute explanation.</p>
-      <img src='img/close.png' alt='site-image' height='16px' width='16px' onclick='closeMD()' id='close-button'>
+      <img src='img/close.png' alt='site-image' height='16px' width='16px' onclick='closeMD()' id='close-metadata'>
     </div>
     <div id="left-panel">
       <h4>Contact Us</h4>
