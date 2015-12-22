@@ -68,9 +68,8 @@
 
 @media (max-width: 415px) {
   #metadata-info {
+    display:block;
     padding-top: 80px;
-    /*padding-right: 20px;*/
-    /*padding-left: 20px;*/
     bottom: 0px;
     height: 100%;
   }
