@@ -32,3 +32,7 @@ https://www.google.com/design/icons/
 - Huge Help With InfoWindow Selection Changes: http://gis.stackexchange.com/questions/75608/infowindow-selection-change
 
 - Huge help figuring out "when" function in javascript for popup photos: http://walterhiggins.net/blog/JavascriptWhen
+
+- great hr tag styles: https://css-tricks.com/examples/hrs/
+
+- Get Device Width when dealing with mobile devices and browsers: http://stackoverflow.com/questions/6850164/get-the-device-width-in-javascript
