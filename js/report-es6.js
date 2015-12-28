@@ -35,7 +35,8 @@ require([
     'TrafficLnCount','Paved','XingIllum',
     'SurfaceType','SurfaceType2','XingCond',
     'FlangeMaterial','XingWidth','XingLength',
-    'Angle','SnoopCompliant','Comments'
+    'Angle','SnoopCompliant','Comments', 'IntRd500', 'IntRdDist',
+    'Num_Tracks', 'PaveMarkCond', 'RDS_AOTCLASS', 'RDS_FUNCL'
   ];
 
   var dotnumqs = getParameterByName("dotnum");
