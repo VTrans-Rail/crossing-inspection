@@ -400,7 +400,7 @@ require([
     //-----------Replace Domain Name with Values------
     //---------------------------------------------
     // Updates Domain Codes to Coded Value, aka description or alias
-    if (document.getElementById('warnCode')) {
+    if (document.getElementById('warning-device-code')) {
       var warn = document.getElementById('warning-device-code').children[1].value;
 
       if (warn === "StopYield") {

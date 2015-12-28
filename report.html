@@ -53,9 +53,14 @@
     <div id="metadata-info">
       <div class="metadata-heading">
         <h4 id="metadata-title">Metadata</h4>
-        <hr class="style-seven">
+        <hr class="style-one">
       </div>
       <p id='metadata-body'>Place your mouse over (or tap) a grid cell to display the data attribute explanation.</p>
+      <div id="metadata-domain" style="display:none; margin-top: 50px;">
+        <h4 id="metadata-domain-title">Valid Entries</h5>
+        <hr class="style-one" style="padding-right:10px; padding-left:10px;">
+        <p id='metadata-domain-text'></p>
+      </div>
       <div class="metadata gotit">
           <a href="#" onclick='closeMD()' class="btn btn-lg btn-success">Got it!</a>
       </div>
@@ -64,7 +69,7 @@
     <div id="left-panel">
       <div class="metadata-heading">
         <h4>Contact Us</h4>
-        <hr class="style-seven">
+        <hr class="style-one">
       </div>
       <p>If you have further questions about public railroad crossing or believe that some of the information is incorrect or out-of-date, please contact us.</p>
         <a class="btn btn-sm btn-default" href="mailto:stephen.smith@vermont.gov" target="_top">Stephen Smith</a>
@@ -156,11 +161,15 @@
       else if (x.id === "warning-device-code") {
         document.getElementById("metadata-title").innerHTML = "Warning Device Level";
         document.getElementById("metadata-body").innerHTML = "Every time a railroad meets a roadway, the MUTCD requires the crossing to have some sort of warning device to alert oncoming traffic of the crossing. The type of warning device(s) used depends on several factors including road geometry, highway speeds, railway speeds, traffic levels, and location. All required devices, signs and features for each type of crossing are detailed in the MUTCD chapter 8. This field was created in accordance with the old FRA Crossing Inventory Form. While the new FRA Crossing Inventory Form requires a greater level of detail in regards to warning devices, this field was kept as a useful tool to list and organize the database by levels of safety features.";
+        document.getElementById("metadata-domain-text").innerHTML = "<ul><li>No signs or signals</li><li>Other signs or signals</li><li>Crossbucks</li><li>Stop or Yield</li><li>Other Active Warning Device (flagging)</li><li>Flashing Lights</li><li>1 - 3 Gates</li><li>Four Quad (full barrier) Gates</li></ul>";
+        document.getElementById("metadata-domain").style.display = "block";
         document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "channelization") {
         document.getElementById("metadata-title").innerHTML = "Channelization";
         document.getElementById("metadata-body").innerHTML = "Channelization occurs when a traffic separation system is present that directs traffic in a particular direction using raised longitudinal channelizers. A median refers to a more substantial traffic separation system that is non-traversable and completely separates traffic travelling in opposite directions. When gates are present, these devices can prevent cars from moving into the other side of the road in order to drive around a lowered gate. These devices provide additional automobile safety at gated crossings.";
+        document.getElementById("metadata-domain-text").innerHTML = "<ul><li><b>All Approaches:</b> All approaches contain some form of a channelization device.</li><li><b>One Approach:</b> One approach contains some form of a channelization device.</li><li><b>Median:</b> A median completely separates traffic lanes travelling in opposite directions.</li><li><b>None:</b> No channelization devices or medians present at the crossing.</li></ul>";
+        document.getElementById("metadata-domain").style.display = "block";
         document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "illuminated") {
@@ -186,6 +195,8 @@
       else if (x.id === "pave-mark-cond") {
         document.getElementById("metadata-title").innerHTML = "Pavement Marking Condition";
         document.getElementById("metadata-body").innerHTML = "The overall condition of the pavement markings. This is determined wear of the paint and the resulting visibility of the markings. It is important to note that it is a subjective rating system that can be influenced by a variety of factors.";
+        document.getElementById("metadata-domain-text").innerHTML = "<ul><li><b>Not Applicable:</b> There are no pavement markings at the crossing to apply a condition to.</li><li><b>OK:</b> Pavement markings are in good enough condition to be effective.</li><li><b>Worn:</b> Pavement markings are worn to the point of being ineffective.</li></ul>";
+        document.getElementById("metadata-domain").style.display = "block";
         document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "gates-road") {
@@ -201,6 +212,8 @@
       else if (x.id === "gate-config") {
         document.getElementById("metadata-title").innerHTML = "Gate Configuration";
         document.getElementById("metadata-body").innerHTML = "The basic configuration of the gates present at gate protected crossings. The GateConfig1 does not necessarily equal the sum of Roadway Gate Arms and BikePed Gate Arms. See domain details for further information.";
+        document.getElementById("metadata-domain-text").innerHTML = "<ul><li><b>2 Quad:</b> Gate configuration featuring gates only on entrance lanes leading onto the crossing. A gated crossing on a one-way street is to be considered a 2 Quade gate configuration.</li><li><b>3 Quad:</b> Specific configuration with gates on all entrance lanes and one exit lane.</li><li><b>4 Quad:</b> Specific configuration with gates on all entrance and exit lanes.</li><li><b>None: </b>No gates.</li></ul>";
+        document.getElementById("metadata-domain").style.display = "block";
         document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "cant-struc-over") {
@@ -295,7 +308,8 @@
       if (width > 415) {
         document.getElementById("metadata-title").innerHTML = "Metadata";
         document.getElementById("metadata-body").innerHTML = "Place your mouse over (or tap) a grid cell to display the data attribute explanation.";
-
+        // document.getElementById("metadata-domain").innerHTML = "";
+        document.getElementById("metadata-domain").style.display = "none";
       }
     }
     function closeMD() {
