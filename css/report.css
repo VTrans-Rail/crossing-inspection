@@ -116,8 +116,9 @@ hr.style-seven:before { /* Not really supposed to work, but does */
 .blur h4 {
   visibility: hidden;
   position: absolute;
+  font-weight: bold;
   bottom: calc((100% - 19px)/2);
-  left: calc((100% - 128px)/2);
+  left: calc((100% - 135px)/2);
 }
 
 .blur img:hover {
