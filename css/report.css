@@ -105,8 +105,27 @@ hr.style-seven:before { /* Not really supposed to work, but does */
   display: none;
 }
 
+.blur .img-responsive {
+  margin-bottom: 5px;
+}
+
+.blur {
+  position:relative;
+}
+
+.blur h4 {
+  visibility: hidden;
+  position: absolute;
+  bottom: calc((100% - 19px)/2);
+  left: calc((100% - 128px)/2);
+}
+
 .blur img:hover {
-  -webkit-filter: blur(1.5px);
+  -webkit-filter: blur(2px);
+}
+
+.blur img:hover + h4 {
+  visibility: visible;
 }
 
 
