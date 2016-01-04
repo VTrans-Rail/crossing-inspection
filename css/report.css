@@ -105,6 +105,10 @@ hr.style-seven:before { /* Not really supposed to work, but does */
   display: none;
 }
 
+.blur img:hover {
+  -webkit-filter: blur(1.5px);
+}
+
 
 @media (min-width: 415px) {
   #metadata-info {
