@@ -124,6 +124,10 @@ hr.style-seven:before { /* Not really supposed to work, but does */
   -webkit-filter: blur(2px);
 }
 
+.blur h4:hover {
+  visibility: visible;
+}
+
 .blur img:hover + h4 {
   visibility: visible;
 }
