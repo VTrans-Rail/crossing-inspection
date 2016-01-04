@@ -82,7 +82,7 @@ require([
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
             // imageString += "<div class='col-sm-6 col-md-4'><img src='" + imgSrc + "' " + imgClass + " " + imageStyle + "></div>";
-            imageString += "<div data-field-span='1'><img src='" + imgSrc + "' " + imgClass + " " + imageStyle + "></div>";
+            imageString += "<div data-field-span='1'><a href='" + imgSrc + "' target='_blank'><img src='" + imgSrc + "' " + imgClass + " " + imageStyle + "></a></div>";
           }
         }
 
