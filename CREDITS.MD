@@ -36,3 +36,5 @@ https://www.google.com/design/icons/
 - great hr tag styles: https://css-tricks.com/examples/hrs/
 
 - Get Device Width when dealing with mobile devices and browsers: http://stackoverflow.com/questions/6850164/get-the-device-width-in-javascript
+
+- Using Template Strings, Backticks, & Multiline HTMl/Javascript compatible with IE: https://babeljs.io/repl/
