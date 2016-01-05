@@ -87,7 +87,7 @@ require([
         }
 
         //consolelog messages used to help debug image loading issues
-        console.log("This text should be followed by the html string for the images if page loaded correctly (This is within the queryAttachment): " + imageString);
+        // console.log("This text should be followed by the html string for the images if page loaded correctly (This is within the queryAttachment): " + imageString);
       });
       //---------------------------------------------------------------------
     }
@@ -120,21 +120,37 @@ require([
     for (var i = 0; i < resultCount; i++) {
       var featureAttributes = results.features[i].attributes;
 
-      var html = "\n<form class='grid-form'>\n<fieldset>\n              <legend>Crossing Details</legend>\n<div data-row-span='4'>\n                  <div data-field-span='1' id='xing-num' onmouseover='displayMD(this)' onmouseout='hideMD(this)' onclick='displayMD(this)'>\n                    <label>Crossing Number</label>\n<input type='text' disabled='true' value='";
-      html += featureAttributes.DOT_Num;+"'>";
-      html += "\n                  </div>\n                  <div data-field-span='1' id='surf-cond' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Surface Condition</label>\n                    <input type='text' disabled='true' id='condition' value='";
-      html =+ featureAttributes.XingCond + "'>\n                  </div>\n                  <div data-field-span='1' id='feature-crossed' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Road Name</label>\n                    <input type='text' disabled='true' value='";
+      var html="\n      <form class='grid-form'>\n          <fieldset>\n              <legend>Crossing Details</legend>\n              <div data-row-span='4'>\n                  <div data-field-span='1' id='xing-num' onmouseover='displayMD(this)' onmouseout='hideMD(this)' onclick='displayMD(this)'>\n                    <label>Crossing Number</label>\n                    <input type='text' disabled='true' value='";
+
+      html += featureAttributes.DOT_Num + "'>\n                  </div>\n                  <div data-field-span='1' id='surf-cond' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Surface Condition</label>\n                    <input type='text' disabled='true' id='condition' value='";
+
+      html += featureAttributes.XingCond + "'>\n                  </div>\n                  <div data-field-span='1' id='feature-crossed' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Road Name</label>\n                    <input type='text' disabled='true' value='";
+
       html += featureAttributes.Feature_Crossed + "'>\n                  </div>\n                  <div data-field-span='1' id='town' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Town</label>\n                    <input type='text' disabled='true' value='";
+
       html += featureAttributes.Town + "'>\n                  </div>\n              </div>\n              <div data-row-span='4'>\n                  <div data-field-span='2' id='rail-division' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Rail Division</label>\n                    <input type='text' disabled='true' value='";
+
       html += featureAttributes.Division + "'>\n                  </div>\n                  <div data-field-span='1' id='rail-subdivision' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Subdivision</label>\n                    <input type='text' disabled='true' value='";
+
       html += featureAttributes.Subdivision + "'>\n                  </div>\n                  <div data-field-span='1' id='mile-post' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>MP</label>\n                    <input type='text' disabled='true' value='";
+
       html += featureAttributes.MP + "'>\n                  </div>\n              </div>\n          </fieldset>\n          <fieldset>\n            <legend>Crossing Photos</legend>\n            <div data-row-span='2'>";
+
       html += imageString + "</div>\n          </fieldset>\n          <fieldset>\n            <legend>Crossing Details</legend>\n            <div data-row-span='3'>\n              <div data-field-span='1' id='surf-type' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Main Surface Material</label>\n                <input type='text' disabled='true' value='";
-      html += featureAttributes.SurfaceType + "'>\n              </div>\n              <div data-field-span='1' id='surf-type-two' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Secondary Surface Material</label>\n                <input type='text' disabled='true' value='"; + featureAttributes.SurfaceType2 + "'>\n              </div>\n              <div data-field-span='1' id='flange-material' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Flange Material</label>\n                <input type='text' disabled='true' value='";
+
+      html += featureAttributes.SurfaceType + "'>\n              </div>\n              <div data-field-span='1' id='surf-type-two' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Secondary Surface Material</label>\n                <input type='text' disabled='true' value='";
+
+      html += featureAttributes.SurfaceType2 + "'>\n              </div>\n              <div data-field-span='1' id='flange-material' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Flange Material</label>\n                <input type='text' disabled='true' value='";
+      console.log(featureAttributes.SurfaceType2);
+
       html += featureAttributes.FlangeMaterial + "'>\n              </div>\n            </div>\n            <div data-row-span='9'>\n              <div data-field-span='3' id='number-tracks' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Number of Tracks</label>\n                <input type='text' disabled='true' value='";
+
       html += featureAttributes.NumTracks + "'>\n              </div>\n              <div data-field-span='1' id='crossing-angle' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Angle</label>\n                <input type='text' disabled='true' value='";
+
       html += featureAttributes.Angle + "'>\n              </div>\n              <div data-field-span='1' id='crossing-width' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Width</label>\n                <input type='text' disabled='true' value='";
+
       html += featureAttributes.XingWidth + "'>\n              </div>\n              <div data-field-span='1' id='crossing-length' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Length</label>\n                <input type='text' disabled='true' value='";
+
       html += featureAttributes.XingLength + "'>\n              </div>\n              <div data-field-span='3' id='snooper' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Snooper Compliant</label>\n                <input type='text' disabled='true' value='";
 
       html += featureAttributes.SnoopCompliant + "'>\n              </div>\n            </div>\n          </fieldset>\n          <fieldset>\n            <legend>Safety Information</legend>\n            <div data-row-span='3'>\n              <div data-field-span='1' id='warning-device-code' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Warning Device</label>\n                <input type='text' disabled='true' value='";
@@ -145,7 +161,7 @@ require([
 
       html += featureAttributes.XingIllum + "'>\n              </div>\n            </div>\n            <div data-row-span='6'>\n              <div data-field-span='1' id='paved' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Paved</label>\n                <input type='text' disabled='true' value='";
 
-      html += featureAttributes.Paved + "'>\n              </div>\n              <div data-field-span='1' id='stop-line' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Stop Line</label>\n                <input type='text' disabled='true' value='";
+      html += featureAttributes.Paved + "'>\n              </div>\n              <div data-field-span='1' id='stop-line' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Stop Line</label>\n                <input type='text' disabled='true' value='"
 
       html += featureAttributes.StopLine + "'>\n              </div>\n              <div data-field-span='2' id='rr-pave-mark' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>RR Pavement Markings</label>\n                <input type='text' disabled='true' value='";
 
@@ -163,7 +179,7 @@ require([
 
       html += featureAttributes.Cant_Struc_Side + "'>\n              </div>\n              <div data-field-span='1' id='cant-bulb-type' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Cantilevered Bulbs</label>\n                <input type='text' disabled='true' value='";
 
-      html += featureAttributes.Cant_FL_Type + "'>\n              </div>\n            </div>\n            <div data-row-span='2'>\n              <div data-field-span='1' id='basic-mast-count' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Mast Count (Not Cantilevered)</label>\n                <input type='text' disabled='true' value='";
+      html += featureAttributes.Cant_FL_Type + "'>\n              </div>\n            </div>\n            <div data-row-span='2'>\n              <div data-field-span='1' id='basic-mast-count' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Mast Count (Not Cantilevered)</label>\n                <input type='text' disabled='true' value='"
 
       html += featureAttributes.FL_MastCount + "'>\n              </div>\n              <div data-field-span='1' id='mast-bulb-type' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Mast Bulbs</label>\n                <input type='text' disabled='true' value='";
 
@@ -199,6 +215,17 @@ require([
     //-----------Replace Domain Name with Values------
     //---------------------------------------------
     // Updates Domain Codes to Coded Value, aka description or alias
+    if (document.getElementById('surf-type-two')) {
+      var surftwo = document.getElementById('surf-type-two').children[1].value;
+
+      if (surftwo === "") {
+        document.getElementById('surf-type-two').children[1].value = "None";
+      }
+      else if (surftwo === "null") {
+        document.getElementById('surf-type-two').children[1].value = "None";
+      }
+    }
+
     if (document.getElementById('warning-device-code')) {
       var warn = document.getElementById('warning-device-code').children[1].value;
 
