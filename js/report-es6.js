@@ -180,7 +180,7 @@ require([
             <div data-row-span='9'>
               <div data-field-span='3' id='number-tracks' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Number of Tracks</label>
-                <input type='text' disabled='true' value='` + featureAttributes.NumTracks + `'>
+                <input type='text' disabled='true' value='` + featureAttributes.Num_Tracks + `'>
               </div>
               <div data-field-span='1' id='crossing-angle' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Angle</label>
@@ -231,7 +231,7 @@ require([
               </div>
               <div data-field-span='2' id='pave-mark-cond' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>
                 <label>Pavement Markings Condition</label>
-                <input type='text' disabled='true' id='pmark-cond' value='` + featureAttributes.PavMarkCond + `'>
+                <input type='text' disabled='true' id='pmark-cond' value='` + featureAttributes.PaveMarkCond + `'>
               </div>
             </div>
             <div data-row-span='3'>

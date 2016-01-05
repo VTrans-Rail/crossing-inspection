@@ -14,7 +14,7 @@ require([
   "dojo/domReady!"
 ], function (dom, on, Query, QueryTask, FeatureLayer) {
 
-  var queryTask = new QueryTask("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1");
+  var queryTask = new QueryTask("http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspections2015/FeatureServer/1");
 
   var query = new Query();
 
@@ -46,7 +46,7 @@ require([
 //------------Working Section------------------------------
 //-----------------------------------------------------
 
-  var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspections2015/FeatureServer/1";
+  var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspections2015/FeatureServer/1";
 
   var crossingPoints = new FeatureLayer(crossingUrl, {
     id: "crossingPoints",
@@ -145,7 +145,7 @@ require([
 
       html += featureAttributes.FlangeMaterial + "'>\n              </div>\n            </div>\n            <div data-row-span='9'>\n              <div data-field-span='3' id='number-tracks' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Number of Tracks</label>\n                <input type='text' disabled='true' value='";
 
-      html += featureAttributes.NumTracks + "'>\n              </div>\n              <div data-field-span='1' id='crossing-angle' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Angle</label>\n                <input type='text' disabled='true' value='";
+      html += featureAttributes.Num_Tracks + "'>\n              </div>\n              <div data-field-span='1' id='crossing-angle' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Angle</label>\n                <input type='text' disabled='true' value='";
 
       html += featureAttributes.Angle + "'>\n              </div>\n              <div data-field-span='1' id='crossing-width' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Width</label>\n                <input type='text' disabled='true' value='";
 
@@ -167,7 +167,7 @@ require([
 
       html += featureAttributes.RRXingPavMark + "'>\n              </div>\n              <div data-field-span='2' id='pave-mark-cond' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Pavement Markings Condition</label>\n                <input type='text' disabled='true' id='pmark-cond' value='";
 
-      html += featureAttributes.PavMarkCond + "'>\n              </div>\n            </div>\n            <div data-row-span='3'>\n              <div data-field-span=\"1\" id='gates-road' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Gate Arms (Vehicle)</label>\n                <input type='text' disabled='true' value='";
+      html += featureAttributes.PaveMarkCond + "'>\n              </div>\n            </div>\n            <div data-row-span='3'>\n              <div data-field-span=\"1\" id='gates-road' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Gate Arms (Vehicle)</label>\n                <input type='text' disabled='true' value='";
 
       html += featureAttributes.GateArmsRoad + "'>\n              </div>\n              <div data-field-span='1' id='gates-ped' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                <label>Gate Arms (Pedestrian)</label>\n                <input type='text' disabled='true' value='";
 
