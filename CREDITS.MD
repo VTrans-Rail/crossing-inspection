@@ -22,10 +22,10 @@ https://www.google.com/design/icons/
 - SimpleLineSymbol: https://developers.arcgis.com/javascript/jsapi/simplelinesymbol-amd.html
 - UniqueValueRenderer: https://developers.arcgis.com/javascript/jssamples/renderer_unique_value.html
 
--Possible Way to Add Outline to SimpleLineSymbol: https://developers.arcgis.com/javascript/jsapi/symbolstyler-amd.html
+- Possible Way to Add Outline to SimpleLineSymbol: https://developers.arcgis.com/javascript/jsapi/symbolstyler-amd.html
 
 
--Locate Button: https://developers.arcgis.com/javascript/jsapi/locatebutton-amd.html
+- Locate Button: https://developers.arcgis.com/javascript/jsapi/locatebutton-amd.html
 
 - Create Label Shadow without v3.15 Halo TextSymbol Properties: https://gist.github.com/patrickarlt/7139538
 
@@ -37,4 +37,4 @@ https://www.google.com/design/icons/
 
 - Get Device Width when dealing with mobile devices and browsers: http://stackoverflow.com/questions/6850164/get-the-device-width-in-javascript
 
-- Using Template Strings, Backticks, & Multiline HTMl/Javascript compatible with IE: https://babeljs.io/repl/
+- Using Template Strings, Backticks, & Multiline HTMl/Javascript compatible with IE: https://babeljs.io/repl/ & https://hacks.mozilla.org/2015/05/es6-in-depth-template-strings-2/
