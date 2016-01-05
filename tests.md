@@ -13,7 +13,7 @@ Browsers
 - [ ] Safari
 
 Search Test - Main Page
-- [ ] Empty 
+- [ ] Empty
 - [ ] Gibberish
 - [ ] Street name
 - [ ] DOT # - dashes
@@ -22,7 +22,7 @@ Search Test - Main Page
 
 
 Search Test - Report Page
-- [ ] Empty 
+- [ ] Empty
 - [ ] Gibberish
 - [ ] Street name
 - [ ] DOT # - dashes
@@ -31,10 +31,17 @@ Search Test - Report Page
 
 
 Sizes
-- [ ] 480px 
+- [ ] 480px
 - [ ] 768px
 - [ ] 992px
 - [ ] 1200px
 
 Accessibility
 - [ ] Colorblind-accessible
+
+Speed Test
+- [ ] high speed Ethernet
+- [ ] wifi (30 mbps)
+- [ ] 4G (4mbps)
+- [ ] good 3g (1mbps)
+- [ ] reg 3g (750 kbps)

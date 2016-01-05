@@ -1,0 +1,242 @@
+#navigation-bar {
+  position: fixed;
+  width: 100%;
+  background-color: rgba(102, 102, 102, 1);
+  border-color: black;
+}
+
+#report-page-title-div {
+  width: 50%;
+  left: 25%;
+}
+
+#condition {
+  font-weight: bold;
+}
+
+#report-title {
+  font-size: 25px;
+  color: #fff;
+}
+
+#info {
+  padding-top: 95px;
+}
+
+#left-panel {
+  display: none;
+}
+
+#metadata-info {
+  display:block;
+  position: fixed;
+  text-align: center;
+  overflow-y: auto;
+  bottom: 0px;
+  right: 0;
+  height: 100%;
+  padding-top: 80px;
+  background-color: rgba(200, 200, 200, 0.95);
+  color: #000;
+  font-size: 12px;
+  z-index: 2;
+  width: 100%;
+}
+
+.metadata-heading {
+  /*position: fixed;*/
+  /*background-color: rgba(102, 102, 102, 1);*/
+  width: 100%;
+  padding-top: 2px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+}
+
+/* Gradient color1 - color2 - color1 */
+hr.style-one {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+/* Flaired edges, by Tomas Theunissen */
+hr.style-seven {
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: -20px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+hr.style-seven:before { /* Not really supposed to work, but does */
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+}
+
+#metadata-body {
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-bottom: 65px;
+}
+
+#metadata-domain-text {
+  text-align: left;
+}
+
+.gotit {
+  position: fixed;
+  bottom: 0px;
+  background-color: rgba(200, 200, 200, 0.9);
+  padding-top: 5px;
+  padding-right: calc(((100% - 82px)/2));
+  padding-bottom: 5px;
+  padding-left: calc(((100% - 82px)/2));
+}
+
+#close-metadata {
+  display: none;
+}
+
+.blur .img-responsive {
+  margin-bottom: 5px;
+}
+
+.blur {
+  position:relative;
+}
+
+.blur h3 {
+  visibility: hidden;
+  position: absolute;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 0px 0px 4px rgba(255,255,255,1);
+  filter: url(#drop-shadow);
+  bottom: calc((100% - 19px)/2);
+  left: calc((100% - 180px)/2);
+}
+
+.blur img:hover {
+  -webkit-filter: blur(2px);
+}
+
+.blur h4:hover {
+  visibility: visible;
+}
+
+.blur img:hover + h3 {
+  visibility: visible;
+}
+
+
+@media (min-width: 415px) {
+  #metadata-info {
+    display:block;
+    position: fixed;
+    text-align: center;
+    overflow-y: auto;
+    bottom: 20px;
+    right: 0;
+    padding-top: 5px;
+    padding-right: calc((100% - 670px)/2);
+    padding-bottom: 5px;
+    padding-left: calc((100% - 670px)/2);
+    background-color: rgba(200, 200, 200, 0.95);
+    color: #000;
+    font-size: 12px;
+    z-index: 2;
+    height: 150px;
+    width: 100%;
+  }
+
+  #metadata-body {
+    margin-bottom: 10px;
+  }
+
+  #metadata-title {
+    /*position: fixed;*/
+  }
+
+  #close-metadata {
+    display:block;
+    position: fixed;
+    float: right;
+    right: 10px;
+    bottom: 140px;
+  }
+
+  .gotit {
+    display: none;
+  }
+}
+
+
+
+@media (min-width: 768px) {
+  #metadata-info {
+    padding-right: calc((100% - 670px)/2);
+  }
+
+  #report-title {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 992px) {
+  #report-title {
+    font-size: 36px;
+  }
+
+  #metadata-info {
+    padding-right: calc((100% - 820px)/2);
+    padding-left: calc((100% - 820px)/2);
+  }
+}
+
+
+@media (min-width: 1200px) {
+  #report-title {
+    font-size: 40px;
+  }
+
+  #metadata-info {
+    /*color: #404040;
+    background-color: #fff;*/
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: rgba(200, 200, 200, 0.9);
+    color: #404040;
+    bottom: 0;
+    width: calc((100% - 830px)/2);
+    height: 100%;
+    padding-top: 85px;
+    padding-right: calc((((100% - 830px)/2) - 300px)/2);
+    padding-left: calc((((100% - 830px)/2) - 300px)/2);
+  }
+
+  #left-panel {
+    display:block;
+    position: fixed;
+    text-align: center;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: rgba(200, 200, 200, 0.9);
+    color: #404040;
+    bottom:0;
+    width: calc((100% - 830px)/2);
+    height: 100%;
+    padding-top: 85px;
+    padding-right: calc((((100% - 830px)/2) - 300px)/2);
+    padding-left: calc((((100% - 830px)/2) - 300px)/2);
+  }
+
+  #close-metadata {
+    display: none;
+  }
+}
