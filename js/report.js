@@ -14,7 +14,7 @@ require([
   "dojo/domReady!"
 ], function (dom, on, Query, QueryTask, FeatureLayer) {
 
-  var queryTask = new QueryTask("http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspections2015/FeatureServer/1");
+  var queryTask = new QueryTask("http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1");
 
   var query = new Query();
 
@@ -46,7 +46,7 @@ require([
 //------------Working Section------------------------------
 //-----------------------------------------------------
 
-  var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspections2015/FeatureServer/1";
+  var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
 
   var crossingPoints = new FeatureLayer(crossingUrl, {
     id: "crossingPoints",
