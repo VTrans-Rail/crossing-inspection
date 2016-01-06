@@ -46,3 +46,13 @@
 - Removed Rail Trails and Twin State RR from Railroad Lines layer as they are not associated with any public crossings. (#156)
 - Changed JS code for loading popup info and images so that each popup loads the correct photos. Stopped photos from automatically loading in popup and added button to popup to load photos on request. Rotated sign photos 90 degrees so that the majority of the sign photos display with the correct orientation in popups. Previously photos were loading for the wrong crossing when network was slow. (#160, #98, #174)
 - Added DOT Number label to crossings and fixed font issue for labels in different browsers (#140, #158)
+
+## Beta 4 - Released 1/6/2015
+- Add field metadata explanation to Report Page when hovering over field, or tapping on a touchscreen (#69)
+- Rotate Sign images to display upright & ignore rotation on iphone as the phone automatically adjusts orientation (#181, #182)
+- Tested load times for hosted vs nonhosted feature services. Chose to move ahead with our *ArcGIS Server* feature services instead of hosting. If slow, will switch back to hosted later (#185)
+- Replace domain code or field code with domain alias/value for popups and report page. Fields changed are `WDCode` & `SurfaceType2` (#187, #52, #175)
+- Images displayed on the report page double as links to open the full image in a new tab. They blur on *hover* and display "View Full Image" text. (#184)
+- **New Report Page Layout!!!** (#100) Used *Gridforms*
+- New report page layout javascript file was run through *Babel* in order to be compatible with *Internet Explorer*. (#186)
+- Crossing symbology for the map page is now colorblind-safe (#139)
