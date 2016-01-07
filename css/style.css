@@ -20,10 +20,6 @@
   margin-bottom: 20px;
 }
 
-.esriControlsBR {
-  display:none;
-}
-
 /*Popup Links*/
 .esriPopup a {
   text-decoration: none;
