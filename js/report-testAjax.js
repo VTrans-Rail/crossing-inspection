@@ -39,9 +39,6 @@ if (dotnumqstest) {
       }
       console.log(imageStringOne);
       console.log(imageStringTwo);
-      // document.getElementById("images-display").innerHTML = imageStringOne;
-
-
 
 
 
@@ -99,7 +96,7 @@ if (dotnumqstest) {
         for (var i = 0; i < resultCount; i++) {
           var featureAttributes = results.features[i].attributes;
           var objectId = featureAttributes.OBJECTID;
-          // ------------Get Picture URls and Build Image Tags------------------
+          // ------------Get Picture URls and Build Image Tags----------------
 
           var imgClass = "class='img-responsive'";
           var imageStyle = "alt='site image' width='100%'";
@@ -329,5 +326,4 @@ if (dotnumqstest) {
   xhttp.open("GET", imgFolder, true);
   xhttp.send();
 }
-
 });
