@@ -1,3 +1,7 @@
+html body {
+  padding:0;
+}
+
 #navigation-bar {
   position: fixed;
   width: 100%;

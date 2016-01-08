@@ -14,7 +14,46 @@ require([
   "dojo/domReady!"
 ], function (dom, on, Query, QueryTask, FeatureLayer) {
 
-  var queryTask = new QueryTask("http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1");
+var dotnumqstest = "247-383P";
+
+var imgFolder = "xImages/" + dotnumqstest;
+
+if (dotnumqstest) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      document.getElementById("image-testing").innerHTML = xhttp.responseText;
+
+      var imgFolderContents = document.getElementsByClassName("icon");
+
+      var imgFolderLength = imgFolderContents.length - 1;
+
+      console.log(imgFolderContents);
+      var imageStringOne = "";
+      var imageStringTwo = new Array();
+
+      for (i = 0; i < imgFolderLength; i++) {
+        console.log(imgFolderContents[i].innerText);
+        imageStringOne += "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "'>";
+        imageStringTwo[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
+      }
+      console.log(imageStringOne);
+      console.log(imageStringTwo);
+      // document.getElementById("images-display").innerHTML = imageStringOne;
+
+//     }
+//   };
+//   xhttp.open("GET", imgFolder, true);
+//   xhttp.send();
+// }
+
+
+
+
+  var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
+
+
+  var queryTask = new QueryTask(crossingUrl);
 
   var query = new Query();
 
@@ -46,20 +85,18 @@ require([
 //------------Working Section------------------------------
 //-----------------------------------------------------
 
-  var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
 
   var crossingPoints = new FeatureLayer(crossingUrl, {
     id: "crossingPoints",
   });
 
 
-  if (dotnumqs)
-    {
-      query.where = "DOT_Num like '%" + dotnumqs + "%'";
-      queryTask.execute(query,getPhotos);
-    }
+  if (dotnumqs) {
+    query.where = "DOT_Num like '%" + dotnumqs + "%'";
+    queryTask.execute(query,getPhotos);
+  }
 
-    var imageString = "";
+  var imageString = "";
 
 
   function getPhotos (results) {
@@ -81,8 +118,8 @@ require([
         else {
           for ( i = 0; i < response.length; i++) {
             imgSrc = response[i].url;
-            // imageString += "<div class='col-sm-6 col-md-4'><img src='" + imgSrc + "' " + imgClass + " " + imageStyle + "></div>";
-            imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'><img src='" + imgSrc + "' " + imgClass + " " + imageStyle + "><h3>View Full Image</h3></a></div>";
+            // imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'><img src='" + imgSrc + "' " + imgClass + " " + imageStyle + "><h3>View Full Image</h3></a></div>";
+            imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'>" + imageStringTwo[i] + "<h3>View Full Image</h3></a></div>";
           }
         }
 
@@ -292,4 +329,10 @@ require([
         pcondcell.style.backgroundColor = "#e24c4c";
       }
   }
+}
+};
+xhttp.open("GET", imgFolder, true);
+xhttp.send();
+}
+
 });
