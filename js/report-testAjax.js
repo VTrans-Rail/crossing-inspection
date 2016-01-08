@@ -304,21 +304,17 @@ if (dotnumqstest) {
           // pavement condition
           var pcond = document.getElementById("pmark-cond");
           var pcondcell = document.getElementById("pave-mark-cond");
-          if (pcond.value === "Excellent") {
-            // cond.style.color = "green";
-            pcondcell.style.backgroundColor = "#99d899";
+          if (pcond.value === "Not Applicable") {
+            pcondcell.style.color = "#000";
+            // pcondcell.style.backgroundColor = "#99d899";
           }
-          else if (pcond.value === "Good") {
-            // cond.style.color = "light-green";
-            pcondcell.style.backgroundColor = "#e5f5e5";
+          else if (pcond.value === "OK") {
+            pcondcell.style.color = "green";
+            // pcondcell.style.backgroundColor = "#e5f5e5";
           }
-          else if (pcond.value === "Fair") {
-            // cond.style.color = "Yellow";
-            pcondcell.style.backgroundColor = "#fcffd1";
-          }
-          else if (pcond.value === "Poor") {
-            // cond.style.color = "Red";
-            pcondcell.style.backgroundColor = "#e24c4c";
+          else if (pcond.value === "Worn") {
+            pcondcell.style.color = "Red";
+            // pcondcell.style.backgroundColor = "#e24c4c";
           }
       }
     }
