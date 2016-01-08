@@ -22,17 +22,9 @@
     <script>
       var dotnumqs = "247-383P";
 
-      // var folderPath = "xImages" + dotnumqs;
-      // var crossingFolder = getFolder(folderPath);
-      // console.log(document.getElementById("image-one").src = "xImages/" + dotnumqs + "/IMG_1092.JPG");
 
       var imgFolder = "xImages/" + dotnumqs;
 
-      // var myObject, f, filesCount;
-      // myObject = new XMLHttpRequest();
-      // f = myObject.GetFolder(imgFolder);
-      // filesCount = f.files.Count;
-      // console.log(filesCount);
 
       if (dotnumqs) {
         // function loadImages() {
@@ -54,7 +46,7 @@
               console.log(imgFolderContents);
               var imageString = "";
 
-              for (i = 0; i < imgFolderLength; i++) {
+              for (i = 1; i < imgFolderLength; i++) {
                 console.log(imgFolderContents[i].innerText);
                 imageString += "<img src='xImages/" + dotnumqs + "/" + imgFolderContents[i].innerText + "'>";
               }
