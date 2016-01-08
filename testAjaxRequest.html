@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html dir="ltr" class="dj_webkit dj_chrome dj_contentbox">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+
+    <title>Full Crossing Report</title>
+
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+
+    <script src="http://localhost:35729/livereload.js"></script>
+
+  </head>
+
+  <body>
+    <div id="image-testing" style="display:none">
+      <img id="image-one" src="img\favicon.png">
+    </div>
+    <div id="images-display"></div>
+
+    <script>
+      var dotnumqs = "247-383P";
+
+      // var folderPath = "xImages" + dotnumqs;
+      // var crossingFolder = getFolder(folderPath);
+      // console.log(document.getElementById("image-one").src = "xImages/" + dotnumqs + "/IMG_1092.JPG");
+
+      var imgFolder = "xImages/" + dotnumqs;
+
+      // var myObject, f, filesCount;
+      // myObject = new XMLHttpRequest();
+      // f = myObject.GetFolder(imgFolder);
+      // filesCount = f.files.Count;
+      // console.log(filesCount);
+
+      if (dotnumqs) {
+        // function loadImages() {
+          // console.log(document.getElementById("image-one"));
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+              console.log(document.getElementById("image-one"));
+              // document.getElementById("image-one").src = xhttp.responseText;
+
+
+              document.getElementById("image-testing").innerHTML = xhttp.responseText;
+
+              var imgFolderContents = document.getElementsByClassName("icon");
+
+              var imgFolderLength = imgFolderContents.length - 1;
+              console.log(imgFolderLength);
+
+              console.log(imgFolderContents);
+              var imageString = "";
+
+              for (i = 0; i < imgFolderLength; i++) {
+                console.log(imgFolderContents[i].innerText);
+                imageString += "<img src='xImages/" + dotnumqs + "/" + imgFolderContents[i].innerText + "'>";
+              }
+              console.log(imageString);
+              document.getElementById("images-display").innerHTML = imageString;
+
+
+            }
+          };
+          xhttp.open("GET", imgFolder, true);
+          xhttp.send();
+
+
+          // console.log(document.getElementById("image-one").src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC4SURBVCjPdZFbDsIgEEWnrsMm7oGGfZrohxvU+Iq1TyjU60Bf1pac4Yc5YS4ZAtGWBMk/drQBOVwJlZrWYkLhsB8UV9K0BUrPGy9cWbng2CtEEUmLGppPjRwpbixUKHBiZRS0p+ZGhvs4irNEvWD8heHpbsyDXznPhYFOyTjJc13olIqzZCHBouE0FRMUjA+s1gTjaRgVFpqRwC8mfoXPPEVPS7LbRaJL2y7bOifRCTEli3U7BMWgLzKlW/CuebZPAAAAAElFTkSuQmCC");
+        // }
+        //add contents to image string
+      }
+    </script>
+
+  </body>
+
+
+  </html>
