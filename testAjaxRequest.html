@@ -15,54 +15,38 @@
 
   <body>
     <div id="image-testing" style="display:none">
-      <img id="image-one" src="img\favicon.png">
     </div>
     <div id="images-display"></div>
 
     <script>
       var dotnumqs = "247-383P";
 
-
       var imgFolder = "xImages/" + dotnumqs;
 
-
       if (dotnumqs) {
-        // function loadImages() {
-          // console.log(document.getElementById("image-one"));
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-              console.log(document.getElementById("image-one"));
-              // document.getElementById("image-one").src = xhttp.responseText;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+            document.getElementById("image-testing").innerHTML = xhttp.responseText;
 
+            var imgFolderContents = document.getElementsByClassName("icon");
 
-              document.getElementById("image-testing").innerHTML = xhttp.responseText;
+            var imgFolderLength = imgFolderContents.length - 1;
 
-              var imgFolderContents = document.getElementsByClassName("icon");
+            console.log(imgFolderContents);
+            var imageString = "";
 
-              var imgFolderLength = imgFolderContents.length - 1;
-              console.log(imgFolderLength);
-
-              console.log(imgFolderContents);
-              var imageString = "";
-
-              for (i = 1; i < imgFolderLength; i++) {
-                console.log(imgFolderContents[i].innerText);
-                imageString += "<img src='xImages/" + dotnumqs + "/" + imgFolderContents[i].innerText + "'>";
-              }
-              console.log(imageString);
-              document.getElementById("images-display").innerHTML = imageString;
-
-
+            for (i = 1; i < imgFolderLength; i++) {
+              console.log(imgFolderContents[i].innerText);
+              imageString += "<img src='xImages/" + dotnumqs + "/" + imgFolderContents[i].innerText + "'>";
             }
-          };
-          xhttp.open("GET", imgFolder, true);
-          xhttp.send();
+            console.log(imageString);
+            document.getElementById("images-display").innerHTML = imageString;
 
-
-          // console.log(document.getElementById("image-one").src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC4SURBVCjPdZFbDsIgEEWnrsMm7oGGfZrohxvU+Iq1TyjU60Bf1pac4Yc5YS4ZAtGWBMk/drQBOVwJlZrWYkLhsB8UV9K0BUrPGy9cWbng2CtEEUmLGppPjRwpbixUKHBiZRS0p+ZGhvs4irNEvWD8heHpbsyDXznPhYFOyTjJc13olIqzZCHBouE0FRMUjA+s1gTjaRgVFpqRwC8mfoXPPEVPS7LbRaJL2y7bOifRCTEli3U7BMWgLzKlW/CuebZPAAAAAElFTkSuQmCC");
-        // }
-        //add contents to image string
+          }
+        };
+        xhttp.open("GET", imgFolder, true);
+        xhttp.send();
       }
     </script>
 
