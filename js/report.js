@@ -42,10 +42,7 @@ if (dotnumqs) {
         imageStringArray[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
         imageNameArray[i] = imgFolderContents[i].innerText;
         imageNameArray[i] = imageNameArray[i].substr(0,8);
-        // imageNameArray[i] = imageNameArray[i].substr(0,8) + imageNameArray[i].substr(14,4);
       }
-      console.log(imageStringArray);
-      console.log(imageNameArray);
 
 
       var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspection2015/FeatureServer/1";
@@ -113,27 +110,20 @@ if (dotnumqs) {
               deferred.resolve("no attachments");
             }
             else {
-              for ( i = 0; i < response.length; i++) {
-                // imgSrc = response[i].url;
-                // imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'>" + imageStringArray[i] + "<h3>View Full Image</h3></a></div>";
-              }
-              // console.log(imgSrc);
-              console.log(response);
               for ( i = 0; i < imageNameArray.length; i++ ) {
                 for ( j = 0; j < response.length; j++ ) {
                   if ( response[j].name.substr(0,8) === imageNameArray[i] ) {
-                    console.log("yes");
                     imgSrc = response[j].url;
                     imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'>" + imageStringArray[i] + "<h3>View Full Image</h3></a></div>";
-                  } else {
-                    // console.log("no");
                   }
                 }
-                // if (response[i].name ===  )
+              }
+              if (imageStringArray.length > response.length) {
+                imageString += "<div data-field-span='1'><p style='padding: 20px 50px 0px 50px; text-align:center;'>There is at least one image for this crossing that cannot be displayed on the website. Missing images were likely not included due to a percieved lack of value. If you would like to see missing images, please contact us and ask for all of the original image files for this crossing (please include the DOT Crossing Number) from the 2015 Crossing Inspection.</p></div>";
               }
             }
           });
-          //--------------------------------------------------------------------
+          //-------------------------------------------------------------------
         }
       }
 
