@@ -356,7 +356,7 @@ require([
 //---------------------------------------------------------------------------
 //---------------------Display Photos in Popup--------------------------------
 //---------------------------------------------------------------------------
-//---------------------Build Link to Report Page--------------------------------
+//---------------------Build Link to Report Page------------------------------
 //---------------------------------------------------------------------------
   on(map.infoWindow, "selection-change", when);
 
@@ -366,11 +366,37 @@ require([
 
     var featureCount = popup.count;
 
+    //Prevent load picture button from displaying until ready
+    var pictureOpen = document.getElementById('popupPictures');
+    pictureOpen.style.display = "none";
+
     if ( featureCount > 0 ) {
 
       //Updates link to report page
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
       link.href = "report.html?dotnum=" + dotnum;
+
+      // Send Ajax Request and populate invisible div with results of contents of thumbnail folder
+      var imgFolder = "script/CrossingPhotosbyID/" + dotnum;
+      if (dotnum) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var rawResponse = xhttp.responseText;
+            var startString = rawResponse.indexOf("<ul");
+            var endString = rawResponse.lastIndexOf("ul>") + 3;
+            var substring = rawResponse.slice(startString, endString);
+            document.getElementById("image-testing").innerHTML = substring;
+
+            //display load picture button when ready
+            pictureOpen.style.display = "inline-block";
+          }
+        };
+        xhttp.open("GET", imgFolder, true);
+        xhttp.send();
+      }
+
+
 
       // Updates Domain Codes to Coded Value, aka description or alias
       if (document.getElementById('warnCode')) {
@@ -396,7 +422,7 @@ require([
       }
 
 
-      var pictureOpen = document.getElementById('popupPictures');
+      // var pictureOpen = document.getElementById('popupPictures');
       if (pictureOpen) {
         pictureOpen.addEventListener('click', function () {
           pictureOpen.style.display = "none";
@@ -414,6 +440,14 @@ require([
 
           if ( selectedLayerId.length > 12 ) {
             selectedLayer = crossingPoints;
+
+            //Get Thumbnail imageArray
+            var imgFolderContents = document.getElementsByClassName("icon");
+            var imgFolderLength = imgFolderContents.length;
+            var imageStringArray = new Array();
+            for (i = 0; i < imgFolderLength; i++) {
+              imageStringArray[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
+            }
           } else {
             selectedLayer = signPoints;
             var transform = "style='transform:rotate(90deg); margin-top:42px; margin-bottom:15px'"
@@ -430,8 +464,13 @@ require([
             }
             else {
               for ( i = 0; i < response.length; i++) {
-                imgSrc = response[i].url;
-                imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'><img src='" + imgSrc + "' " + imageStyle + "></div></td></tr>";
+                if (selectedLayerId.length > 12) {
+                  imgSrc = response[i].url;
+                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + imageStringArray[i] + "</div></td></tr>";
+                } else {
+                  imgSrc = response[i].url;
+                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'><img src='" + imgSrc + "' " + imageStyle + "></div></td></tr>";
+                }
               }
               formatString += imageString;
             }
