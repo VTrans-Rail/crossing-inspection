@@ -1,38 +1,32 @@
+import os
+import sys
 from PIL import Image
-from PIL.ExifTags import TAGS
 
-def processImage(path=None, baseWidth=256):
-    filename, extension = os.path.basename(path).split(".") # Assume 4 chars for .ext
+def resize(folder, fileName):
+    filePath = os.path.join(folder, fileName)
+    im = Image.open(filePath)
+    size = 640, 640
+    im.thumbnail(size, Image.ANTIALIAS)
+    outPath = os.path.splitext(filePath)[0]
+    print(outPath)
+    im.save(outPath+"_thumb.jpg")
+    os.remove(filePath) #remove file after thumbnail created
 
-    # Load to memory object
-    img = Image.open(path)
 
-    # Create dict for EXIF data
-    exifData = {}
+def bulkResize(imageFolder):
+    imgExts = ["png", "bmp", "jpg"]
+    for path, dirs, files in os.walk(imageFolder):
+        for fileName in files:
+            ext = fileName[-3:].lower()
+            if ext not in imgExts:
+                continue
 
-    # Obtain EXIF rotation
-    info = img._getexif()
+            resize(path, fileName)
 
-    # Populate EXIF dict
-    for (tag, value) in info.items():
-        decoded = TAGS.get(tag, tag)
-        exifData[decoded] = value
+if __name__ == "__main__":
+    imageFolder="C://Users//StSmith//Documents//GitHub//crossing-inspection//script//CrossingPhotosbyID" # first arg is path to image folder
+    bulkResize(imageFolder)
 
-    # Process picture orientation / rotation
-    orientation = exifData["Orientation"]
-    if orientation == 1:
-        #im = img
-        pass
-    elif orientation == 3:
-        img = img.transpose(Image.ROTATE_180)
-    elif orientation == 6:
-        img = img.transpose(Image.ROTATE_270)
-    elif orientation == 8:
-        img = img.transpose(Image.ROTATE_90)
-
-    # Resize for thumbnail
-    wpercent = (baseWidth / float(img.size[0]))
-    hsize = int(float(img.size[1]) * float(wpercent))
-    img = img.resize((baseWidth, hsize), Image.ANTIALIAS)
-
-    target = os.path.join(os.path.dirname(path), "{0}_resize.{1}".format(filename, extension))
+# Inspirations:
+# http://stackoverflow.com/questions/273946/how-do-i-resize-an-image-using-pil-and-maintain-its-aspect-ratio
+# http://stackoverflow.com/questions/1048658/resize-images-in-directory
