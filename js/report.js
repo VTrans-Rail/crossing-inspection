@@ -43,7 +43,7 @@ if (dotnumqs) {
       console.log(imageStringArray);
 
 
-      var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
+      var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspection2015/FeatureServer/1";
 
 
       var queryTask = new QueryTask(crossingUrl);
@@ -96,7 +96,7 @@ if (dotnumqs) {
         for (var i = 0; i < resultCount; i++) {
           var featureAttributes = results.features[i].attributes;
           var objectId = featureAttributes.OBJECTID;
-          
+
           // ------------Get Picture URls and Build Image Tags----------------
           var imgClass = "class='img-responsive'";
           var imageStyle = "alt='site image' width='100%'";
