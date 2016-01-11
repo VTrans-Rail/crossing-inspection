@@ -366,11 +366,15 @@ require([
 
     var featureCount = popup.count;
 
+    var pictureOpen = document.getElementById('popupPictures');
+    pictureOpen.style.display = "none";
+
     if ( featureCount > 0 ) {
 
       //Updates link to report page
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
       link.href = "report.html?dotnum=" + dotnum;
+      console.log(dotnum);
 
       var imgFolder = "script/CrossingPhotosbyID/" + dotnum;
 
@@ -383,6 +387,8 @@ require([
             var endString = rawResponse.lastIndexOf("ul>") + 3;
             var substring = rawResponse.slice(startString, endString);
             document.getElementById("image-testing").innerHTML = substring;
+            console.log(substring);
+            pictureOpen.style.display = "inline-block";
           }
         };
         xhttp.open("GET", imgFolder, true);
@@ -415,7 +421,7 @@ require([
       }
 
 
-      var pictureOpen = document.getElementById('popupPictures');
+      // var pictureOpen = document.getElementById('popupPictures');
       if (pictureOpen) {
         pictureOpen.addEventListener('click', function () {
           pictureOpen.style.display = "none";
@@ -435,11 +441,8 @@ require([
             selectedLayer = crossingPoints;
             //Get Thumbnail imageArray
             var imgFolderContents = document.getElementsByClassName("icon");
-
             var imgFolderLength = imgFolderContents.length;
-
             var imageStringArray = new Array();
-
             for (i = 0; i < imgFolderLength; i++) {
               imageStringArray[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
             }
