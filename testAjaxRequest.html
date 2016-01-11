@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <div id="image-testing" style="display:none">
+    <div id="image-testing" style="display:none;">
     </div>
     <div id="images-display"></div>
 
@@ -27,7 +27,16 @@
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (xhttp.readyState == 4 && xhttp.status == 200) {
-            document.getElementById("image-testing").innerHTML = xhttp.responseText;
+            var rawResponse = xhttp.responseText;
+            console.log(rawResponse);
+            var startString = rawResponse.indexOf("<ul");
+            var endString = rawResponse.lastIndexOf("ul>") + 3;
+            var substring = rawResponse.slice(startString, endString);
+            console.log(startString);
+            console.log(endString);
+            console.log(substring);
+
+            document.getElementById("image-testing").innerHTML = substring;
 
             var imgFolderContents = document.getElementsByClassName("icon");
 
