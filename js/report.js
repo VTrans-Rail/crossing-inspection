@@ -36,11 +36,16 @@ if (dotnumqs) {
       var imgFolderLength = imgFolderContents.length;
 
       var imageStringArray = new Array();
+      var imageNameArray = new Array();
 
       for (i = 0; i < imgFolderLength; i++) {
         imageStringArray[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
+        imageNameArray[i] = imgFolderContents[i].innerText;
+        imageNameArray[i] = imageNameArray[i].substr(0,8);
+        // imageNameArray[i] = imageNameArray[i].substr(0,8) + imageNameArray[i].substr(14,4);
       }
       console.log(imageStringArray);
+      console.log(imageNameArray);
 
 
       var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspection2015/FeatureServer/1";
@@ -109,8 +114,22 @@ if (dotnumqs) {
             }
             else {
               for ( i = 0; i < response.length; i++) {
-                imgSrc = response[i].url;
-                imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'>" + imageStringArray[i] + "<h3>View Full Image</h3></a></div>";
+                // imgSrc = response[i].url;
+                // imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'>" + imageStringArray[i] + "<h3>View Full Image</h3></a></div>";
+              }
+              // console.log(imgSrc);
+              console.log(response);
+              for ( i = 0; i < imageNameArray.length; i++ ) {
+                for ( j = 0; j < response.length; j++ ) {
+                  if ( response[j].name.substr(0,8) === imageNameArray[i] ) {
+                    console.log("yes");
+                    imgSrc = response[j].url;
+                    imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'>" + imageStringArray[i] + "<h3>View Full Image</h3></a></div>";
+                  } else {
+                    // console.log("no");
+                  }
+                }
+                // if (response[i].name ===  )
               }
             }
           });
