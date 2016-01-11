@@ -356,7 +356,7 @@ require([
 //---------------------------------------------------------------------------
 //---------------------Display Photos in Popup--------------------------------
 //---------------------------------------------------------------------------
-//---------------------Build Link to Report Page--------------------------------
+//---------------------Build Link to Report Page------------------------------
 //---------------------------------------------------------------------------
   on(map.infoWindow, "selection-change", when);
 
@@ -366,6 +366,7 @@ require([
 
     var featureCount = popup.count;
 
+    //Prevent load picture button from displaying until ready
     var pictureOpen = document.getElementById('popupPictures');
     pictureOpen.style.display = "none";
 
@@ -374,10 +375,9 @@ require([
       //Updates link to report page
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
       link.href = "report.html?dotnum=" + dotnum;
-      console.log(dotnum);
 
+      // Send Ajax Request and populate invisible div with results of contents of thumbnail folder
       var imgFolder = "script/CrossingPhotosbyID/" + dotnum;
-
       if (dotnum) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -387,7 +387,8 @@ require([
             var endString = rawResponse.lastIndexOf("ul>") + 3;
             var substring = rawResponse.slice(startString, endString);
             document.getElementById("image-testing").innerHTML = substring;
-            console.log(substring);
+
+            //display load picture button when ready
             pictureOpen.style.display = "inline-block";
           }
         };
@@ -439,6 +440,7 @@ require([
 
           if ( selectedLayerId.length > 12 ) {
             selectedLayer = crossingPoints;
+
             //Get Thumbnail imageArray
             var imgFolderContents = document.getElementsByClassName("icon");
             var imgFolderLength = imgFolderContents.length;
@@ -446,8 +448,6 @@ require([
             for (i = 0; i < imgFolderLength; i++) {
               imageStringArray[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
             }
-            console.log(imageStringArray);
-
           } else {
             selectedLayer = signPoints;
             var transform = "style='transform:rotate(90deg); margin-top:42px; margin-bottom:15px'"
@@ -467,9 +467,6 @@ require([
                 if (selectedLayerId.length > 12) {
                   imgSrc = response[i].url;
                   imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + imageStringArray[i] + "</div></td></tr>";
-                  // console.log(imageStringArray);
-
-                  // console.log(document.getElementById("image-testing").innerHTML);
                 } else {
                   imgSrc = response[i].url;
                   imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'><img src='" + imgSrc + "' " + imageStyle + "></div></td></tr>";
