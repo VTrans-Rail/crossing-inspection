@@ -141,7 +141,7 @@ require([
 //  ---------------------- Create Feature Layers ------------------------------
 //------------------------------------------------------------------
     //Create Crossing Feature Layer-------------------
-    var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
+    var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspection2015/FeatureServer/1";
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
       id: "crossing-points",
@@ -171,7 +171,7 @@ require([
 
 
     //Create Sign Feature Layer---------------------------------
-    var signUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/0";
+    var signUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspection2015/FeatureServer/0";
 
     var signPoints = new FeatureLayer(signUrl, {
       id: "sign-points",
@@ -372,6 +372,25 @@ require([
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
       link.href = "report.html?dotnum=" + dotnum;
 
+      var imgFolder = "script/CrossingPhotosbyID/" + dotnum;
+
+      if (dotnum) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var rawResponse = xhttp.responseText;
+            var startString = rawResponse.indexOf("<ul");
+            var endString = rawResponse.lastIndexOf("ul>") + 3;
+            var substring = rawResponse.slice(startString, endString);
+            document.getElementById("image-testing").innerHTML = substring;
+          }
+        };
+        xhttp.open("GET", imgFolder, true);
+        xhttp.send();
+      }
+
+
+
       // Updates Domain Codes to Coded Value, aka description or alias
       if (document.getElementById('warnCode')) {
         var warn = document.getElementById('warnCode').innerHTML;
@@ -414,6 +433,18 @@ require([
 
           if ( selectedLayerId.length > 12 ) {
             selectedLayer = crossingPoints;
+            //Get Thumbnail imageArray
+            var imgFolderContents = document.getElementsByClassName("icon");
+
+            var imgFolderLength = imgFolderContents.length;
+
+            var imageStringArray = new Array();
+
+            for (i = 0; i < imgFolderLength; i++) {
+              imageStringArray[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
+            }
+            console.log(imageStringArray);
+
           } else {
             selectedLayer = signPoints;
             var transform = "style='transform:rotate(90deg); margin-top:42px; margin-bottom:15px'"
@@ -430,8 +461,16 @@ require([
             }
             else {
               for ( i = 0; i < response.length; i++) {
-                imgSrc = response[i].url;
-                imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'><img src='" + imgSrc + "' " + imageStyle + "></div></td></tr>";
+                if (selectedLayerId.length > 12) {
+                  imgSrc = response[i].url;
+                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + imageStringArray[i] + "</div></td></tr>";
+                  // console.log(imageStringArray);
+
+                  // console.log(document.getElementById("image-testing").innerHTML);
+                } else {
+                  imgSrc = response[i].url;
+                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'><img src='" + imgSrc + "' " + imageStyle + "></div></td></tr>";
+                }
               }
               formatString += imageString;
             }
