@@ -22,7 +22,13 @@ if (dotnumqstest) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-      document.getElementById("image-testing").innerHTML = xhttp.responseText;
+      var rawResponse = xhttp.responseText;
+      var startString = rawResponse.indexOf("<ul");
+      var endString = rawResponse.lastIndexOf("ul>") + 3;
+      var substring = rawResponse.slice(startString, endString);
+
+
+      document.getElementById("image-testing").innerHTML = substring;
 
       var imgFolderContents = document.getElementsByClassName("icon");
 
@@ -34,10 +40,10 @@ if (dotnumqstest) {
 
       for (i = 0; i < imgFolderLength; i++) {
         console.log(imgFolderContents[i].innerText);
-        imageStringOne += "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "'>";
+        // imageStringOne += "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "'>";
         imageStringTwo[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
       }
-      console.log(imageStringOne);
+      // console.log(imageStringOne);
       console.log(imageStringTwo);
 
 
