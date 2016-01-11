@@ -445,8 +445,12 @@ require([
             var imgFolderContents = document.getElementsByClassName("icon");
             var imgFolderLength = imgFolderContents.length;
             var imageStringArray = new Array();
+            var imageNameArray = new Array();
+
             for (i = 0; i < imgFolderLength; i++) {
               imageStringArray[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
+              imageNameArray[i] = imgFolderContents[i].innerText;
+              imageNameArray[i] = imageNameArray[i].substr(0,8);
             }
           } else {
             selectedLayer = signPoints;
@@ -465,8 +469,17 @@ require([
             else {
               for ( i = 0; i < response.length; i++) {
                 if (selectedLayerId.length > 12) {
-                  imgSrc = response[i].url;
-                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + imageStringArray[i] + "</div></td></tr>";
+                  for ( i = 0; i < imageNameArray.length; i++ ) {
+                    for ( j = 0; j < response.length; j++ ) {
+                      if ( response[j].name.substr(0,8) === imageNameArray[i] ) {
+                        imgSrc = response[j].url;
+                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + imageStringArray[i] + "</div></td></tr>";
+                      }
+                    }
+                  }
+                  if (imageStringArray.length > response.length) {
+                    imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><p style='text-align:center;'>There is at least one image for this crossing that cannot be displayed on the website. Missing images were likely not included due to a percieved lack of value. If you would like to see missing images, please contact us and ask for all of the original image files for this crossing (please include the DOT Crossing Number) from the 2015 Crossing Inspection.</p></div></td></tr>";
+                  }
                 } else {
                   imgSrc = response[i].url;
                   imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'><img src='" + imgSrc + "' " + imageStyle + "></div></td></tr>";
