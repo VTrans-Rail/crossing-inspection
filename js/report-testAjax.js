@@ -14,11 +14,12 @@ require([
   "dojo/domReady!"
 ], function (dom, on, Query, QueryTask, FeatureLayer) {
 
-var dotnumqstest = "247-383P";
 
-var imgFolder = "xImages/" + dotnumqstest;
+var dotnumqs = getParameterByName("dotnum");
 
-if (dotnumqstest) {
+var imgFolder = "script/CrossingPhotosbyID/" + dotnumqs;
+
+if (dotnumqs) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -32,18 +33,15 @@ if (dotnumqstest) {
 
       var imgFolderContents = document.getElementsByClassName("icon");
 
-      var imgFolderLength = imgFolderContents.length - 1;
+      var imgFolderLength = imgFolderContents.length;
 
       console.log(imgFolderContents);
-      var imageStringOne = "";
       var imageStringTwo = new Array();
 
       for (i = 0; i < imgFolderLength; i++) {
         console.log(imgFolderContents[i].innerText);
-        // imageStringOne += "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "'>";
         imageStringTwo[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
       }
-      // console.log(imageStringOne);
       console.log(imageStringTwo);
 
 
@@ -76,7 +74,6 @@ if (dotnumqstest) {
         'Num_Tracks', 'PaveMarkCond', 'RDS_AOTCLASS', 'RDS_FUNCL'
       ];
 
-      var dotnumqs = getParameterByName("dotnum");
 
 
     //-----------------------------------------------------
