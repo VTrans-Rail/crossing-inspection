@@ -45,7 +45,7 @@ if (dotnumqs) {
       }
 
 
-      var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspection2015/FeatureServer/1";
+      var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
 
 
       var queryTask = new QueryTask(crossingUrl);

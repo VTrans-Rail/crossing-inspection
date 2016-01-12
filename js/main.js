@@ -141,7 +141,7 @@ require([
 //  ---------------------- Create Feature Layers ------------------------------
 //------------------------------------------------------------------
     //Create Crossing Feature Layer-------------------
-    var crossingUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspection2015/FeatureServer/1";
+    var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
       id: "crossing-points",
@@ -169,9 +169,33 @@ require([
     });
     crossingTemplate.setContent(crossingPopupFeatures);
 
+    var crossingPointsSearch = new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspection2015/FeatureServer/1", {
+      id: "crossing-points-search",
+      outFields: [
+          'OBJECTID','DOT_Num','Feature_Crossed','MP',
+          'LineName','Division','Subdivision',
+          'Branch','Town','County',
+          'FRA_LandUse','WDCode','SignSignal',
+          'Channelization','StopLine','RRXingPavMark',
+          'DynamicEnv','GateArmsRoad','GateArmsPed',
+          'GateConfig1','GateConfig2','Cant_Struc_Over',
+          'Cant_Struc_Side','Cant_FL_Type','FL_MastCount',
+          'Mast_FL_Type','BackSideFL','FlasherCount',
+          'FlasherSize','WaysideHorn','HTS_Control',
+          'HTS_for_Nearby_Intersection','BellCount','HTPS',
+          'HTPS_StorageDist','HTPS_StopLineDist','TrafficLnType',
+          'TrafficLnCount','Paved','XingIllum',
+          'SurfaceType','SurfaceType2','XingCond',
+          'FlangeMaterial','XingWidth','XingLength',
+          'Angle','SnoopCompliant','Comments', 'IntRd500', 'IntRdDist',
+          'Num_Tracks', 'PaveMarkCond', 'RDS_AOTCLASS', 'RDS_FUNCL',
+        ],
+    });
+
+
 
     //Create Sign Feature Layer---------------------------------
-    var signUrl = "http://services1.arcgis.com/NXmBVyW5TaiCXqFs/ArcGIS/rest/services/CrossingInspection2015/FeatureServer/0";
+    var signUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/0";
 
     var signPoints = new FeatureLayer(signUrl, {
       id: "sign-points",
@@ -525,7 +549,7 @@ require([
 
     //Push the first source used to search to searchSources array
     searchSources.push({
-      featureLayer: crossingPoints,
+      featureLayer: crossingPointsSearch,
       searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed"],
       displayField: "DOT_Num",
       suggestionTemplate: "${DOT_Num}: The ${LineName} crosses ${Feature_Crossed} in ${Town}. (${XingCond})",
