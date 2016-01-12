@@ -170,25 +170,13 @@ require([
     crossingTemplate.setContent(crossingPopupFeatures);
 
     var crossingPointsSearch = new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspection2015/FeatureServer/1", {
-      id: "crossing-points-search",
       outFields: [
           'OBJECTID','DOT_Num','Feature_Crossed','MP',
           'LineName','Division','Subdivision',
           'Branch','Town','County',
           'FRA_LandUse','WDCode','SignSignal',
-          'Channelization','StopLine','RRXingPavMark',
-          'DynamicEnv','GateArmsRoad','GateArmsPed',
-          'GateConfig1','GateConfig2','Cant_Struc_Over',
-          'Cant_Struc_Side','Cant_FL_Type','FL_MastCount',
-          'Mast_FL_Type','BackSideFL','FlasherCount',
-          'FlasherSize','WaysideHorn','HTS_Control',
-          'HTS_for_Nearby_Intersection','BellCount','HTPS',
-          'HTPS_StorageDist','HTPS_StopLineDist','TrafficLnType',
-          'TrafficLnCount','Paved','XingIllum',
           'SurfaceType','SurfaceType2','XingCond',
-          'FlangeMaterial','XingWidth','XingLength',
-          'Angle','SnoopCompliant','Comments', 'IntRd500', 'IntRdDist',
-          'Num_Tracks', 'PaveMarkCond', 'RDS_AOTCLASS', 'RDS_FUNCL',
+          'XingWidth','XingLength','Comments',
         ],
     });
 
@@ -539,7 +527,7 @@ require([
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
       enableHighlight: false,
-      allPlaceholder: "Search for Railroad Crossings, Signs, Addresses or Places",
+      allPlaceholder: "Search for Railroad Crossings, Addresses, or Places",
       map: map,
       suggestionDelay: 0,
     }, "search");
@@ -559,9 +547,6 @@ require([
       placeholder: "Search by DOT #, Line, Street, Town, or County",
       maxResults: 30,
       maxSuggestions: 45,
-
-      //Create an InfoTemplate
-      infoTemplate: crossingTemplate,
 
       enableSuggestions: true,
       minCharacters: 0
