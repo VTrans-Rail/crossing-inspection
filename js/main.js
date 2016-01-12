@@ -384,9 +384,33 @@ require([
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
       link.href = "report.html?dotnum=" + dotnum;
 
+      var DOTsignUID = popup.getSelectedFeature().attributes.DOT_Num + "-" + popup.getSelectedFeature().attributes.SignUID;
+      console.log(DOTsignUID);
+
+      var imgFolderSigns = "script/SignPhotos/" + DOTsignUID;
+      if (popup.getSelectedFeature().attributes.SignUID) {
+        console.log("sign");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var rawResponse = xhttp.responseText;
+            var startString = rawResponse.indexOf("<ul");
+            var endString = rawResponse.lastIndexOf("ul>") + 3;
+            var substring = rawResponse.slice(startString, endString);
+            document.getElementById("image-testing-signs").innerHTML = substring;
+            console.log(substring);
+
+            //display load picture button when ready
+            pictureOpen.style.display = "inline-block";
+          }
+        };
+        xhttp.open("GET", imgFolderSigns, true);
+        xhttp.send();
+      }
+
       // Send Ajax Request and populate invisible div with results of contents of thumbnail folder
       var imgFolder = "script/CrossingPhotosbyID/" + dotnum;
-      if (dotnum) {
+      if (popup.getSelectedFeature().attributes.SignUID === undefined ) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (xhttp.readyState == 4 && xhttp.status == 200) {
