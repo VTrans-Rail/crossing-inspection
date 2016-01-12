@@ -366,10 +366,6 @@ require([
 
     var featureCount = popup.count;
 
-    //Prevent load picture button from displaying until ready
-    // var pictureOpen = document.getElementById('popupPictures');
-    // pictureOpen.style.display = "none";
-
     if ( featureCount > 0 ) {
 
       //Updates link to report page
@@ -423,7 +419,6 @@ require([
 
 
       var pictureOpen = document.getElementById('popupPictures');
-      // pictureOpen.style.display = "none";
       if (pictureOpen) {
         pictureOpen.addEventListener('click', function () {
           pictureOpen.style.display = "none";
