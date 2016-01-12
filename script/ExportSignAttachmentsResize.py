@@ -16,7 +16,7 @@ with da.SearchCursor(inTable, ['DATA', 'ATT_NAME', 'ATTACHMENTID', 'DOT_Num', 'S
             os.makedirs(fileLocation + "/" + str(item[3]) + "-" + str(item[4]))
         open(fileLocation + "/" + str(item[3]) + "-" + str(item[4]) + os.sep + filename, 'wb').write(attachment.tobytes())
         #begin resize
-        filepath = fileLocation + "/" + str(item[3]) + "-" + str(item[4]) + os.sep + filename
+        filePath = fileLocation + "/" + str(item[3]) + "-" + str(item[4]) + os.sep + filename
         im = Image.open(filePath)
         size = 400, 400
         im.thumbnail(size, Image.ANTIALIAS)
