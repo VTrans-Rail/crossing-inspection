@@ -388,7 +388,6 @@ require([
 
       var imgFolderSigns = "script/SignPhotos/" + DOTsignUID;
       if (popup.getSelectedFeature().attributes.SignUID) {
-        console.log("sign");
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (xhttp.readyState == 4 && xhttp.status == 200) {
