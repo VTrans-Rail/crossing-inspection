@@ -126,7 +126,7 @@ require([
 
 
     //Sign Template------------------
-    var signPopupFeatures = "<div id='popupContent' ><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popupPictures' class='btn btn-lg btn-default text-center btnHelp'>&#x25BC Pictures &#x25BC</button></div>";
+    var signPopupFeatures = "<div id='popupContent' ><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popupPictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button></div>";
 
     var signTemplate = new PopupTemplate({
       title: "Crossing Sign",
@@ -385,7 +385,6 @@ require([
       link.href = "report.html?dotnum=" + dotnum;
 
       var DOTsignUID = popup.getSelectedFeature().attributes.DOT_Num + "-" + popup.getSelectedFeature().attributes.SignUID;
-      console.log(DOTsignUID);
 
       var imgFolderSigns = "script/SignPhotos/" + DOTsignUID;
       if (popup.getSelectedFeature().attributes.SignUID) {
@@ -399,6 +398,7 @@ require([
             var substring = rawResponse.slice(startString, endString);
             document.getElementById("image-testing-signs").innerHTML = substring;
             console.log(substring);
+            console.log(DOTsignUID);
 
             //display load picture button when ready
             pictureOpen.style.display = "inline-block";
@@ -473,7 +473,7 @@ require([
           if ( selectedLayerId.length > 12 ) {
             selectedLayer = crossingPoints;
 
-            //Get Thumbnail imageArray
+            //Get Crossing Thumbnail imageArray
             var imgFolderContents = document.getElementsByClassName("icon");
             var imgFolderLength = imgFolderContents.length;
             var imageStringArray = new Array();
@@ -486,15 +486,30 @@ require([
             }
           } else {
             selectedLayer = signPoints;
-            var transform = "style='transform:rotate(90deg); margin-top:42px; margin-bottom:15px'"
+
+            // image orientation style transformation
+            var transform = " style='transform:rotate(90deg); margin-top:42px; margin-bottom:15px'"
             if ( /webOS|iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
               transform = "";
             }
             imageStyle += transform;
+
+            //Get Sign Thumbnail imageArray
+            var imgFolderSignContents = document.getElementsByClassName("icon");
+            var imgFolderSignLength = imgFolderSignContents.length;
+            var imageStringSignArray = new Array();
+            var imageNameSignArray = new Array();
+
+            for (i = 0; i < imgFolderSignLength; i++) {
+              imageStringSignArray[i] = "<img src='" + imgFolderSigns + "/" + imgFolderSignContents[i].innerText + "' " + imageStyle + ">";
+              imageNameSignArray[i] = imgFolderSignContents[i].innerText;
+              imageNameSignArray[i] = imageNameSignArray[i].substr(0,6);
+            }
           }
 
           selectedLayer.queryAttachmentInfos(objectId).then(function(response){
             var imgSrc;
+            console.log(response);
             if (response.length === 0) {
               deferred.resolve("no attachments");
             }
@@ -513,8 +528,20 @@ require([
                     imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><p style='text-align:center;'>There is at least one image for this crossing that cannot be displayed on the website. Missing images were likely not included due to a percieved lack of value. If you would like to see missing images, please contact us and ask for all of the original image files for this crossing (please include the DOT Crossing Number) from the 2015 Crossing Inspection.</p></div></td></tr>";
                   }
                 } else {
-                  imgSrc = response[i].url;
-                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'><img src='" + imgSrc + "' " + imageStyle + "></div></td></tr>";
+                  for ( i = 0; i < imageNameSignArray.length; i++ ) {
+                    for ( j = 0; j < response.length; j++ ) {
+                      console.log(imageNameSignArray[i]);
+                      if ( response[j].name.substr(0,6) === imageNameSignArray[i] ) {
+                        imgSrc = response[j].url;
+                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + imageStringSignArray[i] + "</div></td></tr>";
+                        console.log(imageStringSignArray[i]);
+                      }
+                    }
+                  }
+
+
+                  // imgSrc = response[i].url;
+                  // imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'><img src='" + imgSrc + "' " + imageStyle + "></div></td></tr>";
                 }
               }
               formatString += imageString;
