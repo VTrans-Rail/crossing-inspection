@@ -397,8 +397,6 @@ require([
             var endString = rawResponse.lastIndexOf("ul>") + 3;
             var substring = rawResponse.slice(startString, endString);
             document.getElementById("image-testing-signs").innerHTML = substring;
-            console.log(substring);
-            console.log(DOTsignUID);
 
             //display load picture button when ready
             pictureOpen.style.display = "inline-block";
@@ -509,7 +507,6 @@ require([
 
           selectedLayer.queryAttachmentInfos(objectId).then(function(response){
             var imgSrc;
-            console.log(response);
             if (response.length === 0) {
               deferred.resolve("no attachments");
             }
@@ -530,18 +527,12 @@ require([
                 } else {
                   for ( i = 0; i < imageNameSignArray.length; i++ ) {
                     for ( j = 0; j < response.length; j++ ) {
-                      console.log(imageNameSignArray[i]);
                       if ( response[j].name.substr(0,6) === imageNameSignArray[i] ) {
                         imgSrc = response[j].url;
                         imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + imageStringSignArray[i] + "</div></td></tr>";
-                        console.log(imageStringSignArray[i]);
                       }
                     }
                   }
-
-
-                  // imgSrc = response[i].url;
-                  // imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'><img src='" + imgSrc + "' " + imageStyle + "></div></td></tr>";
                 }
               }
               formatString += imageString;
