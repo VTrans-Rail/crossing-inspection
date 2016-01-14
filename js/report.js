@@ -24,25 +24,6 @@ if (dotnumqs) {
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
       var imageTagArray = JSON.parse(xhttp.responseText);
-      // var startString = rawResponse.indexOf("<ul");
-      // var endString = rawResponse.lastIndexOf("ul>") + 3;
-      // var substring = rawResponse.slice(startString, endString);
-
-
-      // document.getElementById("image-testing").innerHTML = substring;
-      //
-      // var imgFolderContents = document.getElementsByClassName("icon");
-      //
-      // var imgFolderLength = imgFolderContents.length;
-      //
-      // var imageStringArray = new Array();
-      // var imageNameArray = new Array();
-      //
-      // for (i = 0; i < imgFolderLength; i++) {
-      //   imageStringArray[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
-      //   imageNameArray[i] = imgFolderContents[i].innerText;
-      //   imageNameArray[i] = imageNameArray[i].substr(0,8);
-      // }
 
 
       var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
@@ -100,8 +81,6 @@ if (dotnumqs) {
           var objectId = featureAttributes.OBJECTID;
 
           // ----------Get Picture URls and Build Image Tags--------------
-          // var imgClass = "class='img-responsive'";
-          // var imageStyle = "alt='site image' width='100%'";
           var deferred = new dojo.Deferred;
 
           crossingPoints.queryAttachmentInfos(objectId).then(function(response){
