@@ -152,6 +152,10 @@
   width: calc(100% - 70px);
 }
 
+.esriPopup.light .titleButton.maximize {
+  display:none;
+}
+
 /*End extra small devices*/
 
 @media (min-width: 500px) {
@@ -284,18 +288,17 @@
   font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   font-size: 12px;
 }
-@media (max-width: 415px) {
-  .esriPopup.light .titleButton.restore {
-    display: none;
-  }
 
-  .esriPopup.light .titleButton.next {
-    right: 35px;
-  }
+.esriPopup.light .titleButton.restore {
+  display: none;
+}
 
-  .esriPopup.light .titleButton.prev {
-    right: 60px;
-  }
+.esriPopup.light .titleButton.next {
+  right: 35px;
+}
+
+.esriPopup.light .titleButton.prev {
+  right: 60px;
 }
 
 @media (min-width: 350px) {
