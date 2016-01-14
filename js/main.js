@@ -386,7 +386,7 @@ require([
 
       var DOTsignUID = popup.getSelectedFeature().attributes.DOT_Num + "-" + popup.getSelectedFeature().attributes.SignUID;
 
-      var imgFolderSigns = "script/SignPhotos/" + DOTsignUID;
+      var signImgFolder = "script/SignPhotos/" + DOTsignUID;
       if (popup.getSelectedFeature().attributes.SignUID) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -401,40 +401,24 @@ require([
             pictureOpen.style.display = "inline-block";
           }
         };
-        xhttp.open("GET", imgFolderSigns, true);
+        xhttp.open("GET", signImgFolder, true);
         xhttp.send();
       }
 
       // Send Ajax Request and populate invisible div with results of contents of thumbnail folder
-      var imgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/script/CrossingPhotosbyID/" + dotnum;
+      var crossingImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/script/CrossingPhotosbyID/" + dotnum;
       if (popup.getSelectedFeature().attributes.SignUID === undefined ) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (xhttp.readyState == 4 && xhttp.status == 200) {
             var rawResponse = xhttp.responseText;
-            // var startString = rawResponse.indexOf("<ul");
-            // var endString = rawResponse.lastIndexOf("ul>") + 3;
-            // var substring = rawResponse.slice(startString, endString);
-            // document.getElementById("image-testing").innerHTML = substring;
-            // console.log(rawResponse);
-
-            // var imageTagArray = new Array();
-            // // var imageName = new Array();
-            //
-            // for (i = 0; i < rawResponse.length; i++) {
-            //   imageTagArray[i] = "<img src='script/CrossingPhotosbyID/" + dotnum + "/" + rawResponse[i].name + "' id='" + rawResponse[i].name.substr(0,8) + "' class='popup-image img-responsive' alt='site image' width='100%'>";
-            //   // imageName[i] = rawResponse[i].name;
-            // }
-            // console.log(imageTagArray)
             document.getElementById("image-testing").innerHTML = rawResponse;
-            // console.log(document.getElementById("image-testing"));
-
 
             //display load picture button when ready
             pictureOpen.style.display = "inline-block";
           }
         };
-        xhttp.open("GET", imgFolder, true);
+        xhttp.open("GET", crossingImgFolder, true);
         xhttp.send();
       }
 
@@ -485,25 +469,7 @@ require([
 
             //Get Crossing Thumbnail imageArray
             var imageTagArray = JSON.parse(document.getElementById("image-testing").innerHTML);
-            // console.log(imageTagArray.length);
-            // console.log(imageTagArray);
 
-            // for (i = 0; i < imageTagArray.length; i++) {
-            //   imageTagArray[i] = "<img src='script/CrossingPhotosbyID/" + dotnum + "/" + imageTagArray[i].name + "' id='" + imageTagArray[i].name.substr(0,8) + "' class='popup-image img-responsive' alt='site image' width='100%'>";
-            //   // imageName[i] = rawResponse[i].name;
-            // }
-            // console.log(imageTagArray);
-
-            // var imgFolderContents = document.getElementsByClassName("icon");
-            // var imgFolderLength = imgFolderContents.length;
-            // var imageStringArray = new Array();
-            // var imageNameArray = new Array();
-            //
-            // for (i = 0; i < imgFolderLength; i++) {
-            //   imageStringArray[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
-            //   imageNameArray[i] = imgFolderContents[i].innerText;
-            //   imageNameArray[i] = imageNameArray[i].substr(0,8);
-            // }
           } else {
             selectedLayer = signPoints;
 
@@ -539,11 +505,8 @@ require([
                   for ( i = 0; i < imageTagArray.length; i++ ) {
                     for ( j = 0; j < response.length; j++ ) {
                       if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
-                        console.log("yo");
-                        // console.log(imageTagArray[i].name.substr(0,8));
                         imgSrc = response[j].url;
                         imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='script/CrossingPhotosbyID/" + dotnum + "/" + imageTagArray[i].name + "' alt='site image' width='100%'>" + "</div></td></tr>";
-                        console.log(imageString);
                       }
                     }
                   }
