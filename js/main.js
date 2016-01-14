@@ -545,7 +545,6 @@ require([
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
       enableHighlight: false,
-      allPlaceholder: "Search for Railroad Crossings, Addresses, or Places",
       map: map,
       suggestionDelay: 0,
     }, "search");
@@ -570,20 +569,16 @@ require([
       minCharacters: 0
     });
 
-
-
-    //Push the second source used to search to searchSources array(World Geocoding Service).
-    // searchSources.push(searchWidget.sources[0]);
+    if (map.width < 358) {
+      searchSources[0].placeholder = "Search Crossings";
+      document.getElementById("search_input").style.fontSize = "1.25em";
+    } else if (map.width < 439) {
+      searchSources[0].placeholder = "Search for Railroad Crossings";
+      document.getElementById("search_input").style.fontSize = "1em";
+    }
 
     // Set the source for the searchWidget to the properly ordered searchSources array
     searchWidget.set("sources", searchSources);
-
-    //Set the countryCode for World Geocoding Service
-    // searchWidget.sources[1].countryCode = "US";
-    // searchWidget.sources[1].maxSuggestions = 0;
-    // searchWidget.sources[1].maxResults = 0;
-    // searchWidget.sources[1].enableSuggestions = false;
-
 
 
     //Finalize creation of the search widget
