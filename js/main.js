@@ -386,7 +386,7 @@ require([
 
       var DOTsignUID = popup.getSelectedFeature().attributes.DOT_Num + "-" + popup.getSelectedFeature().attributes.SignUID;
 
-      var signImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/script/SignPhotos/" + DOTsignUID;
+      var signImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/SignPhotos/" + DOTsignUID;
       if (popup.getSelectedFeature().attributes.SignUID) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -403,7 +403,7 @@ require([
       }
 
       // Send Ajax Request and populate invisible div with results of contents of thumbnail folder
-      var crossingImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/script/CrossingPhotosbyID/" + dotnum;
+      var crossingImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/CrossingPhotosbyID/" + dotnum;
       if (popup.getSelectedFeature().attributes.SignUID === undefined ) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {

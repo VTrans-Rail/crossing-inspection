@@ -17,7 +17,7 @@ require([
 
 var dotnumqs = getParameterByName("dotnum");
 
-var imgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/script/CrossingPhotosbyID/" + dotnumqs;
+var imgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/CrossingPhotosbyID/" + dotnumqs;
 
 if (dotnumqs) {
   var xhttp = new XMLHttpRequest();
