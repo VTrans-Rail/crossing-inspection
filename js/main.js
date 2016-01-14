@@ -594,7 +594,7 @@ require([
     searchWidget.startup();
 
     if ( isIE ) {
-      alert("Crossing Inspection Web Application designed to be viewed in modern browsers. For best results, open in Chrome or Firefox.");
+      alert("This app best experienced in modern browsers such as Firefox or Chrome.");
     }
 
 
