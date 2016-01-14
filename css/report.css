@@ -147,7 +147,6 @@ hr.style-seven:before { /* Not really supposed to work, but does */
     position: fixed;
     text-align: center;
     overflow-y: auto;
-    bottom: 20px;
     right: 0;
     padding-top: 5px;
     padding-right: calc((100% - 670px)/2);
@@ -165,16 +164,12 @@ hr.style-seven:before { /* Not really supposed to work, but does */
     margin-bottom: 10px;
   }
 
-  #metadata-title {
-    /*position: fixed;*/
-  }
-
   #close-metadata {
     display:block;
     position: fixed;
     float: right;
     right: 10px;
-    bottom: 140px;
+    bottom: 120px;
   }
 
   .gotit {
