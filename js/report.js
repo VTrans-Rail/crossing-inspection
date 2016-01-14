@@ -17,32 +17,32 @@ require([
 
 var dotnumqs = getParameterByName("dotnum");
 
-var imgFolder = "script/CrossingPhotosbyID/" + dotnumqs;
+var imgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/script/CrossingPhotosbyID/" + dotnumqs;
 
 if (dotnumqs) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-      var rawResponse = xhttp.responseText;
-      var startString = rawResponse.indexOf("<ul");
-      var endString = rawResponse.lastIndexOf("ul>") + 3;
-      var substring = rawResponse.slice(startString, endString);
+      var imageTagArray = JSON.parse(xhttp.responseText);
+      // var startString = rawResponse.indexOf("<ul");
+      // var endString = rawResponse.lastIndexOf("ul>") + 3;
+      // var substring = rawResponse.slice(startString, endString);
 
 
-      document.getElementById("image-testing").innerHTML = substring;
-
-      var imgFolderContents = document.getElementsByClassName("icon");
-
-      var imgFolderLength = imgFolderContents.length;
-
-      var imageStringArray = new Array();
-      var imageNameArray = new Array();
-
-      for (i = 0; i < imgFolderLength; i++) {
-        imageStringArray[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
-        imageNameArray[i] = imgFolderContents[i].innerText;
-        imageNameArray[i] = imageNameArray[i].substr(0,8);
-      }
+      // document.getElementById("image-testing").innerHTML = substring;
+      //
+      // var imgFolderContents = document.getElementsByClassName("icon");
+      //
+      // var imgFolderLength = imgFolderContents.length;
+      //
+      // var imageStringArray = new Array();
+      // var imageNameArray = new Array();
+      //
+      // for (i = 0; i < imgFolderLength; i++) {
+      //   imageStringArray[i] = "<img src='" + imgFolder + "/" + imgFolderContents[i].innerText + "' class='img-responsive' alt='site image' width='100%'>";
+      //   imageNameArray[i] = imgFolderContents[i].innerText;
+      //   imageNameArray[i] = imageNameArray[i].substr(0,8);
+      // }
 
 
       var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
@@ -99,9 +99,9 @@ if (dotnumqs) {
           var featureAttributes = results.features[i].attributes;
           var objectId = featureAttributes.OBJECTID;
 
-          // ------------Get Picture URls and Build Image Tags----------------
-          var imgClass = "class='img-responsive'";
-          var imageStyle = "alt='site image' width='100%'";
+          // ----------Get Picture URls and Build Image Tags--------------
+          // var imgClass = "class='img-responsive'";
+          // var imageStyle = "alt='site image' width='100%'";
           var deferred = new dojo.Deferred;
 
           crossingPoints.queryAttachmentInfos(objectId).then(function(response){
@@ -110,15 +110,15 @@ if (dotnumqs) {
               deferred.resolve("no attachments");
             }
             else {
-              for ( i = 0; i < imageNameArray.length; i++ ) {
+              for ( i = 0; i < imageTagArray.length; i++ ) {
                 for ( j = 0; j < response.length; j++ ) {
-                  if ( response[j].name.substr(0,8) === imageNameArray[i] ) {
+                  if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
                     imgSrc = response[j].url;
-                    imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'>" + imageStringArray[i] + "<h3>View Full Image</h3></a></div>";
+                    imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'>" + "<img src='script/CrossingPhotosbyID/" + dotnumqs + "/" + imageTagArray[i].name + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
                   }
                 }
               }
-              if (imageStringArray.length > response.length) {
+              if (imageTagArray.length > response.length) {
                 imageString += "<div data-field-span='1'><p style='padding: 20px 50px 0px 50px; text-align:center;'>There is at least one image for this crossing that cannot be displayed on the website. Missing images were likely not included due to a percieved lack of value. If you would like to see missing images, please contact us and ask for all of the original image files for this crossing (please include the DOT Crossing Number) from the 2015 Crossing Inspection.</p></div>";
               }
             }
