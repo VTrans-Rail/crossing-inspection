@@ -24,7 +24,7 @@ def bulkResize(imageFolder):
             resize(path, fileName)
 
 if __name__ == "__main__":
-    imageFolder="C://Users//jfarmer//Documents//GitHub//crossing-inspection//script//CrossingPhotosbyID400" # first arg is path to image folder
+    imageFolder="C://Users//StSmith//Documents//GitHub//crossing-inspection//thumb//CrossingPhotosbyID400" # first arg is path to image folder
     bulkResize(imageFolder)
 
 # Inspirations:
