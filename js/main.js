@@ -556,7 +556,7 @@ require([
     //Push the first source used to search to searchSources array
     searchSources.push({
       featureLayer: crossingPointsSearch,
-      searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed"],
+      searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed", "XingCond"],
       displayField: "DOT_Num",
       suggestionTemplate: "${DOT_Num}: The ${LineName} crosses ${Feature_Crossed} in ${Town}. (${XingCond})",
       exactMatch: false,
@@ -573,14 +573,18 @@ require([
 
 
     //Push the second source used to search to searchSources array(World Geocoding Service).
-    searchSources.push(searchWidget.sources[0]);
+    // searchSources.push(searchWidget.sources[0]);
 
     // Set the source for the searchWidget to the properly ordered searchSources array
     searchWidget.set("sources", searchSources);
 
     //Set the countryCode for World Geocoding Service
-    searchWidget.sources[1].countryCode = "US";
-    searchWidget.sources[1].maxSuggestions = 4;
+    // searchWidget.sources[1].countryCode = "US";
+    // searchWidget.sources[1].maxSuggestions = 0;
+    // searchWidget.sources[1].maxResults = 0;
+    // searchWidget.sources[1].enableSuggestions = false;
+
+
 
     //Finalize creation of the search widget
     searchWidget.startup();
