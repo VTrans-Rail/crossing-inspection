@@ -25,7 +25,16 @@ require([
 
 var dotnumqs = getParameterByName("dotnum");
 
-var imgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/CrossingPhotosbyID/" + dotnumqs;
+var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+var thumbSizeFolder = "CrossingPhotosbyID400/";
+if ( 467 < width && width < 701 ) {
+  // only change thumbSizeFolder if width is in this range
+  thumbSizeFolder = "CrossingPhotosbyID/";
+}
+console.log(thumbSizeFolder);
+console.log(width);
+
+var imgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/" + thumbSizeFolder + dotnumqs;
 
 if (dotnumqs) {
   var xhttp = new XMLHttpRequest();
@@ -101,7 +110,7 @@ if (dotnumqs) {
                 for ( j = 0; j < response.length; j++ ) {
                   if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
                     imgSrc = response[j].url;
-                    imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'>" + "<img src='thumb/CrossingPhotosbyID/" + dotnumqs + "/" + imageTagArray[i].name + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
+                    imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'>" + "<img src='thumb/" + thumbSizeFolder + dotnumqs + "/" + imageTagArray[i].name + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
                   }
                 }
               }
