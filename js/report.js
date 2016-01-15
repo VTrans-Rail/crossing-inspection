@@ -265,6 +265,17 @@ if (dotnumqs) {
           }
         }
 
+        if (document.getElementById('int-road-distance')) {
+          var intRdDist = document.getElementById('int-road-distance').children[1].value;
+          if (intRdDist === "") {
+            document.getElementById('int-road-distance').children[1].value = "N/A";
+          }
+          else if (intRdDist === "null") {
+            document.getElementById('int-road-distance').children[1].value = "N/A";
+          }
+        }
+
+
         if (document.getElementById('warning-device-code')) {
           var warn = document.getElementById('warning-device-code').children[1].value;
 
