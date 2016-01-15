@@ -90,6 +90,11 @@ hr.style-seven:before { /* Not really supposed to work, but does */
   padding-left: 20px;
 }
 
+#metadata-full-body {
+  overflow-y: auto;
+  margin-bottom: 65px;
+}
+
 #metadata-body {
   padding-right: 20px;
   padding-left: 20px;
@@ -163,6 +168,11 @@ hr.style-seven:before { /* Not really supposed to work, but does */
     z-index: 2;
     height: 150px;
     width: 100%;
+  }
+
+  #metadata-full-body {
+    overflow-y: auto;
+    margin-bottom: 5px;
   }
 
   #metadata-body {
