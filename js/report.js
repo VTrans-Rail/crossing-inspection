@@ -310,7 +310,7 @@ if (dotnumqs) {
             // cond.style.textShadow
           }
           else if (cond.value === "Good") {
-            // cond.style.color = "#e5f5e5";
+            cond.style.color = "black";
             // condcell.style.backgroundColor = "#e5f5e5";
           }
           else if (cond.value === "Fair") {
@@ -326,15 +326,15 @@ if (dotnumqs) {
           var pcond = document.getElementById("pmark-cond");
           var pcondcell = document.getElementById("pave-mark-cond");
           if (pcond.value === "Not Applicable") {
-            pcondcell.style.color = "#000";
+            pcond.style.color = "black";
             // pcondcell.style.backgroundColor = "#99d899";
           }
           else if (pcond.value === "OK") {
-            pcondcell.style.color = "green";
+            pcond.style.color = "green";
             // pcondcell.style.backgroundColor = "#e5f5e5";
           }
           else if (pcond.value === "Worn") {
-            pcondcell.style.color = "Red";
+            pcond.style.color = "Red";
             // pcondcell.style.backgroundColor = "#e24c4c";
           }
       }

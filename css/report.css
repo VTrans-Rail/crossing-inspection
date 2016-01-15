@@ -150,6 +150,9 @@ hr.style-seven:before { /* Not really supposed to work, but does */
   visibility: visible;
 }
 
+form fieldset div div input {
+  color: #666666;
+}
 
 @media (min-width: 415px) {
   #metadata-info {
