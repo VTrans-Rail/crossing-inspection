@@ -480,11 +480,11 @@ require([
             selectedLayer = signPoints;
 
             // image orientation style transformation
-            var transform = " style='transform:rotate(90deg); margin-top:42px; margin-bottom:15px'"
-            if ( /webOS|iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
-              transform = "";
-            }
-            imageStyle += transform;
+            // var transform = " style='transform:rotate(90deg); margin-top:42px; margin-bottom:15px'"
+            // if ( /webOS|iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+            //   transform = "";
+            // }
+            // imageStyle += transform;
 
             //Get Sign Thumbnail imageArray
             var imageTagArray = JSON.parse(document.getElementById("image-testing").innerHTML);
