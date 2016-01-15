@@ -47,7 +47,7 @@ with da.SearchCursor(inTable, ['DATA', 'ATT_NAME', 'ATTACHMENTID', 'DOT_Num', 'S
         # end rotation
 
         #begin resize
-        size = 400, 400
+        size = 533, 533
         im.thumbnail(size, Image.ANTIALIAS)
         outPath = os.path.splitext(filePath)[0]
         print(outPath)
