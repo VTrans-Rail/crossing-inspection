@@ -26,10 +26,19 @@
     <!-- Gridforms CSS -->
     <link rel="stylesheet" type="text/css" href="gridforms/gridforms.css">
 
-
   </head>
 
   <body>
+    <noscript>
+      <style type="text/css">
+          .pagecontainer {display:none;}
+      </style>
+      <div class="noscriptmsg" style="position:absolute; width: 70%; left:15%; text-align:center; font-size: 1.4em; top: 25%;">
+        You don't have Javascript enabled for your browser. This web application requires the use of Javascript. Please enable Javascript in your browser settings and try again.
+      </div>
+    </noscript>
+
+  <div class="pagecontainer">
     <nav class="navbar navbar-inverse navbar-static-top report" id="navigation-bar">
       <div class="container">
           <div class="row">
@@ -337,6 +346,6 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
+  </div>
   </body>
 </html>
