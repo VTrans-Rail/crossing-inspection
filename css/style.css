@@ -20,6 +20,16 @@
   margin-bottom: 20px;
 }
 
+.esriControlsBR {
+  position: absolute;
+  bottom: calc(6% + 10px);
+}
+@media (min-width: 415px) {
+  .esriControlsBR {
+    bottom: calc(7% + 10px);
+  }
+}
+
 /*Popup Links*/
 .esriPopup a {
   text-decoration: none;
