@@ -502,7 +502,7 @@ require([
                     for ( j = 0; j < response.length; j++ ) {
                       if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
                         imgSrc = response[j].url;
-                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='script/CrossingPhotosbyID/" + dotnum + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
+                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/CrossingPhotosbyID/" + dotnum + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
                       }
                     }
                   }
@@ -514,7 +514,7 @@ require([
                     for ( j = 0; j < response.length; j++ ) {
                       if ( response[j].name.substr(0,6) === imageTagArray[i].name.substr(0,6) ) {
                         imgSrc = response[j].url;
-                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='script/SignPhotos/" + DOTsignUID + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
+                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/SignPhotos/" + DOTsignUID + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
                       }
                     }
                   }
@@ -593,9 +593,13 @@ require([
     //Finalize creation of the search widget
     searchWidget.startup();
 
+    var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
     if ( isIE ) {
-      alert("This app best experienced in modern browsers such as Firefox or Chrome.");
+      alert(browserAlert);
+    } else if ( isOpera ) {
+      alert(browserAlert);
+    } else if ( isSafari ) {
+      alert(browserAlert);
     }
-
 
 });
