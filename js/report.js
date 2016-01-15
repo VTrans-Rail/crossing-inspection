@@ -31,8 +31,6 @@ if ( 467 < width && width < 701 ) {
   // only change thumbSizeFolder if width is in this range
   thumbSizeFolder = "CrossingPhotosbyID/";
 }
-console.log(thumbSizeFolder);
-console.log(width);
 
 var imgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/" + thumbSizeFolder + dotnumqs;
 
