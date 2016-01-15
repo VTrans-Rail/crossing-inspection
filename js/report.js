@@ -147,6 +147,11 @@ if (dotnumqs) {
         alert(browserAlert);
       }
 
+      // function to convert strings to Title Case (for Town field)
+      function toTitleCase(str) {
+        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+      }
+
 
       function showResults (results) {
         var resultItems = [];
@@ -163,7 +168,7 @@ if (dotnumqs) {
 
           html += featureAttributes.Feature_Crossed + "'>\n                  </div>\n                  <div data-field-span='1' id='town' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Town</label>\n                    <input type='text' disabled='true' value='";
 
-          html += featureAttributes.Town + "'>\n                  </div>\n              </div>\n              <div data-row-span='4'>\n                  <div data-field-span='2' id='rail-division' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Rail Division</label>\n                    <input type='text' disabled='true' value='";
+          html += toTitleCase(featureAttributes.Town) + "'>\n                  </div>\n              </div>\n              <div data-row-span='4'>\n                  <div data-field-span='2' id='rail-division' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Rail Division</label>\n                    <input type='text' disabled='true' value='";
 
           html += featureAttributes.Division + "'>\n                  </div>\n                  <div data-field-span='1' id='rail-subdivision' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Subdivision</label>\n                    <input type='text' disabled='true' value='";
 
