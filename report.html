@@ -352,14 +352,9 @@
       }
     }
     function hideMD() {
-      // document.getElementById("metadata-info").style.display = "none";
-      var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-      if (width > 415) {
-        document.getElementById("metadata-title").innerHTML = "Metadata";
-        document.getElementById("metadata-body").innerHTML = "Place your mouse over (or tap) a grid cell to display the data attribute explanation.";
-        // document.getElementById("metadata-domain").innerHTML = "";
-        document.getElementById("metadata-domain").style.display = "none";
-      }
+      document.getElementById("metadata-title").innerHTML = "Metadata";
+      document.getElementById("metadata-body").innerHTML = "Place your mouse over (or tap) a grid cell to display the data attribute explanation.";
+      document.getElementById("metadata-domain").style.display = "none";
     }
     function closeMD() {
       document.getElementById("metadata-info").style.display = "none";
