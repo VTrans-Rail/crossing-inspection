@@ -379,7 +379,8 @@ require([
     "id": "fullReport",
     "innerHTML": "Full Report",
     "href": "www.google.com",
-    "target": "_blank"
+    "target": "_blank",
+    // "onclick": "fullReportLink(dotnum)"
   }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
 //------------------------------------------------------------------------
 
@@ -399,18 +400,23 @@ require([
     var featureCount = popup.count;
 
     if ( featureCount > 0 ) {
-
-      // Google Analytics
-      if( popup.getSelectedFeature()._layer.id.length > 12 ) {
-        ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View', eventLabel: 'Crossing Popup Views'});
-      } else {
-        ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View', eventLabel: 'Sign Popup Views'});
-      }
-
-
       //Updates link to report page
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
       link.href = "report.html?dotnum=" + dotnum;
+
+      //Google Analytics -- Records when the full report link is chosen from the popup along with the DOT num of the crossing
+      link.onclick = function () {
+            ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View Full Report', eventLabel: dotnum + ' - Full Report Link Hit'});
+          }
+
+
+      // Google Analytics
+      if( popup.getSelectedFeature()._layer.id.length > 12 ) {
+        ga('send', 'event', { eventCategory: 'Popup', eventAction: 'Crossing Popup View', eventLabel: dotnum + ' - Crossing Popup Views'});
+      } else {
+        ga('send', 'event', { eventCategory: 'Popup', eventAction: 'Sign Popup View', eventLabel: dotnum + ' - Sign Popup Views'});
+      }
+
 
       var DOTsignUID = popup.getSelectedFeature().attributes.DOT_Num + "-" + popup.getSelectedFeature().attributes.SignUID;
 
@@ -609,14 +615,7 @@ require([
     searchWidget.startup();
 
     on(searchWidget, "search-results", function() {
-      console.log(searchWidget.searchResults);
-      console.log(searchWidget.value);
       var searchString = searchWidget.value;
-      // console.log(searchWidget.suggestResults[0]);
-      // var searchResults = new Array(searchWidget.searchResults[0]);
-      // console.log(searchResults[0].length);
-      // console.log(searchResults);
-      // console.log(searchWidget.searchResults[0][0].length);
 
       //Google Analytics --- Records Total Amount of Searches Executed
       ga('send', 'event', { eventCategory: 'Search', eventAction: 'Execute', eventLabel: 'Search Executed'});
@@ -626,7 +625,6 @@ require([
 
 
       if (searchWidget.searchResults === null) {
-        console.log("failure");
         //Google Analytics -- Records any searches executed that returned 0 results
         ga('send', 'event', { eventCategory: 'Search', eventAction: 'Failure', eventLabel: 'Search Input Had No Results'});
 
@@ -634,13 +632,11 @@ require([
         ga('send', 'event', { eventCategory: 'SearchString', eventAction: 'Failure', eventLabel: searchString + ' - Search Input Had No Results'});
       }
       else {
-        console.log("success");
         //Google Analytics -- Records any search that at least one crossing match for results
         ga('send', 'event', { eventCategory: 'Search', eventAction: 'Success', eventLabel: 'Search Input Had Results'});
 
         var results = new Array(searchWidget.searchResults[0]);
         if (results[0].length === 1) {
-          console.log("PRECISE!");
           //Google Analytics -- Records searches that have only one result. Indicates that the user probably knew what crossing they were looking for and successfuly found it with the current search widget settings.
           ga('send', 'event', { eventCategory: 'Search', eventAction: 'Precise', eventLabel: 'Search Input Had Exactly One Result'});
         }
