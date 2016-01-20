@@ -150,8 +150,9 @@ hr.style-seven:before { /* Not really supposed to work, but does */
   visibility: visible;
 }
 
-form fieldset div div input {
+form fieldset div div input:disabled {
   color: #666666;
+  background: transparent;
 }
 
 @media (min-width: 415px) {
