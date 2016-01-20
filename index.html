@@ -117,6 +117,13 @@
       ga('send', 'event', { eventCategory: 'Pictures', eventAction: 'View Full Image', eventLabel: 'Sign Popup Full Image Link'});
     }
   </script>
+  <script>
+    //Google Analytics -- Record Client IP Address
+    $.getJSON('http://ipinfo.io', function(data){
+      alert(data.ip);
+      ga('send', 'event', { eventCategory: 'Users', eventAction: 'User Views', eventLabel: data.ip + ' - Client IP Address'});
+    });
+  </script>
 </div>
 </body>
 
