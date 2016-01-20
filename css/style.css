@@ -161,6 +161,11 @@
   border: 2px solid #1B5E20;
   width: calc(100% - 70px);
 }
+@media (min-height: 600px) {
+  .arcgisSearch .searchMenu {
+    max-height: 50vh;
+  }
+}
 
 .esriPopup.light .titleButton.maximize {
   display:none;
