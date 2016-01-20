@@ -160,13 +160,13 @@ if (dotnumqs) {
         for (var i = 0; i < resultCount; i++) {
           var featureAttributes = results.features[i].attributes;
 
-          var html="\n      <form class='grid-form'>\n          <fieldset>\n              <legend>Crossing Details</legend>\n              <div data-row-span='4'>\n                  <div data-field-span='1' id='xing-num' onmouseover='displayMD(this)' onmouseout='hideMD(this)' onclick='displayMD(this)'>\n                    <label>Crossing Number</label>\n                    <input type='text' disabled='true' value='";
+          var html="\n      <form class='grid-form'>\n          <fieldset>\n              <legend>Crossing Details</legend>\n              <div data-row-span='4'>\n                  <div data-field-span='1' id='xing-num' onmouseover='displayMD(this)' onmouseout='hideMD(this)' onclick='displayMD(this)'>\n                    <label>Crossing Number</label>\n                    <input type='text' readonly value='";
 
           html += featureAttributes.DOT_Num + "'>\n                  </div>\n                  <div data-field-span='1' id='surf-cond' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Surface Condition</label>\n                    <input type='text' disabled='true' id='condition' value='";
 
           html += featureAttributes.XingCond + "'>\n                  </div>\n                  <div data-field-span='1' id='feature-crossed' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Road Name</label>\n                    <input type='text' disabled='true' value='";
 
-          html += featureAttributes.Feature_Crossed + "'>\n                  </div>\n                  <div data-field-span='1' id='town' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Town</label>\n                    <input type='text' disabled='true' value='";
+          html += featureAttributes.Feature_Crossed + "'>\n                  </div>\n                  <div data-field-span='1' id='town' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Town</label>\n                    <input type='text' readonly value='";
 
           html += toTitleCase(featureAttributes.Town) + "'>\n                  </div>\n              </div>\n              <div data-row-span='4'>\n                  <div data-field-span='2' id='rail-division' onmouseover='displayMD(this)' onmouseout='hideMD(this)'>\n                    <label>Rail Division</label>\n                    <input type='text' disabled='true' value='";
 
