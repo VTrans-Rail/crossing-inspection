@@ -108,7 +108,7 @@ if (dotnumqs) {
                 for ( j = 0; j < response.length; j++ ) {
                   if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
                     imgSrc = response[j].url;
-                    imageString += "<div data-field-span='1' class='blur'><a href='" + imgSrc + "' target='_blank'>" + "<img src='thumb/" + thumbSizeFolder + dotnumqs + "/" + imageTagArray[i].name + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
+                    imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='" + imgSrc + "' target='_blank'>" + "<img src='thumb/" + thumbSizeFolder + dotnumqs + "/" + imageTagArray[i].name + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
                   }
                 }
               }

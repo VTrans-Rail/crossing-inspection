@@ -106,7 +106,18 @@
 
     ga('create', 'UA-45708379-9', 'auto');
     ga('send', 'pageview');
-
+  </script>
+  <script>
+    function crossingImageGA() {
+      console.log("crossing");
+      //Google Analytics
+      ga('send', 'event', { eventCategory: 'Pictures', eventAction: 'View Full Image', eventLabel: 'Crossing Popup Full Image Link'});
+    }
+    function signImageGA() {
+      console.log("sign");
+      //Google Analytics
+      ga('send', 'event', { eventCategory: 'Pictures', eventAction: 'View Full Image', eventLabel: 'Sign Popup Full Image Link'});
+    }
   </script>
 </div>
 </body>

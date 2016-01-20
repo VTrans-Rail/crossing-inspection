@@ -117,6 +117,11 @@ require([
       scale: 5000,
     }, "locateButton");
     geoLocate.startup();
+
+    on(geoLocate, "locate", function() {
+      //Google Analytics
+      ga('send', 'event', { eventCategory: 'Locate', eventAction: 'GeoLocate', eventLabel: 'Use Geolocation Button'});
+    });
 //------------------------------------------------------------------
 
 
@@ -312,6 +317,9 @@ require([
         document.getElementById('legend').style.display = "block";
         document.getElementById('openMobileLegend').style.display = "none";
         document.getElementById('closeMobileLegend').style.display = "block";
+
+        //Google Analytics
+        ga('send', 'event', { eventCategory: 'Legend', eventAction: 'Open', eventLabel: 'Open Mobile Legend'});
       });
     }
 
@@ -321,6 +329,9 @@ require([
         document.getElementById('legend').style.display = "none";
         document.getElementById('openMobileLegend').style.display = "block";
         document.getElementById('closeMobileLegend').style.display = "none";
+
+        //Google Analytics
+        ga('send', 'event', { eventCategory: 'Legend', eventAction: 'Close', eventLabel: 'Close Mobile Legend'});
       });
     }
 //-------------------------------------------------------------
@@ -388,6 +399,14 @@ require([
     var featureCount = popup.count;
 
     if ( featureCount > 0 ) {
+
+      // Google Analytics
+      if( popup.getSelectedFeature()._layer.id.length > 12 ) {
+        ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View', eventLabel: 'Crossing Popup Views'});
+      } else {
+        ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View', eventLabel: 'Sign Popup Views'});
+      }
+
 
       //Updates link to report page
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
@@ -495,7 +514,7 @@ require([
                     for ( j = 0; j < response.length; j++ ) {
                       if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
                         imgSrc = response[j].url;
-                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/CrossingPhotosbyID400/" + dotnum + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
+                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='crossingImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/CrossingPhotosbyID400/" + dotnum + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
                       }
                     }
                   }
@@ -507,7 +526,7 @@ require([
                     for ( j = 0; j < response.length; j++ ) {
                       if ( response[j].name.substr(0,6) === imageTagArray[i].name.substr(0,6) ) {
                         imgSrc = response[j].url;
-                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/SignPhotos/" + DOTsignUID + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
+                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='signImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/SignPhotos/" + DOTsignUID + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
                       }
                     }
                   }
@@ -518,6 +537,9 @@ require([
           }).then(function(response) {
               var summaryInfo = document.getElementById("popupContent").innerHTML;
               document.getElementById("popupContent").innerHTML = summaryInfo + formatString;
+
+              //Google Analytics
+              ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View', eventLabel: 'Popup Image Views'});
             });
         });
       } else {
@@ -561,11 +583,11 @@ require([
       displayField: "DOT_Num",
       suggestionTemplate: "${DOT_Num}: The ${LineName} crosses ${Feature_Crossed} in ${Town}. (${XingCond})",
       exactMatch: false,
-      outFields: ["*"],
+      outFields: ["DOT_Num", "RRXingNumb", "Town", "County", "LineName", "Feature_Crossed", "XingCond"],
       name: "Railroad Crossings",
       placeholder: "Search by DOT #, Line, Street, Town, or County",
-      maxResults: 30,
-      maxSuggestions: 45,
+      maxResults: 500,
+      maxSuggestions:500,
 
       enableSuggestions: true,
       minCharacters: 0
@@ -585,6 +607,45 @@ require([
 
     //Finalize creation of the search widget
     searchWidget.startup();
+
+    on(searchWidget, "search-results", function() {
+      console.log(searchWidget.searchResults);
+      console.log(searchWidget.value);
+      var searchString = searchWidget.value;
+      // console.log(searchWidget.suggestResults[0]);
+      // var searchResults = new Array(searchWidget.searchResults[0]);
+      // console.log(searchResults[0].length);
+      // console.log(searchResults);
+      // console.log(searchWidget.searchResults[0][0].length);
+
+      //Google Analytics --- Records Total Amount of Searches Executed
+      ga('send', 'event', { eventCategory: 'Search', eventAction: 'Execute', eventLabel: 'Search Executed'});
+
+      //Google Analytics -- Records the string that was present when the search is executed. If a feature is picked from the dropdown menu, the display name, or DOT_Num, is recorded as the input string
+      ga('send', 'event', { eventCategory: 'SearchString', eventAction: 'Total', eventLabel: searchString });
+
+
+      if (searchWidget.searchResults === null) {
+        console.log("failure");
+        //Google Analytics -- Records any searches executed that returned 0 results
+        ga('send', 'event', { eventCategory: 'Search', eventAction: 'Failure', eventLabel: 'Search Input Had No Results'});
+
+        //Google Analytics -- Records any failed searches organized by search term
+        ga('send', 'event', { eventCategory: 'SearchString', eventAction: 'Failure', eventLabel: searchString + ' - Search Input Had No Results'});
+      }
+      else {
+        console.log("success");
+        //Google Analytics -- Records any search that at least one crossing match for results
+        ga('send', 'event', { eventCategory: 'Search', eventAction: 'Success', eventLabel: 'Search Input Had Results'});
+
+        var results = new Array(searchWidget.searchResults[0]);
+        if (results[0].length === 1) {
+          console.log("PRECISE!");
+          //Google Analytics -- Records searches that have only one result. Indicates that the user probably knew what crossing they were looking for and successfuly found it with the current search widget settings.
+          ga('send', 'event', { eventCategory: 'Search', eventAction: 'Precise', eventLabel: 'Search Input Had Exactly One Result'});
+        }
+      }
+    })
 
     var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
     if ( isIE ) {
