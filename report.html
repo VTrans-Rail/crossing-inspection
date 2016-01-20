@@ -112,6 +112,10 @@
 
     var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
+    if (width < 1200) {
+      document.getElementById("metadata-body").innerHTML = "Click or tap a grid cell for more information."
+    }
+
 
     function onMouseEventOpen(y) {
       if (width > 1199) {
