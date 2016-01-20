@@ -152,7 +152,7 @@ hr.style-seven:before { /* Not really supposed to work, but does */
 
 form fieldset div div input:disabled {
   color: #666666;
-  -webkit-text-fill-color:#666666;
+  /*-webkit-text-fill-color:#666666;*/
   -webkit-opacity:1;
 }
 
