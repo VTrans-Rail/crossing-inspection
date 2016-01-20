@@ -13,7 +13,7 @@
     <script type="text/javascript" charset="utf-8" src="http://js.arcgis.com/3.14/dojox/gfx/svg.js"></script>
     <script src="http://js.arcgis.com/3.14/"></script>
     <script src="js/report.js"></script>
-    <!-- <script src="http://localhost:35729/livereload.js"></script> -->
+    <script src="http://localhost:35729/livereload.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/report.css">
@@ -109,6 +109,23 @@
 
     <!--Display Metadata-->
     <script>
+
+    var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+
+    function onMouseEventOpen(y) {
+      if (width > 1199) {
+        displayMD(y);
+      }
+    }
+
+    function onMouseEventClose(y) {
+      if (width > 1199) {
+        hideMD(y);
+      }
+    }
+
+
     function displayMD(x) {
       // document.getElementById("metadata-info").style.display = "block";
       if (x.id === "xing-num") {
