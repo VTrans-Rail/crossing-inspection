@@ -117,10 +117,10 @@
       ga('send', 'event', { eventCategory: 'Pictures', eventAction: 'View Full Image', eventLabel: 'Sign Popup Full Image Link'});
     }
   </script>
+
   <script>
-    //Google Analytics -- Record Client IP Address
+    //Google Analytics -- Record Client IP Address. This will only be unique for users that are not behind a firewall. All internal VTrans computers will likely be recorded under the same IP address of 159.105.162.13
     $.getJSON('http://ipinfo.io', function(data){
-      alert(data.ip);
       ga('send', 'event', { eventCategory: 'Users', eventAction: 'User Views', eventLabel: data.ip + ' - Client IP Address'});
     });
   </script>
