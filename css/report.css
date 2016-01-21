@@ -259,3 +259,25 @@ form fieldset div div input:disabled {
     display: none;
   }
 }
+
+
+@media print {
+  #info {
+    padding: 0;
+  }
+
+  #crossing-photos-fieldset {
+    display: none;
+    visibility: hidden;
+  }
+
+  .navbar {
+    display: none;
+    visibility: hidden;
+  }
+
+  #metadata-info {
+    display: none;
+    visibility: hidden;
+  }
+}

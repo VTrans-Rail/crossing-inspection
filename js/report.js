@@ -174,7 +174,7 @@ if (dotnumqs) {
 
           html += featureAttributes.Subdivision + "'>\n                  </div>\n                  <div data-field-span='1' id='mile-post' onmouseover='onMouseEventOpen(this)' onmouseout='onMouseEventClose(this)' onclick='displayMD(this)'>\n                    <label>MP</label>\n                    <input type='text' readonly disabled value='";
 
-          html += featureAttributes.MP + "'>\n                  </div>\n              </div>\n          </fieldset>\n          <fieldset>\n            <legend>Crossing Photos</legend>\n            <div data-row-span='2'>";
+          html += featureAttributes.MP + "'>\n                  </div>\n              </div>\n          </fieldset>\n          <fieldset id='crossing-photos-fieldset'>\n            <legend>Crossing Photos</legend>\n            <div data-row-span='2'>";
 
           html += imageString + "</div>\n          </fieldset>\n          <fieldset>\n            <legend>Crossing Details</legend>\n            <div data-row-span='3'>\n              <div data-field-span='1' id='surf-type' onmouseover='onMouseEventOpen(this)' onmouseout='onMouseEventClose(this)' onclick='displayMD(this)'>\n                <label>Main Surface Material</label>\n                <input type='text' readonly disabled value='";
 
