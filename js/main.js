@@ -573,6 +573,7 @@ require([
 
 // ---------------------------- Build search --------------------------
     var searchWidget = new Search({
+      allPlaceholder: "Search by DOT #, Rail Line, Condition, or Place",
       enableLabel: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
@@ -602,10 +603,10 @@ require([
     });
 
     if (map.width < 358) {
-      searchSources[0].placeholder = "Search Crossings";
+      searchWidget.allPlaceholder = "Search";
       document.getElementById("search_input").style.fontSize = "1.25em";
     } else if (map.width < 439) {
-      searchSources[0].placeholder = "Search for Railroad Crossings";
+      searchWidget.allPlaceholder = "Search Crossings or Places";
       document.getElementById("search_input").style.fontSize = "1em";
     }
 
