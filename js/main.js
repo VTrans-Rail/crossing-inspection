@@ -19,6 +19,7 @@ require([
   "esri/dijit/Popup", "esri/dijit/PopupTemplate",
   "esri/dijit/LocateButton",
   "esri/dijit/Legend",
+  "esri/geometry/Extent",
   "esri/renderers/UniqueValueRenderer",
   "esri/symbols/Font",
   "esri/symbols/CartographicLineSymbol",
@@ -46,6 +47,7 @@ require([
     Popup, PopupTemplate,
     LocateButton,
     Legend,
+    Extent,
     UniqueValueRenderer,
     font,
     CartographicLineSymbol,
@@ -609,6 +611,20 @@ require([
       document.getElementById("search_input").style.fontSize = "1em";
     }
 
+    //create extent to limit search Results
+    var extent = new esri.geometry.Extent({
+      "xmin":-73.31,
+      "ymin":42.75,
+      "xmax":-71.65,
+      "ymax":45.00,
+    });
+
+    searchWidget.sources[0].maxSuggestions = 5;
+    searchWidget.sources[0].searchExtent = extent;
+
+    //Push the second source used to search to searchSources array(World Geocoding Service).
+    searchSources.push(searchWidget.sources[0]);
+
     // Set the source for the searchWidget to the properly ordered searchSources array
     searchWidget.set("sources", searchSources);
 
@@ -658,7 +674,7 @@ require([
 
         var insertSuggestCount = "<li id='search-suggest-totals' tabindex='0'>" + suggestions[0].length + " crossings match your current query.<hr style='margin: 10px 0px 5px 0px; padding: 0px 14px;'></li>";
 
-        var newSuggestions = "<div><ul>" + insertSuggestCount + originalSuggestions.slice(9);
+        var newSuggestions = "<div>" + insertSuggestCount + originalSuggestions.slice(5);
 
         document.getElementsByClassName("suggestionsMenu")[0].innerHTML = newSuggestions;
       }
