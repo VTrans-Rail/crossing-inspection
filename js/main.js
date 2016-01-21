@@ -185,7 +185,7 @@ require([
     });
     crossingTemplate.setContent(crossingPopupFeatures);
 
-    var crossingPointsSearch = new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspection2015/FeatureServer/1", {
+    var crossingPointsSearch = new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspection2015WebAppSearch/FeatureServer/0", {
       outFields: [
           'OBJECTID','DOT_Num','Feature_Crossed','MP',
           'LineName','Division','Subdivision',
@@ -574,7 +574,6 @@ require([
 // ---------------------------- Build search --------------------------
     var searchWidget = new Search({
       enableLabel: false,
-      // autoNavigate: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
       enableHighlight: false,
@@ -588,18 +587,17 @@ require([
     //Push the first source used to search to searchSources array
     searchSources.push({
       featureLayer: crossingPointsSearch,
-      searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed", "XingCond"],
+      searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Division", "Subdivision", "Branch", "Feature_Crossed", "XingCond"],
       displayField: "DOT_Num",
       suggestionTemplate: "${DOT_Num}: The ${LineName} crosses ${Feature_Crossed} in ${Town}. (${XingCond})",
       exactMatch: false,
-      outFields: ["DOT_Num", "RRXingNumb", "Town", "County", "LineName", "Feature_Crossed", "XingCond"],
+      outFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed", "XingCond"],
       name: "Railroad Crossings",
       placeholder: "Search by DOT #, Line, Street, Town, or County",
       maxResults: 500,
       maxSuggestions:500,
 
       enableSuggestions: true,
-      // enableSuggestionsMenu: true,
       minCharacters: 0
     });
 
