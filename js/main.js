@@ -572,6 +572,7 @@ require([
 // ---------------------------- Build search --------------------------
     var searchWidget = new Search({
       enableLabel: false,
+      // autoNavigate: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
       enableHighlight: false,
@@ -596,6 +597,7 @@ require([
       maxSuggestions:500,
 
       enableSuggestions: true,
+      // enableSuggestionsMenu: true,
       minCharacters: 0
     });
 
@@ -615,6 +617,7 @@ require([
     searchWidget.startup();
 
     on(searchWidget, "search-results", function() {
+
       var searchString = searchWidget.value;
 
       //Google Analytics --- Records Total Amount of Searches Executed
@@ -632,14 +635,32 @@ require([
         ga('send', 'event', { eventCategory: 'SearchString', eventAction: 'Failure', eventLabel: searchString + ' - Search Input Had No Results'});
       }
       else {
+        var results = new Array(searchWidget.searchResults[0]);
+        var selections = results[0]
+
         //Google Analytics -- Records any search that at least one crossing match for results
         ga('send', 'event', { eventCategory: 'Search', eventAction: 'Success', eventLabel: 'Search Input Had Results'});
-
-        var results = new Array(searchWidget.searchResults[0]);
         if (results[0].length === 1) {
           //Google Analytics -- Records searches that have only one result. Indicates that the user probably knew what crossing they were looking for and successfuly found it with the current search widget settings.
           ga('send', 'event', { eventCategory: 'Search', eventAction: 'Precise', eventLabel: 'Search Input Had Exactly One Result'});
         }
+      }
+    });
+
+    on(searchWidget, "suggest-results", function() {
+      if (searchWidget.suggestResults === null) {
+        //do nothing
+      } else {
+
+        var originalSuggestions = document.getElementsByClassName("suggestionsMenu")[0].innerHTML;
+
+        var suggestions = new Array(searchWidget.suggestResults[0]);
+
+        var insertSuggestCount = "<li id='search-suggest-totals' tabindex='0'>" + suggestions[0].length + " crossings match your current query.<hr style='margin: 10px 0px 5px 0px; padding: 0px 14px;'></li>";
+
+        var newSuggestions = "<div><ul>" + insertSuggestCount + originalSuggestions.slice(9);
+
+        document.getElementsByClassName("suggestionsMenu")[0].innerHTML = newSuggestions;
       }
     })
 
