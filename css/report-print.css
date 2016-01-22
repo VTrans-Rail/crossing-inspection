@@ -1,0 +1,44 @@
+@media print {
+  #info {
+    padding: 0;
+  }
+
+  #crossing-photos-fieldset {
+    display: none;
+    visibility: hidden;
+  }
+
+  .navigation-bar-report {
+    display: none;
+    visibility: hidden;
+  }
+
+  #metadata-info {
+    display: none;
+    visibility: hidden;
+  }
+
+  form.grid-form [data-row-span] {
+    height: 22px;
+  }
+  form.grid-form [data-row-span] [data-field-span] {
+    padding: 1px 3px;
+  }
+  form.grid-form fieldset{
+    padding:bottom: 6px;
+  }
+  form.grid-form fieldset legend {
+    font-size:14px;
+    margin-bottom: 15px;
+  }
+  form.grid-form fieldset div div input:disabled {
+    font-size: 10px;
+  }
+  form.grid-form fieldset div div textarea:disabled {
+    font-size: 10px;
+  }
+  form.grid-form [data-row-span] [data-field-span] label:first-child {
+    font-size: 10px;
+    margin-bottom: 1px;
+  }
+}

@@ -10,14 +10,10 @@
 button.full-button {
   display:none;
   position:absolute;
-  /*border-radius: 0;
-  border: 1px solid black;*/
 }
 
 button.icon-button {
   position: absolute;
-  /*border-radius: 0;
-  padding: 8px 12px;*/
 }
 
 #print-icon {
@@ -31,8 +27,6 @@ button.icon-button {
 }
 
 #report-page-title-div {
-  /*width: 50%;*/
-  /*left: 25%;*/
 }
 
 #report-title {
