@@ -271,7 +271,7 @@ form fieldset div div input:disabled {
     visibility: hidden;
   }
 
-  .navbar {
+  .navigation-bar-report {
     display: none;
     visibility: hidden;
   }
