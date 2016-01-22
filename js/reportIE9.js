@@ -333,8 +333,6 @@ if (dotnumqs) {
     }
   };
   xhttp.open("GET", imgFolder, true);
-  // xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  // xhttp.withCredentials = true;
   xhttp.send();
 }
 });
