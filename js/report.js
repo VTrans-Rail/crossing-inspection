@@ -306,19 +306,15 @@ if (dotnumqs) {
           var condcell = document.getElementById("surf-cond");
           if (cond.value === "Excellent") {
             cond.style.color = "rgb(0, 136, 55)";
-            // cond.style.textShadow = "0 0 2px #000";
           }
           else if (cond.value === "Good") {
             cond.style.color = "rgb(166, 219, 160)";
-            // cond.style.textShadow = "0 0 2px #000";
           }
           else if (cond.value === "Fair") {
             cond.style.color = "rgb(255,187,0)";
-            // cond.style.textShadow = "0 0 2px #000";
           }
           else if (cond.value === "Poor") {
             cond.style.color = "rgb(123,50,148)";
-            // cond.style.textShadow = "0 0 2px #000";
           }
 
           // pavement condition
