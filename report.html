@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/report.css">
+    <link rel="stylesheet" href="css/report-navbar.css">
 
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -50,7 +51,31 @@
     </noscript>
 
   <div class="pagecontainer">
-    <nav class="navbar navbar-inverse navbar-static-top report" id="navigation-bar">
+    <div>
+        <div class="navigation-bar-report">
+          <div>
+            <div>
+              <button id="print-button" type="button" name="button" class="btn btn-primary btn-lg full-button" onclick="window.print()">Print Report</button>
+            </div>
+            <div class="">
+              <button id="print-icon" type="button" name="button" class="btn btn-primary icon-button" onclick="window.print()"><img src="img\print.png" height="16" width="16px" alt="close" /></button>
+            </div>
+          </div>
+          <div id="report-page-title-div">
+            <h1 id="report-title">Crossing Report</h1>
+          </div>
+          <div class="">
+            <div>
+              <button id="close-button" type="button" name="button" class="btn btn-primary btn-lg full-button" onclick="self.close()">Close Report</button>
+            </div>
+            <div>
+              <button id="close-icon" type="button" name="button" class="btn btn-primary icon-button" onclick="self.close()"><img src="img\close.png" height="16" width="16px" alt="" /></button>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- <nav class="navbar navbar-inverse navbar-static-top report" id="navigation-bar">
       <div class="container">
           <div class="row">
             <div class="col-xs-3 col-sm-2 btn-head">
@@ -66,7 +91,7 @@
             </div>
         </div>
       </div>
-    </nav>
+    </nav> -->
 
 
     <div class="container-fluid" id="info"></div>

@@ -9,19 +9,19 @@ html body {
   border-color: black;
 }
 
-#report-page-title-div {
+/*#report-page-title-div {
   width: 50%;
   left: 25%;
-}
+}*/
 
 #condition {
   font-weight: bold;
 }
 
-#report-title {
+/*#report-title {
   font-size: 25px;
   color: #fff;
-}
+}*/
 
 #info {
   padding-top: 95px;
@@ -204,15 +204,15 @@ form fieldset div div input:disabled {
     padding-right: calc((100% - 670px)/2);
   }
 
-  #report-title {
+  /*#report-title {
     font-size: 32px;
-  }
+  }*/
 }
 
 @media (min-width: 992px) {
-  #report-title {
+  /*#report-title {
     font-size: 36px;
-  }
+  }*/
 
   #metadata-info {
     padding-right: calc((100% - 820px)/2);
@@ -222,9 +222,9 @@ form fieldset div div input:disabled {
 
 
 @media (min-width: 1200px) {
-  #report-title {
+  /*#report-title {
     font-size: 40px;
-  }
+  }*/
 
   #metadata-info {
     /*color: #404040;
@@ -260,22 +260,6 @@ form fieldset div div input:disabled {
   }
 }
 
-/*form.grid-form fieldset div div input:disabled {
-  font-size: 10px;
-}*/
-/*form.grid-form fieldset div div textarea:disabled {
-  font-size: 10px;
-}*/
-/*form.grid-form fieldset legend {
-  font-size:14px;
-}*/
-/*form.grid-form [data-row-span] [data-field-span] {
-  padding: 4px;
-}*/
-/*form.grid-form [data-row-span] [data-field-span] label:first-child {
-  margin-bottom: 2px;
-}*/
-
 
 @media print {
   #info {
@@ -296,7 +280,7 @@ form fieldset div div input:disabled {
     display: none;
     visibility: hidden;
   }
-  
+
   form.grid-form [data-row-span] {
     height: 22px;
   }
