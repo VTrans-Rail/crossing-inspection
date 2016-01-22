@@ -305,21 +305,20 @@ if (dotnumqs) {
           var cond = document.getElementById("condition");
           var condcell = document.getElementById("surf-cond");
           if (cond.value === "Excellent") {
-            cond.style.color = "green";
-            // condcell.style.backgroundColor = "#99d899";
-            // cond.style.textShadow
+            cond.style.color = "rgb(0, 136, 55)";
+            // cond.style.textShadow = "0 0 2px #000";
           }
           else if (cond.value === "Good") {
-            cond.style.color = "black";
-            // condcell.style.backgroundColor = "#e5f5e5";
+            cond.style.color = "rgb(166, 219, 160)";
+            // cond.style.textShadow = "0 0 2px #000";
           }
           else if (cond.value === "Fair") {
-            cond.style.color = "Orange";
-            // condcell.style.backgroundColor = "#fcffd1";
+            cond.style.color = "rgb(255,187,0)";
+            // cond.style.textShadow = "0 0 2px #000";
           }
           else if (cond.value === "Poor") {
-            cond.style.color = "Red";
-            // condcell.style.backgroundColor = "#e24c4c";
+            cond.style.color = "rgb(123,50,148)";
+            // cond.style.textShadow = "0 0 2px #000";
           }
 
           // pavement condition
@@ -327,15 +326,12 @@ if (dotnumqs) {
           var pcondcell = document.getElementById("pave-mark-cond");
           if (pcond.value === "Not Applicable") {
             pcond.style.color = "black";
-            // pcondcell.style.backgroundColor = "#99d899";
           }
           else if (pcond.value === "OK") {
             pcond.style.color = "green";
-            // pcondcell.style.backgroundColor = "#e5f5e5";
           }
           else if (pcond.value === "Worn") {
             pcond.style.color = "Red";
-            // pcondcell.style.backgroundColor = "#e24c4c";
           }
       }
     }

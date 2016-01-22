@@ -18,6 +18,12 @@
     visibility: hidden;
   }
 
+  #condition {
+    text-shadow: none;
+    font-weight: normal;
+    letter-spacing: normal;
+  }
+
   form.grid-form [data-row-span] {
     height: 22px;
   }
@@ -33,9 +39,11 @@
   }
   form.grid-form fieldset div div input:disabled {
     font-size: 10px;
+    /*text-shadow: none;*/
   }
   form.grid-form fieldset div div textarea:disabled {
     font-size: 10px;
+    /*text-shadow: none;*/
   }
   form.grid-form [data-row-span] [data-field-span] label:first-child {
     font-size: 10px;

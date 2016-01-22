@@ -4,6 +4,8 @@ html body {
 
 #condition {
   font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 2px #000;
 }
 
 #info {
