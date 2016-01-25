@@ -2,11 +2,8 @@ var formatString = "";
 
 var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
-var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
 var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
     // At least Safari 3+: "[object HTMLElementConstructor]"
-var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
-var isIE = /*@cc_on!@*/false || !!document.documentMode;   // At least IE6
 
 
 require([
@@ -26,8 +23,8 @@ require([
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
-  "dijit/layout/BorderContainer",
-  "dijit/layout/ContentPane",
+  // "dijit/layout/BorderContainer",
+  // "dijit/layout/ContentPane",
   "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
   "dojo/domReady!"
@@ -540,11 +537,13 @@ require([
                   }
                 }
               }
-              formatString += imageString;
+              // formatString += imageString;
             }
           }).then(function(response) {
               var summaryInfo = document.getElementById("popupContent").innerHTML;
-              document.getElementById("popupContent").innerHTML = summaryInfo + formatString;
+              // document.getElementById("popupContent").innerHTML = summaryInfo + formatString;
+              document.getElementById("popupContent").innerHTML = summaryInfo + imageString;
+
 
               //Google Analytics
               ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View', eventLabel: 'Popup Image Views'});
@@ -680,9 +679,7 @@ require([
     })
 
     var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
-    if ( isIE ) {
-      alert(browserAlert);
-    } else if ( isOpera ) {
+    if ( isOpera ) {
       alert(browserAlert);
     } else if ( isSafari ) {
       alert(browserAlert);
