@@ -1,4 +1,8 @@
-var formatString = "";
+// ----------------------------------------------------------------------------
+// -------------This is the mainIE9.js index.html or homepage when the browser
+// is IE9. Please see the main.js file for more detailed documentation-------
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 
 var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
@@ -22,8 +26,6 @@ require([
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
-  "dijit/layout/BorderContainer",
-  "dijit/layout/ContentPane",
   "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
   "dojo/domReady!"
@@ -451,8 +453,6 @@ require([
 
           var objectId = popup.getSelectedFeature().attributes.OBJECTID;
 
-          formatString = "";
-
           var imageString = "<table><tr>";
           var imageStyle = "alt='site image' width='100%'";
 
@@ -483,11 +483,10 @@ require([
                   imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='signImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (j+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='" + imgSrc + "' " + imageStyle + ">" + "</div></td></tr>";
                 }
               }
-              formatString += imageString;
             }
           }).then(function(response) {
               var summaryInfo = document.getElementById("popupContent").innerHTML;
-              document.getElementById("popupContent").innerHTML = summaryInfo + formatString;
+              document.getElementById("popupContent").innerHTML = summaryInfo + imageString;
 
               //Google Analytics
               ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View', eventLabel: 'Popup Image Views'});
