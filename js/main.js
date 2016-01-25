@@ -1,9 +1,29 @@
+// ----------------------------------------------------------------------------
+// ----------------This is the main.js (main javascript file) for the index.html // or homepage. This file is essential for loading the map and the layers of the // map. It also defines the behavior of those layers and their popups. It builds // the legend, the locate button, and the search widget as well.---------------
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
+
+
+//-----------------------------------------------------------------------
+// ----------- Test for Browsers that might have issues with the webapp -----
+// --------------------- alert the User ---------------------------------
 var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
 var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
     // At least Safari 3+: "[object HTMLElementConstructor]"
 
+var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
+if ( isOpera ) {
+  alert(browserAlert);
+} else if ( isSafari ) {
+  alert(browserAlert);
+}
+//-----------------------------------------------------------------------
 
+
+//------------------------------------------------------------------
+// ----------------------Initialize Functions-----------------------
+//------------------------------------------------------------------
 require([
   "esri/map",
   "esri/arcgis/utils",
@@ -26,10 +46,6 @@ require([
   "dojo/domReady!"
   ],
 
-
-//------------------------------------------------------------------
-// ----------------------Initialize Functions-----------------------
-//------------------------------------------------------------------
   function (
     Map,
     arcgisUtils,
@@ -50,6 +66,7 @@ require([
     Query, QueryTask,
     InfoTemplate
   ) {
+// ------------------------------------------------------------------------
 
 
 
@@ -59,7 +76,7 @@ require([
     }, domConstruct.create("div"));
     popup.setContent("");
 
-    //Add Popup theme
+    //Add Popup theme (standard Esri light theme modified in style.css)
     domClass.add(popup.domNode, "light");
 //----------------------------------------------------------------------
 
@@ -68,7 +85,12 @@ require([
 //-------------------------------------------------------------
 //--------------------Create Map-----------------------------------------
 //-------------------------------------------------------------
-    // satellite imagery from ArcGIS Online, use levels 0 - 14
+
+  //-----------------------------------------------------------------------
+  // --------- Build Custom Basemap that Changes with Zoom Level -------------
+  // ------- ArcGISTiledMapServiceLayer replace Map widget basemap property---
+  //------------------------------------------------------------------------
+    // topo basemap from ArcGIS Online, use levels 0 - 14
     var topoBasemap = new   ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer", {
       displayLevels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
     });
@@ -78,15 +100,19 @@ require([
       displayLevels: [15, 16, 17, 18, 19],
     });
 
-    // transportation reference layer map service from ArcGIS Online, use levels 15 - 19
+    // transportation reference layer map service from ArcGIS Online, use levels 15 - 19 (this adds the labels for streets and other features)
     var streetReferenceLayer = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer", {
       displayLevels: [15, 16, 17, 18, 19],
     });
+  //--------------------------------------------------------------------------
 
 
+  //------------------------------------------------------------------------
+  // ------------------------ Initialize Map ------------------------------
+  //------------------------------------------------------------------------
     // create the map and use the custom zoom levels
     var map = new Map("map", {
-      // basemap: "topo",
+      // basemap: "topo", replaced by custom tiled layers
       center: [-72.68, 43.785],
       zoom: 8,
       maxZoom:19,
@@ -94,12 +120,14 @@ require([
       showLabels: true,
     });
 
+    // add basemap layers to map
     map.addLayer(topoBasemap);
     map.addLayer(imageryBasemap);
     map.addLayer(streetReferenceLayer);
 
-    //Resize Popup To Fit titlePane
+    //Resize Popup To Fit titlePane (slightly unnecessary)
     map.infoWindow.resize(300, 370)
+  //-------------------------------------------------------------------
 //-------------------------------------------------------------
 
 
@@ -113,8 +141,8 @@ require([
     }, "locateButton");
     geoLocate.startup();
 
+    // Google Analytics track when locatebutton clicked
     on(geoLocate, "locate", function() {
-      //Google Analytics
       ga('send', 'event', { eventCategory: 'Locate', eventAction: 'GeoLocate', eventLabel: 'Use Geolocation Button'});
     });
 //------------------------------------------------------------------
@@ -122,76 +150,79 @@ require([
 
 
 //------------------------------------------------------------------
-// -----------------Define PopupTemplates------------------------------
+// ----------------- Define PopupTemplates ------------------------------
 //------------------------------------------------------------------
-    //Crossing Template--------------
+
+  //------------------------------------------------------------------
+  //Crossing Popup Template--------------
+  //-----------------------------------------------------
     var crossingPopupFeatures = "<div id='popupContent' style='overflow-y:auto'><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b><span id='warnCode'>${WDCode}</span></b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popupPictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button></div>";
 
     var crossingTemplate = new PopupTemplate({
       title: "Crossing {DOT_Num}",
     });
     //Provides warning if popup doesn't load properly and clears out editSummary
+    //This hasn't been an issue in a while. If it doesn't happen after 1.0 launch, removed this for v1.1 to improve performance
     crossingTemplate.setContent("<h1>Oops!</h1></br><b>Please close popup and try again.</b></br>The summary information and pictures for this crossing did not load properly.");
+  //-----------------------------------------------------
 
-
-    //Sign Template------------------
+  //-----------------------------------------------------
+  //Sign Popup Template------------------
+  //-----------------------------------------------------
     var signPopupFeatures = "<div id='popupContent' ><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popupPictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button></div>";
 
     var signTemplate = new PopupTemplate({
       title: "Crossing Sign",
     });
     //Provides warning if popup doesn't load properly and clears out editSummary
+    //This hasn't been an issue in a while. If it doesn't happen after 1.0 launch, removed this for v1.1 to improve performance
     signTemplate.setContent("<h1>Oops!</h1></br><b>Please close popup and try again.</b></br>The summary information and pictures for this sign did not load properly.");
+  //-----------------------------------------------------
 //-----------------------------------------------------------------------
 
 
 
 //------------------------------------------------------------------
-//  ---------------------- Create Feature Layers ------------------------------
+//  ----------- Create Railroad Infrastructure Feature Layers -----------------
 //------------------------------------------------------------------
-    //Create Crossing Feature Layer-------------------
-    var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
+
+  // ----- Create Crossing Feature Layer-------------------
+    var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1"; // URL to local hosted crossing features service
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
       id: "crossing-points",
       outFields: [
           'OBJECTID','DOT_Num','Feature_Crossed','MP',
           'LineName','Division','Subdivision',
-          'Branch','Town','County',
-          'FRA_LandUse','WDCode','SignSignal',
-          'Channelization','StopLine','RRXingPavMark',
-          'DynamicEnv','GateArmsRoad','GateArmsPed',
-          'GateConfig1','GateConfig2','Cant_Struc_Over',
-          'Cant_Struc_Side','Cant_FL_Type','FL_MastCount',
-          'Mast_FL_Type','BackSideFL','FlasherCount',
-          'FlasherSize','WaysideHorn','HTS_Control',
-          'HTS_for_Nearby_Intersection','BellCount','HTPS',
-          'HTPS_StorageDist','HTPS_StopLineDist','TrafficLnType',
-          'TrafficLnCount','Paved','XingIllum',
-          'SurfaceType','SurfaceType2','XingCond',
-          'FlangeMaterial','XingWidth','XingLength',
-          'Angle','SnoopCompliant','Comments', 'IntRd500', 'IntRdDist',
-          'Num_Tracks', 'PaveMarkCond', 'RDS_AOTCLASS', 'RDS_FUNCL',
+          'Branch','Town','County','WDCode',
+          'SurfaceType','XingCond',
         ],
       infoTemplate: crossingTemplate,
       minScale: 650000,
     });
     crossingTemplate.setContent(crossingPopupFeatures);
+  // --------------------------------------------------------------
 
+  // --------------------------------------------------------------------
+  // ----Create Duplicate Crossing Feature Layer for Search Widget -----------
+  // ---------------------------------------------------------------------
+  // ----- VTrans local SDE Server version does not support Pagination ----
+  // ----- pagination is necessary for search suggestions ----------------
+  // -------- url is a slimmed down hosted feature service -------------------
+  // --------------------------------------------------------------------
     var crossingPointsSearch = new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspection2015WebAppSearch/FeatureServer/0", {
       outFields: [
           'OBJECTID','DOT_Num','Feature_Crossed','MP',
           'LineName','Division','Subdivision',
           'Branch','Town','County',
-          'FRA_LandUse','WDCode','SignSignal',
-          'SurfaceType','SurfaceType2','XingCond',
-          'XingWidth','XingLength','Comments',
+          'FRA_LandUse','WDCode','SurfaceType','XingCond',
         ],
     });
+  // -------------------------------------------------------------------
 
 
 
-    //Create Sign Feature Layer---------------------------------
+  // ----- Create Sign Feature Layer---------------------------------
     var signUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/0";
 
     var signPoints = new FeatureLayer(signUrl, {
@@ -202,18 +233,20 @@ require([
       minScale: 3000,
     });
     signTemplate.setContent(signPopupFeatures);
+  // -------------------------------------------------------------------
 
 
-    //Create Rail Line Feature Layer----------------------------
+  // ---------- Create Rail Line Feature Layer----------------------------
     var lineUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer/0";
 
     var railLine = new FeatureLayer(lineUrl, {
       id: "rail-line",
       outFields: ["*"],
     });
+  // -----------------------------------------------------------------
 
 
-    //Create Mile Posts Feature Layers-------------------------------
+  // --- Create Mile Posts Feature Layers-------------------------------
     var mpTenUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3";
 
     var mpFiveUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/2";
@@ -244,6 +277,7 @@ require([
     milePostsTen.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsFive.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
     milePostsOne.setDefinitionExpression("RailTrail = 'N' AND VRLID <> 'VRL15'");
+  // ------------------------------------------------------------------
 //-------------------------------------------------------------------------
 
 
@@ -257,8 +291,6 @@ require([
     dotNumLabel.font.setFamily("Verdana");
     dotNumLabel.font.setWeight(font.WEIGHT_BOLD);
     dotNumLabel.setColor(new Color([190, 232, 255, 1, 1]));
-    // dotNumLabel.setHaloColor(new Color([26, 26, 26, 1])); //Option added at v3.15
-    // dotNumLabel.setHaloSize("25px"); //Option added at v3.15
 
     var jsonLblCrossing = {
       "labelExpressionInfo": {"value": "{DOT_Num}"},
@@ -671,12 +703,4 @@ require([
         document.getElementsByClassName("suggestionsMenu")[0].innerHTML = newSuggestions;
       }
     })
-
-    var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
-    if ( isOpera ) {
-      alert(browserAlert);
-    } else if ( isSafari ) {
-      alert(browserAlert);
-    }
-
 });
