@@ -35,9 +35,8 @@ if ( 467 < width && width < 701 ) {
 var imgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/" + thumbSizeFolder + dotnumqs;
 
 if (dotnumqs) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
+  var xhttp = new XDomainRequest();
+  xhttp.onload = function() {
       var imageTagArray = JSON.parse(xhttp.responseText);
 
 
@@ -330,13 +329,13 @@ if (dotnumqs) {
             pcond.style.color = "Red";
           }
       }
-    }
   };
-  xhttp.open("GET", imgFolder, true);
-  // xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  // xhttp.setRequestHeader('Access-Control-Allow-Credentials', true);
-  // xhttp.setRequestHeader('Access-Control-Allow-Origin', true);
-  // xhttp.withCredentials = true;
-  xhttp.send();
+  xhttp.open("GET", imgFolder);
+  xhttp.onprogress = function () { };
+  xhttp.ontimeout = function () { };
+  setTimeout(function () {
+                xhttp.send();
+            }, 0);
+  // xhttp.send();
 }
 });
