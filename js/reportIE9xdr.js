@@ -139,7 +139,7 @@ if (dotnumqs) {
 
       var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
       if ( isIE ) {
-        alert(browserAlert);
+        // alert(browserAlert);
       } else if ( isOpera ) {
         alert(browserAlert);
       } else if ( isSafari ) {
