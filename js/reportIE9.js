@@ -26,21 +26,8 @@ require([
 var dotnumqs = getParameterByName("dotnum");
 
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-var thumbSizeFolder = "CrossingPhotosbyID400/";
-if ( 467 < width && width < 701 ) {
-  // only change thumbSizeFolder if width is in this range
-  thumbSizeFolder = "CrossingPhotosbyID/";
-}
-
-var imgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/" + thumbSizeFolder + dotnumqs;
 
 if (dotnumqs) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-      var imageTagArray = JSON.parse(xhttp.responseText);
-
-
       var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
 
 
@@ -104,18 +91,12 @@ if (dotnumqs) {
               deferred.resolve("no attachments");
             }
             else {
-              for ( i = 0; i < imageTagArray.length; i++ ) {
-                for ( j = 0; j < response.length; j++ ) {
-                  if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
-                    imgSrc = response[j].url;
-                    imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='" + imgSrc + "' target='_blank'>" + "<img src='thumb/" + thumbSizeFolder + dotnumqs + "/" + imageTagArray[i].name + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
-                  }
-                }
-              }
-              if (imageTagArray.length > response.length) {
-                imageString += "<div data-field-span='1'><p style='padding: 20px 50px 0px 50px; text-align:center;'>There is at least one image for this crossing that cannot be displayed on the website. Missing images were likely not included due to a percieved lack of value. If you would like to see missing images, please contact us and ask for all of the original image files for this crossing (please include the DOT Crossing Number) from the 2015 Crossing Inspection.</p></div>";
+              for ( j = 0; j < response.length; j++ ) {
+                imgSrc = response[j].url;
+                imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='" + imgSrc + "' target='_blank'>" + "<img src='" + imgSrc + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
               }
             }
+            console.log(imageString);
           });
           //-------------------------------------------------------------------
         }
@@ -331,8 +312,4 @@ if (dotnumqs) {
           }
       }
     }
-  };
-  xhttp.open("GET", imgFolder, true);
-  xhttp.send();
-}
 });
