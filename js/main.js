@@ -323,7 +323,7 @@ require([
 
 
 //------------------------------------------------------------------
-//----------------------Add Layers to Map--------------------------
+//----------------------Add Railroad Layers to Map--------------------------
 //------------------------------------------------------------------
     map.addLayer(railLine);
     map.addLayer(milePostsTen);
@@ -337,7 +337,8 @@ require([
 
 //-------------------------------------------------------------
 //--------------------Setup Mobile Legend Controls-----------------------
-//-------------------------------------------------------------
+//----------full screen panel that minimizes to bottom of screen------------
+//--------------------------------------------------------------------
     var legendOpen = document.getElementById('openMobileLegend');
     if (legendOpen) {
       legendOpen.addEventListener('click', function () {
@@ -345,7 +346,7 @@ require([
         document.getElementById('openMobileLegend').style.display = "none";
         document.getElementById('closeMobileLegend').style.display = "block";
 
-        //Google Analytics
+        //Google Analytics record when someone opens legend
         ga('send', 'event', { eventCategory: 'Legend', eventAction: 'Open', eventLabel: 'Open Mobile Legend'});
       });
     }
@@ -357,7 +358,7 @@ require([
         document.getElementById('openMobileLegend').style.display = "block";
         document.getElementById('closeMobileLegend').style.display = "none";
 
-        //Google Analytics
+        //Google Analytics record when someone closes legend
         ga('send', 'event', { eventCategory: 'Legend', eventAction: 'Close', eventLabel: 'Close Mobile Legend'});
       });
     }
@@ -392,7 +393,6 @@ require([
     }, "legendDiv");
     legendDijit.startup();
   });
-
 //------------------------------------------------------------------
 
 
@@ -405,10 +405,9 @@ require([
     "role": "button",
     "id": "fullReport",
     "innerHTML": "Full Report",
-    "href": "www.google.com",
+    "href": "#",
     "target": "_blank",
-    // "onclick": "fullReportLink(dotnum)"
-  }, dojo.query(".actionList", map.infoWindow.domNode)[0]);
+  }, dojo.query(".actionList", map.infoWindow.domNode)[0]); // adds to popup
 //------------------------------------------------------------------------
 
 
@@ -418,26 +417,40 @@ require([
 //---------------------------------------------------------------------------
 //---------------------Build Link to Report Page------------------------------
 //---------------------------------------------------------------------------
-  on(map.infoWindow, "selection-change", when);
 
+  //Important line that triggers updatePopupInfo if the popup selection changes
+  //this is carefully coded to ensure that the correct photos are displayed
+  on(map.infoWindow, "selection-change", updatePopupInfo);
+
+  // This is the time interval (ms) that will continue to trigger
+  // updatePopupInfo every 3000ms until the popupPictures DOM button element
+  // exists. This button only displays once the XMLHttpRequest is completed.
+  // This ensures the correct images are loaded by preventing the user from
+  // clicking on the button until the request is finished.
   var interval = 3000;
-  function when (interval) {
+
+  function updatePopupInfo (interval) {
     var deferred = new dojo.Deferred();
 
     var featureCount = popup.count;
 
     if ( featureCount > 0 ) {
-      //Updates link to report page
+      // gets DOT Number of curretly selected feature
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
+
+      // ----- Updates link to report page ------------------
+      // -- unrelated to pictures but this location ensure the link is correct
       link.href = "report.html?dotnum=" + dotnum;
+      //------------------------------------------------------------------
 
       //Google Analytics -- Records when the full report link is chosen from the popup along with the DOT num of the crossing
       link.onclick = function () {
             ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View Full Report', eventLabel: dotnum + ' - Full Report Link Hit'});
           }
+      // ---------------------------------------------------------------
 
 
-      // Google Analytics
+      // Google Analytics records whether popup viewed is crossing or sign
       if( popup.getSelectedFeature()._layer.id.length > 12 ) {
         ga('send', 'event', { eventCategory: 'Popup', eventAction: 'Crossing Popup View', eventLabel: dotnum + ' - Crossing Popup Views'});
       } else {
@@ -445,9 +458,16 @@ require([
       }
 
 
+    // --------------------------------------------------------------------
+    // --------------- Initialize XMLHttpRequest ----------------------------
+    // -----Get image file contents of features photo folder -------------
+    // ----------------------------------------------------------------------
+
+      // ------ XMLHttpRequest for signs ---------------------------------
+      // -- Creates Sign Image Folder Name from selected feature attributes --
       var DOTsignUID = popup.getSelectedFeature().attributes.DOT_Num + "-" + popup.getSelectedFeature().attributes.SignUID;
 
-      var signImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/SignPhotos/" + DOTsignUID;
+      var signImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/SignPhotos/" + DOTsignUID; //github api image storage
       if (popup.getSelectedFeature().attributes.SignUID) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -462,9 +482,10 @@ require([
         xhttp.open("GET", signImgFolder, true);
         xhttp.send();
       }
+      // --------------------------------------------------------------
 
-      // Send Ajax Request and populate invisible div with results of contents of thumbnail folder
-      var crossingImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/CrossingPhotosbyID400/" + dotnum;
+      // --------XMLHttpRequest for crossings -------------------------
+      var crossingImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/CrossingPhotosbyID400/" + dotnum; //github api image storage
       if (popup.getSelectedFeature().attributes.SignUID === undefined ) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -479,6 +500,7 @@ require([
         xhttp.open("GET", crossingImgFolder, true);
         xhttp.send();
       }
+    // ---------------------------------------------------------------------
 
 
 
@@ -504,17 +526,21 @@ require([
           document.getElementById('warnCode').innerHTML = "No signs or signals";
         }
       }
+      // ---------------------------------------------------------------
 
 
+    // -------------------------------------------------------------------
+    // if XMLHttpRequest completed, then popupPictures button is created
+    // if popupPictures button defined, then adds event listener for
+    // user to click on the button. If clicked, triggers images to display.
       var pictureOpen = document.getElementById('popupPictures');
       if (pictureOpen) {
         pictureOpen.addEventListener('click', function () {
-          pictureOpen.style.display = "none";
+          pictureOpen.style.display = "none"; // hides popupPictures button
 
           var objectId = popup.getSelectedFeature().attributes.OBJECTID;
 
-          formatString = "";
-
+          // creates imageString variable to be added to
           var imageString = "<table><tr>";
           var imageStyle = "alt='site image' width='100%'";
 
@@ -522,26 +548,37 @@ require([
 
           var selectedLayerId = popup.getSelectedFeature()._layer.id;
 
+          // Determine whether crossings or signs is selected
           if ( selectedLayerId.length > 12 ) {
             selectedLayer = crossingPoints;
 
-            //Get Crossing Thumbnail imageArray
+            //Get Crossing Thumbnail image Array created by the XMLHttpRequest
             var imageTagArray = JSON.parse(document.getElementById("image-testing").innerHTML);
 
           } else {
             selectedLayer = signPoints;
 
-            //Get Sign Thumbnail imageArray
+            //Get Sign Thumbnail image Array created by the XMLHttpRequest
             var imageTagArray = JSON.parse(document.getElementById("image-testing").innerHTML);
           }
 
+          // ------------- queryAttachmentInfos ----------------------------
+          // This ArcGIS Javascript API method queries info about attachments
+          // by searching by objectId. the url can be passed into a button that
+          // opens the original image in a new window. The thumbnail images that
+          // actually display in the popup are served from the github repo that
+          // by inputing the file name contents that were returned from the
+          // XMLHttpRequest to the github API.
+          // By using nested For loops with If, Else If statements, it is
+          // possible to ensure that the image link to the original image
+          // matches the image thumbnail displayed in the popup
           selectedLayer.queryAttachmentInfos(objectId).then(function(response){
             var imgSrc;
             if (response.length === 0) {
               deferred.resolve("no attachments");
             }
             else {
-              for ( i = 0; i < response.length; i++) {
+              // for ( i = 0; i < response.length; i++) {
                 if (selectedLayerId.length > 12) {
                   for ( i = 0; i < imageTagArray.length; i++ ) {
                     for ( j = 0; j < response.length; j++ ) {
@@ -564,7 +601,7 @@ require([
                     }
                   }
                 }
-              }
+              // }
             }
           }).then(function(response) {
               var summaryInfo = document.getElementById("popupContent").innerHTML;
@@ -576,7 +613,7 @@ require([
             });
         });
       } else {
-        setTimeout(function(){ when(interval);}, interval);
+        setTimeout(function(){ updatePopupInfo(interval);}, interval);
       }
     }
   }
