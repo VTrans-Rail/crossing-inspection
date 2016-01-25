@@ -1,5 +1,3 @@
-var formatString = "";
-
 var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
 var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
@@ -23,8 +21,6 @@ require([
   "esri/symbols/SimpleFillSymbol", "esri/Color",
   "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
   "dojo/dom-attr", "dojo/dom",
-  // "dijit/layout/BorderContainer",
-  // "dijit/layout/ContentPane",
   "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/InfoTemplate",
   "dojo/domReady!"
@@ -537,11 +533,9 @@ require([
                   }
                 }
               }
-              // formatString += imageString;
             }
           }).then(function(response) {
               var summaryInfo = document.getElementById("popupContent").innerHTML;
-              // document.getElementById("popupContent").innerHTML = summaryInfo + formatString;
               document.getElementById("popupContent").innerHTML = summaryInfo + imageString;
 
 
