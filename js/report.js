@@ -1,26 +1,52 @@
-//get querystring value
+// --------------- get querystring value ----------------------------
+// this function gets the dotnum of the crossing the user was viewing from
+// the url so that it can be used for query tasks in the report page
+// -----------------------------------------------------------------------
 function getParameterByName(name) {
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
   var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
     results = regex.exec(location.search);
   return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+// ----------------------------------------------------------------
 
+
+
+//-----------------------------------------------------------------------
+// ----------- Test for Browsers that might have issues with the webapp -----
+// --------------------- alert the User ---------------------------------
 var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
 var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
     // At least Safari 3+: "[object HTMLElementConstructor]"
 
+var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
+if ( isOpera ) {
+  alert(browserAlert);
+} else if ( isSafari ) {
+  alert(browserAlert);
+}
+//-----------------------------------------------------------------------
+
+
+
+
+// -------------------------------------------------------------------
+// ----------------- Initialize ArcGIS Javascript API Functions -----------
+// --------------------------------------------------------------------
 require([
   "dojo/dom", "dojo/on",
   "esri/tasks/query", "esri/tasks/QueryTask",
   "esri/layers/FeatureLayer",
   "dojo/domReady!"
 ], function (dom, on, Query, QueryTask, FeatureLayer) {
+// ---------------------------------------------------------------------
 
 
 var dotnumqs = getParameterByName("dotnum");
 
+
+// This gets viewport width to determine what thumbnails to serve
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var thumbSizeFolder = "CrossingPhotosbyID400/";
 if ( 467 < width && width < 701 ) {
@@ -31,25 +57,34 @@ if ( 467 < width && width < 701 ) {
 var imgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/" + thumbSizeFolder + dotnumqs;
 
 if (dotnumqs) {
+
+  // ----------------- Set Up XMLHttpRequest -------------------------
+  // -------to get the file names of the crossing images -----------
+  // In order to ensure that the image thumbnails are properly served,
+  // the entire gridforms report generation was placed inside the
+  // XMLHttpRequest function
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-      var imageTagArray = JSON.parse(xhttp.responseText);
+      var imageTagArray = JSON.parse(xhttp.responseText); //creates json object
 
 
-      var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
+      var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1"; // Use most frequently updated feature serv
 
 
+      // -------------------------------------------------------------------
+      // ------------Set Query Parameters -------------------------------
+      // -------------------------------------------------------------
       var queryTask = new QueryTask(crossingUrl);
 
       var query = new Query();
 
-      query.returnGeometry = false;
+      query.returnGeometry = false; // do not need for report page
       query.outFields = [
         'OBJECTID','DOT_Num','Feature_Crossed','MP',
         'LineName','Division','Subdivision',
         'Branch','Town','County',
-        'FRA_LandUse','WDCode','SignSignal',
+        'FRA_LandUse','WDCode',
         'Channelization','StopLine','RRXingPavMark',
         'DynamicEnv','GateArmsRoad','GateArmsPed',
         'GateConfig1','GateConfig2','Cant_Struc_Over',
@@ -65,24 +100,23 @@ if (dotnumqs) {
         'Num_Tracks', 'PaveMarkCond', 'RDS_AOTCLASS', 'RDS_FUNCL'
       ];
 
+      query.where = "DOT_Num like '%" + dotnumqs + "%'";
+
+      //execute query and then pass result into getPhotos func and initiate
+      queryTask.execute(query,getPhotos);
+      //-----------------------------------------------------
 
 
-    //-----------------------------------------------------
-    //------------Working Section------------------------------
-    //-----------------------------------------------------
 
-
+      // --------------- Build Crossing Feature Layer -----------------
+      // queryAttachmentInfos can only be executed on a feature layer
       var crossingPoints = new FeatureLayer(crossingUrl, {
         id: "crossingPoints",
       });
+      // --------------------------------------------------------------
 
 
-      if (dotnumqs) {
-        query.where = "DOT_Num like '%" + dotnumqs + "%'";
-        queryTask.execute(query,getPhotos);
-      }
-
-      var imageString = "";
+      var imageString = ""; //will be populated with image tags
 
 
       function getPhotos (results) {
@@ -116,14 +150,12 @@ if (dotnumqs) {
           //-------------------------------------------------------------------
         }
       }
-
-
-    //-----------------------------------------------------
     //-----------------------------------------------------
 
 
 
-      //Ensures that photos load by preventing the rest of the report from being generated until the attachment query from being complete
+    //Ensures that photos load by preventing the rest of the report from being
+    // generated until the attachment query from being complete
       on(crossingPoints, "query-attachment-infos-complete", beginReport);
       function beginReport () {
         if (dotnumqs)
@@ -132,14 +164,7 @@ if (dotnumqs) {
             queryTask.execute(query,showResults);
           }
       }
-
-
-      var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
-      if ( isOpera ) {
-        alert(browserAlert);
-      } else if ( isSafari ) {
-        alert(browserAlert);
-      }
+    // --------------------------------------------------------------
 
       // function to convert strings to Title Case (for Town field)
       function toTitleCase(str) {
@@ -243,11 +268,14 @@ if (dotnumqs) {
           html += featureAttributes.Comments + "</textarea>\n              </div>\n            </div>\n          </fieldset>\n     </form>";
         }
         dom.byId("info").innerHTML = html;
+      // ---------------------------------------------------------------
 
-        //---------------------------------------------
-        //-----------Replace Domain Name with Values------
-        //---------------------------------------------
-        // Updates Domain Codes to Coded Value, aka description or alias
+
+
+      //----------------------------------------------------------
+      //-----------Replace Domain Name with Values------------------
+      //----------------------------------------------------------
+      // Updates Domain Codes to Coded Value, aka description or alias
         if (document.getElementById('surf-type-two')) {
           var surftwo = document.getElementById('surf-type-two').children[1].value;
 
@@ -291,10 +319,13 @@ if (dotnumqs) {
             document.getElementById('warning-device-code').children[1].value = "No signs or signals";
           }
         }
+        // --------------------------------------------------------------
 
 
 
+        // ----------------------------------------------
         //--------Update color of condition cells----------
+        // ----------------------------------------------
           // overall condition
           var cond = document.getElementById("condition");
           var condcell = document.getElementById("surf-cond");
@@ -323,14 +354,12 @@ if (dotnumqs) {
           else if (pcond.value === "Worn") {
             pcond.style.color = "Red";
           }
+        // ----------------------------------------------
       }
     }
   };
+  // Send XMLHttpRequest
   xhttp.open("GET", imgFolder, true);
-  // xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  // xhttp.setRequestHeader('Access-Control-Allow-Credentials', true);
-  // xhttp.setRequestHeader('Access-Control-Allow-Origin', true);
-  // xhttp.withCredentials = true;
   xhttp.send();
 }
 });
