@@ -734,6 +734,7 @@ require([
 
         var insertSuggestCount = "<li id='search-suggest-totals' tabindex='0'>" + suggestions[0].length + " crossings match your current query.<hr style='margin: 10px 0px 5px 0px; padding: 0px 14px;'></li>";
 
+        // adds suggestions count to top of suggestion list
         var newSuggestions = "<div>" + insertSuggestCount + originalSuggestions.slice(5);
 
         document.getElementsByClassName("suggestionsMenu")[0].innerHTML = newSuggestions;
