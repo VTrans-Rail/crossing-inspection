@@ -420,43 +420,6 @@ require([
       }
 
 
-      // var DOTsignUID = popup.getSelectedFeature().attributes.DOT_Num + "-" + popup.getSelectedFeature().attributes.SignUID;
-
-      // var signImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/SignPhotos/" + DOTsignUID;
-      // if (popup.getSelectedFeature().attributes.SignUID) {
-      //   var xhttp = new XMLHttpRequest();
-      //   xhttp.onreadystatechange = function() {
-      //     if (xhttp.readyState == 4 && xhttp.status == 200) {
-      //       var rawResponse = xhttp.responseText;
-      //       document.getElementById("image-testing").innerHTML = rawResponse;
-      //
-      //       //display load picture button when ready
-      //       pictureOpen.style.display = "inline-block";
-      //     }
-      //   };
-      //   xhttp.open("GET", signImgFolder, true);
-      //   xhttp.send();
-      // }
-      //
-      // // Send Ajax Request and populate invisible div with results of contents of thumbnail folder
-      // var crossingImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/CrossingPhotosbyID400/" + dotnum;
-      // if (popup.getSelectedFeature().attributes.SignUID === undefined ) {
-      //   var xhttp = new XMLHttpRequest();
-      //   xhttp.onreadystatechange = function() {
-      //     if (xhttp.readyState == 4 && xhttp.status == 200) {
-      //       var rawResponse = xhttp.responseText;
-      //       document.getElementById("image-testing").innerHTML = rawResponse;
-      //
-      //       //display load picture button when ready
-      //       pictureOpen.style.display = "inline-block";
-      //     }
-      //   };
-      //   xhttp.open("GET", crossingImgFolder, true);
-      //   xhttp.send();
-      // }
-
-
-
       // Updates Domain Codes to Coded Value, aka description or alias
       if (document.getElementById('warnCode')) {
         var warn = document.getElementById('warnCode').innerHTML;
@@ -503,15 +466,8 @@ require([
 
           if ( selectedLayerId.length > 12 ) {
             selectedLayer = crossingPoints;
-
-            //Get Crossing Thumbnail imageArray
-            // var imageTagArray = JSON.parse(document.getElementById("image-testing").innerHTML);
-
           } else {
             selectedLayer = signPoints;
-
-            //Get Sign Thumbnail imageArray
-            // var imageTagArray = JSON.parse(document.getElementById("image-testing").innerHTML);
           }
 
           selectedLayer.queryAttachmentInfos(objectId).then(function(response){
