@@ -578,39 +578,37 @@ require([
               deferred.resolve("no attachments");
             }
             else {
-              // for ( i = 0; i < response.length; i++) {
-                if (selectedLayerId.length > 12) {
-                  for ( i = 0; i < imageTagArray.length; i++ ) {
-                    for ( j = 0; j < response.length; j++ ) {
-                      if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
-                        imgSrc = response[j].url;
-                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='crossingImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/CrossingPhotosbyID400/" + dotnum + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
-                      }
-                    }
-                  }
-                  if (imageTagArray.length > response.length) {
-                    imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><p style='text-align:center;'>There is at least one image for this crossing that cannot be displayed on the website. Missing images were likely not included due to a percieved lack of value. If you would like to see missing images, please contact us and ask for all of the original image files for this crossing (please include the DOT Crossing Number) from the 2015 Crossing Inspection.</p></div></td></tr>";
-                  }
-                } else {
-                  for ( i = 0; i < imageTagArray.length; i++ ) {
-                    for ( j = 0; j < response.length; j++ ) {
-                      if ( response[j].name.substr(0,6) === imageTagArray[i].name.substr(0,6) ) {
-                        imgSrc = response[j].url;
-                        imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='signImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/SignPhotos/" + DOTsignUID + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
-                      }
+              if (selectedLayerId.length > 12) {
+                for ( i = 0; i < imageTagArray.length; i++ ) {
+                  for ( j = 0; j < response.length; j++ ) {
+                    if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
+                      imgSrc = response[j].url;
+                      imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='crossingImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/CrossingPhotosbyID400/" + dotnum + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
                     }
                   }
                 }
-              // }
+                if (imageTagArray.length > response.length) {
+                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><p style='text-align:center;'>There is at least one image for this crossing that cannot be displayed on the website. Missing images were likely not included due to a percieved lack of value. If you would like to see missing images, please contact us and ask for all of the original image files for this crossing (please include the DOT Crossing Number) from the 2015 Crossing Inspection.</p></div></td></tr>";
+                }
+              } else {
+                for ( i = 0; i < imageTagArray.length; i++ ) {
+                  for ( j = 0; j < response.length; j++ ) {
+                    if ( response[j].name.substr(0,6) === imageTagArray[i].name.substr(0,6) ) {
+                      imgSrc = response[j].url;
+                      imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='signImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/SignPhotos/" + DOTsignUID + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
+                    }
+                  }
+                }
+              }
             }
           }).then(function(response) {
-              var summaryInfo = document.getElementById("popupContent").innerHTML;
-              document.getElementById("popupContent").innerHTML = summaryInfo + imageString;
+            var summaryInfo = document.getElementById("popupContent").innerHTML;
+            document.getElementById("popupContent").innerHTML = summaryInfo + imageString; // replace popupContent.innerHTML with info plus pics
 
 
-              //Google Analytics
-              ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View', eventLabel: 'Popup Image Views'});
-            });
+            //Google Analytics records when images were loaded in the popup
+            ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View', eventLabel: 'Popup Image Views'});
+          });
         });
       } else {
         setTimeout(function(){ updatePopupInfo(interval);}, interval);
@@ -664,6 +662,7 @@ require([
       minCharacters: 0
     });
 
+    //change placeholder text and font-size to respond to screen width
     if (map.width < 358) {
       searchWidget.allPlaceholder = "Search";
       document.getElementById("search_input").style.fontSize = "1.25em";
