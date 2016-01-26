@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no" />
 
     <title>Full Crossing Report</title>
 
@@ -12,11 +12,20 @@
     <script type="text/javascript" charset="utf-8" src="http://js.arcgis.com/3.14/esri/nls/jsapi_en-us.js"></script>
     <script type="text/javascript" charset="utf-8" src="http://js.arcgis.com/3.14/dojox/gfx/svg.js"></script>
     <script src="http://js.arcgis.com/3.14/"></script>
-    <script src="js/report.js"></script>
+    
+    <!--[if !IE]> -->
+      <script src="js/report.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE 9]>
+      <script src="js/reportIE9.js"></script>
+    <![endif]-->
+
     <!-- <script src="http://localhost:35729/livereload.js"></script> -->
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/report.css">
+    <link rel="stylesheet" href="css/report-navbar.css">
+    <link rel="stylesheet" href="css/report-print.css">
 
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -26,28 +35,65 @@
     <!-- Gridforms CSS -->
     <link rel="stylesheet" type="text/css" href="gridforms/gridforms.css">
 
+    <!--[if IE 7]>
+      <script>alert("This app best experienced in modern browsers such as Firefox or Chrome.");</script>
+    <![endif]-->
+    <!--[if IE 8]>
+      <script>alert("This app best experienced in modern browsers such as Firefox or Chrome.");</script>
+      <script src="js/reportIE9xdr.js"></script>
+    <![endif]-->
+    <!--[if IE 9]>
+      <script>alert("This app best experienced in modern browsers such as Firefox or Chrome.");</script>
+    <![endif]-->
+
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-45708379-9', 'auto');
+      ga('send', 'pageview');
+    </script>
 
   </head>
 
   <body>
-    <nav class="navbar navbar-inverse navbar-static-top report" id="navigation-bar">
-      <div class="container">
-          <div class="row">
-            <div class="col-xs-3 col-sm-2 btn-head">
-              <div class="hidden-xs">
-                <a href="index.html"><button type="button" name="button" class="btn btn-primary btn-lg" onclick="self.close()">Close Report</button></a>
-              </div>
-              <div class="visible-xs-2 hidden-sm hidden-md hidden-lg">
-                <a href="index.html"><button type="button" name="button" class="btn btn-primary" onclick="self.close()"><img src="img\close.png" height="16" width="16px" alt="" /></button></a>
-              </div>
-            </div>
-            <div class="col-xs-6 col-sm-7" id="report-page-title-div">
-              <h1 class="text-center" id="report-title">Crossing Report</h1>
-            </div>
-        </div>
+    <noscript>
+      <style type="text/css">
+          .pagecontainer {display:none;}
+      </style>
+      <div class="noscriptmsg" style="position:absolute; width: 70%; left:15%; text-align:center; font-size: 1.4em; top: 25%;">
+        You don't have Javascript enabled for your browser. This web application requires the use of Javascript. Please enable Javascript in your browser settings and try again.
       </div>
-    </nav>
+    </noscript>
 
+  <div class="pagecontainer">
+    <div>
+        <div class="navigation-bar-report">
+          <div>
+            <div>
+              <button id="print-button" type="button" name="button" class="btn btn-primary btn-lg full-button" onclick="window.print()">Print Report</button>
+            </div>
+            <div class="">
+              <button id="print-icon" type="button" name="button" class="btn btn-primary icon-button" onclick="window.print()"><img src="img\print.png" height="16" width="16px" alt="close" /></button>
+            </div>
+          </div>
+          <div id="report-page-title-div">
+            <h1 id="report-title">Crossing Report</h1>
+          </div>
+          <div class="">
+            <div>
+              <button id="close-button" type="button" name="button" class="btn btn-primary btn-lg full-button" onclick="self.close()">Close Report</button>
+            </div>
+            <div>
+              <button id="close-icon" type="button" name="button" class="btn btn-primary icon-button" onclick="self.close()"><img src="img\close.png" height="16" width="16px" alt="" /></button>
+            </div>
+          </div>
+      </div>
+    </div>
 
     <div class="container-fluid" id="info"></div>
     <div id="metadata-info">
@@ -55,11 +101,13 @@
         <h4 id="metadata-title">Metadata</h4>
         <hr class="style-one">
       </div>
-      <p id='metadata-body'>Place your mouse over (or tap) a grid cell to display the data attribute explanation.</p>
-      <div id="metadata-domain" style="display:none; margin-top: 50px;">
-        <h4 id="metadata-domain-title">Valid Entries</h5>
-        <hr class="style-one" style="padding-right:10px; padding-left:10px;">
-        <p id='metadata-domain-text'></p>
+      <div id="metadata-full-body">
+        <p id='metadata-body'>Place your mouse over (or tap) a grid cell to display the data attribute explanation.</p>
+        <div id="metadata-domain" style="display:none; margin-top: 50px;">
+          <h4 id="metadata-domain-title">Valid Entries</h4>
+          <hr class="style-one" style="padding-right:10px; padding-left:10px;">
+          <p id='metadata-domain-text'></p>
+        </div>
       </div>
       <div class="metadata gotit">
           <a href="#" onclick='closeMD()' class="btn btn-lg btn-success">Got it!</a>
@@ -71,10 +119,11 @@
         <h4>Contact Us</h4>
         <hr class="style-one">
       </div>
-      <p>If you have further questions about public railroad crossing or believe that some of the information is incorrect or out-of-date, please contact us.</p>
+      <p id="contact-paragraph">If you have further questions about public railroad crossing or believe that some of the information is incorrect or out-of-date, please contact us.</p>
         <a class="btn btn-sm btn-default" href="mailto:stephen.smith@vermont.gov" target="_top">Stephen Smith</a>
         <a class="btn btn-sm btn-default" href="mailto:jonathan.farmer@vermont.gov" target="_top">Jonathan Farmer</a>
     </div>
+    <div id="image-testing" style="display:none;"></div>
 
 
     <!--Creates DropShadow for Text-->
@@ -97,6 +146,32 @@
 
     <!--Display Metadata-->
     <script>
+
+    function imageGA() {
+      //Google Analytics
+      ga('send', 'event', { eventCategory: 'Pictures', eventAction: 'View Full Image', eventLabel: 'Report Page Full Image Link'});
+    }
+
+    var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+    if (width < 1200) {
+      document.getElementById("metadata-body").innerHTML = "Click or tap a grid cell for more information."
+    }
+
+
+    function onMouseEventOpen(y) {
+      if (width > 1199) {
+        displayMD(y);
+      }
+    }
+
+    function onMouseEventClose(y) {
+      if (width > 1199) {
+        hideMD(y);
+      }
+    }
+
+
     function displayMD(x) {
       // document.getElementById("metadata-info").style.display = "block";
       if (x.id === "xing-num") {
@@ -117,7 +192,7 @@
       else if (x.id === "town") {
         document.getElementById("metadata-title").innerHTML = "Town";
         document.getElementById("metadata-body").innerHTML = "The town that the crossing is located within.";
-        document.getElementById("metadata-body").style.display = "block";
+        document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "rail-division") {
         document.getElementById("metadata-title").innerHTML = "Division";
@@ -319,14 +394,9 @@
       }
     }
     function hideMD() {
-      // document.getElementById("metadata-info").style.display = "none";
-      var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-      if (width > 415) {
-        document.getElementById("metadata-title").innerHTML = "Metadata";
-        document.getElementById("metadata-body").innerHTML = "Place your mouse over (or tap) a grid cell to display the data attribute explanation.";
-        // document.getElementById("metadata-domain").innerHTML = "";
-        document.getElementById("metadata-domain").style.display = "none";
-      }
+      document.getElementById("metadata-title").innerHTML = "Metadata";
+      document.getElementById("metadata-body").innerHTML = "Place your mouse over (or tap) a grid cell to display the data attribute explanation.";
+      document.getElementById("metadata-domain").style.display = "none";
     }
     function closeMD() {
       document.getElementById("metadata-info").style.display = "none";
@@ -336,6 +406,6 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
+  </div>
   </body>
 </html>

@@ -23,12 +23,38 @@
 
 
     <script src="http://js.arcgis.com/3.14/"></script>
-    <script src="js/main.js"></script>
-    <!-- <script src="http://localhost:35729/livereload.js"></script> -->
+
     <script type="text/javascript" src="js/instructions-popup.js"></script>
+    <!--[if !IE]> -->
+      <script src="js/main.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE 9]>
+      <script src="js/mainIE9.js"></script>
+      <script>alert("This app best experienced in modern browsers such as Firefox or Chrome.");</script>
+    <![endif]-->
+
+    <!--[if IE 7]>
+      <script>alert("This app best experienced in modern browsers such as Firefox or Chrome.");</script>
+    <![endif]-->
+    <!--[if IE 8]>
+      <script>alert("This app best experienced in modern browsers such as Firefox or Chrome.");</script>
+    <![endif]-->
+
+    <!-- <script src="http://localhost:35729/livereload.js"></script> -->
+
 </head>
 
 <body>
+  <noscript>
+    <style type="text/css">
+        .pagecontainer {display:none;}
+    </style>
+    <div class="noscriptmsg" style="position:absolute; width: 70%; left:15%; text-align:center; font-size: 1.4em; top: 25%;">
+      You don't have Javascript enabled for your browser. This web application requires the use of Javascript. Please enable Javascript in your browser settings and try again.
+    </div>
+  </noscript>
+
+<div class="pagecontainer">
   <div id="instructions" style="display: none;"></div>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -56,6 +82,8 @@
 
     <button type="button" id="openMobileLegend" class="btn btn-default text-center btnHelp">&#x25B2 Legend &#x25B2</button>
   </div>
+  <div id="image-testing" style="display:none;"></div>
+  <div id="image-testing-signs" style="display:none;"></div>
 
 
 
@@ -94,8 +122,25 @@
 
     ga('create', 'UA-45708379-9', 'auto');
     ga('send', 'pageview');
-
   </script>
+  <script>
+    function crossingImageGA() {
+      //Google Analytics
+      ga('send', 'event', { eventCategory: 'Pictures', eventAction: 'View Full Image', eventLabel: 'Crossing Popup Full Image Link'});
+    }
+    function signImageGA() {
+      //Google Analytics
+      ga('send', 'event', { eventCategory: 'Pictures', eventAction: 'View Full Image', eventLabel: 'Sign Popup Full Image Link'});
+    }
+  </script>
+
+  <script>
+    //Google Analytics -- Record Client IP Address. This will only be unique for users that are not behind a firewall. All internal VTrans computers will likely be recorded under the same IP address of 159.105.162.13
+    $.getJSON('http://ipinfo.io', function(data){
+      ga('send', 'event', { eventCategory: 'Users', eventAction: 'User Views', eventLabel: data.ip + ' - Client IP Address'});
+    });
+  </script>
+</div>
 </body>
 
 </html>

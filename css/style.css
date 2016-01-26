@@ -20,6 +20,34 @@
   margin-bottom: 20px;
 }
 
+.esriControlsBR {
+  position: absolute;
+  bottom: calc(6% + 10px);
+}
+@media (min-width: 415px) {
+  .esriControlsBR {
+    bottom: calc(7% + 10px);
+  }
+}
+@media (min-width: 992px) {
+  .esriControlsBR {
+    right: 210px;
+    bottom: 10px;
+  }
+}
+
+#search-suggest-totals {
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+  list-style-type: none;
+}
+@media (min-width: 600px) {
+  #search-suggest-totals {
+    font-size: 20px;
+  }
+}
+
 /*Popup Links*/
 .esriPopup a {
   text-decoration: none;
@@ -106,7 +134,7 @@
     width: 100%;
     padding: 6px 0px 6px 12px;
     height: 30px;
-    font-size: 1em;
+    font-size: .85em;
     border-left: 1px solid #57585A;
     border-radius: 4px 0 0 4px;
 }
@@ -120,12 +148,12 @@
 }
 
 /*multiple search dropdown arrow tweaks*/
-.arcgisSearch .hasMultipleSources .searchToggle {
+.arcgisSearch  .searchToggle {
   height: 30px;
 }
 
 /*search mag glass button size*/
-.arcgisSearch .hasMultipleSources .searchSubmit {
+.arcgisSearch .searchSubmit {
   height: 30px;
 }
 
@@ -151,8 +179,25 @@
   border: 2px solid #1B5E20;
   width: calc(100% - 70px);
 }
+@media (min-height: 600px) {
+  .arcgisSearch .searchMenu {
+    max-height: 50vh;
+  }
+}
+
+.esriPopup.light .titleButton.maximize {
+  display:none;
+}
 
 /*End extra small devices*/
+
+@media (min-width: 500px) {
+  .arcgisSearch .searchGroup .searchInput {
+    font-size: 1em;
+  }
+}
+
+
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
@@ -173,12 +218,12 @@
   }
 
   /*multiple search dropdown arrow tweaks*/
-  .arcgisSearch .hasMultipleSources .searchToggle {
+  .arcgisSearch .searchToggle {
     height: 40px;
   }
 
   /*search mag glass button size*/
-  .arcgisSearch .hasMultipleSources .searchSubmit {
+  .arcgisSearch .searchSubmit {
     height: 40px;
   }
 
@@ -223,12 +268,12 @@
   }
 
   /*multiple search dropdown arrow tweaks*/
-  .arcgisSearch .hasMultipleSources .searchToggle {
+  .arcgisSearch .searchToggle {
     height: 50px;
   }
 
   /*search mag glass button size*/
-  .arcgisSearch .hasMultipleSources .searchSubmit {
+  .arcgisSearch .searchSubmit {
     height: 50px;
   }
 
@@ -276,18 +321,17 @@
   font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   font-size: 12px;
 }
-@media (max-width: 415px) {
-  .esriPopup.light .titleButton.restore {
-    display: none;
-  }
 
-  .esriPopup.light .titleButton.next {
-    right: 35px;
-  }
+.esriPopup.light .titleButton.restore {
+  display: none;
+}
 
-  .esriPopup.light .titleButton.prev {
-    right: 60px;
-  }
+.esriPopup.light .titleButton.next {
+  right: 35px;
+}
+
+.esriPopup.light .titleButton.prev {
+  right: 60px;
 }
 
 @media (min-width: 350px) {

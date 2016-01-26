@@ -1,22 +1,11 @@
-#navigation-bar {
-  position: fixed;
-  width: 100%;
-  background-color: rgba(102, 102, 102, 1);
-  border-color: black;
-}
-
-#report-page-title-div {
-  width: 50%;
-  left: 25%;
+html body {
+  padding:0;
 }
 
 #condition {
   font-weight: bold;
-}
-
-#report-title {
-  font-size: 25px;
-  color: #fff;
+  letter-spacing: 2px;
+  text-shadow: 0 0 2px #000;
 }
 
 #info {
@@ -39,13 +28,11 @@
   background-color: rgba(200, 200, 200, 0.95);
   color: #000;
   font-size: 12px;
-  z-index: 2;
+  z-index: 10;
   width: 100%;
 }
 
 .metadata-heading {
-  /*position: fixed;*/
-  /*background-color: rgba(102, 102, 102, 1);*/
   width: 100%;
   padding-top: 2px;
   padding-right: 10px;
@@ -60,25 +47,15 @@ hr.style-one {
     background: #333;
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
-/* Flaired edges, by Tomas Theunissen */
-hr.style-seven {
-    height: 30px;
-    margin-top: 10px;
-    margin-bottom: -20px;
-    border-style: solid;
-    border-color: black;
-    border-width: 1px 0 0 0;
-    border-radius: 20px;
+
+#contact-paragraph {
+  padding-right: 20px;
+  padding-left: 20px;
 }
-hr.style-seven:before { /* Not really supposed to work, but does */
-    display: block;
-    content: "";
-    height: 30px;
-    margin-top: -31px;
-    border-style: solid;
-    border-color: black;
-    border-width: 0 0 1px 0;
-    border-radius: 20px;
+
+#metadata-full-body {
+  overflow-y: auto;
+  margin-bottom: 65px;
 }
 
 #metadata-body {
@@ -136,6 +113,11 @@ hr.style-seven:before { /* Not really supposed to work, but does */
   visibility: visible;
 }
 
+form fieldset div div input:disabled {
+  color: #666666;
+  /*-webkit-text-fill-color:#666666;*/
+  -webkit-opacity:1;
+}
 
 @media (min-width: 415px) {
   #metadata-info {
@@ -143,7 +125,6 @@ hr.style-seven:before { /* Not really supposed to work, but does */
     position: fixed;
     text-align: center;
     overflow-y: auto;
-    bottom: 20px;
     right: 0;
     padding-top: 5px;
     padding-right: calc((100% - 670px)/2);
@@ -152,17 +133,18 @@ hr.style-seven:before { /* Not really supposed to work, but does */
     background-color: rgba(200, 200, 200, 0.95);
     color: #000;
     font-size: 12px;
-    z-index: 2;
+    z-index: 10;
     height: 150px;
     width: 100%;
   }
 
-  #metadata-body {
-    margin-bottom: 10px;
+  #metadata-full-body {
+    overflow-y: auto;
+    margin-bottom: 5px;
   }
 
-  #metadata-title {
-    /*position: fixed;*/
+  #metadata-body {
+    margin-bottom: 10px;
   }
 
   #close-metadata {
@@ -170,7 +152,7 @@ hr.style-seven:before { /* Not really supposed to work, but does */
     position: fixed;
     float: right;
     right: 10px;
-    bottom: 140px;
+    bottom: 120px;
   }
 
   .gotit {
@@ -184,17 +166,9 @@ hr.style-seven:before { /* Not really supposed to work, but does */
   #metadata-info {
     padding-right: calc((100% - 670px)/2);
   }
-
-  #report-title {
-    font-size: 32px;
-  }
 }
 
 @media (min-width: 992px) {
-  #report-title {
-    font-size: 36px;
-  }
-
   #metadata-info {
     padding-right: calc((100% - 820px)/2);
     padding-left: calc((100% - 820px)/2);
@@ -203,13 +177,7 @@ hr.style-seven:before { /* Not really supposed to work, but does */
 
 
 @media (min-width: 1200px) {
-  #report-title {
-    font-size: 40px;
-  }
-
   #metadata-info {
-    /*color: #404040;
-    background-color: #fff;*/
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: rgba(200, 200, 200, 0.9);
     color: #404040;

@@ -38,3 +38,5 @@ https://www.google.com/design/icons/
 - Get Device Width when dealing with mobile devices and browsers: http://stackoverflow.com/questions/6850164/get-the-device-width-in-javascript
 
 - Using Template Strings, Backticks, & Multiline HTMl/Javascript compatible with IE: https://babeljs.io/repl/ & https://hacks.mozilla.org/2015/05/es6-in-depth-template-strings-2/
+
+- get accurate viewport width: http://stackoverflow.com/questions/1248081/get-the-browser-viewport-dimensions-with-javascript
