@@ -467,7 +467,7 @@ require([
       // -- Creates Sign Image Folder Name from selected feature attributes --
       var DOTsignUID = popup.getSelectedFeature().attributes.DOT_Num + "-" + popup.getSelectedFeature().attributes.SignUID;
 
-      var signImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/SignPhotos/" + DOTsignUID; //github api image storage
+      var signImgFolder = "https://api.github.com/repos/VTrans-Rail/crossing-inspection/contents/thumb/SignPhotos/" + DOTsignUID; //github api image storage
       if (popup.getSelectedFeature().attributes.SignUID) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -485,7 +485,7 @@ require([
       // --------------------------------------------------------------
 
       // --------XMLHttpRequest for crossings -------------------------
-      var crossingImgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/CrossingPhotosbyID400/" + dotnum; //github api image storage
+      var crossingImgFolder = "https://api.github.com/repos/VTrans-Rail/crossing-inspection/contents/thumb/CrossingPhotosbyID400/" + dotnum; //github api image storage
       if (popup.getSelectedFeature().attributes.SignUID === undefined ) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
