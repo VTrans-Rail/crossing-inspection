@@ -30,7 +30,6 @@ if ( isOpera ) {
 
 
 
-
 // -------------------------------------------------------------------
 // ----------------- Initialize ArcGIS Javascript API Functions -----------
 // --------------------------------------------------------------------
@@ -56,8 +55,10 @@ if ( 467 < width && width < 701 ) {
 
 var imgFolder = "https://api.github.com/repos/VTrans-Rail/crossing-inspection/contents/thumb/" + thumbSizeFolder + dotnumqs;
 
-// if (dotnumqs) {
+var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1"; // Use most frequently updated feature serv
 
+
+if (dotnumqs) {
   // ----------------- Set Up XMLHttpRequest -------------------------
   // -------to get the file names of the crossing images -----------
   // In order to ensure that the image thumbnails are properly served,
@@ -73,125 +74,91 @@ var imgFolder = "https://api.github.com/repos/VTrans-Rail/crossing-inspection/co
   // Send XMLHttpRequest
   xhttp.open("GET", imgFolder, true);
   xhttp.send();
+}
 
 
-      var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1"; // Use most frequently updated feature serv
+// -------------------------------------------------------------------
+// ------------Set Query Parameters -------------------------------
+// -------------------------------------------------------------
+var queryTask = new QueryTask(crossingUrl);
+
+var query = new Query();
+
+query.returnGeometry = false; // do not need for report page
+query.outFields = [
+  'OBJECTID','DOT_Num','Feature_Crossed','MP',
+  'LineName','Division','Subdivision',
+  'Branch','Town','County',
+  'FRA_LandUse','WDCode',
+  'Channelization','StopLine','RRXingPavMark',
+  'DynamicEnv','GateArmsRoad','GateArmsPed',
+  'GateConfig1','GateConfig2','Cant_Struc_Over',
+  'Cant_Struc_Side','Cant_FL_Type','FL_MastCount',
+  'Mast_FL_Type','BackSideFL','FlasherCount',
+  'FlasherSize','WaysideHorn','HTS_Control',
+  'HTS_for_Nearby_Intersection','BellCount','HTPS',
+  'HTPS_StorageDist','HTPS_StopLineDist','TrafficLnType',
+  'TrafficLnCount','Paved','XingIllum',
+  'SurfaceType','SurfaceType2','XingCond',
+  'FlangeMaterial','XingWidth','XingLength',
+  'Angle','SnoopCompliant','Comments', 'IntRd500', 'IntRdDist',
+  'Num_Tracks', 'PaveMarkCond', 'RDS_AOTCLASS', 'RDS_FUNCL'
+];
+
+query.where = "DOT_Num like '%" + dotnumqs + "%'";
+
+//execute query and then pass result into getPhotos func and initiate
+queryTask.execute(query,getAttachInfo);
+//-----------------------------------------------------
 
 
-      // -------------------------------------------------------------------
-      // ------------Set Query Parameters -------------------------------
-      // -------------------------------------------------------------
-      var queryTask = new QueryTask(crossingUrl);
+// --------------- Build Crossing Feature Layer -----------------
+// queryAttachmentInfos can only be executed on a feature layer
+var crossingPoints = new FeatureLayer(crossingUrl, {
+  id: "crossingPoints",
+});
+// --------------------------------------------------------------
 
-      var query = new Query();
-
-      query.returnGeometry = false; // do not need for report page
-      query.outFields = [
-        'OBJECTID','DOT_Num','Feature_Crossed','MP',
-        'LineName','Division','Subdivision',
-        'Branch','Town','County',
-        'FRA_LandUse','WDCode',
-        'Channelization','StopLine','RRXingPavMark',
-        'DynamicEnv','GateArmsRoad','GateArmsPed',
-        'GateConfig1','GateConfig2','Cant_Struc_Over',
-        'Cant_Struc_Side','Cant_FL_Type','FL_MastCount',
-        'Mast_FL_Type','BackSideFL','FlasherCount',
-        'FlasherSize','WaysideHorn','HTS_Control',
-        'HTS_for_Nearby_Intersection','BellCount','HTPS',
-        'HTPS_StorageDist','HTPS_StopLineDist','TrafficLnType',
-        'TrafficLnCount','Paved','XingIllum',
-        'SurfaceType','SurfaceType2','XingCond',
-        'FlangeMaterial','XingWidth','XingLength',
-        'Angle','SnoopCompliant','Comments', 'IntRd500', 'IntRdDist',
-        'Num_Tracks', 'PaveMarkCond', 'RDS_AOTCLASS', 'RDS_FUNCL'
-      ];
-
-      query.where = "DOT_Num like '%" + dotnumqs + "%'";
-
-      //execute query and then pass result into getPhotos func and initiate
-      queryTask.execute(query,getPhotos);
-      //-----------------------------------------------------
+// function to convert strings to Title Case (for Town field)
+function toTitleCase(str) {
+  return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
 
 
+var imageString = ""; //will be populated with image tags
 
-      // --------------- Build Crossing Feature Layer -----------------
-      // queryAttachmentInfos can only be executed on a feature layer
-      var crossingPoints = new FeatureLayer(crossingUrl, {
-        id: "crossingPoints",
-      });
-      // --------------------------------------------------------------
+function getAttachInfo (results) {
+  var resultCount = results.features.length;
+  // console.log(document.getElementById("image-testing").innerHTML);
+  var getInnerHTML = document.getElementById("image-testing").innerHTML;
+  if (getInnerHTML !== '') {
+    var imageTagArray = JSON.parse(getInnerHTML);
+    console.log(imageTagArray);
+    for (var i = 0; i < resultCount; i++) {
+      var featureAttributes = results.features[i].attributes;
+      var objectId = featureAttributes.OBJECTID;
 
+      // ----------Get Picture URls and Build Image Tags--------------
+      var deferred = new dojo.Deferred;
 
-      var imageString = ""; //will be populated with image tags
-
-
-      function getPhotos (results) {
-        var resultCount = results.features.length;
-        // console.log(document.getElementById("image-testing").innerHTML);
-        var getInnerHTML = document.getElementById("image-testing").innerHTML;
-        if (getInnerHTML !== '') {
-          var imageTagArray = JSON.parse(getInnerHTML);
-        } else {
-          console.log("failure");
-          queryTask.execute(query,getPhotos);
+      crossingPoints.queryAttachmentInfos(objectId).then(function(response){
+        var imgSrc;
+        if (response.length === 0) {
+          deferred.resolve("no attachments");
         }
-        console.log(imageTagArray);
-
-        for (var i = 0; i < resultCount; i++) {
-          var featureAttributes = results.features[i].attributes;
-          var objectId = featureAttributes.OBJECTID;
-
-          // ----------Get Picture URls and Build Image Tags--------------
-          var deferred = new dojo.Deferred;
-
-          crossingPoints.queryAttachmentInfos(objectId).then(function(response){
-            var imgSrc;
-            if (response.length === 0) {
-              deferred.resolve("no attachments");
-            }
-            else {
-              for ( i = 0; i < imageTagArray.length; i++ ) {
-                for ( j = 0; j < response.length; j++ ) {
-                  if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
-                    imgSrc = response[j].url;
-                    imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='" + imgSrc + "' target='_blank'>" + "<img src='thumb/" + thumbSizeFolder + dotnumqs + "/" + imageTagArray[i].name + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
-                  }
-                }
-              }
-              if (imageTagArray.length > response.length) {
-                imageString += "<div data-field-span='1'><p style='padding: 20px 50px 0px 50px; text-align:center;'>There is at least one image for this crossing that cannot be displayed on the website. Missing images were likely not included due to a percieved lack of value. If you would like to see missing images, please contact us and ask for all of the original image files for this crossing (please include the DOT Crossing Number) from the 2015 Crossing Inspection.</p></div>";
+        else {
+          for ( i = 0; i < imageTagArray.length; i++ ) {
+            for ( j = 0; j < response.length; j++ ) {
+              if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
+                imgSrc = response[j].url;
+                imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='" + imgSrc + "' target='_blank'>" + "<img src='thumb/" + thumbSizeFolder + dotnumqs + "/" + imageTagArray[i].name + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
               }
             }
-          });
-          //-------------------------------------------------------------------
-        }
-      }
-    //-----------------------------------------------------
-
-
-
-    //Ensures that photos load by preventing the rest of the report from being
-    // generated until the attachment query from being complete
-      on(crossingPoints, "query-attachment-infos-complete", beginReport);
-      function beginReport () {
-        if (dotnumqs)
-          {
-            query.where = "DOT_Num like '%" + dotnumqs + "%'";
-            queryTask.execute(query,showResults);
           }
-      }
-    // --------------------------------------------------------------
-
-      // function to convert strings to Title Case (for Town field)
-      function toTitleCase(str) {
-        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-      }
-
-
-      function showResults (results) {
-        var resultItems = [];
-        var resultCount = results.features.length;
-
+          if (imageTagArray.length > response.length) {
+            imageString += "<div data-field-span='1'><p style='padding: 20px 50px 0px 50px; text-align:center;'>There is at least one image for this crossing that cannot be displayed on the website. Missing images were likely not included due to a percieved lack of value. If you would like to see missing images, please contact us and ask for all of the original image files for this crossing (please include the DOT Crossing Number) from the 2015 Crossing Inspection.</p></div>";
+          }
+        }
         for (var i = 0; i < resultCount; i++) {
           var featureAttributes = results.features[i].attributes;
 
@@ -370,7 +337,12 @@ var imgFolder = "https://api.github.com/repos/VTrans-Rail/crossing-inspection/co
           else if (pcond.value === "Worn") {
             pcond.style.color = "Red";
           }
-        // ----------------------------------------------
-      }
-// }
+
+      });
+    }
+  } else {
+    console.log("XHR Request not returned yet.");
+    queryTask.execute(query,getAttachInfo);
+  }
+}
 });
