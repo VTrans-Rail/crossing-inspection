@@ -344,11 +344,8 @@ function getAttachInfo (results) {
     }
   } else {
     getAttachTrials = getAttachTrials + 1;
-    // console.log("XHR Request has not returned yet. Trying again...");
-    // console.log(getAttachTrials);
-    if (getAttachTrials < 10) {
+    if (getAttachTrials < 15) {
       console.log("XHR Request has not returned yet. Trying again...");
-      console.log(getAttachTrials);
       queryTask.execute(query,getAttachInfo);
     } else {
       console.log("This crossing does not have images, there is an issue with the XMLHttpRequest, or your connection is too slow.");
@@ -559,7 +556,6 @@ function getAttachInfo (results) {
         });
       }
     }
-    // queryTask.execute(query,getAttachInfo);
   }
 }
 });
