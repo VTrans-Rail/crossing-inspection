@@ -54,7 +54,7 @@ if ( 467 < width && width < 701 ) {
   thumbSizeFolder = "CrossingPhotosbyID/";
 }
 
-var imgFolder = "https://api.github.com/repos/jfarmer91/crossing-inspection/contents/thumb/" + thumbSizeFolder + dotnumqs;
+var imgFolder = "https://api.github.com/repos/VTrans-Rail/crossing-inspection/contents/thumb/" + thumbSizeFolder + dotnumqs;
 
 if (dotnumqs) {
 
