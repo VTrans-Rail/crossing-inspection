@@ -47,7 +47,7 @@
 - Changed JS code for loading popup info and images so that each popup loads the correct photos. Stopped photos from automatically loading in popup and added button to popup to load photos on request. Rotated sign photos 90 degrees so that the majority of the sign photos display with the correct orientation in popups. Previously photos were loading for the wrong crossing when network was slow. (#160, #98, #174)
 - Added DOT Number label to crossings and fixed font issue for labels in different browsers (#140, #158)
 
-## Beta 4 - Released 1/6/2015
+## Beta 4 - Released 1/6/2016
 - Add field metadata explanation to Report Page when hovering over field, or tapping on a touchscreen (#69)
 - Rotate Sign images to display upright & ignore rotation on iphone as the phone automatically adjusts orientation (#181, #182)
 - Tested load times for hosted vs nonhosted feature services. Chose to move ahead with our *ArcGIS Server* feature services instead of hosting. If slow, will switch back to hosted later (#185)
@@ -56,3 +56,28 @@
 - **New Report Page Layout!!!** (#100) Used *Gridforms*
 - New report page layout javascript file was run through *Babel* in order to be compatible with *Internet Explorer*. (#186)
 - Crossing symbology for the map page is now colorblind-safe (#139)
+
+## Beta 5 - Released 1/26/2016
+- Serve **thumbnail images** instead of full images on map page popup and in the report page. Only serves full image if someone clicks on full image link. This *drastically* reduces page load time. Also organized how thumbnails were stored (#213, #209, #216, #207, #206, #214, #215, #220, #233, #232)
+- Wrote *IE conditional statements* to serve a separate javascript file when browser was **IE9** and issue browser alert for IE9 and lower. Also send alert in Safari and Opera (#233, #232, #202)
+- Fixed **search widget suggestions**. When we switched to using ArcGIS for Server Feature classes (local) we discovered that the search suggestions were no longer working because our server does not support *pagination*. Now use combination of local and hosted feature services for the Web App. Also had to remove *domains* from the trimmed down hosted feature service to allow suggestions to work without an *exact match*. (#208, #228, #212)
+- Add responsive placeholder text to search widget. (#114)
+- Increase length of search suggestions menu (#116)
+- Added search suggestions summarization bar at top of suggestions menu.
+- Added test to determine if javascript is enabled and changes html content to display warning if javascript is disabled. This application is useless without javascript (#218)
+- Made Town name display in *title case* instead of upper case on report page. (#191)
+- Metadata now stays collapsed if you are using a mouse on a medium width device or viewport. Previously, a mouseover event would cause the bottom metadata banner to reappear on medium devices. Also removed the gab below the Metadata section on medium devices (#195, #194)
+- On the **Report Page** the *Distance to Intersection* now displays as "N/A" when value equals null. (#193)
+- Added basemap credits back to map page (esriControlsBR) and positioned them to be responsive (#226, #222)
+- Limited Esri Geocoder *extent* to region around Vermont for Search Widget (#217, #229)
+- Fixed styling of *Contact Us* section to match that of the *Metadata* section (#224)
+- Updated the crossing icon that is located on the *Help* instructions page to match the new colorblind-safe symbology. (#198)
+- Updated the *Crossing Condition* color that displays on the *Report Page* to match the new colorblind-safe symbology. (#196)
+- Fixed bug with *Metadata* section that prevented proper scrolling when there was overflow-y. (#223)
+- Fixed a popup bug (#211)
+- Removed *Maximize* button from popup and spread out popup title bar buttons to make it easier on touchscreen devices. Now that thumbnail images are served in popups instead of the full size images, there is no benefit to maximizing the popup. (#210)
+- Cleared out old test files (#234)
+- Removed browser specific styling that sometimes caused *disabled* `input` fields to display in a very light color that was difficult to read. If we used *readonly* instead of *disabled* it created issues with the `onclick()` functions. (#192)
+- Created Report Page styling specific for *Print* functions. Also added a clear print `button` to make it easier for users. (#230)
+- **Fixed major report page bug for Firefox.** This bug prevented `fuctions` created within a conditional block from being read properly. (#237)
+- Added **Events** for **Google Analytics**. (#153)
