@@ -89,7 +89,7 @@ if (dotnumqs) {
             else {
               for ( j = 0; j < response.length; j++ ) {
                 imgSrc = response[j].url;
-                imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='" + imgSrc + "' target='_blank'>" + "<img src='" + imgSrc + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
+                imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='photo.html?url=" + imgSrc + "' target='_blank'>" + "<img src='" + imgSrc + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
               }
             }
           });
