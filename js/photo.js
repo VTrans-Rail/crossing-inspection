@@ -21,8 +21,14 @@ var hammertime = new Hammer(pictureDiv);
 
 hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 
-hammertime.on('panleft panright panup pandown tap press', function(ev) {
+hammertime.get('pinch').set({ enable: true});
+
+hammertime.on('pinch panleft panright panup pandown tap press', function(ev) {
   console.log(ev.type + "whatever");
+  if (ev.type === "pinch") {
+    MouseWheelHandler();
+    alert("wow");
+  }
 });
 
 var image = document.getElementById("image");
