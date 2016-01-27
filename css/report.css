@@ -27,7 +27,6 @@ html body {
   padding-top: 80px;
   background-color: rgba(200, 200, 200, 0.95);
   color: #000;
-  font-size: 12px;
   z-index: 10;
   width: 100%;
 }
@@ -120,6 +119,10 @@ form fieldset div div input:disabled {
 }
 
 @media (min-width: 415px) {
+  form {
+    padding-bottom: 40vh;
+  }
+
   #metadata-info {
     display:block;
     position: fixed;
@@ -132,9 +135,8 @@ form fieldset div div input:disabled {
     padding-left: calc((100% - 670px)/2);
     background-color: rgba(200, 200, 200, 0.95);
     color: #000;
-    font-size: 12px;
     z-index: 10;
-    height: 150px;
+    height: 40%;
     width: 100%;
   }
 
@@ -151,8 +153,10 @@ form fieldset div div input:disabled {
     display:block;
     position: fixed;
     float: right;
+    height: 26px;
+    width: 26px;
     right: 10px;
-    bottom: 120px;
+    top: calc(60% + 10px);
   }
 
   .gotit {
@@ -177,6 +181,11 @@ form fieldset div div input:disabled {
 
 
 @media (min-width: 1200px) {
+  form {
+    padding-bottom: 50px;
+  }
+
+
   #metadata-info {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: rgba(200, 200, 200, 0.9);

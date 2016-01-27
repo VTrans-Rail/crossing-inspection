@@ -44,6 +44,7 @@ require([
 
 var dotnumqs = getParameterByName("dotnum");
 
+// document.getElementById("report-title").innerHTML = dotnumqs + ": Crossing Report";
 
 // This gets viewport width to determine what thumbnails to serve
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
