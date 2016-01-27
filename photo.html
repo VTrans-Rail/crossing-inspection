@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="css/report-navbar.css">
     <link rel="stylesheet" href="css/report-print.css">
-    <link rel="stylesheet" href="css/photo.css">
+    <!-- <link rel="stylesheet" href="css/photo.css"> -->
 
 
     <!-- Latest compiled and minified Bootstrap CSS -->
@@ -38,10 +38,17 @@
         background-color: rgba(200, 200, 200, 0.95);
       }
 
+      img {
+        /*max-width: 3200px;*/
+      }
+
       #info {
+        position: absolute;
+        overflow-x: auto;
+        overflow-y: auto;
         margin-top: 84px;
         height: calc(100vh - 84px);
-        overflow: hidden;
+        width: 100vw;
         background-color: rgba(200, 200, 200, 0.95);
       }
 
@@ -108,6 +115,7 @@
     </div>
 
     <div class="content" id="info"></div>
+    <div id="save-old-width" style="display:none;"></div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
