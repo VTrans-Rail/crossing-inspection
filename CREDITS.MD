@@ -40,3 +40,5 @@ https://www.google.com/design/icons/
 - Using Template Strings, Backticks, & Multiline HTMl/Javascript compatible with IE: https://babeljs.io/repl/ & https://hacks.mozilla.org/2015/05/es6-in-depth-template-strings-2/
 
 - get accurate viewport width: http://stackoverflow.com/questions/1248081/get-the-browser-viewport-dimensions-with-javascript
+
+- mousewheel events for image zoom on photo.html http://www.sitepoint.com/html5-javascript-mouse-wheel/
