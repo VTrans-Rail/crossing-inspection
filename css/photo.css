@@ -1,0 +1,29 @@
+/*.content{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}*/
+
+.content img{
+  opacity: 0;
+  transition: opacity .6s linear .8s;
+}
+
+.content img.loaded{ opacity: 1; }
+
+.img-pan-container, .img-pan-container img{ -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+.img-pan-container{
+  position: relative;
+  overflow: hidden;
+  cursor: crosshair;
+  height: 100%;
+  width: 100%;
+}
+
+.img-pan-container img{
+  -webkit-transform: translateZ(0); -ms-transform: translateZ(0); transform: translateZ(0);
+  position: absolute;
+  top: 0;
+  left: 0;
+}

@@ -42,3 +42,6 @@ https://www.google.com/design/icons/
 - get accurate viewport width: http://stackoverflow.com/questions/1248081/get-the-browser-viewport-dimensions-with-javascript
 
 - mousewheel events for image zoom on photo.html http://www.sitepoint.com/html5-javascript-mouse-wheel/
+
+- touchscreen panning help http://manos.malihu.gr/jquery-image-panning/
+- also Hammer js helps with touch events
