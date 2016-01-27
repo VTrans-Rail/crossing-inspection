@@ -6,11 +6,6 @@ function getParameterByName(name) {
   return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-    // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
-var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-    // At least Safari 3+: "[object HTMLElementConstructor]"
-
 require([
   "dojo/dom", "dojo/on",
   "esri/tasks/query", "esri/tasks/QueryTask",
@@ -113,13 +108,6 @@ if (dotnumqs) {
           }
       }
 
-
-      var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
-      if ( isOpera ) {
-        alert(browserAlert);
-      } else if ( isSafari ) {
-        alert(browserAlert);
-      }
 
       // function to convert strings to Title Case (for Town field)
       function toTitleCase(str) {
