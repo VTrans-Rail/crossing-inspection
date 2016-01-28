@@ -31,10 +31,12 @@ function zoom (x) {
 
   if ( previousWidth === "" ) {
     x.style.width = "4320px";
+    ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'DoubleClickZoom', eventLabel: 'Zoom In'});
   } else if ( widthRatio > 1 ) {
     x.style.width = "100%";
+    ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'DoubleClickZoom', eventLabel: 'Zoom Out'});
   } else if ( widthRatio < 1 ) {
-    console.log("eh");
+    ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'DoubleClickZoom', eventLabel: 'Zoom In'});
     x.style.width = "4320px";
   }
 }
@@ -58,21 +60,29 @@ hammertime.on('pinch pinchstart pinchin pinchout pan panstart panleft panright p
   } else if (ev.type === "pinchout") {
     image.style.width = Math.max(width, Math.min(4320, image.width + 10)) + "px";
   } else if (ev.type === "swipeleft") {
+    ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'Swipe', eventLabel: 'Swipe Left'});
+
     var scrollDistance = Math.abs(ev.target.x) + Math.abs(ev.target.width * 0.25 * ev.overallVelocity);
     $("#info").animate({
       scrollLeft: scrollDistance
     }, 500)
   } else if (ev.type === "swiperight") {
+    ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'Swipe', eventLabel: 'Swipe Right'});
+
     var scrollDistance = Math.abs(ev.target.x) - Math.abs(ev.target.width * 0.25 * ev.overallVelocity);
     $("#info").animate({
       scrollLeft: scrollDistance
     }, 500)
   } else if (ev.type === "swipeup") {
+    ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'Swipe', eventLabel: 'Swipe Up'});
+
     var scrollDistance = Math.abs(ev.target.y) + Math.abs(ev.target.height * 0.25 * ev.overallVelocity);
     $("#info").animate({
       scrollTop: scrollDistance
     }, 500)
   } else if (ev.type === "swipedown") {
+    ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'Swipe', eventLabel: 'Swipe Down'});
+
     var scrollDistance = Math.abs(ev.target.y) - Math.abs(ev.target.height * 0.25 * ev.overallVelocity);
     $("#info").animate({
       scrollTop: scrollDistance
@@ -85,6 +95,10 @@ hammertime.on('pinch pinchstart pinchin pinchout pan panstart panleft panright p
     pictureDiv.scrollTop += 2;
   } else if (ev.type === "pandown") {
     pictureDiv.scrollTop -= 2;
+  }
+
+  if (ev.type === "pinchend") {
+    ga('send', 'event', { eventCategory: 'FullPictureZoom', eventAction: 'Pinch', eventLabel: 'Zoom Direction Unidentified'});
   }
 });
 
@@ -102,6 +116,11 @@ function MouseWheelHandler() {
   var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
 
   image.style.width = Math.max(width, Math.min(4320, image.width + (100 * delta))) + "px";
+  if (delta > 0) {
+    ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'WheelZoom', eventLabel: 'Zoom In'});
+  } else if (delta < 0) {
+    ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'WheelZoom', eventLabel: 'Zoom Out'});
+  }
 
   return false;
 }
