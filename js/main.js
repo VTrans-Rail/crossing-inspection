@@ -31,6 +31,8 @@ require([
   "esri/dijit/LocateButton",
   "esri/dijit/Legend",
   "esri/geometry/Extent",
+  "esri/geometry/Point",
+  "esri/SpatialReference",
   "esri/renderers/UniqueValueRenderer",
   "esri/symbols/Font",
   "esri/symbols/CartographicLineSymbol",
@@ -53,6 +55,8 @@ require([
     LocateButton,
     Legend,
     Extent,
+    Point,
+    SpatialReference,
     UniqueValueRenderer,
     font,
     CartographicLineSymbol,
@@ -426,6 +430,8 @@ require([
   var interval = 3000;
 
   function updatePopupInfo (interval) {
+    console.log(map.extent);
+
     var deferred = new dojo.Deferred();
 
     var featureCount = popup.count;
@@ -433,6 +439,43 @@ require([
     if ( featureCount > 0 ) {
       // gets DOT Number of curretly selected feature
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
+      // console.log(popup.getSelectedFeature());
+      // console.log(popup.getSelectedFeature().geometry.x);
+      // console.log(popup.getSelectedFeature().geometry.y);
+
+      // var oldXmin = map.extent.xmin;
+      // var oldXmax = map.extent.xmax;
+      // var oldYmin = map.extent.ymin;
+      // var oldYmax = map.extent.ymax;
+
+      var centerX = popup.getSelectedFeature().geometry.x;
+      var centerY = popup.getSelectedFeature().geometry.y;
+
+      // var mapWidth = (oldXmax - oldXmin);
+      // var mapHeight = (oldYmax - oldYmin);
+      // // console.log(mapHeight);
+      // // console.log(mapWidth);
+      //
+      // var newXmin = centerX - mapWidth/2;
+      // var newXmax = centerX + mapWidth/2;
+      // var newYmin = centerY - mapHeight;
+      // var newYmax = centerY + mapHeight/2;
+      // // console.log(newXmin + " " + newXmax);
+      // // console.log(newYmin + " " + newYmax);
+      // console.log(centerX);
+      // console.log(centerY);
+      //
+      // //create extent to limit search Results
+      // var newExtent = new esri.geometry.Extent({
+      //   "xmin":newXmin,
+      //   "ymin":newYmin,
+      //   "xmax":newXmax,
+      //   "ymax":newYmax,
+      // });
+      //
+      // console.log(newExtent);
+
+      // map.centerAt(new Point(centerX, centerY, new SpatialReference({ wkid: 102100})));
 
       // ----- Updates link to report page ------------------
       // -- unrelated to pictures but this location ensure the link is correct
@@ -491,6 +534,8 @@ require([
 
             //display load picture button when ready
             pictureOpen.style.display = "inline-block";
+
+            map.centerAt(new Point(centerX, centerY, new SpatialReference({ wkid: 102100})));
           }
         };
         xhttp.open("GET", crossingImgFolder, true);
