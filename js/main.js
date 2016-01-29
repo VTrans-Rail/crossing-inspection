@@ -450,37 +450,37 @@ $("#map_container").click(function (e) {
       // gets DOT Number of curretly selected feature
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
 
-      var x = document.getElementById("relative-x").innerHTML;
-      var y = document.getElementById("relative-y").innerHTML;
-
-
-      if (x < 300 && y < 240) {
-        map.infoWindow.anchor = "bottom-right";
-        console.log(x);
-        console.log(y);
-        console.log("bottom-right");
-      } else if (Math.abs(map.width - x) < 300 && y < 240) {
-        map.infoWindow.anchor = "bottom-left";
-        console.log("bottom-left");
-      } else if (Math.abs(map.width - x) < 300 && Math.abs(map.height - y) < 240) {
-        map.infoWindow.anchor = "top-left";
-        console.log("top-left");
-      } else if (x < 300 && Math.abs(map.height - y) < 240) {
-        map.infoWindow.anchor = "top-right";
-        console.log("top-right");
-      } else if (x < 300) {
-        map.infoWindow.anchor = "right";
-        console.log("right");
-      } else if (Math.abs(map.width - x) < 300) {
-        map.infoWindow.anchor = "left";
-        console.log("left");
-      } else if (y < 440) {
-        map.infoWindow.anchor = "bottom";
-        console.log("bottom");
-      } else if (Math.abs(map.height - y) < 440) {
-        map.infoWindow.anchor = "top";
-        console.log("top");
-      }
+      // var x = document.getElementById("relative-x").innerHTML;
+      // var y = document.getElementById("relative-y").innerHTML;
+      //
+      //
+      // if (x < 300 && y < 240) {
+      //   map.infoWindow.anchor = "bottom-right";
+      //   console.log(x);
+      //   console.log(y);
+      //   console.log("bottom-right");
+      // } else if (Math.abs(map.width - x) < 300 && y < 240) {
+      //   map.infoWindow.anchor = "bottom-left";
+      //   console.log("bottom-left");
+      // } else if (Math.abs(map.width - x) < 300 && Math.abs(map.height - y) < 240) {
+      //   map.infoWindow.anchor = "top-left";
+      //   console.log("top-left");
+      // } else if (x < 300 && Math.abs(map.height - y) < 240) {
+      //   map.infoWindow.anchor = "top-right";
+      //   console.log("top-right");
+      // } else if (x < 300) {
+      //   map.infoWindow.anchor = "right";
+      //   console.log("right");
+      // } else if (Math.abs(map.width - x) < 300) {
+      //   map.infoWindow.anchor = "left";
+      //   console.log("left");
+      // } else if (y < 440) {
+      //   map.infoWindow.anchor = "bottom";
+      //   console.log("bottom");
+      // } else if (Math.abs(map.height - y) < 440) {
+      //   map.infoWindow.anchor = "top";
+      //   console.log("top");
+      // }
 
       // ----- Updates link to report page ------------------
       // -- unrelated to pictures but this location ensure the link is correct
@@ -521,6 +521,39 @@ $("#map_container").click(function (e) {
 
             //display load picture button when ready
             pictureOpen.style.display = "inline-block";
+
+            var x = document.getElementById("relative-x").innerHTML;
+            var y = document.getElementById("relative-y").innerHTML;
+
+
+            if (x < 300 && y < 240) {
+              map.infoWindow.anchor = "bottom-right";
+              console.log(x);
+              console.log(y);
+              console.log("bottom-right");
+            } else if (Math.abs(map.width - x) < 300 && y < 240) {
+              map.infoWindow.anchor = "bottom-left";
+              console.log("bottom-left");
+            } else if (Math.abs(map.width - x) < 300 && Math.abs(map.height - y) < 240) {
+              map.infoWindow.anchor = "top-left";
+              console.log("top-left");
+            } else if (x < 300 && Math.abs(map.height - y) < 240) {
+              map.infoWindow.anchor = "top-right";
+              console.log("top-right");
+            } else if (x < 300) {
+              map.infoWindow.anchor = "right";
+              console.log("right");
+            } else if (Math.abs(map.width - x) < 300) {
+              map.infoWindow.anchor = "left";
+              console.log("left");
+            } else if (y < 440) {
+              map.infoWindow.anchor = "bottom";
+              console.log("bottom");
+            } else if (Math.abs(map.height - y) < 440) {
+              map.infoWindow.anchor = "top";
+              console.log("top");
+            }
+
           }
         };
         xhttp.open("GET", signImgFolder, true);
@@ -667,7 +700,7 @@ $("#map_container").click(function (e) {
 // -------------------Maximize Popup for Small Devices----------------------
 // ---------------------------------------------------------------------
     on(map, "click", function(evt) {
-      if ( map.width < 415 ) {
+      if ( map.width < 500 ) {
         map.infoWindow.maximize();
       }
     });
