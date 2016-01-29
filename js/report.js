@@ -62,13 +62,6 @@ var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/
 // XMLHttpRequest function
 if (dotnumqs) {
   var xhttp = new XMLHttpRequest();
-  // xhttp.onreadystatechange = function() {
-  //   if (xhttp.readyState == 4 && xhttp.status == 200) {
-  //     // console.log(xhttp);
-  //     // var rawResponse = xhttp.responseText; //creates json object
-  //     // document.getElementById("image-testing").innerHTML = rawResponse;
-  //   }
-  // };
   // Send XMLHttpRequest
   xhttp.open("GET", imgFolder, true);
   xhttp.send();
@@ -131,10 +124,8 @@ var getAttachTrials = 0;
 
 function getAttachInfo (results) {
   var resultCount = results.features.length;
-  // var getInnerHTML = document.getElementById("image-testing").innerHTML;
   if (xhttp.responseText !== '') {
     var imageTagArray = JSON.parse(xhttp.responseText);
-    console.log(imageTagArray);
     for (var i = 0; i < resultCount; i++) {
       var featureAttributes = results.features[i].attributes;
       var objectId = featureAttributes.OBJECTID;
