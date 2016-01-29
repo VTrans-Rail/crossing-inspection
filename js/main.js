@@ -414,16 +414,12 @@ require([
 
 
 $("#map_container").click(function (e) {
-
   var offset = $(this).offset();
   var relativeX = (e.pageX - offset.left);
   var relativeY = (e.pageY - offset.top);
-  // var point = new Array (relativeX, relativeY);
   document.getElementById("relative-x").innerHTML = relativeX;
   document.getElementById("relative-y").innerHTML = relativeY;
   return;
-
-
 });
 
 
@@ -453,9 +449,7 @@ $("#map_container").click(function (e) {
     if ( featureCount > 0 ) {
       // gets DOT Number of curretly selected feature
       var dotnum = popup.getSelectedFeature().attributes.DOT_Num;
-      // console.log(popup.getSelectedFeature());
-      // console.log(popup.getSelectedFeature().geometry.x);
-      // console.log(popup.getSelectedFeature().geometry.y);
+
       var x = document.getElementById("relative-x").innerHTML;
       var y = document.getElementById("relative-y").innerHTML;
 
@@ -485,67 +479,6 @@ $("#map_container").click(function (e) {
         map.infoWindow.anchor = "top";
         console.log("top");
       }
-
-
-      // var oldXmin = map.extent.xmin;
-      // var oldXmax = map.extent.xmax;
-      // var oldYmin = map.extent.ymin;
-      // var oldYmax = map.extent.ymax;
-      //
-      // var centerX = popup.getSelectedFeature().geometry.x;
-      // var centerY = popup.getSelectedFeature().geometry.y;
-
-      // if (Math.abs(oldXmin - centerX) < 300 && Math.abs(oldYmax - centerY) < 440) {
-      //   map.infoWindow.anchor = "bottom-right";
-      //   console.log("bottom-right");
-      // } else if (Math.abs(oldXmax - centerX) < 300 && Math.abs(oldYmax - centerY) < 440) {
-      //   map.infoWindow.anchor = "bottom-left";
-      //   console.log("bottom-left");
-      // } else if (Math.abs(oldXmax - centerX) < 300 && Math.abs(oldYmin - centerY) < 440) {
-      //   map.infoWindow.anchor = "top-left";
-      //   console.log("top-left");
-      // } else if (Math.abs(oldXmin - centerX) < 300 && Math.abs(oldYmin - centerY) < 440) {
-      //   map.infoWindow.anchor = "top-right";
-      //   console.log("top-right");
-      // } else if (Math.abs(oldXmin - centerX) < 300) {
-      //   map.infoWindow.anchor = "right";
-      //   console.log("right");
-      // } else if (Math.abs(oldXmax - centerX) < 300) {
-      //   map.infoWindow.anchor = "left";
-      //   console.log("left");
-      // } else if (Math.abs(oldYmax - centerY) < 440) {
-      //   map.infoWindow.anchor = "bottom";
-      //   console.log("bottom");
-      // } else if (Math.abs(oldYmin - centerY) < 440) {
-      //   map.infoWindow.anchor = "top";
-      //   console.log("top");
-      // }
-
-      // var mapWidth = (oldXmax - oldXmin);
-      // var mapHeight = (oldYmax - oldYmin);
-      // // console.log(mapHeight);
-      // // console.log(mapWidth);
-      //
-      // var newXmin = centerX - mapWidth/2;
-      // var newXmax = centerX + mapWidth/2;
-      // var newYmin = centerY - mapHeight;
-      // var newYmax = centerY + mapHeight/2;
-      // // console.log(newXmin + " " + newXmax);
-      // // console.log(newYmin + " " + newYmax);
-      // console.log(centerX);
-      // console.log(centerY);
-      //
-      // //create extent to limit search Results
-      // var newExtent = new esri.geometry.Extent({
-      //   "xmin":newXmin,
-      //   "ymin":newYmin,
-      //   "xmax":newXmax,
-      //   "ymax":newYmax,
-      // });
-      //
-      // console.log(newExtent);
-
-      // map.centerAt(new Point(centerX, centerY, new SpatialReference({ wkid: 102100})));
 
       // ----- Updates link to report page ------------------
       // -- unrelated to pictures but this location ensure the link is correct
@@ -604,8 +537,6 @@ $("#map_container").click(function (e) {
 
             //display load picture button when ready
             pictureOpen.style.display = "inline-block";
-
-            // map.centerAt(new Point(centerX, centerY, new SpatialReference({ wkid: 102100})));
           }
         };
         xhttp.open("GET", crossingImgFolder, true);
