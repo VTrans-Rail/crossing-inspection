@@ -13,7 +13,7 @@ function getParameterByName(name) {
 
 var photoUrl = getParameterByName("url");
 
-document.getElementById("info").innerHTML = "<img src='" + photoUrl + "' id='image' alt='site-image' width='100%' ondblclick='zoom(this)'>";
+document.getElementById("info").innerHTML = "<img src='" + photoUrl + "' id='image' alt='site-image' width='100%' ondblclick='zoom(this)' style='cursor: zoom-in'>";
 
 
 
@@ -31,13 +31,16 @@ function zoom (x) {
 
   if ( previousWidth === "" ) {
     x.style.width = "4320px";
+    x.style.cursor = "zoom-out";
     ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'DoubleClickZoom', eventLabel: 'Zoom In'});
   } else if ( widthRatio > 1 ) {
     x.style.width = "100%";
+    x.style.cursor = "zoom-in";
     ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'DoubleClickZoom', eventLabel: 'Zoom Out'});
   } else if ( widthRatio < 1 ) {
     ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'DoubleClickZoom', eventLabel: 'Zoom In'});
     x.style.width = "4320px";
+    x.style.cursor = "zoom-out";
   }
 }
 
@@ -102,25 +105,25 @@ hammertime.on('pinch pinchstart pinchin pinchout pan panstart panleft panright p
   }
 });
 
-var image = document.getElementById("image");
-
-if (image.addEventListener) {
-	// IE9, Chrome, Safari, Opera
-	image.addEventListener("mousewheel", MouseWheelHandler, false);
-	// Firefox
-	image.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
-}
-
-function MouseWheelHandler() {
-  var e = window.event || e; // old IE support
-  var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-
-  image.style.width = Math.max(width, Math.min(4320, image.width + (100 * delta))) + "px";
-  if (delta > 0) {
-    ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'WheelZoom', eventLabel: 'Zoom In'});
-  } else if (delta < 0) {
-    ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'WheelZoom', eventLabel: 'Zoom Out'});
-  }
-
-  return false;
-}
+// var image = document.getElementById("image");
+//
+// if (image.addEventListener) {
+// 	// IE9, Chrome, Safari, Opera
+// 	image.addEventListener("mousewheel", MouseWheelHandler, false);
+// 	// Firefox
+// 	image.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
+// }
+//
+// function MouseWheelHandler() {
+//   var e = window.event || e; // old IE support
+//   var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+//
+//   image.style.width = Math.max(width, Math.min(4320, image.width + (100 * delta))) + "px";
+//   if (delta > 0) {
+//     ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'WheelZoom', eventLabel: 'Zoom In'});
+//   } else if (delta < 0) {
+//     ga('send', 'event', { eventCategory: 'FullPictureEvents', eventAction: 'WheelZoom', eventLabel: 'Zoom Out'});
+//   }
+//
+//   return false;
+// }
