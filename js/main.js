@@ -700,7 +700,7 @@ $("#map_container").click(function (e) {
 // -------------------Maximize Popup for Small Devices----------------------
 // ---------------------------------------------------------------------
     on(map, "click", function(evt) {
-      if ( map.width < 500 ) {
+      if ( map.width < 415 ) {
         map.infoWindow.maximize();
       }
     });
