@@ -412,7 +412,6 @@ require([
 //------------------------------------------------------------------------
 
 
-
 $("#map_container").click(function (e) {
   var offset = $(this).offset();
   var relativeX = (e.pageX - offset.left);
@@ -516,8 +515,8 @@ $("#map_container").click(function (e) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (xhttp.readyState == 4 && xhttp.status == 200) {
-            var rawResponse = xhttp.responseText;
-            document.getElementById("image-testing").innerHTML = rawResponse;
+            // var rawResponse = xhttp.responseText;
+            // document.getElementById("image-testing").innerHTML = rawResponse;
 
             //display load picture button when ready
             pictureOpen.style.display = "inline-block";
@@ -567,8 +566,8 @@ $("#map_container").click(function (e) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (xhttp.readyState == 4 && xhttp.status == 200) {
-            var rawResponse = xhttp.responseText;
-            document.getElementById("image-testing").innerHTML = rawResponse;
+            // var rawResponse = xhttp.responseText;
+            // document.getElementById("image-testing").innerHTML = rawResponse;
 
             //display load picture button when ready
             pictureOpen.style.display = "inline-block";
@@ -630,13 +629,16 @@ $("#map_container").click(function (e) {
             selectedLayer = crossingPoints;
 
             //Get Crossing Thumbnail image Array created by the XMLHttpRequest
-            var imageTagArray = JSON.parse(document.getElementById("image-testing").innerHTML);
+            // var imageTagArray = JSON.parse(document.getElementById("image-testing").innerHTML);
+            var imageTagArray = JSON.parse(xhttp.responseText);
+
 
           } else {
             selectedLayer = signPoints;
 
             //Get Sign Thumbnail image Array created by the XMLHttpRequest
-            var imageTagArray = JSON.parse(document.getElementById("image-testing").innerHTML);
+            // var imageTagArray = JSON.parse(document.getElementById("image-testing").innerHTML);
+            var imageTagArray = JSON.parse(xhttp.responseText);
           }
 
           // ------------- queryAttachmentInfos ----------------------------
