@@ -454,16 +454,18 @@ $("#map_container").click(function (e) {
       var y = document.getElementById("relative-y").innerHTML;
 
 
-      if (x < 300 && y < 440) {
+      if (x < 300 && y < 240) {
         map.infoWindow.anchor = "bottom-right";
+        console.log(x);
+        console.log(y);
         console.log("bottom-right");
-      } else if (Math.abs(map.width - x) < 300 && y < 440) {
+      } else if (Math.abs(map.width - x) < 300 && y < 240) {
         map.infoWindow.anchor = "bottom-left";
         console.log("bottom-left");
-      } else if (Math.abs(map.width - x) < 300 && Math.abs(map.height - y) < 440) {
+      } else if (Math.abs(map.width - x) < 300 && Math.abs(map.height - y) < 240) {
         map.infoWindow.anchor = "top-left";
         console.log("top-left");
-      } else if (x < 300 && Math.abs(map.height - y) < 440) {
+      } else if (x < 300 && Math.abs(map.height - y) < 240) {
         map.infoWindow.anchor = "top-right";
         console.log("top-right");
       } else if (x < 300) {
