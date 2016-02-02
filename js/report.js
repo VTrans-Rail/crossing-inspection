@@ -160,9 +160,29 @@ function getAttachInfo (results) {
       console.log("XHR Request has not returned yet. Trying again...");
       queryTask.execute(query,getAttachInfo);
     } else {
-      console.log("This crossing does not have images, there is an issue with the XMLHttpRequest, or your connection is too slow.");
-      alert("This crossing does not have images, there is an issue with the XMLHttpRequest, or your connection is too slow and the request has timed out.");
-      showResults(resultCount, results);
+      console.log("There is an issue with the XMLHttpRequest. This is likely a temporary issue that will resolve itself. In the meantime, you may experience sluggish load times.");
+      alert("There is an issue with the XMLHttpRequest. This is likely a temporary issue that will resolve itself. In the meantime, you may experience sluggish load times.");
+
+      for (var i = 0; i < resultCount; i++) {
+        var featureAttributes = results.features[i].attributes;
+        var objectId = featureAttributes.OBJECTID;
+
+        var deferred = new dojo.Deferred;
+
+        crossingPoints.queryAttachmentInfos(objectId).then(function(response){
+          var imgSrc;
+          if (response.length === 0) {
+            deferred.resolve("no attachments");
+          }
+          else {
+            for ( j = 0; j < response.length; j++ ) {
+              imgSrc = response[j].url;
+              imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='" + imgSrc + "' target='_blank'>" + "<img src='" + imgSrc + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
+            }
+          }
+          showResults(resultCount, results);
+        });
+      }
     };
   }
 }
