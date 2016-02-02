@@ -21,7 +21,7 @@ if ( isOpera ) {
 // ----------------------Initialize Functions-----------------------
 //------------------------------------------------------------------
 require([
-  "esri/map",
+  "maptiks/map",
   "esri/arcgis/utils",
   "esri/dijit/Search",
   "esri/layers/FeatureLayer",
@@ -118,6 +118,8 @@ require([
       maxZoom:19,
       infoWindow: popup,
       showLabels: true,
+      maptiks_trackcode: 'afbe75a4-bb16-4c19-92cf-e2c9cd8e98ed',
+      maptiks_id: 'Crossing Inspection',
     });
 
     // add basemap layers to map

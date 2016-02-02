@@ -21,6 +21,11 @@
     <link href="css/instructions.css" rel="stylesheet">
     <link rel="stylesheet" href="css/legend.css">
 
+    <!-- ADD NEXT THREE LINES BEFORE THE ESRI LIBRARY LOADS -->
+
+    <script>
+      var dojoConfig={paths:{maptiks:'https://cdn.maptiks.com/esri3'}};
+    </script>
 
     <script src="http://js.arcgis.com/3.14/"></script>
 
@@ -120,8 +125,8 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    // ga('create', 'UA-45708379-9', 'auto');
-    // ga('send', 'pageview');
+    ga('create', 'UA-45708379-9', 'auto');
+    ga('send', 'pageview');
   </script>
   <script>
     function crossingImageGA() {
