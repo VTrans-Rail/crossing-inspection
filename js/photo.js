@@ -13,7 +13,7 @@ function getParameterByName(name) {
 
 var photoUrl = getParameterByName("url");
 
-document.getElementById("info").innerHTML = "<img src='" + photoUrl + "' id='image' alt='site-image' width='100%' ondblclick='zoom(this)' style='cursor: zoom-in'>";
+document.getElementById("info").innerHTML = "<img src='" + photoUrl + "' id='image' alt='site-image' width='100%' onclick='zoom(this)' style='cursor: zoom-in'>";
 
 
 
