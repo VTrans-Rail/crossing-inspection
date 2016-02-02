@@ -125,8 +125,6 @@ var getAttachTrials = 0;
 function getAttachInfo (results) {
   var resultCount = results.features.length;
   if (xhttp.responseText !== '' && xhttp.status !== 403) {
-    // console.log(xhttp.status);
-    // console.log(xhttp.responseText);
     var imageTagArray = JSON.parse(xhttp.responseText);
     for (var i = 0; i < resultCount; i++) {
       var featureAttributes = results.features[i].attributes;
