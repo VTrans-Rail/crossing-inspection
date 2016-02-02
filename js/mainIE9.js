@@ -4,11 +4,6 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-    // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
-var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-    // At least Safari 3+: "[object HTMLElementConstructor]"
-
 require([
   "esri/map",
   "esri/arcgis/utils",
@@ -620,12 +615,4 @@ require([
         document.getElementsByClassName("suggestionsMenu")[0].innerHTML = newSuggestions;
       }
     })
-
-    var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
-    if ( isOpera ) {
-      alert(browserAlert);
-    } else if ( isSafari ) {
-      alert(browserAlert);
-    }
-
 });

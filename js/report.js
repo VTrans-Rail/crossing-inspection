@@ -17,13 +17,9 @@ function getParameterByName(name) {
 // --------------------- alert the User ---------------------------------
 var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
-var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-    // At least Safari 3+: "[object HTMLElementConstructor]"
 
 var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
 if ( isOpera ) {
-  alert(browserAlert);
-} else if ( isSafari ) {
   alert(browserAlert);
 }
 //-----------------------------------------------------------------------
@@ -44,6 +40,7 @@ require([
 
 var dotnumqs = getParameterByName("dotnum");
 
+// document.getElementById("report-title").innerHTML = dotnumqs + ": Crossing Report";
 
 // This gets viewport width to determine what thumbnails to serve
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -65,12 +62,6 @@ var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/
 // XMLHttpRequest function
 if (dotnumqs) {
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-      var rawResponse = xhttp.responseText; //creates json object
-      document.getElementById("image-testing").innerHTML = rawResponse;
-    }
-  };
   // Send XMLHttpRequest
   xhttp.open("GET", imgFolder, true);
   xhttp.send();
@@ -133,9 +124,8 @@ var getAttachTrials = 0;
 
 function getAttachInfo (results) {
   var resultCount = results.features.length;
-  var getInnerHTML = document.getElementById("image-testing").innerHTML;
-  if (getInnerHTML !== '') {
-    var imageTagArray = JSON.parse(getInnerHTML);
+  if (xhttp.responseText !== '' && xhttp.status !== 403) {
+    var imageTagArray = JSON.parse(xhttp.responseText);
     for (var i = 0; i < resultCount; i++) {
       var featureAttributes = results.features[i].attributes;
       var objectId = featureAttributes.OBJECTID;
@@ -170,9 +160,29 @@ function getAttachInfo (results) {
       console.log("XHR Request has not returned yet. Trying again...");
       queryTask.execute(query,getAttachInfo);
     } else {
-      console.log("This crossing does not have images, there is an issue with the XMLHttpRequest, or your connection is too slow.");
-      alert("This crossing does not have images, there is an issue with the XMLHttpRequest, or your connection is too slow and the request has timed out.");
-      showResults(resultCount, results);
+      console.log("There is an issue with the XMLHttpRequest. This is likely a temporary issue that will resolve itself. In the meantime, you may experience sluggish load times.");
+      alert("There is an issue with the XMLHttpRequest. This is likely a temporary issue that will resolve itself. In the meantime, you may experience sluggish load times.");
+
+      for (var i = 0; i < resultCount; i++) {
+        var featureAttributes = results.features[i].attributes;
+        var objectId = featureAttributes.OBJECTID;
+
+        var deferred = new dojo.Deferred;
+
+        crossingPoints.queryAttachmentInfos(objectId).then(function(response){
+          var imgSrc;
+          if (response.length === 0) {
+            deferred.resolve("no attachments");
+          }
+          else {
+            for ( j = 0; j < response.length; j++ ) {
+              imgSrc = response[j].url;
+              imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='" + imgSrc + "' target='_blank'>" + "<img src='" + imgSrc + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
+            }
+          }
+          showResults(resultCount, results);
+        });
+      }
     };
   }
 }
