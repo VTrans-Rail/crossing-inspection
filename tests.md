@@ -45,3 +45,6 @@ Speed Test
 - [ ] 4G (4mbps)
 - [ ] good 3g (1mbps)
 - [ ] reg 3g (750 kbps)
+
+Google Analytics
+- [ ] Make sure Google Analytics property ID line in the code block isn't commented out
