@@ -172,7 +172,7 @@ require([
   //------------------------------------------------------------------
   //Crossing Popup Template--------------
   //-----------------------------------------------------
-    var crossingPopupFeatures = "<div id='popup-content' style='overflow-y:auto'><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b><span id='popup-content-warn-code'>${WDCode}</span></b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popup-content-pictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button><p id='popup-content-images-loading'>Getting Image Info...</p></br><p id='images-error' style='display:none;'><small>If this text does not disappear soon, there may be a temporary issue with the XMLHttpRequest that will resolve itself. In the meantime, click on the full report to view images.</small></p></div>";
+    var crossingPopupFeatures = "<div id='popup-content' style='overflow-y:auto'><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b><span id='popup-content-warn-code'>${WDCode}</span></b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popup-content-pictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button><p id='popup-content-images-loading'>Getting Image Info...</p></br><p id='popup-content-images-error' style='display:none;'><small>If this text does not disappear soon, there may be a temporary issue with the XMLHttpRequest that will resolve itself. In the meantime, click on the full report to view images.</small></p></div>";
 
     var crossingTemplate = new PopupTemplate({
       title: 'Crossing {DOT_Num}',
@@ -185,7 +185,7 @@ require([
   //-----------------------------------------------------
   //Sign Popup Template------------------
   //-----------------------------------------------------
-    var signPopupFeatures = "<div id='popup-content' ><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popup-content-pictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button><p id='popup-content-images-loading'>Getting Image Info...</p></br><p id='images-error' style='display:none;'><small>If this text does not disappear soon, there may be a temporary issue with the XMLHttpRequest that will resolve itself. In the meantime, click on the full report to view images.</small></p></div>";
+    var signPopupFeatures = "<div id='popup-content' ><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popup-content-pictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button><p id='popup-content-images-loading'>Getting Image Info...</p></br><p id='popup-content-images-error' style='display:none;'><small>If this text does not disappear soon, there may be a temporary issue with the XMLHttpRequest that will resolve itself. In the meantime, click on the full report to view images.</small></p></div>";
 
     var signTemplate = new PopupTemplate({
       title: 'Crossing Sign',
@@ -496,7 +496,7 @@ require([
           } else if (xhttp.status == 403) {
             document.getElementById('popup-content-images-loading').style.display = 'none';
 
-            document.getElementById('images-error').style.display = 'inline-block';
+            document.getElementById('popup-content-images-error').style.display = 'inline-block';
             map.centerAt(new Point(popup.getSelectedFeature().geometry.x, popup.getSelectedFeature().geometry.y, new SpatialReference({ wkid: 102100})));
           }
         };
@@ -519,7 +519,7 @@ require([
           } else if (xhttp.status == 403) {
             document.getElementById('popup-content-images-loading').style.display = 'none';
 
-            document.getElementById('images-error').style.display = 'inline-block';
+            document.getElementById('popup-content-images-error').style.display = 'inline-block';
             map.centerAt(new Point(popup.getSelectedFeature().geometry.x, popup.getSelectedFeature().geometry.y, new SpatialReference({ wkid: 102100})));
           }
         };
