@@ -154,7 +154,7 @@ require([
     var geoLocate = new LocateButton({
       map: map,
       scale: 5000,
-    }, "locateButton");
+    }, "locate-button");
     geoLocate.startup();
 
     // Google Analytics track when locatebutton clicked
@@ -406,7 +406,7 @@ require([
       layerInfos: layerInfo,
 
       respectCurrentMapScale: true,
-    }, "legendDiv");
+    }, "legend-div");
     legendDijit.startup();
   });
 //------------------------------------------------------------------

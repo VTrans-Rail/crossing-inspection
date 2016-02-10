@@ -10,7 +10,7 @@
   height: 100%;
 }
 
-#legendDiv {
+#legend-div {
   top: 10px;
   color: #fff;
   top: 70px;
@@ -44,35 +44,35 @@
 
 
 /*Hides Rail Trails and TSRR (I couldn't figure out how to display only some of the symbology classes)*/
-#legendDiv_rail-line tr:nth-child( 1n+9 ) {
+#legend-div_rail-line tr:nth-child( 1n+9 ) {
   display: none;
 }
 
-#legendDiv_crossing-points_1 .esriLegendLayer:last-child {
+#legend-div_crossing-points_1 .esriLegendLayer:last-child {
   display: none;
 }
 
-#legendDiv_sign-points_0 tr {
+#legend-div_sign-points_0 tr {
   display: none;
 }
 
-#legendDiv_sign-points_0 tr:nth-child( 1 ) {
+#legend-div_sign-points_0 tr:nth-child( 1 ) {
   display: table-row;
 }
-#legendDiv_sign-points_0 tr:nth-child( 5 ) {
+#legend-div_sign-points_0 tr:nth-child( 5 ) {
   display: table-row;
 }
-#legendDiv_sign-points_0 tr:nth-child( 7 ) {
+#legend-div_sign-points_0 tr:nth-child( 7 ) {
   display: table-row;
 }
-#legendDiv_sign-points_0 tr:nth-child( 16 ) {
+#legend-div_sign-points_0 tr:nth-child( 16 ) {
   display: table-row;
 }
-#legendDiv_sign-points_0 tr:nth-child( 30 ) {
+#legend-div_sign-points_0 tr:nth-child( 30 ) {
   display: table-row;
 }
 
-#legendDiv_sign-points_0 .esriLegendLayer:last-child {
+#legend-div_sign-points_0 .esriLegendLayer:last-child {
   display:none;
 }
 
@@ -88,7 +88,7 @@
     height: 75px;
   }
 
-  #legendDiv {
+  #legend-div {
     font-size: 18px;
     width: 40%;
     top: 90px;
@@ -110,7 +110,7 @@
     height: 100%;
   }
 
-  #legendDiv {
+  #legend-div {
     font-size: 14px;
     top: 100px;
     left: 5%;

@@ -105,7 +105,7 @@
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
-#locateButton {
+#locate-button {
   position: absolute;
   float: left;
   border: 1px solid #57585A;
@@ -191,7 +191,7 @@
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
-  #locateButton {
+  #locate-button {
     top: 95px;
     left: 60px;
   }
@@ -236,7 +236,7 @@
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 
-  #locateButton {
+  #locate-button {
     top: 105px;
     left: 72px;
   }
