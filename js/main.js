@@ -355,24 +355,24 @@ require([
 //--------------------Setup Mobile Legend Controls-----------------------
 //----------full screen panel that minimizes to bottom of screen------------
 //--------------------------------------------------------------------
-    var legendOpen = document.getElementById('openMobileLegend');
+    var legendOpen = document.getElementById('mobile-legend-open');
     if (legendOpen) {
       legendOpen.addEventListener('click', function () {
         document.getElementById('legend').style.display = "block";
-        document.getElementById('openMobileLegend').style.display = "none";
-        document.getElementById('closeMobileLegend').style.display = "block";
+        document.getElementById('mobile-legend-open').style.display = "none";
+        document.getElementById('mobile-legend-close').style.display = "block";
 
         //Google Analytics record when someone opens legend
         ga('send', 'event', { eventCategory: 'Legend', eventAction: 'Open', eventLabel: 'Open Mobile Legend'});
       });
     }
 
-    var legendClose = document.getElementById('closeMobileLegend');
+    var legendClose = document.getElementById('mobile-legend-close');
     if (legendClose) {
       legendClose.addEventListener('click', function () {
         document.getElementById('legend').style.display = "none";
-        document.getElementById('openMobileLegend').style.display = "block";
-        document.getElementById('closeMobileLegend').style.display = "none";
+        document.getElementById('mobile-legend-open').style.display = "block";
+        document.getElementById('mobile-legend-close').style.display = "none";
 
         //Google Analytics record when someone closes legend
         ga('send', 'event', { eventCategory: 'Legend', eventAction: 'Close', eventLabel: 'Close Mobile Legend'});

@@ -18,7 +18,7 @@
   left: 15%;
 }
 
-#openMobileLegend {
+#mobile-legend-open {
   display: block;
   position: fixed;
   color: #fff;
@@ -29,7 +29,7 @@
   width: 100%;
   z-index: 1;
 }
-#closeMobileLegend {
+#mobile-legend-close {
   display: none;
   position: fixed;
   color: #fff;
@@ -78,13 +78,13 @@
 
 
 @media (min-width: 415px) {
-  #openMobileLegend {
+  #mobile-legend-open {
     height: 7%;
   }
 }
 
 @media (min-width: 768px) {
-  #closeMobileLegend {
+  #mobile-legend-close {
     height: 75px;
   }
 
@@ -97,7 +97,7 @@
 }
 
 @media (min-width: 992px) {
-  #openMobileLegend {
+  #mobile-legend-open {
     display: none;
   }
   #legend {
