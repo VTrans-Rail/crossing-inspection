@@ -102,17 +102,6 @@
   padding: 10px;
 }
 
-#helpDiv {
-  padding-top: 10px;
-  padding-left: 0px;
-}
-
-#HelpButton {
-  padding-top: 1px;
-  padding-bottom: 1px;
-}
-
-
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
@@ -242,11 +231,6 @@
   #map {
     padding-top: 75px;
   }
-
-  #HelpButton {
-    padding-top: 6px;
-    padding-bottom: 6px;
-  }
 } /* end small devices */
 
 /* Medium devices (desktops, 992px and up) */
@@ -297,11 +281,6 @@
     max-width: 24px;
     padding-top: 13px;
     padding-bottom: 13px;
-  }
-
-  #HelpButton {
-    padding-top: 11px;
-    padding-bottom: 11px;
   }
 } /* end medium devices */
 
