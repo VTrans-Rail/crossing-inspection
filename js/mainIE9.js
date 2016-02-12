@@ -93,7 +93,7 @@ require([
       infoWindow: popup,
       showLabels: true,
       maptiks_trackcode: 'afbe75a4-bb16-4c19-92cf-e2c9cd8e98ed',
-      maptiks_id: 'Crossing Inspection',      
+      maptiks_id: 'Crossing Inspection',
     });
 
     map.addLayer(topoBasemap);
@@ -472,12 +472,12 @@ require([
               if (selectedLayerId.length > 12) {
                 for ( j = 0; j < response.length; j++ ) {
                   imgSrc = response[j].url;
-                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='crossingImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (j+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='" + imgSrc + "' " + imageStyle + ">" + "</div></td></tr>";
+                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='crossingImageGA()' href='photo.html?url=" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (j+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='" + imgSrc + "' " + imageStyle + ">" + "</div></td></tr>";
                 }
               } else {
                 for ( j = 0; j < response.length; j++ ) {
                   imgSrc = response[j].url;
-                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='signImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (j+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='" + imgSrc + "' " + imageStyle + ">" + "</div></td></tr>";
+                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='signImageGA()' href='photo.html?url=" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (j+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='" + imgSrc + "' " + imageStyle + ">" + "</div></td></tr>";
                 }
               }
             }
