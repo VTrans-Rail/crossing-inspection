@@ -172,7 +172,10 @@
 
 
     function displayMD(x) {
-      // document.getElementById("metadata-info").style.display = "block";
+      // Hides any metadata-domain or "Valid Entries" text set by previous
+      // metadata queries
+      document.getElementById("metadata-domain").style.display = "none";
+
       if (x.id === "xing-num") {
         document.getElementById("metadata-title").innerHTML = "Department of Transportation Crossing Number";
         document.getElementById("metadata-body").innerHTML = "This is the crossing ID number assigned by the Department of Transportation (DOT_Num), with the dash after the third character. Usually the DOT number is reported with the dash and this field allows for simple queries and joins in most situations. For crossings believed to be public that do not yet have a valid DOT number, this field has the unique ID given to the crossing by the crossing inspector in 2015. The format for these crossing ID’s is “NOT-####,” with the numbers increasing with each addition, starting with NOT-0001.";
