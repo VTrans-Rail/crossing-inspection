@@ -127,7 +127,7 @@
 
 
     <!--Creates DropShadow for Text-->
-    <svg height="0" xmlns="http://www.w3.org/2000/svg">
+    <!-- <svg height="0" xmlns="http://www.w3.org/2000/svg">
       <filter id="drop-shadow">
         <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
         <feOffset dx="0" dy="0" result="offsetblur"/>
@@ -138,6 +138,25 @@
           <feMergeNode in="SourceGraphic"/>
         </feMerge>
       </filter>
+    </svg> -->
+
+    <!-- SVG filter for Firefox  -->
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter id="blur">
+         	<feGaussianBlur stdDeviation="2"/>
+        </filter>
+        <filter id="drop-shadow">
+    	    <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+    	    <feOffset dx="2" dy="2" result="offsetblur"/>
+    	    <feFlood flood-color="#000000"/>
+    	    <feComposite in2="offsetblur" operator="in"/>
+    	    <feMerge>
+    		    <feMergeNode/>
+    		    <feMergeNode in="SourceGraphic"/>
+    	    </feMerge>
+    	</filter>
+    </defs>
     </svg>
 
 
