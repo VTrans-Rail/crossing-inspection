@@ -184,6 +184,10 @@
       else if (x.id === "surf-cond") {
         document.getElementById("metadata-title").innerHTML = "Overal Crossing Condition";
         document.getElementById("metadata-body").innerHTML = "The overall condition of the crossing. This is determined by the safety and comfort for vehicles and pedestrians crossing the tracks. It is important to note that while there was great consideration taken when rating these crossing conditions, it is a subjective rating system that can be influenced by a variety of factors.";
+        document.getElementById("metadata-domain-text").innerHTML = "<ul><li><b>Poor: </b>Crossing has large potholes, gaps, exposed rail or differential surface height that force vehicles to slow down to near idling speed to avoid damage or concern. Crossing needs attention.</li><li><b>Fair: </b>The crossing requires a significant reduction in speed to avoid possible concern. Surface could exhibit potholes and/or large cracking, possibly exposed material or depressions. Enough evidence to suggest work should be done on the crossing.</li><li><b>Good: </b> The crossing contains minor cracking and miniscule to no potholes. Vehicles can travel over the surface with little to no reduction in speed. The surface is just about flush with the rails.</li><li><b>Excellent: </b>Crossing is in pristine condition, usually paved within the last year or two. Hairline fractures at the most are displayed here with a level surface spanning the entire crossing.</li></ul>";
+
+        document.getElementById("metadata-domain").style.display = "block";
+
         document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "feature-crossed") {
@@ -214,11 +218,19 @@
       else if (x.id === "surf-type") {
         document.getElementById("metadata-title").innerHTML = "Main Surface Material";
         document.getElementById("metadata-body").innerHTML = "Indicates the material that covers the majority, or all, of the surface area of the crossing. This flange material is not considered part of the crossing surface material.";
+        document.getElementById("metadata-domain-text").innerHTML = "<ul><li><b>Asphalt: </b>Asphalt is the most commonly used material for crossing surfaces.</li><li><b>Composite: </b>An engineered material formed from two or more distinct materials generally incorporating a polymer binder with reinforcing fibers and/or fillers to contribute enhanced properties and/or other property modifiers in a polymer matrix that are usually individually installed and removable for maintenance and replacement purposes.</li><li><b>Concrete: </b>Concrete slab, or concrete pavement, surface over the crossing area. Typically pre-cast sections that are removable for maintenance and replacement purposes.</li><li><b>Metal: </b>Sections of steel or other metal that cover the crossing area.</li><li><b>Rubber: </b>Typically preformed rubber sections that are removable for maintenance and replacement purposes.</li><li><b>Timber: </b>Sectional treated timber or full wood plank that covers the crossing area.</li><li><b>Unconsolidated: </b>Ballast, dirt, gravel, or other unconsolidated material placed over crossing area.</li><li><b>Other: </b> Any surface material not previously described.</li></ul>";
+
+        document.getElementById("metadata-domain").style.display = "block";
+
         document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "surf-type-two") {
         document.getElementById("metadata-title").innerHTML = "Secondary Surface Type";
         document.getElementById("metadata-body").innerHTML = "If more than one material cover the surface of the crossing area, SurfaceType2 indicates the material that covers the minority of the surface area of the crossing. Again, flange material is not considered part of the crossing surface material and should not be recorded in this field. If the SurfaceType (Primary Crossing Surface) material covers the entire crossing area, this field is left null.";
+        document.getElementById("metadata-domain-text").innerHTML = "<ul><li><b>Asphalt: </b>Asphalt is the most commonly used material for crossing surfaces.</li><li><b>Composite: </b>An engineered material formed from two or more distinct materials generally incorporating a polymer binder with reinforcing fibers and/or fillers to contribute enhanced properties and/or other property modifiers in a polymer matrix that are usually individually installed and removable for maintenance and replacement purposes.</li><li><b>Concrete: </b>Concrete slab, or concrete pavement, surface over the crossing area. Typically pre-cast sections that are removable for maintenance and replacement purposes.</li><li><b>Metal: </b>Sections of steel or other metal that cover the crossing area.</li><li><b>Rubber: </b>Typically preformed rubber sections that are removable for maintenance and replacement purposes.</li><li><b>Timber: </b>Sectional treated timber or full wood plank that covers the crossing area.</li><li><b>Unconsolidated: </b>Ballast, dirt, gravel, or other unconsolidated material placed over crossing area.</li><li><b>Other: </b> Any surface material not previously described.</li></ul>";
+
+        document.getElementById("metadata-domain").style.display = "block";
+
         document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "snooper") {
@@ -229,6 +241,10 @@
       else if (x.id === "flange-material") {
         document.getElementById("metadata-title").innerHTML = "Flange Material";
         document.getElementById("metadata-body").innerHTML = "Indicates the material used to form flangeway openings. Some crossings do not have any flange material protecting the flangeway opening from debris.";
+        document.getElementById("metadata-domain-text").innerHTML = "<ul><li><b>Rail: </b>Old rail line or “mudrail” placed next to the track to create a flangeway opening.</li><li><b>Rubber: </b>Rubber flangeway material typically specifically molded for the purpose of creating a flangeway opening.</li><li><b>Timber: </b>Timber placed next to track to create a flangeway opening.</li><li><b>Other: </b>Other types of material, not specified above, placed next to track to create a flangeway opening.</li></ul>";
+
+        document.getElementById("metadata-domain").style.display = "block";
+
         document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "number-tracks") {
@@ -239,6 +255,10 @@
       else if (x.id === "crossing-angle") {
         document.getElementById("metadata-title").innerHTML = "Crossing Angle";
         document.getElementById("metadata-body").innerHTML = "The range that includes the angle of that most closely describes the smallest angle created between the roadway/pathway and the track.";
+        document.getElementById("metadata-domain-text").innerHTML = "<ul><li>0 - 29</li><li>30 - 59</li><li>60 - 90</li></ul>";
+
+        document.getElementById("metadata-domain").style.display = "block";
+
         document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "crossing-width") {
