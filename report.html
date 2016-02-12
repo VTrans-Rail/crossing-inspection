@@ -402,11 +402,19 @@
       else if (x.id === "road-funcl") {
         document.getElementById("metadata-title").innerHTML = "Functional Classification";
         document.getElementById("metadata-body").innerHTML = "The FUNCL, or Functional Classification, of the TransRoad_RDS feature that intersects the rail line at the crossing feature location.";
+        document.getElementById("metadata-domain-text").innerHTML = "<ul><li>Interstate</li><li>Principal Arterial</li><li>Minor Arterial</li><li>Major Collector</li><li>Minor Collector</li><li>Local</li><li>No Functional Classification</li><li>Unknown</li></ul>";
+
+        document.getElementById("metadata-domain").style.display = "block";
+
         document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "road-aot") {
         document.getElementById("metadata-title").innerHTML = "AOT Classification";
         document.getElementById("metadata-body").innerHTML = "The AOTCLASS, or Agency of Transportation road classification, of the TransRoad_RDS feature that intersects the rail line at the crossing feature location.";
+        document.getElementById("metadata-domain-text").innerHTML = "<ul><li>US Highway</li><li>State Highway</li><li>Class 1 Town Highway</li><li>Class 2 Town Highway</li><li>Class 3 Town Highway</li><li>Class 4 Town Highway</li><li>Private Road</li><li>Legal Trail</li><li>Unknown</li></ul>";
+
+        document.getElementById("metadata-domain").style.display = "block";
+
         document.getElementById("metadata-info").style.display = "block";
       }
       else if (x.id === "comments") {
