@@ -143,7 +143,7 @@ function getAttachInfo (results) {
             for ( j = 0; j < response.length; j++ ) {
               if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
                 imgSrc = response[j].url;
-                imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='" + imgSrc + "' target='_blank'>" + "<img src='thumb/" + thumbSizeFolder + dotnumqs + "/" + imageTagArray[i].name + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
+                imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='photo.html?url=" + imgSrc + "' target='_blank'>" + "<img src='thumb/" + thumbSizeFolder + dotnumqs + "/" + imageTagArray[i].name + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
               }
             }
           }
@@ -177,7 +177,7 @@ function getAttachInfo (results) {
           else {
             for ( j = 0; j < response.length; j++ ) {
               imgSrc = response[j].url;
-              imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='" + imgSrc + "' target='_blank'>" + "<img src='" + imgSrc + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
+              imageString += "<div data-field-span='1' class='blur'><a onclick='imageGA()' href='photo.html?url=" + imgSrc + "' target='_blank'>" + "<img src='" + imgSrc + "' class='img-responsive' alt='site image' width='100%'>" + "<h3>View Full Image</h3></a></div>";
             }
           }
           showResults(resultCount, results);
@@ -333,6 +333,51 @@ function showResults(x, y) {
       document.getElementById('warning-device-code').children[1].value = "No signs or signals";
     }
   }
+
+  if (document.getElementById('road-funcl')) {
+    var funcl = document.getElementById('road-funcl').children[1].value;
+    if (funcl === '0') {
+      document.getElementById('road-funcl').children[1].value = 'No Functional Classification.';
+    } else if (funcl === '1') {
+      document.getElementById('road-funcl').children[1].value = 'Interstate';
+    } else if (funcl === '2' || funcl === '3') {
+      document.getElementById('road-funcl').children[1].value = 'Principal Arterial';
+    } else if (funcl === '4') {
+      document.getElementById('road-funcl').children[1].value = 'Minor Arterial';
+    } else if (funcl === '5') {
+      document.getElementById('road-funcl').children[1].value = 'Major Collector';
+    } else if (funcl === '6') {
+      document.getElementById('road-funcl').children[1].value = 'Minor Collector';
+    } else if (funcl === '7') {
+      document.getElementById('road-funcl').children[1].value = 'Local';
+    } else {
+      document.getElementById('road-funcl').children[1].value = 'Unknown';
+    }
+  }
+
+  if (document.getElementById('road-aot')) {
+    var aot = document.getElementById('road-aot').children[1].value;
+    if (aot === '1') {
+      document.getElementById('road-aot').children[1].value = 'Class 1 Town Highway';
+    } else if (aot === '2') {
+      document.getElementById('road-aot').children[1].value = 'Class 2 Town Highway';
+    } else if (aot === '3') {
+      document.getElementById('road-aot').children[1].value = 'Class 3 Town Highway';
+    } else if (aot === '4') {
+      document.getElementById('road-aot').children[1].value = 'Class 4 Town Highway';
+    } else if (aot === '7') {
+      document.getElementById('road-aot').children[1].value = 'Legal Trail';
+    } else if (aot === '8') {
+      document.getElementById('road-aot').children[1].value = 'Private Road';
+    } else if (aot === '30' || aot === '33'){
+      document.getElementById('road-aot').children[1].value = 'State Highway';
+    } else if (aot === '40' || aot === '43'){
+      document.getElementById('road-aot').children[1].value = 'US Highway';
+    } else {
+      document.getElementById('road-aot').children[1].value = 'Unknown';
+    }
+  }
+
   // --------------------------------------------------------------
 
 

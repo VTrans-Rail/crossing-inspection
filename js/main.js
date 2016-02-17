@@ -10,7 +10,7 @@
 var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
 
-var browserAlert = "This app best experienced in modern browsers such as Firefox or Chrome.";
+var browserAlert = 'This app best experienced in modern browsers such as Firefox or Chrome.';
 if ( isOpera ) {
   alert(browserAlert);
 }
@@ -21,27 +21,34 @@ if ( isOpera ) {
 // ----------------------Initialize Functions-----------------------
 //------------------------------------------------------------------
 require([
-  "maptiks/map",
-  "esri/arcgis/utils",
-  "esri/dijit/Search",
-  "esri/layers/FeatureLayer",
-  "esri/layers/ArcGISTiledMapServiceLayer",
-  "esri/layers/LayerInfo",
-  "esri/dijit/Popup", "esri/dijit/PopupTemplate",
-  "esri/dijit/LocateButton",
-  "esri/dijit/Legend",
-  "esri/geometry/Extent",
-  "esri/geometry/Point",
-  "esri/SpatialReference",
-  "esri/renderers/UniqueValueRenderer",
-  "esri/symbols/Font",
-  "esri/symbols/CartographicLineSymbol",
-  "esri/symbols/SimpleFillSymbol", "esri/Color",
-  "dojo/dom-class", "dojo/dom-construct", "dojo/query", "dojo/on",
-  "dojo/dom-attr", "dojo/dom",
-  "esri/tasks/query", "esri/tasks/QueryTask",
-  "esri/InfoTemplate",
-  "dojo/domReady!"
+  'maptiks/map',
+  'esri/arcgis/utils',
+  'esri/dijit/Search',
+  'esri/layers/FeatureLayer',
+  'esri/layers/ArcGISTiledMapServiceLayer',
+  'esri/layers/LayerInfo',
+  'esri/dijit/Popup',
+  'esri/dijit/PopupTemplate',
+  'esri/dijit/LocateButton',
+  'esri/dijit/Legend',
+  'esri/geometry/Extent',
+  'esri/geometry/Point',
+  'esri/SpatialReference',
+  'esri/renderers/UniqueValueRenderer',
+  'esri/symbols/Font',
+  'esri/symbols/CartographicLineSymbol',
+  'esri/symbols/SimpleFillSymbol',
+  'esri/Color',
+  'dojo/dom-class',
+  'dojo/dom-construct',
+  'dojo/query',
+  'dojo/on',
+  'dojo/dom-attr',
+  'dojo/dom',
+  'esri/tasks/query',
+  'esri/tasks/QueryTask',
+  'esri/InfoTemplate',
+  'dojo/domReady!'
   ],
 
   function (
@@ -51,7 +58,8 @@ require([
     FeatureLayer,
     ArcGISTiledMapServiceLayer,
     LayerInfo,
-    Popup, PopupTemplate,
+    Popup,
+    PopupTemplate,
     LocateButton,
     Legend,
     Extent,
@@ -60,10 +68,15 @@ require([
     UniqueValueRenderer,
     font,
     CartographicLineSymbol,
-    SimpleFillSymbol, Color,
-    domClass, domConstruct, query, on,
+    SimpleFillSymbol,
+    Color,
+    domClass,
+    domConstruct,
+    query,
+    on,
     dom,
-    Query, QueryTask,
+    Query,
+    QueryTask,
     InfoTemplate
   ) {
 // ------------------------------------------------------------------------
@@ -73,11 +86,11 @@ require([
 // --------------------Popup Shell Setup-----------------------------------
     var popup = new Popup({
       titleInBody: false,
-    }, domConstruct.create("div"));
-    popup.setContent("");
+    }, domConstruct.create('div'));
+    popup.setContent('');
 
     //Add Popup theme (standard Esri light theme modified in style.css)
-    domClass.add(popup.domNode, "light");
+    domClass.add(popup.domNode, 'light');
 //----------------------------------------------------------------------
 
 
@@ -91,17 +104,17 @@ require([
   // ------- ArcGISTiledMapServiceLayer replace Map widget basemap property---
   //------------------------------------------------------------------------
     // topo basemap from ArcGIS Online, use levels 0 - 14
-    var topoBasemap = new   ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer", {
+    var topoBasemap = new   ArcGISTiledMapServiceLayer('http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer', {
       displayLevels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
     });
 
     // satellite Map service from ArcGIS Online, use levels 15 - 19
-    var imageryBasemap = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer", {
+    var imageryBasemap = new ArcGISTiledMapServiceLayer('http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer', {
       displayLevels: [15, 16, 17, 18, 19],
     });
 
     // transportation reference layer map service from ArcGIS Online, use levels 15 - 19 (this adds the labels for streets and other features)
-    var streetReferenceLayer = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer", {
+    var streetReferenceLayer = new ArcGISTiledMapServiceLayer('http://services.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer', {
       displayLevels: [15, 16, 17, 18, 19],
     });
   //--------------------------------------------------------------------------
@@ -111,8 +124,8 @@ require([
   // ------------------------ Initialize Map ------------------------------
   //------------------------------------------------------------------------
     // create the map and use the custom zoom levels
-    var map = new Map("map", {
-      // basemap: "topo", replaced by custom tiled layers
+    var map = new Map('map', {
+      // basemap: 'topo', replaced by custom tiled layers
       center: [-72.68, 43.785],
       zoom: 8,
       maxZoom:19,
@@ -129,7 +142,7 @@ require([
 
     //Resize Popup To Fit titlePane (slightly unnecessary)
     map.infoWindow.resize(300, 370);
-    map.infoWindow.anchor = "left";
+    map.infoWindow.anchor = 'left';
   //-------------------------------------------------------------------
 //-------------------------------------------------------------
 
@@ -141,11 +154,11 @@ require([
     var geoLocate = new LocateButton({
       map: map,
       scale: 5000,
-    }, "locateButton");
+    }, 'locate-button');
     geoLocate.startup();
 
     // Google Analytics track when locatebutton clicked
-    on(geoLocate, "locate", function() {
+    on(geoLocate, 'locate', function() {
       ga('send', 'event', { eventCategory: 'Locate', eventAction: 'GeoLocate', eventLabel: 'Use Geolocation Button'});
     });
 //------------------------------------------------------------------
@@ -159,27 +172,27 @@ require([
   //------------------------------------------------------------------
   //Crossing Popup Template--------------
   //-----------------------------------------------------
-    var crossingPopupFeatures = "<div id='popupContent' style='overflow-y:auto'><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b><span id='warnCode'>${WDCode}</span></b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popupPictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button><p id='images-loading'>Getting Image Info...</p></br><p id='images-error' style='display:none;'><small>If this text does not disappear soon, there may be a temporary issue with the XMLHttpRequest that will resolve itself. In the meantime, click on the full report to view images.</small></p></div>";
+    var crossingPopupFeatures = "<div id='popup-content' style='overflow-y:auto'><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b><span id='popup-content-warn-code'>${WDCode}</span></b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popup-content-pictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button><p id='popup-content-images-loading'>Getting Image Info...</p></br><p id='popup-content-images-error' style='display:none;'><small>If this text does not disappear soon, there may be a temporary issue with the XMLHttpRequest that will resolve itself. In the meantime, click on the full report to view images.</small></p></div>";
 
     var crossingTemplate = new PopupTemplate({
-      title: "Crossing {DOT_Num}",
+      title: 'Crossing {DOT_Num}',
     });
     //Provides warning if popup doesn't load properly and clears out editSummary
     //This hasn't been an issue in a while. If it doesn't happen after 1.0 launch, removed this for v1.1 to improve performance
-    crossingTemplate.setContent("<h1>Oops!</h1></br><b>Please close popup and try again.</b></br>The summary information and pictures for this crossing did not load properly.");
+    crossingTemplate.setContent('<h1>Oops!</h1></br><b>Please close popup and try again.</b></br>The summary information and pictures for this crossing did not load properly.');
   //-----------------------------------------------------
 
   //-----------------------------------------------------
   //Sign Popup Template------------------
   //-----------------------------------------------------
-    var signPopupFeatures = "<div id='popupContent' ><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popupPictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button><p id='images-loading'>Getting Image Info...</p></br><p id='images-error' style='display:none;'><small>If this text does not disappear soon, there may be a temporary issue with the XMLHttpRequest that will resolve itself. In the meantime, click on the full report to view images.</small></p></div>";
+    var signPopupFeatures = "<div id='popup-content' ><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popup-content-pictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button><p id='popup-content-images-loading'>Getting Image Info...</p></br><p id='popup-content-images-error' style='display:none;'><small>If this text does not disappear soon, there may be a temporary issue with the XMLHttpRequest that will resolve itself. In the meantime, click on the full report to view images.</small></p></div>";
 
     var signTemplate = new PopupTemplate({
-      title: "Crossing Sign",
+      title: 'Crossing Sign',
     });
     //Provides warning if popup doesn't load properly and clears out editSummary
     //This hasn't been an issue in a while. If it doesn't happen after 1.0 launch, removed this for v1.1 to improve performance
-    signTemplate.setContent("<h1>Oops!</h1></br><b>Please close popup and try again.</b></br>The summary information and pictures for this sign did not load properly.");
+    signTemplate.setContent('<h1>Oops!</h1></br><b>Please close popup and try again.</b></br>The summary information and pictures for this sign did not load properly.');
   //-----------------------------------------------------
 //-----------------------------------------------------------------------
 
@@ -190,10 +203,10 @@ require([
 //------------------------------------------------------------------
 
   // ----- Create Crossing Feature Layer-------------------
-    var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1"; // URL to local hosted crossing features service
+    var crossingUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1'; // URL to local hosted crossing features service
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
-      id: "crossing-points",
+      id: 'crossing-points',
       outFields: [
           'OBJECTID','DOT_Num','Feature_Crossed','MP',
           'LineName','Division','Subdivision',
@@ -213,7 +226,7 @@ require([
   // ----- pagination is necessary for search suggestions ----------------
   // -------- url is a slimmed down hosted feature service -------------------
   // --------------------------------------------------------------------
-    var crossingPointsSearch = new FeatureLayer("http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspection2015WebAppSearch/FeatureServer/0", {
+    var crossingPointsSearch = new FeatureLayer('http://services1.arcgis.com/NXmBVyW5TaiCXqFs/arcgis/rest/services/CrossingInspection2015WebAppSearch/FeatureServer/0', {
       outFields: [
           'OBJECTID','DOT_Num','Feature_Crossed','MP',
           'LineName','Division','Subdivision',
@@ -226,12 +239,12 @@ require([
 
 
   // ----- Create Sign Feature Layer---------------------------------
-    var signUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/0";
+    var signUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/0';
 
     var signPoints = new FeatureLayer(signUrl, {
-      id: "sign-points",
-      displayField: "DOT_Num",
-      outFields: ["*"],
+      id: 'sign-points',
+      displayField: 'DOT_Num',
+      outFields: ['*'],
       infoTemplate: signTemplate,
       minScale: 3000,
     });
@@ -240,38 +253,38 @@ require([
 
 
   // ---------- Create Rail Line Feature Layer----------------------------
-    var lineUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer/0";
+    var lineUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer/0';
 
     var railLine = new FeatureLayer(lineUrl, {
-      id: "rail-line",
-      outFields: ["*"],
+      id: 'rail-line',
+      outFields: ['*'],
     });
   // -----------------------------------------------------------------
 
 
   // --- Create Mile Posts Feature Layers-------------------------------
-    var mpTenUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3";
+    var mpTenUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3';
 
-    var mpFiveUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/2";
+    var mpFiveUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/2';
 
-    var mpOneUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/1";
+    var mpOneUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/1';
 
     var milePostsTen = new FeatureLayer (mpTenUrl, {
-      id: "mile-post-ten",
-      outFields: ["MP"],
-      labelingInfo: ["MP"],
+      id: 'mile-post-ten',
+      outFields: ['MP'],
+      labelingInfo: ['MP'],
     });
 
     var milePostsFive = new FeatureLayer (mpFiveUrl, {
-      id: "mile-post-five",
-      outFields: ["MP"],
-      labelingInfo: ["MP"],
+      id: 'mile-post-five',
+      outFields: ['MP'],
+      labelingInfo: ['MP'],
     });
 
     var milePostsOne = new FeatureLayer (mpOneUrl, {
-      id: "mile-post-one",
-      outFields: ["MP"],
-      labelingInfo: ["MP"],
+      id: 'mile-post-one',
+      outFields: ['MP'],
+      labelingInfo: ['MP'],
       minScale: 50000,
     });
 
@@ -290,14 +303,14 @@ require([
 // -------------------------------------------------------------------
   // crossingPoints labels
     var dotNumLabel = new esri.symbol.TextSymbol();
-    dotNumLabel.font.setSize("13pt");
-    dotNumLabel.font.setFamily("Verdana");
+    dotNumLabel.font.setSize('13pt');
+    dotNumLabel.font.setFamily('Verdana');
     dotNumLabel.font.setWeight(font.WEIGHT_BOLD);
     dotNumLabel.setColor(new Color([190, 232, 255, 1, 1]));
 
     var jsonLblCrossing = {
-      "labelExpressionInfo": {"value": "{DOT_Num}"},
-      "minScale": 20000,
+      'labelExpressionInfo': {'value': '{DOT_Num}'},
+      'minScale': 20000,
     };
 
     var crossingLabelClass = new esri.layers.LabelClass(jsonLblCrossing);
@@ -307,12 +320,12 @@ require([
 
   // mp labels
     var mpLabel = new esri.symbol.TextSymbol();
-    mpLabel.font.setSize("10pt");
-    mpLabel.font.setFamily("Verdana");
+    mpLabel.font.setSize('10pt');
+    mpLabel.font.setFamily('Verdana');
     mpLabel.setColor(new Color([235,235,235, 1]));
 
     var jsonLblmp = {
-      "labelExpressionInfo": {"value": "{MP}"},
+      'labelExpressionInfo': {'value': '{MP}'},
     };
 
     var mpLabelClass = new esri.layers.LabelClass(jsonLblmp);
@@ -342,24 +355,24 @@ require([
 //--------------------Setup Mobile Legend Controls-----------------------
 //----------full screen panel that minimizes to bottom of screen------------
 //--------------------------------------------------------------------
-    var legendOpen = document.getElementById('openMobileLegend');
+    var legendOpen = document.getElementById('mobile-legend-open');
     if (legendOpen) {
       legendOpen.addEventListener('click', function () {
-        document.getElementById('legend').style.display = "block";
-        document.getElementById('openMobileLegend').style.display = "none";
-        document.getElementById('closeMobileLegend').style.display = "block";
+        document.getElementById('legend').style.display = 'block';
+        document.getElementById('mobile-legend-open').style.display = 'none';
+        document.getElementById('mobile-legend-close').style.display = 'block';
 
         //Google Analytics record when someone opens legend
         ga('send', 'event', { eventCategory: 'Legend', eventAction: 'Open', eventLabel: 'Open Mobile Legend'});
       });
     }
 
-    var legendClose = document.getElementById('closeMobileLegend');
+    var legendClose = document.getElementById('mobile-legend-close');
     if (legendClose) {
       legendClose.addEventListener('click', function () {
-        document.getElementById('legend').style.display = "none";
-        document.getElementById('openMobileLegend').style.display = "block";
-        document.getElementById('closeMobileLegend').style.display = "none";
+        document.getElementById('legend').style.display = 'none';
+        document.getElementById('mobile-legend-open').style.display = 'block';
+        document.getElementById('mobile-legend-close').style.display = 'none';
 
         //Google Analytics record when someone closes legend
         ga('send', 'event', { eventCategory: 'Legend', eventAction: 'Close', eventLabel: 'Close Mobile Legend'});
@@ -372,19 +385,19 @@ require([
 //------------------------------------------------------------------
 //----------------------Build Legend----------------------------
 //------------------------------------------------------------------
-  map.on("load", function() {
+  map.on('load', function() {
     var layerInfo = [
       {
-        layer: signPoints, title: "Common Crossing Signs"
+        layer: signPoints, title: 'Common Crossing Signs'
       },
       {
-        layer: crossingPoints, title: "Railroad Crossings"
+        layer: crossingPoints, title: 'Railroad Crossings'
       },
       {
-        layer: milePostsTen, title: "Mile Posts"
+        layer: milePostsTen, title: 'Mile Posts'
       },
       {
-        layer: railLine, title: "Railroad Lines", hideLayers: [0], defaultSymbol: false
+        layer: railLine, title: 'Railroad Lines', hideLayers: [0], defaultSymbol: false
       }];
 
     var legendDijit = new Legend({
@@ -393,7 +406,7 @@ require([
       layerInfos: layerInfo,
 
       respectCurrentMapScale: true,
-    }, "legendDiv");
+    }, 'legend-div');
     legendDijit.startup();
   });
 //------------------------------------------------------------------
@@ -403,14 +416,14 @@ require([
 //------------------------------------------------------------------------
 //----------Create Full Report link with a filler href---------------------
 //------------------------------------------------------------------------
-  var link = domConstruct.create("a", {
-    "class": "btn btn-sm btn-default btn-report",
-    "role": "button",
-    "id": "fullReport",
-    "innerHTML": "Full Report",
-    "href": "#",
-    "target": "_blank",
-  }, dojo.query(".actionList", map.infoWindow.domNode)[0]); // adds to popup
+  var link = domConstruct.create('a', {
+    'class': 'btn btn-sm btn-default btn-report',
+    'role': 'button',
+    'id': 'fullReport',
+    'innerHTML': 'Full Report',
+    'href': '#',
+    'target': '_blank',
+  }, dojo.query('.actionList', map.infoWindow.domNode)[0]); // adds to popup
 //------------------------------------------------------------------------
 
 
@@ -423,10 +436,10 @@ require([
 
   //Important line that triggers updatePopupInfo if the popup selection changes
   //this is carefully coded to ensure that the correct photos are displayed
-  on(map.infoWindow, "selection-change", updatePopupInfo);
+  on(map.infoWindow, 'selection-change', updatePopupInfo);
 
   // This is the time interval (ms) that will continue to trigger
-  // updatePopupInfo every 3000ms until the popupPictures DOM button element
+  // updatePopupInfo every 3000ms until the popup-content-pictures DOM button element
   // exists. This button only displays once the XMLHttpRequest is completed.
   // This ensures the correct images are loaded by preventing the user from
   // clicking on the button until the request is finished.
@@ -444,7 +457,7 @@ require([
 
       // ----- Updates link to report page ------------------
       // -- unrelated to pictures but this location ensure the link is correct
-      link.href = "report.html?dotnum=" + dotnum;
+      link.href = 'report.html?dotnum=' + dotnum;
       //------------------------------------------------------------------
 
       //Google Analytics -- Records when the full report link is chosen from the popup along with the DOT num of the crossing
@@ -469,48 +482,48 @@ require([
 
       // ------ XMLHttpRequest for signs ---------------------------------
       // -- Creates Sign Image Folder Name from selected feature attributes --
-      var DOTsignUID = popup.getSelectedFeature().attributes.DOT_Num + "-" + popup.getSelectedFeature().attributes.SignUID;
+      var DOTsignUID = popup.getSelectedFeature().attributes.DOT_Num + '-' + popup.getSelectedFeature().attributes.SignUID;
 
-      var signImgFolder = "https://api.github.com/repos/VTrans-Rail/crossing-inspection/contents/thumb/SignPhotos/" + DOTsignUID; //github api image storage
+      var signImgFolder = 'https://api.github.com/repos/VTrans-Rail/crossing-inspection/contents/thumb/SignPhotos/' + DOTsignUID; //github api image storage
       if (popup.getSelectedFeature().attributes.SignUID) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (xhttp.readyState == 4 && xhttp.status == 200) {
             //display load picture button when ready
-            pictureOpen.style.display = "inline-block";
-            document.getElementById("images-loading").style.display = "none";
+            pictureOpen.style.display = 'inline-block';
+            document.getElementById('popup-content-images-loading').style.display = 'none';
             map.centerAt(new Point(popup.getSelectedFeature().geometry.x, popup.getSelectedFeature().geometry.y, new SpatialReference({ wkid: 102100})));
           } else if (xhttp.status == 403) {
-            document.getElementById("images-loading").style.display = "none";
+            document.getElementById('popup-content-images-loading').style.display = 'none';
 
-            document.getElementById("images-error").style.display = "inline-block";
+            document.getElementById('popup-content-images-error').style.display = 'inline-block';
             map.centerAt(new Point(popup.getSelectedFeature().geometry.x, popup.getSelectedFeature().geometry.y, new SpatialReference({ wkid: 102100})));
           }
         };
-        xhttp.open("GET", signImgFolder, true);
+        xhttp.open('GET', signImgFolder, true);
         xhttp.send();
       }
       // --------------------------------------------------------------
 
       // --------XMLHttpRequest for crossings -------------------------
-      var crossingImgFolder = "https://api.github.com/repos/VTrans-Rail/crossing-inspection/contents/thumb/CrossingPhotosbyID400/" + dotnum; //github api image storage
+      var crossingImgFolder = 'https://api.github.com/repos/VTrans-Rail/crossing-inspection/contents/thumb/CrossingPhotosbyID400/' + dotnum; //github api image storage
       if (popup.getSelectedFeature().attributes.SignUID === undefined ) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (xhttp.readyState == 4 && xhttp.status == 200) {
             //display load picture button when ready
-            pictureOpen.style.display = "inline-block";
-            document.getElementById("images-loading").style.display = "none";
+            pictureOpen.style.display = 'inline-block';
+            document.getElementById('popup-content-images-loading').style.display = 'none';
 
             map.centerAt(new Point(popup.getSelectedFeature().geometry.x, popup.getSelectedFeature().geometry.y, new SpatialReference({ wkid: 102100})));
           } else if (xhttp.status == 403) {
-            document.getElementById("images-loading").style.display = "none";
+            document.getElementById('popup-content-images-loading').style.display = 'none';
 
-            document.getElementById("images-error").style.display = "inline-block";
+            document.getElementById('popup-content-images-error').style.display = 'inline-block';
             map.centerAt(new Point(popup.getSelectedFeature().geometry.x, popup.getSelectedFeature().geometry.y, new SpatialReference({ wkid: 102100})));
           }
         };
-        xhttp.open("GET", crossingImgFolder, true);
+        xhttp.open('GET', crossingImgFolder, true);
         xhttp.send();
       }
     // ---------------------------------------------------------------------
@@ -518,38 +531,38 @@ require([
 
 
       // Updates Domain Codes to Coded Value, aka description or alias
-      if (document.getElementById('warnCode')) {
-        var warn = document.getElementById('warnCode').innerHTML;
+      if (document.getElementById('popup-content-warn-code')) {
+        var warn = document.getElementById('popup-content-warn-code').innerHTML;
 
-        if (warn === "StopYield") {
-          document.getElementById('warnCode').innerHTML = "Stop or Yield";
-        } else if (warn === "XB") {
-          document.getElementById('warnCode').innerHTML = "Crossbucks";
-        } else if (warn === "Flashers") {
-          document.getElementById('warnCode').innerHTML = "Flashing Lights";
-        } else if (warn === "Gates") {
-          document.getElementById('warnCode').innerHTML = "1 to 3 Gates";
-        } else if (warn === "FullQuad") {
-          document.getElementById('warnCode').innerHTML = "Four Quad (full barrier) Gates";
-        } else if (warn === "Other") {
-          document.getElementById('warnCode').innerHTML = "Other signs or signals";
-        } else if (warn === "Other AWD") {
-          document.getElementById('warnCode').innerHTML = "Other Active Device (flagging)";
-        } else if (warn === "None") {
-          document.getElementById('warnCode').innerHTML = "No signs or signals";
+        if (warn === 'StopYield') {
+          document.getElementById('popup-content-warn-code').innerHTML = 'Stop or Yield';
+        } else if (warn === 'XB') {
+          document.getElementById('popup-content-warn-code').innerHTML = 'Crossbucks';
+        } else if (warn === 'Flashers') {
+          document.getElementById('popup-content-warn-code').innerHTML = 'Flashing Lights';
+        } else if (warn === 'Gates') {
+          document.getElementById('popup-content-warn-code').innerHTML = '1 to 3 Gates';
+        } else if (warn === 'FullQuad') {
+          document.getElementById('popup-content-warn-code').innerHTML = 'Four Quad (full barrier) Gates';
+        } else if (warn === 'Other') {
+          document.getElementById('popup-content-warn-code').innerHTML = 'Other signs or signals';
+        } else if (warn === 'Other AWD') {
+          document.getElementById('popup-content-warn-code').innerHTML = 'Other Active Device (flagging)';
+        } else if (warn === 'None') {
+          document.getElementById('popup-content-warn-code').innerHTML = 'No signs or signals';
         }
       }
       // ---------------------------------------------------------------
 
 
     // -------------------------------------------------------------------
-    // if XMLHttpRequest completed, then popupPictures button is created
-    // if popupPictures button defined, then adds event listener for
+    // if XMLHttpRequest completed, then popup-content-pictures button is created
+    // if popup-content-pictures button defined, then adds event listener for
     // user to click on the button. If clicked, triggers images to display.
-      var pictureOpen = document.getElementById('popupPictures');
+      var pictureOpen = document.getElementById('popup-content-pictures');
       if (pictureOpen) {
         pictureOpen.addEventListener('click', function () {
-          pictureOpen.style.display = "none"; // hides popupPictures button
+          pictureOpen.style.display = 'none'; // hides popup-content-pictures button
 
           var objectId = popup.getSelectedFeature().attributes.OBJECTID;
 
@@ -557,7 +570,7 @@ require([
           var imageString = "<table><tr>";
           var imageStyle = "alt='site image' width='100%'";
 
-          var selectedLayer = "";
+          var selectedLayer = '';
 
           var selectedLayerId = popup.getSelectedFeature()._layer.id;
 
@@ -589,7 +602,7 @@ require([
           selectedLayer.queryAttachmentInfos(objectId).then(function(response){
             var imgSrc;
             if (response.length === 0) {
-              deferred.resolve("no attachments");
+              deferred.resolve('no attachments');
             }
             else {
               if (selectedLayerId.length > 12) {
@@ -597,7 +610,7 @@ require([
                   for ( j = 0; j < response.length; j++ ) {
                     if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
                       imgSrc = response[j].url;
-                      imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='crossingImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/CrossingPhotosbyID400/" + dotnum + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
+                      imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='crossingImageGA()' href='photo.html?url=" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/CrossingPhotosbyID400/" + dotnum + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
                     }
                   }
                 }
@@ -609,15 +622,15 @@ require([
                   for ( j = 0; j < response.length; j++ ) {
                     if ( response[j].name.substr(0,6) === imageTagArray[i].name.substr(0,6) ) {
                       imgSrc = response[j].url;
-                      imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='signImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/SignPhotos/" + DOTsignUID + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
+                      imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='signImageGA()' href='photo.html?url=" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/SignPhotos/" + DOTsignUID + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
                     }
                   }
                 }
               }
             }
           }).then(function(response) {
-            var summaryInfo = document.getElementById("popupContent").innerHTML;
-            document.getElementById("popupContent").innerHTML = summaryInfo + imageString; // replace popupContent.innerHTML with info plus pics
+            var summaryInfo = document.getElementById('popup-content').innerHTML;
+            document.getElementById('popup-content').innerHTML = summaryInfo + imageString; // replace popup-content.innerHTML with info plus pics
 
 
             //Google Analytics records when images were loaded in the popup
@@ -636,7 +649,7 @@ require([
 // ---------------------------------------------------------------------
 // -------------------Maximize Popup for Small Devices----------------------
 // ---------------------------------------------------------------------
-    on(map, "click", function(evt) {
+    on(map, 'click', function(evt) {
       if ( map.width < 415 ) {
         map.infoWindow.maximize();
       }
@@ -647,14 +660,14 @@ require([
 
 // ---------------------------- Build search --------------------------
     var searchWidget = new Search({
-      allPlaceholder: "Search by DOT #, Rail Line, Condition, or Place",
+      allPlaceholder: 'Search by DOT #, Rail Line, Condition, or Place',
       enableLabel: false,
       enableInfoWindow: true,
       showInfoWindowOnSelect: false,
       enableHighlight: false,
       map: map,
       suggestionDelay: 0,
-    }, "search");
+    }, 'search');
 
     //Create blank searchSources array
     var searchSources = [];
@@ -662,13 +675,13 @@ require([
     //Push the first source used to search to searchSources array
     searchSources.push({
       featureLayer: crossingPointsSearch,
-      searchFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Division", "Subdivision", "Branch", "Feature_Crossed", "XingCond"],
-      displayField: "DOT_Num",
-      suggestionTemplate: "${DOT_Num}: The ${LineName} crosses ${Feature_Crossed} in ${Town}. (${XingCond})",
+      searchFields: ['DOT_Num', 'RRXingNum', 'Town', 'County', 'LineName', 'Division', 'Subdivision', 'Branch', 'Feature_Crossed', 'XingCond'],
+      displayField: 'DOT_Num',
+      suggestionTemplate: '${DOT_Num}: The ${LineName} crosses ${Feature_Crossed} in ${Town}. (${XingCond})',
       exactMatch: false,
-      outFields: ["DOT_Num", "RRXingNum", "Town", "County", "LineName", "Feature_Crossed", "XingCond"],
-      name: "Railroad Crossings",
-      placeholder: "Search by DOT #, Line, Street, Town, or County",
+      outFields: ['DOT_Num', 'RRXingNum', 'Town', 'County', 'LineName', 'Feature_Crossed', 'XingCond'],
+      name: 'Railroad Crossings',
+      placeholder: 'Search by DOT #, Line, Street, Town, or County',
       maxResults: 500,
       maxSuggestions:500,
 
@@ -678,19 +691,19 @@ require([
 
     //change placeholder text and font-size to respond to screen width
     if (map.width < 358) {
-      searchWidget.allPlaceholder = "Search";
-      document.getElementById("search_input").style.fontSize = "1.25em";
+      searchWidget.allPlaceholder = 'Search';
+      document.getElementById('search_input').style.fontSize = '1.25em';
     } else if (map.width < 439) {
-      searchWidget.allPlaceholder = "Search Crossings or Places";
-      document.getElementById("search_input").style.fontSize = "1em";
+      searchWidget.allPlaceholder = 'Search Crossings or Places';
+      document.getElementById('search_input').style.fontSize = '1em';
     }
 
     //create extent to limit search Results
     var extent = new esri.geometry.Extent({
-      "xmin":-73.31,
-      "ymin":42.75,
-      "xmax":-71.65,
-      "ymax":45.00,
+      'xmin':-73.31,
+      'ymin':42.75,
+      'xmax':-71.65,
+      'ymax':45.00,
     });
 
     searchWidget.sources[0].maxSuggestions = 5;
@@ -700,13 +713,13 @@ require([
     searchSources.push(searchWidget.sources[0]);
 
     // Set the source for the searchWidget to the properly ordered searchSources array
-    searchWidget.set("sources", searchSources);
+    searchWidget.set('sources', searchSources);
 
 
     //Finalize creation of the search widget
     searchWidget.startup();
 
-    on(searchWidget, "search-results", function() {
+    on(searchWidget, 'search-results', function() {
 
       var searchString = searchWidget.value;
 
@@ -737,12 +750,12 @@ require([
       }
     });
 
-    on(searchWidget, "suggest-results", function() {
+    on(searchWidget, 'suggest-results', function() {
       if (searchWidget.suggestResults === null) {
         //do nothing
       } else {
 
-        var originalSuggestions = document.getElementsByClassName("suggestionsMenu")[0].innerHTML;
+        var originalSuggestions = document.getElementsByClassName('suggestionsMenu')[0].innerHTML;
 
         var suggestions = new Array(searchWidget.suggestResults[0]);
 
@@ -751,7 +764,7 @@ require([
         // adds suggestions count to top of suggestion list
         var newSuggestions = "<div>" + insertSuggestCount + originalSuggestions.slice(5);
 
-        document.getElementsByClassName("suggestionsMenu")[0].innerHTML = newSuggestions;
+        document.getElementsByClassName('suggestionsMenu')[0].innerHTML = newSuggestions;
       }
     })
 });

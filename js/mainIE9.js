@@ -93,7 +93,7 @@ require([
       infoWindow: popup,
       showLabels: true,
       maptiks_trackcode: 'afbe75a4-bb16-4c19-92cf-e2c9cd8e98ed',
-      maptiks_id: 'Crossing Inspection',      
+      maptiks_id: 'Crossing Inspection',
     });
 
     map.addLayer(topoBasemap);
@@ -112,7 +112,7 @@ require([
     var geoLocate = new LocateButton({
       map: map,
       scale: 5000,
-    }, "locateButton");
+    }, "locate-button");
     geoLocate.startup();
 
     on(geoLocate, "locate", function() {
@@ -127,7 +127,7 @@ require([
 // -----------------Define PopupTemplates------------------------------
 //------------------------------------------------------------------
     //Crossing Template--------------
-    var crossingPopupFeatures = "<div id='popupContent' style='overflow-y:auto'><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b><span id='warnCode'>${WDCode}</span></b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popupPictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button></div>";
+    var crossingPopupFeatures = "<div id='popup-content' style='overflow-y:auto'><small>DOT Crossing Number:</small> <b>${DOT_Num}</b></br><small>Line Name:</small> <b>${LineName}</b></br><small>Feature Crossed:</small> <b>${Feature_Crossed}</b></br><small>Warning Device Level:</small> <b><span id='popup-content-warn-code'>${WDCode}</span></b></br><small>Primary Surface Material:</small> <b>${SurfaceType}</b></br><small>Crossing Codition:</small> <b>${XingCond}</b></br> </br>     <button type='button' id='popup-content-pictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button></div>";
 
     var crossingTemplate = new PopupTemplate({
       title: "Crossing {DOT_Num}",
@@ -137,7 +137,7 @@ require([
 
 
     //Sign Template------------------
-    var signPopupFeatures = "<div id='popupContent' ><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popupPictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button></div>";
+    var signPopupFeatures = "<div id='popup-content' ><small>Associated Crossing DOT#:</small> <b>${DOT_Num}</b></br><small>Type of Sign:</small> <b>${SignType}</b></br><small>Type of Post:</small> <b>${Post}</b></br><small>ASTM Reflective Sheeting:</small> <b>${Reflective}</b></br><small>Reflective Sheeting Condition:</small> <b>${ReflSheetCond}</b></br><small>Installation Date:</small> <b>${InstallDate}</b></br><small>Overall Condition:</small> <b>${SignCondition}</b></br> </br>   <button type='button' id='popup-content-pictures' class='btn btn-lg btn-default text-center btnHelp' style='display:none;'>&#x25BC Pictures &#x25BC</button></div>";
 
     var signTemplate = new PopupTemplate({
       title: "Crossing Sign",
@@ -166,7 +166,7 @@ require([
           'GateConfig1','GateConfig2','Cant_Struc_Over',
           'Cant_Struc_Side','Cant_FL_Type','FL_MastCount',
           'Mast_FL_Type','BackSideFL','FlasherCount',
-          'FlasherSize','WaysideHorn','HTS_Control',
+          'FlasherSize','Waypopup-contentorn','HTS_Control',
           'HTS_for_Nearby_Intersection','BellCount','HTPS',
           'HTPS_StorageDist','HTPS_StopLineDist','TrafficLnType',
           'TrafficLnCount','Paved','XingIllum',
@@ -308,24 +308,24 @@ require([
 //-------------------------------------------------------------
 //--------------------Setup Mobile Legend Controls-----------------------
 //-------------------------------------------------------------
-    var legendOpen = document.getElementById('openMobileLegend');
+    var legendOpen = document.getElementById('mobile-legend-open');
     if (legendOpen) {
       legendOpen.addEventListener('click', function () {
         document.getElementById('legend').style.display = "block";
-        document.getElementById('openMobileLegend').style.display = "none";
-        document.getElementById('closeMobileLegend').style.display = "block";
+        document.getElementById('mobile-legend-open').style.display = "none";
+        document.getElementById('mobile-legend-close').style.display = "block";
 
         //Google Analytics
         ga('send', 'event', { eventCategory: 'Legend', eventAction: 'Open', eventLabel: 'Open Mobile Legend'});
       });
     }
 
-    var legendClose = document.getElementById('closeMobileLegend');
+    var legendClose = document.getElementById('mobile-legend-close');
     if (legendClose) {
       legendClose.addEventListener('click', function () {
         document.getElementById('legend').style.display = "none";
-        document.getElementById('openMobileLegend').style.display = "block";
-        document.getElementById('closeMobileLegend').style.display = "none";
+        document.getElementById('mobile-legend-open').style.display = "block";
+        document.getElementById('mobile-legend-close').style.display = "none";
 
         //Google Analytics
         ga('send', 'event', { eventCategory: 'Legend', eventAction: 'Close', eventLabel: 'Close Mobile Legend'});
@@ -359,7 +359,7 @@ require([
       layerInfos: layerInfo,
 
       respectCurrentMapScale: true,
-    }, "legendDiv");
+    }, "legend-div");
     legendDijit.startup();
   });
 
@@ -416,30 +416,30 @@ require([
 
 
       // Updates Domain Codes to Coded Value, aka description or alias
-      if (document.getElementById('warnCode')) {
-        var warn = document.getElementById('warnCode').innerHTML;
+      if (document.getElementById('popup-content-warn-code')) {
+        var warn = document.getElementById('popup-content-warn-code').innerHTML;
 
         if (warn === "StopYield") {
-          document.getElementById('warnCode').innerHTML = "Stop or Yield";
+          document.getElementById('popup-content-warn-code').innerHTML = "Stop or Yield";
         } else if (warn === "XB") {
-          document.getElementById('warnCode').innerHTML = "Crossbucks";
+          document.getElementById('popup-content-warn-code').innerHTML = "Crossbucks";
         } else if (warn === "Flashers") {
-          document.getElementById('warnCode').innerHTML = "Flashing Lights";
+          document.getElementById('popup-content-warn-code').innerHTML = "Flashing Lights";
         } else if (warn === "Gates") {
-          document.getElementById('warnCode').innerHTML = "1 to 3 Gates";
+          document.getElementById('popup-content-warn-code').innerHTML = "1 to 3 Gates";
         } else if (warn === "FullQuad") {
-          document.getElementById('warnCode').innerHTML = "Four Quad (full barrier) Gates";
+          document.getElementById('popup-content-warn-code').innerHTML = "Four Quad (full barrier) Gates";
         } else if (warn === "Other") {
-          document.getElementById('warnCode').innerHTML = "Other signs or signals";
+          document.getElementById('popup-content-warn-code').innerHTML = "Other signs or signals";
         } else if (warn === "Other AWD") {
-          document.getElementById('warnCode').innerHTML = "Other Active Device (flagging)";
+          document.getElementById('popup-content-warn-code').innerHTML = "Other Active Device (flagging)";
         } else if (warn === "None") {
-          document.getElementById('warnCode').innerHTML = "No signs or signals";
+          document.getElementById('popup-content-warn-code').innerHTML = "No signs or signals";
         }
       }
 
 
-      var pictureOpen = document.getElementById('popupPictures');
+      var pictureOpen = document.getElementById('popup-content-pictures');
 
 
       pictureOpen.style.display = "inline-block";
@@ -472,18 +472,18 @@ require([
               if (selectedLayerId.length > 12) {
                 for ( j = 0; j < response.length; j++ ) {
                   imgSrc = response[j].url;
-                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='crossingImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (j+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='" + imgSrc + "' " + imageStyle + ">" + "</div></td></tr>";
+                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='crossingImageGA()' href='photo.html?url=" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (j+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='" + imgSrc + "' " + imageStyle + ">" + "</div></td></tr>";
                 }
               } else {
                 for ( j = 0; j < response.length; j++ ) {
                   imgSrc = response[j].url;
-                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='signImageGA()' href='" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (j+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='" + imgSrc + "' " + imageStyle + ">" + "</div></td></tr>";
+                  imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='signImageGA()' href='photo.html?url=" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (j+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='" + imgSrc + "' " + imageStyle + ">" + "</div></td></tr>";
                 }
               }
             }
           }).then(function(response) {
-              var summaryInfo = document.getElementById("popupContent").innerHTML;
-              document.getElementById("popupContent").innerHTML = summaryInfo + imageString;
+              var summaryInfo = document.getElementById("popup-content").innerHTML;
+              document.getElementById("popup-content").innerHTML = summaryInfo + imageString;
 
               //Google Analytics
               ga('send', 'event', { eventCategory: 'Popup', eventAction: 'View', eventLabel: 'Popup Image Views'});

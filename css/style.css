@@ -5,7 +5,7 @@
   position: absolute;
 }
 
-#popupPictures {
+#popup-content-pictures {
   width: 100%;
   margin: 0 auto;
   margin-bottom: 2px;
@@ -102,21 +102,10 @@
   padding: 10px;
 }
 
-#helpDiv {
-  padding-top: 10px;
-  padding-left: 0px;
-}
-
-#HelpButton {
-  padding-top: 1px;
-  padding-bottom: 1px;
-}
-
-
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
-#locateButton {
+#locate-button {
   position: absolute;
   float: left;
   border: 1px solid #57585A;
@@ -202,7 +191,7 @@
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
-  #locateButton {
+  #locate-button {
     top: 95px;
     left: 60px;
   }
@@ -242,17 +231,12 @@
   #map {
     padding-top: 75px;
   }
-
-  #HelpButton {
-    padding-top: 6px;
-    padding-bottom: 6px;
-  }
 } /* end small devices */
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 
-  #locateButton {
+  #locate-button {
     top: 105px;
     left: 72px;
   }
@@ -297,11 +281,6 @@
     max-width: 24px;
     padding-top: 13px;
     padding-bottom: 13px;
-  }
-
-  #HelpButton {
-    padding-top: 11px;
-    padding-bottom: 11px;
   }
 } /* end medium devices */
 
