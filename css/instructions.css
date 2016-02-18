@@ -41,6 +41,20 @@
   font-weight: bold;
 }
 
+.vtrans-logo {
+  margin-top: 1rem;
+  content: "";
+  /*display: inline-block;*/
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  min-height: 30px;
+  min-width: 120px;
+  line-height: 0;
+  background-size: 100% auto;
+  background-image: url("../img/MOM AOT BLK.svg") !important;
+}
+
 
 /*
  * Footer
@@ -65,7 +79,7 @@
 .btnHelp {
   background-color: white;
   border: 1px solid #57585A;
-  border-radius: 4px;
+  /*border-radius: 4px;*/
   padding: 1px 9px;
 }
 
@@ -76,8 +90,14 @@
 
 
 #help-button {
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding-top: 2px;
+  /*padding-bottom: 1px;*/
+  font-size: .75em;
+  line-height: 1.5em;
+}
+
+.esri-icon-question::before {
+  font-size: 1.25em;
 }
 
 
@@ -173,10 +193,10 @@
     font-size: 1.75em;
   }
 
-  #help-button {
+  /*#help-button {
     padding-top: 6px;
     padding-bottom: 6px;
-  }
+  }*/
 }
 
 @media (min-width: 992px) {
@@ -186,8 +206,8 @@
     width: 700px;
   }
 
-  #help-button {
+  /*#help-button {
     padding-top: 11px;
     padding-bottom: 11px;
-  }
+  }*/
 }

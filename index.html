@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html dir="ltr">
+<!--[if lt IE 9]>  <html class="ie lt-ie9 ie8"> <![endif]-->
+<!--[if IE 9]>     <html class="ie ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html>
+<!--<![endif]-->
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 
     <title>VTrans Rail: At-Grade Public Railroad Crossings</title>
 
     <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
 
     <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+
+    <link rel="stylesheet" type="text/css" href="dist/css/calcite-web-no-fonts.min.css">
 
     <link rel="stylesheet" href="css/instructions.css">
     <link rel="stylesheet" href="css/style.css">
@@ -45,7 +52,7 @@
       <script>alert("This app best experienced in modern browsers such as Firefox or Chrome.");</script>
     <![endif]-->
 
-    <!-- <script src="http://localhost:35729/livereload.js"></script> -->
+    <script src="http://localhost:35729/livereload.js"></script>
 
 </head>
 
@@ -59,20 +66,25 @@
     </div>
   </noscript>
 
-<div class="pagecontainer">
   <div id="instructions" style="display: none;"></div>
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-10 col-sm-11">
-          <div id="search"></div>
-        </div>
-        <div class="col-xs-1" id="help-div">
-          <button class="btn btn-default text-center btnHelp" id="help-button" type="button" onclick="helpButton()"><span class="esri-icon-question"></span><br>Help</button>
-        </div>
+
+
+    <header class="top-nav" id="page-top">
+      <div class="grid-container">
+          <div class="column-2">
+            <a href="" class="top-nav-title vtrans-logo"></a>
+          </div>
+          <div class="column-4">&nbsp</div>
+          <div class="column-13">
+            <div id="search"></div>
+          </div>
+          <div class="column-4">&nbsp</div>
+          <div class="column-1" id="help-div">
+            <button class="text-center btnHelp" id="help-button" type="button" onclick="helpButton()"><span class="esri-icon-question"></span><br>Help</button>
+          </div>
       </div>
-    </div>
-  </div>
+    </header>
+
 
   <div id="map">
     <div id="locate-button"></div>
@@ -123,8 +135,8 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-45708379-9', 'auto');
-    ga('send', 'pageview');
+    // ga('create', 'UA-45708379-9', 'auto');
+    // ga('send', 'pageview');
   </script>
   <script>
     function crossingImageGA() {
@@ -143,7 +155,6 @@
       ga('send', 'event', { eventCategory: 'Users', eventAction: 'User Views', eventLabel: data.ip + ' - Client IP Address'});
     });
   </script>
-</div>
 </body>
 
 </html>
