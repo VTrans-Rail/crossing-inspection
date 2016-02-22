@@ -154,8 +154,8 @@
   width: calc(100% - 70px);
 }
 .arcgisSearch .suggestionsMenu {
-  background-color: #81C784;
-  border: 2px solid #1B5E20;
+  background-color: #f8f8f8;
+  border: 2px solid #333333;
   width: calc(100% - 70px);
 }
 @media (min-height: 600px) {
