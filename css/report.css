@@ -1,23 +1,19 @@
 html body {
-  padding:0;
+  padding: 0;
 }
-
 #condition {
   font-weight: bold;
   letter-spacing: 2px;
   text-shadow: 0 0 2px #000;
 }
-
 #info {
   padding-top: 95px;
 }
-
 #left-panel {
   display: none;
 }
-
 #metadata-info {
-  display:block;
+  display: block;
   position: fixed;
   text-align: center;
   overflow-y: auto;
@@ -30,12 +26,10 @@ html body {
   z-index: 10;
   width: 100%;
 }
-
 #rpt-ico {
   max-height: 1.125em;
   padding-right: 5px;
 }
-
 .metadata-heading {
   width: 100%;
   padding-top: 2px;
@@ -45,33 +39,29 @@ html body {
 }
 
 /* Gradient color1 - color2 - color1 */
-hr.style-one {
-    border: 0;
-    height: 1px;
-    background: #333;
-    background-image: linear-gradient(to right, #ccc, #333, #ccc);
-}
 
+hr.style-one {
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
 #contact-paragraph {
   padding-right: 20px;
   padding-left: 20px;
 }
-
 #metadata-full-body {
   overflow-y: auto;
   margin-bottom: 65px;
 }
-
 #metadata-body {
   padding-right: 20px;
   padding-left: 20px;
   margin-bottom: 65px;
 }
-
 #metadata-domain-text {
   text-align: left;
 }
-
 .gotit {
   position: fixed;
   bottom: 0px;
@@ -81,59 +71,49 @@ hr.style-one {
   padding-bottom: 5px;
   padding-left: calc(((100% - 82px)/2));
 }
-
 #close-metadata {
   display: none;
 }
-
 .blur .img-responsive {
   margin-bottom: 5px;
 }
-
 .blur {
-  position:relative;
+  position: relative;
 }
-
 .blur h3 {
   visibility: hidden;
   position: absolute;
   font-weight: bold;
   color: #000;
-  text-shadow: 0px 0px 4px rgba(255,255,255,1);
+  text-shadow: 0px 0px 4px rgba(255, 255, 255, 1);
   /*filter: url(#drop-shadow);*/
   bottom: calc((100% - 19px)/2);
   left: calc((100% - 180px)/2);
 }
-
 .blur img:hover {
   filter: blur(2px);
   -webkit-filter: blur(2px);
   -moz-filter: blur(2px);
-	-o-filter: blur(2px);
-	-ms-filter: blur(2px);
-  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius='5');
 }
-
 .blur h4:hover {
   visibility: visible;
 }
-
 .blur img:hover + h3 {
   visibility: visible;
 }
-
 form fieldset div div input:disabled {
   color: #666666;
-  -webkit-opacity:1;
+  -webkit-opacity: 1;
 }
-
 @media (min-width: 415px) {
   form {
     padding-bottom: 40vh;
   }
-
   #metadata-info {
-    display:block;
+    display: block;
     position: fixed;
     text-align: center;
     overflow-y: auto;
@@ -148,18 +128,15 @@ form fieldset div div input:disabled {
     height: 40%;
     width: 100%;
   }
-
   #metadata-full-body {
     overflow-y: auto;
     margin-bottom: 5px;
   }
-
   #metadata-body {
     margin-bottom: 10px;
   }
-
   #close-metadata {
-    display:block;
+    display: block;
     position: fixed;
     float: right;
     height: 26px;
@@ -167,36 +144,27 @@ form fieldset div div input:disabled {
     right: 10px;
     top: calc(60% + 10px);
   }
-
   .gotit {
     display: none;
   }
 }
-
-
-
 @media (min-width: 768px) {
   #metadata-info {
     padding-right: calc((100% - 670px)/2);
   }
 }
-
 @media (min-width: 992px) {
   #metadata-info {
     padding-right: calc((100% - 820px)/2);
     padding-left: calc((100% - 820px)/2);
   }
 }
-
-
 @media (min-width: 1200px) {
   form {
     padding-bottom: 50px;
   }
-
-
   #metadata-info {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: rgba(200, 200, 200, 0.9);
     color: #404040;
     bottom: 0;
@@ -206,22 +174,20 @@ form fieldset div div input:disabled {
     padding-right: calc((((100% - 830px)/2) - 300px)/2);
     padding-left: calc((((100% - 830px)/2) - 300px)/2);
   }
-
   #left-panel {
-    display:block;
+    display: block;
     position: fixed;
     text-align: center;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: rgba(200, 200, 200, 0.9);
     color: #404040;
-    bottom:0;
+    bottom: 0;
     width: calc((100% - 830px)/2);
     height: 100%;
     padding-top: 85px;
     padding-right: calc((((100% - 830px)/2) - 300px)/2);
     padding-left: calc((((100% - 830px)/2) - 300px)/2);
   }
-
   #close-metadata {
     display: none;
   }

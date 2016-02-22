@@ -1,64 +1,53 @@
 .navigation-bar-report {
-  position:fixed;
+  position: fixed;
   width: 100%;
   top: 0;
   background-color: white;
   z-index: 11;
   border-bottom: 1px solid black;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
-
 button.full-button {
-  display:none;
-  position:absolute;
+  display: none;
+  position: absolute;
 }
-
 #print-icon {
   top: 16px;
 }
-
 #close-icon {
   background-image: url('../img/close.svg');
   background-size: cover;
-  padding: 0; /* reset */
+  padding: 0;
+  /* reset */
   width: 15px;
   padding-bottom: 100%;
   top: -5;
 }
-
-#report-page-title-div {
-}
-
+#report-page-title-div {}
 #nav-pad {
   padding-top: 5px;
 }
-
 #report-title {
   color: #333;
   text-align: center;
   font-size: 20px;
 }
-
 .icon-button {
-  padding: 1px 6px;;
+  padding: 1px 6px;
+  ;
 }
-
-@media(min-width: 359px) {
-
-}
-
+@media(min-width: 359px) {}
 @media (min-width: 415px) {
   #report-title {
     font-size: 20px;
   }
 }
-
 @media (min-width: 768px) {
   button.icon-button {
     display: none;
   }
   button.full-button {
-    display:block;
+    display: block;
   }
 }
