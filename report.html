@@ -71,29 +71,65 @@
     </noscript>
 
   <div class="pagecontainer">
-    <div>
+    <div class="navbar navbar-default navbar-fixed-top">
+
+
+      <div class="container-fluid">
+        <div class="row" id="nav-pad">
+          <div class="col-xs-2 hidden-xs">
+            <button id="print-button" type="button" name="button" class="btn btn-primary full-button" onclick="window.print()">
+              <img src="img/printer.svg" id="rpt-ico" alt="" />
+              Print
+            </button>
+          </div>
+          <div class="col-xs-10 col-sm-8 text-center">
+            <p id="report-title">Crossing Report</p>
+          </div>
+          <div class="col-xs-2 hidden-xs">
+            <button id="close-button" type="button" name="button" class="btn btn-primary full-button" onclick="self.close()">
+              <img src="img/close.svg" id="rpt-ico"  alt="" />
+              Close
+            </button>
+          </div>
+          <div class="col-xs-1 hidden-sm hidden-md hidden-xl">
+            <button type="button" name="button" class="btn btn-primary icon-button" onclick="self.close()">
+              <img id="close-icon"></img>
+            </button>
+          </div>
+
+        </div> <!-- end row -->
+      </div> <!-- end container fluid -->
+    </div> <!-- end navbar-default -->
+
+    <!-- <div>
         <div class="navigation-bar-report">
           <div>
             <div>
-              <button id="print-button" type="button" name="button" class="btn btn-primary btn-lg full-button" onclick="window.print()">Print Report</button>
+              <button id="print-button" type="button" name="button" class="btn btn-primary full-button" onclick="window.print()">
+                <img src="img/printer.svg" id="rpt-ico" alt="" />
+                Print
+              </button>
             </div>
-            <div class="">
+             <div class="">
               <button id="print-icon" type="button" name="button" class="btn btn-primary icon-button" onclick="window.print()"><img src="img\print.png" height="16" width="16px" alt="close" /></button>
             </div>
           </div>
           <div id="report-page-title-div">
-            <h1 id="report-title">Crossing Report</h1>
+            <h2 id="report-title">Crossing Report</h2>
           </div>
           <div class="">
             <div>
-              <button id="close-button" type="button" name="button" class="btn btn-primary btn-lg full-button" onclick="self.close()">Close Report</button>
+              <button id="close-button" type="button" name="button" class="btn btn-primary full-button" onclick="self.close()">
+                <img src="img/close.svg" id="rpt-ico"  alt="" />
+                Close
+              </button>
             </div>
             <div>
               <button id="close-icon" type="button" name="button" class="btn btn-primary icon-button" onclick="self.close()"><img src="img\close.png" height="16" width="16px" alt="" /></button>
             </div>
           </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="container-fluid" id="info"></div>
     <!-- <div id="metadata-info">

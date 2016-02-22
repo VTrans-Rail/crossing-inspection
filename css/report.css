@@ -31,6 +31,11 @@ html body {
   width: 100%;
 }
 
+#rpt-ico {
+  max-height: 1.125em;
+  padding-right: 5px;
+}
+
 .metadata-heading {
   width: 100%;
   padding-top: 2px;
