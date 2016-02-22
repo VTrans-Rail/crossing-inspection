@@ -2,73 +2,82 @@
 <html dir="ltr" class="dj_webkit dj_chrome dj_contentbox">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no" />
 
-    <title>Full Crossing Report</title>
+  <title>Full Crossing Report</title>
 
-    <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
 
-    <script type="text/javascript" charset="utf-8" src="http://js.arcgis.com/3.14/esri/nls/jsapi_en-us.js"></script>
-    <script type="text/javascript" charset="utf-8" src="http://js.arcgis.com/3.14/dojox/gfx/svg.js"></script>
-    <script src="http://js.arcgis.com/3.14/"></script>
+  <script type="text/javascript" charset="utf-8" src="http://js.arcgis.com/3.14/esri/nls/jsapi_en-us.js"></script>
+  <script type="text/javascript" charset="utf-8" src="http://js.arcgis.com/3.14/dojox/gfx/svg.js"></script>
+  <script src="http://js.arcgis.com/3.14/"></script>
 
-    <!--[if !IE]> -->
-      <script src="js/report.js"></script>
-    <!-- <![endif]-->
-    <!--[if IE 9]>
+  <!--[if !IE]> -->
+  <script src="js/report.js"></script>
+  <!-- <![endif]-->
+  <!--[if IE 9]>
       <script src="js/reportIE9.js"></script>
     <![endif]-->
 
 
-    <script src="http://localhost:35729/livereload.js"></script>
+  <script src="http://localhost:35729/livereload.js"></script>
 
-    <link rel="stylesheet" href="dist/css/calcite-bootstrap-open.min.css">
+  <link rel="stylesheet" href="dist/css/calcite-bootstrap-open.min.css">
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/report.css">
-    <link rel="stylesheet" href="css/report-navbar.css">
-    <link rel="stylesheet" href="css/report-print.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/report.css">
+  <link rel="stylesheet" href="css/report-navbar.css">
+  <link rel="stylesheet" href="css/report-print.css">
 
-    <link rel="stylesheet" href="css/bootstrap-mod.css">
+  <link rel="stylesheet" href="css/bootstrap-mod.css">
 
-    <!-- Gridforms CSS -->
-    <link rel="stylesheet" type="text/css" href="gridforms/gridforms.css">
+  <!-- Gridforms CSS -->
+  <link rel="stylesheet" type="text/css" href="gridforms/gridforms.css">
 
-    <!--[if IE 7]>
+  <!--[if IE 7]>
       <script>alert("This app best experienced in modern browsers such as Firefox or Chrome.");</script>
     <![endif]-->
-    <!--[if IE 8]>
+  <!--[if IE 8]>
       <script>alert("This app best experienced in modern browsers such as Firefox or Chrome.");</script>
       <script src="js/reportIE9xdr.js"></script>
     <![endif]-->
-    <!--[if IE 9]>
+  <!--[if IE 9]>
       <script>alert("This app best experienced in modern browsers such as Firefox or Chrome.");</script>
     <![endif]-->
 
 
-    <!-- Google Analytics -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  <!-- Google Analytics -->
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-45708379-9', 'auto');
-      ga('send', 'pageview');
-    </script>
+    ga('create', 'UA-45708379-9', 'auto');
+    ga('send', 'pageview');
+  </script>
 
-  </head>
+</head>
 
-  <body>
-    <noscript>
-      <style type="text/css">
-          .pagecontainer {display:none;}
-      </style>
-      <div class="noscriptmsg" style="position:absolute; width: 70%; left:15%; text-align:center; font-size: 1.4em; top: 25%;">
-        You don't have Javascript enabled for your browser. This web application requires the use of Javascript. Please enable Javascript in your browser settings and try again.
-      </div>
-    </noscript>
+<body>
+  <noscript>
+    <style type="text/css">
+      .pagecontainer {
+        display: none;
+      }
+    </style>
+    <div class="noscriptmsg" style="position:absolute; width: 70%; left:15%; text-align:center; font-size: 1.4em; top: 25%;">
+      You don't have Javascript enabled for your browser. This web application requires the use of Javascript. Please enable Javascript in your browser settings and try again.
+    </div>
+  </noscript>
 
   <div class="pagecontainer">
     <div class="navbar navbar-default navbar-fixed-top">
@@ -78,8 +87,7 @@
         <div class="row" id="nav-pad">
           <div class="col-xs-2 hidden-xs">
             <button id="print-button" type="button" name="button" class="btn btn-primary full-button" onclick="window.print()">
-              <img src="img/printer.svg" id="rpt-ico" alt="" />
-              Print
+              <img src="img/printer.svg" id="rpt-ico" alt="" /> Print
             </button>
           </div>
           <div class="col-xs-10 col-sm-8 text-center">
@@ -87,8 +95,7 @@
           </div>
           <div class="col-xs-2 hidden-xs">
             <button id="close-button" type="button" name="button" class="btn btn-primary full-button" onclick="self.close()">
-              <img src="img/close.svg" id="rpt-ico"  alt="" />
-              Close
+              <img src="img/close.svg" id="rpt-ico" alt="" /> Close
             </button>
           </div>
           <div class="col-xs-1 hidden-sm hidden-md hidden-xl">
@@ -97,9 +104,12 @@
             </button>
           </div>
 
-        </div> <!-- end row -->
-      </div> <!-- end container fluid -->
-    </div> <!-- end navbar-default -->
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- end container fluid -->
+    </div>
+    <!-- end navbar-default -->
 
     <div class="container-fluid" id="info"></div>
     <div id="metadata-info">
@@ -116,7 +126,7 @@
         </div>
       </div>
       <div class="metadata gotit">
-          <a href="#" onclick='closeMD()' class="btn btn-lg btn-success">Got it!</a>
+        <a href="#" onclick='closeMD()' class="btn btn-lg btn-success">Got it!</a>
       </div>
       <img src='img/close.png' alt='site-image' height='16px' width='16px' onclick='closeMD()' id='close-metadata'>
     </div>
@@ -126,8 +136,8 @@
         <hr class="style-one">
       </div>
       <p id="contact-paragraph">If you have further questions about public railroad crossing or believe that some of the information is incorrect or out-of-date, please contact us.</p>
-        <a class="btn btn-sm btn-default" href="mailto:stephen.smith@vermont.gov" target="_top">Stephen Smith</a>
-        <a class="btn btn-sm btn-default" href="mailto:jonathan.farmer@vermont.gov" target="_top">Jonathan Farmer</a>
+      <a class="btn btn-sm btn-default" href="mailto:stephen.smith@vermont.gov" target="_top">Stephen Smith</a>
+      <a class="btn btn-sm btn-default" href="mailto:jonathan.farmer@vermont.gov" target="_top">Jonathan Farmer</a>
     </div>
 
 
@@ -147,21 +157,21 @@
 
     <!-- SVG filter for Firefox  -->
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <defs>
+      <defs>
         <filter id="blur">
-         	<feGaussianBlur stdDeviation="2"/>
+          <feGaussianBlur stdDeviation="2" />
         </filter>
         <filter id="drop-shadow">
-    	    <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-    	    <feOffset dx="2" dy="2" result="offsetblur"/>
-    	    <feFlood flood-color="#000000"/>
-    	    <feComposite in2="offsetblur" operator="in"/>
-    	    <feMerge>
-    		    <feMergeNode/>
-    		    <feMergeNode in="SourceGraphic"/>
-    	    </feMerge>
-    	</filter>
-    </defs>
+          <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
+          <feOffset dx="2" dy="2" result="offsetblur" />
+          <feFlood flood-color="#000000" />
+          <feComposite in2="offsetblur" operator="in" />
+          <feMerge>
+            <feMergeNode/>
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
     </svg>
 
 
@@ -176,5 +186,6 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </div>
-  </body>
+</body>
+
 </html>
