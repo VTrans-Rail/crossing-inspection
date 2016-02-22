@@ -218,7 +218,7 @@
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
-  #locate-button {
+  /*#locate-button {
     top: 75px;
     left: 60px;
   }
@@ -226,7 +226,7 @@
   .LocateButton .zoomLocateButton {
     width: 45px;
     height: 45px;
-  }
+  }*/
 
   .arcgisSearch .searchGroup .searchInput {
       /*height: 40px;*/
@@ -263,7 +263,7 @@
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 
-  #locate-button {
+  /*#locate-button {
     top: 75px;
     left: 70px;
   }
@@ -271,7 +271,7 @@
   .LocateButton .zoomLocateButton {
     width: 60px;
     height: 60px;
-  }
+  }*/
 
   .arcgisSearch .searchGroup .searchInput {
       /*height: 50px;*/

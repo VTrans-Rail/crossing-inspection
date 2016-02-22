@@ -78,7 +78,7 @@
 
 .btnHelp {
   background-color: white;
-  border: 1px solid #57585A;
+  border: 1px solid #333;
   /*border-radius: 4px;*/
   padding: 1px 6px;
 }
@@ -94,7 +94,7 @@
   /*padding-bottom: 1px;*/
   font-size: .75em;
   line-height: 1.15em;
-  color: #57585A;
+  color: #333;
 }
 
 .esri-icon-question::before {
