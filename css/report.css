@@ -124,7 +124,6 @@ hr.style-one {
 
 form fieldset div div input:disabled {
   color: #666666;
-  /*-webkit-text-fill-color:#666666;*/
   -webkit-opacity:1;
 }
 

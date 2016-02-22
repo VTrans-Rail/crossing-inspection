@@ -1,5 +1,4 @@
 .vtrans-logo {
-  /*margin-top: 1rem;*/
   content: "";
   display: inline-block;
   background-repeat: no-repeat;
@@ -88,7 +87,6 @@
 
 
 .vtransTheme .esriList {
-  /*background-color: #FFFFED;*/
   padding-left: 0px;
   margin-bottom: 0px;
   list-style: none;
@@ -102,7 +100,6 @@
 }
 
 .vtransTheme .esriContent {
-  /*position: absolute;*/
   padding-left: 15px;
   padding-top: 4px;
   padding-right: 2px;
@@ -128,12 +125,8 @@
   position: absolute;
   float: left;
   border: 1px solid #57585A;
-  /*border-radius: 5px;*/
   left: 20px;
   top: 145px;
-  /*width: 40px;*/
-  /*height: 40px;*/
-  /*bottom: 55px;*/
   z-index: 1;
 }
 
@@ -145,10 +138,7 @@
 .arcgisSearch .searchGroup .searchInput {
     width: 100%;
     padding: 6px 0px 6px 12px;
-    /*height: 30px;*/
-    /*font-size: .85em;*/
     border-left: 1px solid #57585A;
-    /*border-radius: 4px 0 0 4px;*/
 }
 /*set search input box width to full - width of side elements*/
 .arcgisSearch .searchInputGroup {
@@ -159,22 +149,9 @@
     width: calc(100% - 48px);
 }
 
-/*multiple search dropdown arrow tweaks*/
-.arcgisSearch  .searchToggle {
-  /*height: 30px;*/
-}
-
-/*search mag glass button size*/
-.arcgisSearch .searchSubmit {
-  /*height: 30px;*/
-}
-
 /*modify search icon symbol sizes and alignment*/
 .arcgisSearch .searchIcon {
-  /*font-size: 1em;*/
   width: 20px;
-  /*height: 30px;*/
-  /*line-height: 30px;*/
 }
 
 .arcgisSearch .searchClear {
@@ -217,91 +194,26 @@
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-
-  /*#locate-button {
-    top: 75px;
-    left: 60px;
-  }
-
-  .LocateButton .zoomLocateButton {
-    width: 45px;
-    height: 45px;
-  }*/
-
-  .arcgisSearch .searchGroup .searchInput {
-      /*height: 40px;*/
-      /*font-size: 1.25em;*/
-  }
-
-  /*multiple search dropdown arrow tweaks*/
-  .arcgisSearch .searchToggle {
-    /*height: 40px;*/
-  }
-
-  /*search mag glass button size*/
-  .arcgisSearch .searchSubmit {
-    /*height: 40px;*/
-  }
-
   .arcgisSearch .searchClear {
     padding: 8px 16px;
   }
 
   /*modify search icon symbol sizes and alignment*/
   .arcgisSearch .searchIcon {
-    /*font-size: 1.25em;*/
     width: 20px;
-    /*height: 40px;*/
-    /*line-height: 40px;*/
   }
 
-  #map {
-    /*padding-top: 75px;*/
-  }
 } /* end small devices */
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-
-  /*#locate-button {
-    top: 75px;
-    left: 70px;
-  }
-
-  .LocateButton .zoomLocateButton {
-    width: 60px;
-    height: 60px;
-  }*/
-
-  .arcgisSearch .searchGroup .searchInput {
-      /*height: 50px;*/
-      /*font-size: 1.125em;*/
-  }
-
-  /*multiple search dropdown arrow tweaks*/
-  .arcgisSearch .searchToggle {
-    /*height: 50px;*/
-  }
-
-  /*search mag glass button size*/
-  .arcgisSearch .searchSubmit {
-    /*height: 50px;*/
-  }
-
   .arcgisSearch .searchClear {
     padding: 9px 18px;
   }
 
   /*modify search icon symbol sizes and alignment*/
   .arcgisSearch .searchIcon {
-    /*font-size: 1.35em;*/
     width: 20px;
-    /*height: 50px;*/
-    /*line-height: 50px;*/
-  }
-
-  #map {
-    /*padding-top: 85px;*/
   }
 
   #helpIcon img {

@@ -14,10 +14,6 @@ button.full-button {
   position:absolute;
 }
 
-/*button.icon-button {
-  position: absolute;
-}*/
-
 #print-icon {
   top: 16px;
 }
@@ -39,12 +35,8 @@ button.full-button {
 }
 
 #report-title {
-  /*position: absolute;
-  font-size: 28px;*/
   color: #333;
   text-align: center;
-  /*width: 60%;
-  left: 20%;*/
   font-size: 20px;
 }
 
@@ -53,9 +45,7 @@ button.full-button {
 }
 
 @media(min-width: 359px) {
-  /*.navigation-bar-report {
-    height: 70px;
-  }*/
+
 }
 
 @media (min-width: 415px) {
@@ -65,25 +55,10 @@ button.full-button {
 }
 
 @media (min-width: 768px) {
-  /*.navigation-bar-report {
-    height: 80px;
-  }*/
-  #report-title {
-    /*font-size: 34px;*/
-  }
-
   button.icon-button {
     display: none;
   }
   button.full-button {
     display:block;
   }
-
-  /*#print-button {
-    top: 5px;
-  }*/
-
-  /*#close-button {
-    top: 5px;
-  }*/
 }
