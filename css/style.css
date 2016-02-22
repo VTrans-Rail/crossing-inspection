@@ -1,3 +1,22 @@
+.vtrans-logo {
+  /*margin-top: 1rem;*/
+  content: "";
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  min-height: 30px;
+  min-width: 120px;
+  line-height: 0;
+  background-size: 100% auto;
+  background-image: url("../img/MOM AOT BLK.svg") !important;
+}
+
+.icon-ui-menu {
+  margin-top: 8px;
+  height: 24px;
+}
+
 #map {
   width: 100%;
   height: 100%;
@@ -127,7 +146,7 @@
     width: 100%;
     padding: 6px 0px 6px 12px;
     /*height: 30px;*/
-    font-size: .85em;
+    /*font-size: .85em;*/
     border-left: 1px solid #57585A;
     /*border-radius: 4px 0 0 4px;*/
 }
@@ -211,7 +230,7 @@
 
   .arcgisSearch .searchGroup .searchInput {
       /*height: 40px;*/
-      font-size: 1.25em;
+      /*font-size: 1.25em;*/
   }
 
   /*multiple search dropdown arrow tweaks*/
@@ -256,7 +275,7 @@
 
   .arcgisSearch .searchGroup .searchInput {
       /*height: 50px;*/
-      font-size: 1.35em;
+      /*font-size: 1.125em;*/
   }
 
   /*multiple search dropdown arrow tweaks*/

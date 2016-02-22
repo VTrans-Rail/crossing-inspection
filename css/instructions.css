@@ -80,7 +80,7 @@
   background-color: white;
   border: 1px solid #57585A;
   /*border-radius: 4px;*/
-  padding: 1px 9px;
+  padding: 1px 6px;
 }
 
 #help-div {
@@ -93,11 +93,12 @@
   padding-top: 2px;
   /*padding-bottom: 1px;*/
   font-size: .75em;
-  line-height: 1.5em;
+  line-height: 1.15em;
+  color: #57585A;
 }
 
 .esri-icon-question::before {
-  font-size: 1.25em;
+  /*font-size: 1.25em;*/
 }
 
 
