@@ -2,20 +2,25 @@
  * Base structure
  */
 
- /* Extra small devices (phones, less than 768px) */
- /* No media query since this is the default in Bootstrap */
+
+/* Extra small devices (phones, less than 768px) */
+
+
+/* No media query since this is the default in Bootstrap */
 
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
+
 .site-wrapper {
   display: table;
   width: 100%;
-  height: 100%; /* For at least Firefox */
+  height: 100%;
+  /* For at least Firefox */
   min-height: 100%;
   background-color: #333;
   color: white;
-  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+  -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
 }
 .site-wrapper-inner {
   display: table-cell;
@@ -27,35 +32,48 @@
 }
 
 /* Padding for spacing */
+
 .inner {
   padding: 10px;
   padding-top: 0;
 }
-
 .cover {
   padding: 0 20px;
 }
-
 .cover.btn-lg {
   padding: 10px 20px;
   font-weight: bold;
 }
-
+.vtrans-logo {
+  margin-top: 1rem;
+  content: "";
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  min-height: 30px;
+  min-width: 120px;
+  line-height: 0;
+  background-size: 100% auto;
+  background-image: url("../img/MOM AOT BLK.svg") !important;
+}
 
 /*
  * Footer
  */
 
 .mastfoot {
-  color: #999; /* IE8 proofing */
-  color: rgba(255,255,255,.5);
+  color: #999;
+  /* IE8 proofing */
+  color: rgba(255, 255, 255, .5);
 }
 
 /*
  * Affix and center
  */
 
+
 /*set search selection dropdown to display: none*/
+
 #search_menu_button {
   display: none;
 }
@@ -64,22 +82,18 @@
 
 .btnHelp {
   background-color: white;
-  border: 1px solid #57585A;
-  border-radius: 4px;
-  padding: 1px 9px;
+  border: 1px solid #333 padding: 1px 6px;
 }
-
 #help-div {
   padding-top: 10px;
   padding-left: 0px;
 }
-
-
 #help-button {
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding-top: 2px;
+  font-size: .75em;
+  line-height: 1.15em;
+  color: #333;
 }
-
 
 /*user added styles*/
 
@@ -87,23 +101,19 @@
   margin: 0;
   margin-top: 5px;
 }
-
 #helpRptBtn {
   position: inherit;
   max-width: 150px;
   pointer-events: none;
   cursor: default;
 }
-
 .subtitle small {
   color: #ddd;
   font-style: italic;
 }
-
 .step {
   font-size: 1.125em;
 }
-
 .horiz-line {
   height: 1px;
   background-color: #ddd;
@@ -111,18 +121,15 @@
   margin-bottom: 15px;
   margin-top: 15px;
 }
-
 .divider-text {
   background-color: #333;
   position: relative;
   top: -0.75em;
   padding: 5px;
 }
-
 #xingImg {
   max-height: 50px;
 }
-
 
 /*End extra small devices*/
 
@@ -132,62 +139,39 @@
     position: fixed;
     top: 0;
   }
-
   .masthead-brand {
     font-size: 40px;
   }
-
   .mastfoot {
-  position: fixed;
-  bottom: 10%;
-}
-
+    position: fixed;
+    bottom: 10%;
+  }
   .subtitle {
     font-size: 28px;
   }
-
   .step {
     font-size: 26px;
     line-height: 50px;
   }
-
-  .inner.cover p,
-  .inner.cover li,
-  .divider-text {
+  .inner.cover p, .inner.cover li, .divider-text {
     font-size: 18px;
   }
-
   /* Start the vertical centering */
   .site-wrapper-inner {
     vertical-align: middle;
   }
   /* Handle the widths */
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 70%; /* Must be percentage or pixels for horizontal alignment */
+  .masthead, .mastfoot, .cover-container {
+    width: 70%;
+    /* Must be percentage or pixels for horizontal alignment */
   }
-
   .gotit a {
     margin: 30px;
     font-size: 1.75em;
   }
-
-  #help-button {
-    padding-top: 6px;
-    padding-bottom: 6px;
-  }
 }
-
 @media (min-width: 992px) {
-  .masthead,
-  .mastfoot,
-  .cover-container {
+  .masthead, .mastfoot, .cover-container {
     width: 700px;
-  }
-
-  #help-button {
-    padding-top: 11px;
-    padding-bottom: 11px;
   }
 }
