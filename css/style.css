@@ -148,7 +148,12 @@ a.btn-default:hover, button.btn-default:hover {
 /*modify search icon symbol sizes and alignment*/
 
 .arcgisSearch .searchIcon {
+  height:20px;
   width: 20px;
+}
+.esri-icon-close {
+    position: absolute;
+    top: 0;
 }
 .arcgisSearch .searchClear {
   padding: 6px 12px;
