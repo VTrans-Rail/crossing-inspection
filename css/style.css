@@ -27,6 +27,7 @@
   text-align: center;
 }
 #map_zoom_slider {
+  border-radius: 0;
   z-index: 24;
 }
 .actual-image {
