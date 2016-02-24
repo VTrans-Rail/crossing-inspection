@@ -21,10 +21,7 @@ html body {
   right: 0;
   height: 100%;
   padding-top: 80px;
-  /*background-color: rgba(200, 200, 200, 0.95);*/
   background-color: rgba(242, 241, 237, .95);
-  /*color: #000;*/
-  /*color: #999;*/
   color: #404040;
   z-index: 10;
   width: 100%;
@@ -68,7 +65,6 @@ hr.style-one {
 .gotit {
   position: fixed;
   bottom: 0px;
-  /*background-color: rgba(200, 200, 200, 0.9);*/
   background-color: rgba(242, 241, 237, 0.95);
   padding-top: 5px;
   padding-right: calc(((100% - 82px)/2));
@@ -126,10 +122,7 @@ form fieldset div div input:disabled {
     padding-right: calc((100% - 670px)/2);
     padding-bottom: 5px;
     padding-left: calc((100% - 670px)/2);
-    /*background-color: rgba(200, 200, 200, 0.95);*/
     background-color: rgba(242, 241, 237, 0.95);
-    /*color: #000;*/
-    /*color: #999;*/
     color: #404040;
     z-index: 10;
     height: 40%;
@@ -173,7 +166,6 @@ form fieldset div div input:disabled {
   #metadata-info {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: #F2F1ED;
-    /*color: #404040;*/
     color: #999;
     bottom: 0;
     width: calc((100% - 830px)/2);
@@ -188,7 +180,6 @@ form fieldset div div input:disabled {
     text-align: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: #F2F1ED;
-    /*color: #404040;*/
     color: #999;
     bottom: 0;
     width: calc((100% - 830px)/2);
