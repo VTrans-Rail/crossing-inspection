@@ -13,6 +13,12 @@ function getParameterByName(name) {
 
 var photoUrl = getParameterByName("url");
 
+var uri = window.location.toString();
+if (uri.indexOf('?') > 0) {
+  var cleanUri = uri.substring(0, uri.indexOf('?'));
+  window.history.replaceState({}, document.title, cleanUri);
+}
+
 document.getElementById("image").innerHTML = "<img src='" + photoUrl + "' id='image' alt='site-image' width='100%' onclick='zoom(this)' style='cursor: zoom-in'>";
 
 
