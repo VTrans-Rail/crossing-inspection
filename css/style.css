@@ -30,6 +30,10 @@
   border-radius: 0;
   z-index: 24;
 }
+a.btn-default:hover, button.btn-default:hover {
+  /*background-color: #eee!important;*/
+  background-color: #57585A!important;
+}
 .actual-image {
   margin-bottom: 20px;
 }
