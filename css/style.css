@@ -14,6 +14,10 @@
   margin-top: 8px;
   height: 24px;
 }
+button.btn-default {
+  color: #57585A;
+  border-color: #57585A;
+}
 #map {
   width: 100%;
   height: 100%;
