@@ -35,7 +35,6 @@ button.btn-default {
   z-index: 24;
 }
 a.btn-default:hover, button.btn-default:hover {
-  /*background-color: #eee!important;*/
   background-color: #57585A!important;
 }
 .actual-image {
@@ -45,11 +44,6 @@ a.btn-default:hover, button.btn-default:hover {
   position: absolute;
   bottom: calc(8% + 10px);
 }
-/*@media (min-width: 415px) {
-  .esriControlsBR {
-    bottom: calc(8% + 10px);
-  }
-}*/
 @media (min-width: 992px) {
   .esriControlsBR {
     right: 210px;
