@@ -40,12 +40,6 @@ require([
 
 var dotnumqs = getParameterByName("dotnum");
 
-var uri = window.location.toString();
-if (uri.indexOf('?') > 0) {
-  var cleanUri = uri.substring(0, uri.indexOf('?'));
-  window.history.replaceState({}, document.title, cleanUri);
-}
-
 // This gets viewport width to determine what thumbnails to serve
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var thumbSizeFolder = "CrossingPhotosbyID400/";

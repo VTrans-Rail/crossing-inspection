@@ -165,8 +165,11 @@ form fieldset div div input:disabled {
   }
   #metadata-info {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: rgba(200, 200, 200, 0.9);
-    color: #404040;
+    /*background-color: rgba(200, 200, 200, 0.9);*/
+    background-color: #F2F1ED;
+    /*color: #404040;*/
+    /*color: #DE5A51;*/
+    color: #999;
     bottom: 0;
     width: calc((100% - 830px)/2);
     height: 100%;
@@ -179,8 +182,11 @@ form fieldset div div input:disabled {
     position: fixed;
     text-align: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: rgba(200, 200, 200, 0.9);
-    color: #404040;
+    /*background-color: rgba(200, 200, 200, 0.9);*/
+    background-color: #F2F1ED;
+    /*color: #404040;*/
+    /*color: #DE5A51;*/
+    color: #999;
     bottom: 0;
     width: calc((100% - 830px)/2);
     height: 100%;
