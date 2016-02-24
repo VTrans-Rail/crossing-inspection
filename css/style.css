@@ -43,13 +43,13 @@ a.btn-default:hover, button.btn-default:hover {
 }
 .esriControlsBR {
   position: absolute;
-  bottom: calc(6% + 10px);
+  bottom: calc(8% + 10px);
 }
-@media (min-width: 415px) {
+/*@media (min-width: 415px) {
   .esriControlsBR {
-    bottom: calc(7% + 10px);
+    bottom: calc(8% + 10px);
   }
-}
+}*/
 @media (min-width: 992px) {
   .esriControlsBR {
     right: 210px;
