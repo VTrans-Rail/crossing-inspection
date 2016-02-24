@@ -2,7 +2,7 @@
   display: none;
   overflow-y: auto;
   position: absolute;
-  background-color: rgba(102, 102, 102, 0.8);
+  background-color: rgba(242, 241, 237, 0.85);
   float: right;
   right: 0px;
   z-index: 31;
@@ -11,7 +11,7 @@
 }
 #legend-div {
   top: 10px;
-  color: #fff;
+  color: #404040;
   top: 70px;
   width: 70%;
   left: 15%;
@@ -19,8 +19,8 @@
 #mobile-legend-open {
   display: block;
   position: fixed;
-  color: #fff;
-  background-color: rgba(102, 102, 102, 0.8);
+  /*color: #fff;*/
+  background-color: rgba(102, 102, 102, 0.85);
   font-size: 18px;
   bottom: 0%;
   height: 6%;
@@ -30,7 +30,7 @@
 #mobile-legend-close {
   display: none;
   position: fixed;
-  color: #fff;
+  /*color: #fff;*/
   background-color: rgba(102, 102, 102, 1);
   font-size: 18px;
   top: 0;
@@ -92,7 +92,7 @@
     display: block;
     overflow-y: auto;
     position: absolute;
-    background-color: rgba(102, 102, 102, 0.8);
+    /*background-color: rgba(102, 102, 102, 0.8);*/
     z-index: 1;
     width: 200px;
     height: 100%;
@@ -102,7 +102,7 @@
     top: 100px;
     left: 5%;
     width: 90%;
-    color: #fff;
+    /*color: #fff;*/
     padding-bottom: 25px;
   }
 }
