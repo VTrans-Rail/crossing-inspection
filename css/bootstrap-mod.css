@@ -1,79 +1,75 @@
 /*Local styles that modify the default look of Bootstrap elements*/
 
-.navbar {
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+.navbar-default {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
-
 .report {
   background-color: #FFC107;
   border-color: #FF6F00;
   border-width: 12;
   border-style: solid;
 }
-
 .navbar-header .navbar-brand {
   color: #333333;
 }
-
 .btn-head {
-  position:absolute;
+  position: absolute;
   float: right;
   padding-top: 15px;
   right: 0px;
 }
-
 .img-responsive {
   margin-bottom: 30px;
 }
 
 /*Setup container-fluid widths for report page:*/
 
+
 /*==================================================
 =            Bootstrap 3 Media Queries             =
 ==================================================*/
 
 
+/*==========  Mobile First Method  ==========*/
 
 
-    /*==========  Mobile First Method  ==========*/
+/* Custom, iPhone Retina */
 
-    /* Custom, iPhone Retina */
-    @media only screen and (min-width : 320px) {
+@media only screen and (min-width: 320px) {}
 
-    }
+/* Extra Small Devices, Phones */
 
-    /* Extra Small Devices, Phones */
-    @media only screen and (min-width : 480px) {
+@media only screen and (min-width: 480px) {}
 
-    }
+/* Small Devices, Tablets */
 
-    /* Small Devices, Tablets */
-    @media only screen and (min-width : 768px) {
-      .container-fluid {
-        max-width: 700px;
-      }
+@media only screen and (min-width: 768px) {
+  .container-fluid {
+    max-width: 700px;
+  }
+  .btn-head {
+    position: absolute;
+    float: right;
+    padding-top: 10px;
+    right: 50px;
+  }
+}
 
-      .btn-head {
-        position:absolute;
-        float: right;
-        padding-top: 10px;
-        right: 50px;
-      }
-    }
+/* Medium Devices, Desktops */
 
-    /* Medium Devices, Desktops */
-    @media only screen and (min-width : 992px) {
-      .container-fluid {
-        max-width: 850px;
-      }
-    }
+@media only screen and (min-width: 992px) {
+  .container-fluid {
+    max-width: 850px;
+  }
+}
 
-    /* Large Devices, Wide Screens */
-    @media only screen and (min-width : 1200px) {
-      .btn-head {
-        position:absolute;
-        float: right;
-        padding-top: 15px;
-        right: 50px;
-      }
-    }
+/* Large Devices, Wide Screens */
+
+@media only screen and (min-width: 1200px) {
+  .btn-head {
+    position: absolute;
+    float: right;
+    padding-top: 15px;
+    right: 50px;
+  }
+}

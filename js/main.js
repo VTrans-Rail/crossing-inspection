@@ -692,7 +692,7 @@ require([
     //change placeholder text and font-size to respond to screen width
     if (map.width < 358) {
       searchWidget.allPlaceholder = 'Search';
-      document.getElementById('search_input').style.fontSize = '1.25em';
+      // document.getElementById('search_input').style.fontSize = '1.25em';
     } else if (map.width < 439) {
       searchWidget.allPlaceholder = 'Search Crossings or Places';
       document.getElementById('search_input').style.fontSize = '1em';
