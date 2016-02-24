@@ -164,7 +164,9 @@ a.btn-default:hover, button.btn-default:hover {
 }
 .arcgisSearch .suggestionsMenu {
   background-color: #f8f8f8;
-  border: 2px solid #333333;
+  border: 1px solid #333333;
+  border-right-width: 2px;
+  border-radius: 0;
   width: calc(100% - 70px);
 }
 @media (min-height: 600px) {
