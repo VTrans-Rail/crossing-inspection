@@ -165,16 +165,18 @@ a.btn-default:hover, button.btn-default:hover {
   background-color: #f8f8f8;
   border: 1px solid #333333;
   border-radius: 0;
-  /*width: 500px;*/
-  /*width: calc(100% + 170px);*/
 }
 .arcgisSearch .showSuggestions .suggestionsMenu {
-  /*display: block;*/
-  /*position:absolute;*/
   top: 45px;
   left: -52px;
   width: calc(100vw - 6px);
-  /*width: calc(100% + 57px);*/
+}
+@media (min-width: 414px) {
+  .arcgisSearch .showSuggestions .suggestionsMenu {
+    top: 45px;
+    left: 0px;
+    width: calc(100% + 57px);
+  }
 }
 @media (min-height: 600px) {
   .arcgisSearch .searchMenu {
