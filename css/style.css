@@ -164,9 +164,17 @@ a.btn-default:hover, button.btn-default:hover {
 .arcgisSearch .suggestionsMenu {
   background-color: #f8f8f8;
   border: 1px solid #333333;
-  border-right-width: 2px;
   border-radius: 0;
-  width: calc(100% - 70px);
+  /*width: 500px;*/
+  /*width: calc(100% + 170px);*/
+}
+.arcgisSearch .showSuggestions .suggestionsMenu {
+  /*display: block;*/
+  /*position:absolute;*/
+  top: 45px;
+  left: -52px;
+  width: calc(100vw - 6px);
+  /*width: calc(100% + 57px);*/
 }
 @media (min-height: 600px) {
   .arcgisSearch .searchMenu {
@@ -195,6 +203,9 @@ a.btn-default:hover, button.btn-default:hover {
   .arcgisSearch .searchIcon {
     width: 20px;
   }
+  .arcgisSearch .suggestionsMenu {
+    width: calc(100% - 70px);
+  }
 }
 
 /* end small devices */
@@ -209,6 +220,9 @@ a.btn-default:hover, button.btn-default:hover {
   /*modify search icon symbol sizes and alignment*/
   .arcgisSearch .searchIcon {
     width: 20px;
+  }
+  .arcgisSearch .suggestionsMenu {
+    border-right-width: 2px;
   }
   #helpIcon img {
     max-width: 24px;
