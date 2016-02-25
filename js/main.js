@@ -416,7 +416,7 @@ require([
 //------------------------------------------------------------------------
 //----------Create Full Report link with a filler href---------------------
 //------------------------------------------------------------------------
-  var link = domConstruct.create('button', {
+  var link = domConstruct.create('a', {
     'class': 'btn btn-sm btn-default btn-report',
     'role': 'button',
     'id': 'fullReport',
