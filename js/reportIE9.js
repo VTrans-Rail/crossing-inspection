@@ -19,7 +19,7 @@ var dotnumqs = getParameterByName("dotnum");
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
 if (dotnumqs) {
-      var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
+      var crossingUrl = "https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/CrossingInspection2017_inspect_Inspected/FeatureServer/0";
 
 
       var queryTask = new QueryTask(crossingUrl);

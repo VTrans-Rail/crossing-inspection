@@ -154,7 +154,7 @@ require([
     var geoLocate = new LocateButton({
       map: map,
       scale: 5000,
-    }, 'locate-button');
+    }, 'locate-button'); // ID of the div for the LocateButton
     geoLocate.startup();
 
     // Google Analytics track when locatebutton clicked
@@ -203,7 +203,7 @@ require([
 //------------------------------------------------------------------
 
   // ----- Create Crossing Feature Layer-------------------
-    var crossingUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1'; // URL to local hosted crossing features service
+    var crossingUrl = 'https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/CrossingInspection2017_inspect_Inspected/FeatureServer/0'; // URL to local hosted crossing features service
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
       id: 'crossing-points',
@@ -239,7 +239,7 @@ require([
 
 
   // ----- Create Sign Feature Layer---------------------------------
-    var signUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/0';
+    var signUrl = 'https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/CrossingInspection2017_inspect_Inspected/FeatureServer/1';
 
     var signPoints = new FeatureLayer(signUrl, {
       id: 'sign-points',
@@ -253,21 +253,21 @@ require([
 
 
   // ---------- Create Rail Line Feature Layer----------------------------
-    var lineUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer/0';
+    var lineUrl = 'https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/Rail_Lines/MapServer/0';
 
     var railLine = new FeatureLayer(lineUrl, {
       id: 'rail-line',
-      outFields: ['*'],
+      outFields: ['RailTrail','VRLID'],
     });
   // -----------------------------------------------------------------
 
 
   // --- Create Mile Posts Feature Layers-------------------------------
-    var mpTenUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3';
+    var mpTenUrl = 'https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3';
 
-    var mpFiveUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/2';
+    var mpFiveUrl = 'https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/2';
 
-    var mpOneUrl = 'http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/1';
+    var mpOneUrl = 'https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/1';
 
     var milePostsTen = new FeatureLayer (mpTenUrl, {
       id: 'mile-post-ten',
@@ -304,7 +304,7 @@ require([
   // crossingPoints labels
     var dotNumLabel = new esri.symbol.TextSymbol();
     dotNumLabel.font.setSize('13pt');
-    dotNumLabel.font.setFamily('Verdana');
+    dotNumLabel.font.setFamily('Verdana'); // add fallback fonts here
     dotNumLabel.font.setWeight(font.WEIGHT_BOLD);
     dotNumLabel.setColor(new Color([190, 232, 255, 1, 1]));
 
@@ -388,7 +388,7 @@ require([
   map.on('load', function() {
     var layerInfo = [
       {
-        layer: signPoints, title: 'Common Crossing Signs'
+        layer: signPoints, title: 'Common Crossing Signs' // CSS helps hide most of the signs to only include most common sign types
       },
       {
         layer: crossingPoints, title: 'Railroad Crossings'
@@ -575,7 +575,7 @@ require([
           var selectedLayerId = popup.getSelectedFeature()._layer.id;
 
           // Determine whether crossings or signs is selected
-          if ( selectedLayerId.length > 12 ) {
+          if ( selectedLayerId.length > 12 ) { // VITAL: IT DETERMINES WHICH PICTURES TO SHOW BASED ON LAYER NAME LENGTH.
             selectedLayer = crossingPoints;
 
             //Get Crossing Thumbnail image Array created by the XMLHttpRequest
@@ -605,10 +605,10 @@ require([
               deferred.resolve('no attachments');
             }
             else {
-              if (selectedLayerId.length > 12) {
+              if (selectedLayerId.length > 12) { // VITAL: IT DETERMINES WHICH PICTURES TO SHOW BASED ON LAYER NAME LENGTH.
                 for ( i = 0; i < imageTagArray.length; i++ ) {
                   for ( j = 0; j < response.length; j++ ) {
-                    if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) {
+                    if ( response[j].name.substr(0,8) === imageTagArray[i].name.substr(0,8) ) { // VITAL: IT DETERMINES WHICH PICTURES TO SHOW BASED ON file name length
                       imgSrc = response[j].url;
                       imageString += "<tr><td></br></td></tr><tr><td><div class='img-link'><a onclick='crossingImageGA()' href='photo.html?url=" + imgSrc + "' target='_blank' class='btn btn-xs btn-default btnImage' role='button'>Image " + (i+1) + ": View Full Image</a></div></td></tr><tr><td><div class='actual-image'>" + "<img src='thumb/CrossingPhotosbyID400/" + dotnum + "/" + imageTagArray[i].name + "' " + imageStyle + ">" + "</div></td></tr>";
                     }

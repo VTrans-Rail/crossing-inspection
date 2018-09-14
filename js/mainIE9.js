@@ -152,7 +152,7 @@ require([
 //  ---------------------- Create Feature Layers ------------------------------
 //------------------------------------------------------------------
     //Create Crossing Feature Layer-------------------
-    var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
+    var crossingUrl = "https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/CrossingInspection2017_inspect_Inspected/FeatureServer/0";
 
     var crossingPoints = new FeatureLayer(crossingUrl, {
       id: "crossing-points",
@@ -194,7 +194,7 @@ require([
 
 
     //Create Sign Feature Layer---------------------------------
-    var signUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/0";
+    var signUrl = "https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/CrossingInspection2017_inspect_Inspected/FeatureServer/1";
 
     var signPoints = new FeatureLayer(signUrl, {
       id: "sign-points",
@@ -207,7 +207,7 @@ require([
 
 
     //Create Rail Line Feature Layer----------------------------
-    var lineUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer/0";
+    var lineUrl = "https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/Rail_Lines/MapServer/0";
 
     var railLine = new FeatureLayer(lineUrl, {
       id: "rail-line",
@@ -216,11 +216,11 @@ require([
 
 
     //Create Mile Posts Feature Layers-------------------------------
-    var mpTenUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3";
+    var mpTenUrl = "https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/3";
 
-    var mpFiveUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/2";
+    var mpFiveUrl = "https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/2";
 
-    var mpOneUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/1";
+    var mpOneUrl = "https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/Rail_MilePosts/MapServer/1";
 
     var milePostsTen = new FeatureLayer (mpTenUrl, {
       id: "mile-post-ten",

@@ -40,7 +40,7 @@ if (dotnumqs) {
       var imageTagArray = JSON.parse(xhttp.responseText);
 
 
-      var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1";
+      var crossingUrl = "https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/CrossingInspection2017_inspect_Inspected/FeatureServer/0";
 
 
       var queryTask = new QueryTask(crossingUrl);

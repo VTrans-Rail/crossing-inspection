@@ -50,7 +50,7 @@ if ( 467 < width && width < 701 ) {
 
 var imgFolder = "https://api.github.com/repos/VTrans-Rail/crossing-inspection/contents/thumb/" + thumbSizeFolder + dotnumqs;
 
-var crossingUrl = "http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/CrossingInspection2015/FeatureServer/1"; // Use most frequently updated feature serv
+var crossingUrl = "https://maps.vtrans.vermont.gov/arcgis/rest/services/Rail/CrossingInspection2017_inspect_Inspected/FeatureServer/0"; // Use most frequently updated feature serv
 
 
 // ----------------- Set Up XMLHttpRequest -------------------------
@@ -90,7 +90,7 @@ query.outFields = [
   'HTS_for_Nearby_Intersection','BellCount','HTPS',
   'HTPS_StorageDist','HTPS_StopLineDist','TrafficLnType',
   'TrafficLnCount','Paved','XingIllum',
-  'SurfaceType','SurfaceType2','XingCond',
+  'Track1_XingCond','SurfaceType2','XingCond',
   'FlangeMaterial','XingWidth','XingLength',
   'Angle','SnoopCompliant','Comments', 'IntRd500', 'IntRdDist',
   'Num_Tracks', 'PaveMarkCond', 'RDS_AOTCLASS', 'RDS_FUNCL'
@@ -195,7 +195,7 @@ function showResults(x, y) {
 
     html += featureAttributes.DOT_Num + "'>\n                  </div>\n                  <div data-field-span='1' id='surf-cond' onmouseover='onMouseEventOpen(this)' onmouseout='onMouseEventClose(this)' onclick='displayMD(this)'>\n                    <label>Surface Condition</label>\n                    <input type='text' readonly disabled id='condition' value='";
 
-    html += featureAttributes.XingCond + "'>\n                  </div>\n                  <div data-field-span='1' id='feature-crossed' onmouseover='onMouseEventOpen(this)' onmouseout='onMouseEventClose(this)' onclick='displayMD(this)'>\n                    <label>Road Name</label>\n                    <input type='text' readonly disabled value='";
+    html += featureAttributes.Track1_XingCond + "'>\n                  </div>\n                  <div data-field-span='1' id='feature-crossed' onmouseover='onMouseEventOpen(this)' onmouseout='onMouseEventClose(this)' onclick='displayMD(this)'>\n                    <label>Road Name</label>\n                    <input type='text' readonly disabled value='";
 
     html += featureAttributes.Feature_Crossed + "'>\n                  </div>\n                  <div data-field-span='1' id='town' onmouseover='onMouseEventOpen(this)' onmouseout='onMouseEventClose(this)' onclick='displayMD(this)'>\n                    <label>Town</label>\n                    <input type='text' readonly disabled value='";
 
